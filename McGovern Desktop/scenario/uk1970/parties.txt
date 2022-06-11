@@ -1,0 +1,10 @@
+labour:
+	fullname=Labour Party
+	power=500
+	aiideologies:
+		socialdemocracy
+	extraideologies:
+		socialism
+conservative:
+	fullname=Conservative Party
+	power=500

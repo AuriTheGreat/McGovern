@@ -1,0 +1,13 @@
+immigration:
+	fullname=Immigration
+	levels:
+		Opposed
+		Neutral
+		Supportive
+
+tariffs:
+	fullname=Tariffs
+	levels:
+		Low
+		Neutral
+		High

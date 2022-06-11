@@ -1,0 +1,4 @@
+middleclass:
+	fullname='Middle Class'
+wealthy:
+	fullname='The Wealthy'

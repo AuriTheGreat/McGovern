@@ -1,0 +1,12 @@
+labour-immigration:
+	mean=0
+	variance=0
+labour-tariffs:
+	mean=0
+	variance=0
+conservative-immigration:
+	mean=0
+	variance=0
+conservative-tariffs:
+	mean=0
+	variance=0
