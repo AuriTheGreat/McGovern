@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "McGovern Desktop", "McGovern Desktop\McGovern Desktop.pyproj", "{46879802-CC9D-40BC-9EC3-7D6C6F734FB0}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "McGovern", "McGovern\McGovern.pyproj", "{46879802-CC9D-40BC-9EC3-7D6C6F734FB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
