@@ -7,4 +7,3 @@ startdate=1969-05-05
 enddate=1970-06-18
 electiondate=1970-06-18
 turns=12
-seats=650

@@ -1,0 +1,96 @@
+London-immigration:
+	mean=0
+	variance=1
+	importance=0
+London-tariffs:
+	mean=0
+	variance=1
+	importance=0
+Scotland-immigration:
+	mean=0
+	variance=1
+	importance=0
+Scotland-tariffs:
+	mean=0
+	variance=1
+	importance=0
+Wales-immigration:
+	mean=0
+	variance=5
+	importance=0
+Wales-tariffs:
+	mean=0
+	variance=1
+	importance=0
+Northern Ireland-immigration:
+	mean=0
+	variance=1
+	importance=0
+Northern Ireland-tariffs:
+	mean=0
+	variance=1
+	importance=0
+South West-immigration:
+	mean=0
+	variance=1
+	importance=0
+South West-tariffs:
+	mean=0
+	variance=1
+	importance=0
+South East-immigration:
+	mean=0
+	variance=1
+	importance=0
+South East-tariffs:
+	mean=0
+	variance=1
+	importance=0
+West Midlands-immigration:
+	mean=0
+	variance=1
+	importance=0
+West Midlands-tariffs:
+	mean=0
+	variance=1
+	importance=0
+East Midlands-immigration:
+	mean=0
+	variance=1
+	importance=0
+East Midlands-tariffs:
+	mean=0
+	variance=1
+	importance=0
+North West-immigration:
+	mean=0
+	variance=1
+	importance=0
+North West-tariffs:
+	mean=0
+	variance=1
+	importance=0
+North East-immigration:
+	mean=0
+	variance=1
+	importance=0
+North East-tariffs:
+	mean=0
+	variance=1
+	importance=0
+Eastern-immigration:
+	mean=0
+	variance=1
+	importance=0
+Eastern-tariffs:
+	mean=0
+	variance=1
+	importance=0
+Yorkshire and the Humber-immigration:
+	mean=0
+	variance=1
+	importance=0
+Yorkshire and the Humber-tariffs:
+	mean=0
+	variance=1
+	importance=0

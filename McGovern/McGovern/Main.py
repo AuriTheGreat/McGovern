@@ -1,4 +1,5 @@
 import ScenarioHandler
+import ResultHandler
 import os
 
 def getvalidscenarios(scenarios):
@@ -24,7 +25,9 @@ scenarios=getvalidscenarios(scenarios)
 
 scenarioname=getscenario(scenarios)
 
-ScenarioHandler.main(scenarioname)
+scenario=ScenarioHandler.main(scenarioname)
+
+ResultHandler.main(scenario)
 
 
 """

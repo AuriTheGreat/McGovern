@@ -12,6 +12,7 @@
     <OutputPath>.</OutputPath>
     <Name>McGovern</Name>
     <RootNamespace>McGovern Desktop</RootNamespace>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +24,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.py" />
+    <Compile Include="ResultHandler.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ScenarioHandler.py">
       <SubType>Code</SubType>
     </Compile>
@@ -45,6 +49,17 @@
     <Content Include="scenario\uk1970\populations.txt" />
     <Content Include="scenario\uk1970\regionissue.txt" />
     <Content Include="scenario\uk1970\regions.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.10</Version>
+      <Description>env (Python 3.10 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
