@@ -503,7 +503,7 @@ def main(scenarioname):
     scenario.partyissues=partyissuehandler(scenarioname,scenario.parties,scenario.issues)
     scenario.regionissues=regionissuehandler(scenarioname,scenario.regions,scenario.issues)
 
-    scenario.printalldata()
+    #scenario.printalldata()
 
     #print(next((x for x in scenario.partyissues if x.party.name == "labour" and x.issue.name== "tariffs"), None).variance)
     #print(next((x for x in scenario.regionissues if x.region.name == "Wales" and x.issue.name== "immigration"), None).variance)

@@ -2,11 +2,11 @@ labour-immigration:
 	mean=5
 	variance=1
 labour-tariffs:
-	mean=0
+	mean=3
 	variance=1
 conservative-immigration:
-	mean=0
-	variance=1
+	mean=2
+	variance=3
 conservative-tariffs:
 	mean=0
 	variance=1
