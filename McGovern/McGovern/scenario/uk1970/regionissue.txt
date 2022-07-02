@@ -1,9 +1,9 @@
 London-immigration:
-	mean=5
-	variance=1
-	importance=1.5
+	mean=2
+	variance=1.5
+	importance=0.5
 London-tariffs:
-	mean=3
+	mean=5
 	variance=2
 	importance=0.5
 Scotland-immigration:

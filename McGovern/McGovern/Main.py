@@ -27,7 +27,9 @@ scenarioname=getscenario(scenarios)
 
 scenario=ScenarioHandler.main(scenarioname)
 
-ResultHandler.main(scenario)
+results=ResultHandler.main(scenario)
+
+ResultHandler.printresults(results)
 
 
 """
