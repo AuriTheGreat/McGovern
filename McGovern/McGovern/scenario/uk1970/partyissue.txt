@@ -10,3 +10,15 @@ conservative-immigration:
 conservative-tariffs:
 	mean=0
 	variance=1
+liberal-immigration:
+	mean=0
+	variance=1
+liberal-tariffs:
+	mean=0
+	variance=1
+snp-immigration:
+	mean=0
+	variance=1
+snp-tariffs:
+	mean=0
+	variance=1

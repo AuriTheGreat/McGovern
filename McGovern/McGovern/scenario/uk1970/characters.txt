@@ -34,3 +34,15 @@ Michael Foot:
 Edward Heath:
 	party=conservative
 	leader=True	
+Enoch Powell:
+	party=conservative
+	leader=False	
+Reginald Maudling:
+	party=conservative
+	leader=False	
+Jeremy Thorpe:
+	party=liberal
+	leader=True	
+William Wolfe:
+	party=snp
+	leader=True	

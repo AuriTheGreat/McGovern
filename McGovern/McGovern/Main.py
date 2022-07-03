@@ -29,8 +29,6 @@ scenario=ScenarioHandler.main(scenarioname)
 
 results=ResultHandler.main(scenario)
 
-ResultHandler.printresults(results)
-
 
 """
 import pygame

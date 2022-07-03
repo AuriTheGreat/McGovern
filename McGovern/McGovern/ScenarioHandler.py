@@ -415,7 +415,7 @@ def partyissuehandler(scenarioname, parties, issues):
     for i in neededelements:
         f.write(i + ":" + "\n")
         f.write("\t" + "mean=0" + "\n")
-        f.write("\t" + "variance=0" + "\n")
+        f.write("\t" + "variance=1" + "\n")
 
     for i in parties:
         i.issues=[]

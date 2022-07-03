@@ -8,3 +8,9 @@ labour:
 conservative:
 	fullname=Conservative Party
 	power=500
+liberal:
+	fullname=Liberal Party
+	power=100
+snp:
+	fullname=Scottish National Party
+	power=50

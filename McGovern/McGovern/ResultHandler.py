@@ -3,45 +3,48 @@ from numpy import arange
 from scipy.stats import norm
 import matplotlib.pyplot as plt
 
+class Results:
+    def __init__(self, scenario, partyregionresults=None):
+        self.scenario=scenario
+        self.partyregionresults=partyregionresults
+    def printresults(self):
+        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("|", "RESULTS".center(93), "|")
+        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("|", "Party".center(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
+        
+        region=None
+        regionvotes=None
+        
+        for i in self.partyregionresults:
+            if i.region!=region:
+                print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+                if region!=None:
+                    print("|", "Total".rjust(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
+                    print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+                    print("|", "".rjust(48), "|", f'{regionvotes:,}'[0:20].center(20), "|", "100.0%".center(10), "|", str(region.seats).center(6), "|")
+                    print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+                print("|", i.region.name.center(93), "|")
+                print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+                region=i.region
+                regionvotes=round(sum([sum(i.partyaxes[1]) for i in self.partyregionresults if i.region==region]))
+            print("|", i.party.fullname[0:48].rjust(48), "|", f'{(round(sum(i.partyaxes[1]))):,}'[0:20].center(20), "|",
+                  (str(round(round(sum(i.partyaxes[1]))/sum([sum(i.partyaxes[1]) for i in self.partyregionresults if i.region==region])*100,1)) + "%")[0:10].center(10), "|", 
+                  str(round(sum(i.partyaxes[1])/sum([sum(i.partyaxes[1]) for i in self.partyregionresults if i.region==region])*i.region.seats))[0:6].center(6), "|")
+        
+        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("|", "Total".rjust(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
+        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("|", "".rjust(48), "|", f'{regionvotes:,}'[0:20].center(20), "|", "100.0%".center(10), "|", str(i.region.seats).center(6), "|")
+        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+
+
 class PartyRegionResult:
       def __init__(self, region, party, regionaxes, partyaxes):
         self.region = region
         self.party = party
         self.regionaxes=regionaxes
         self.partyaxes=partyaxes
-
-
-def printresults(results):
-    print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
-    print("|", "RESULTS".center(93), "|")
-    print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
-    print("|", "Party".center(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
-    
-    region=None
-    regionvotes=None
-    
-    for i in results:
-        if i.region!=region:
-            print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
-            if region!=None:
-                print("|", "Total".rjust(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
-                print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
-                print("|", "".rjust(48), "|", f'{regionvotes:,}'[0:20].center(20), "|", "100.0%".center(10), "|", str(region.seats).center(6), "|")
-                print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
-            print("|", i.region.name.center(93), "|")
-            print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
-            region=i.region
-            regionvotes=round(sum([sum(i.partyaxes[1]) for i in results if i.region==region]))
-        print("|", i.party.fullname[0:48].rjust(48), "|", f'{(round(sum(i.partyaxes[1]))):,}'[0:20].center(20), "|",
-              (str(round(round(sum(i.partyaxes[1]))/sum([sum(i.partyaxes[1]) for i in results if i.region==region])*100,1)) + "%")[0:10].center(10), "|", 
-              str(round(sum(i.partyaxes[1])/sum([sum(i.partyaxes[1]) for i in results if i.region==region])*i.region.seats))[0:6].center(6), "|")
-    
-    print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
-    print("|", "Total".rjust(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
-    print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
-    print("|", "".rjust(48), "|", f'{regionvotes:,}'[0:20].center(20), "|", "100.0%".center(10), "|", str(i.region.seats).center(6), "|")
-    print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
-
 
 def issuepartyregiongrouper(scenario):
     x_axis=arange(-10, 10, 0.01)
@@ -104,6 +107,7 @@ def partyregionsummation(scenario, issuepartyregionresults):
             plt.plot(i.partyaxes[0], i.partyaxes[1]) 
         #print(i.region.name, round(sum(i.regionaxes[1])))
         #print(i.party.name, i.region.name, round(sum(i.partyaxes[1])))
+    plt.show()
     """
 
     return list(partyregionresults.values())
@@ -128,16 +132,24 @@ def partyregiondistributer(scenario, partyregionresults):
         if i.region.name=='London':
             plt.plot(i.regionaxes[0], i.regionaxes[1]) 
             plt.plot(i.partyaxes[0], i.partyaxes[1]) 
-            print(i.region.name, round(sum(i.regionaxes[1])))
-            print(i.party.name, i.region.name, round(sum(i.partyaxes[1])))
+            #print(i.region.name, round(sum(i.regionaxes[1])))
+            #print(i.party.name, i.region.name, round(sum(i.partyaxes[1])))
+    plt.show()
     """
 
     partyregionresults.sort(key=lambda x: (x.region.seats, x.region.population, sum(x.partyaxes[1])), reverse=True)
 
+
     return partyregionresults
 
 
-def main(scenario):
+def getpartyregionresults(scenario):
     issuepartyregionresults=issuepartyregiongrouper(scenario)
     partyregionresults=partyregionsummation(scenario, issuepartyregionresults)
     return partyregiondistributer(scenario, partyregionresults)
+
+def main(scenario):
+    results=Results(scenario)
+    results.partyregionresults=getpartyregionresults(scenario)
+    #results.printresults()
+    return results
