@@ -22,3 +22,9 @@ snp-immigration:
 snp-tariffs:
 	mean=0
 	variance=1
+plc-immigration:
+	mean=0
+	variance=1
+plc-tariffs:
+	mean=0
+	variance=1

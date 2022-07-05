@@ -46,3 +46,6 @@ Jeremy Thorpe:
 William Wolfe:
 	party=snp
 	leader=True	
+Gwynfor Evans:
+	party=plc
+	leader=True	

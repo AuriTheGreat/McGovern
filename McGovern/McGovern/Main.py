@@ -1,6 +1,10 @@
 import ScenarioHandler
 import ResultHandler
 import os
+import pygame
+from pygame.locals import *
+
+
 
 def getvalidscenarios(scenarios):
     validscenarios=[]
@@ -19,48 +23,118 @@ def getscenario(scenarios):
         else:
             print("Wrong input: scenario name needed.")
 
+class Image():
+    def __init__(self, x, y, width, height, img):
+            self.x = x
+            self.y = y
+            self.width = width
+            self.height = height
+            self.img = img
 
-scenarios=os.listdir('scenario')
-scenarios=getvalidscenarios(scenarios)
+            objects.append(self)
 
-scenarioname=getscenario(scenarios)
+    def process(self):
+        image = pygame.image.load(self.img)
+        image = pygame.transform.scale(image,(self.width, self.height))
+        screen.blit(image, (self.x,self.y))
+        
 
-scenario=ScenarioHandler.main(scenarioname)
+class Button():
+    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, onePress=False):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.onclickFunction = onclickFunction
+        self.onePress = onePress
 
-results=ResultHandler.main(scenario)
+        self.fillColors = {
+            'normal': '#ffffff',
+            'hover': '#666666',
+            'pressed': '#333333',
+        }
+
+        self.buttonSurface = pygame.Surface((self.width, self.height))
+        self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
+
+        self.buttonSurf = font.render(buttonText, True, (20, 20, 20))
+
+        self.alreadyPressed = False
+
+        objects.append(self)
+
+    def process(self):
+
+        mousePos = pygame.mouse.get_pos()
+        
+        self.buttonSurface.fill(self.fillColors['normal'])
+        if self.buttonRect.collidepoint(mousePos):
+            self.buttonSurface.fill(self.fillColors['hover'])
+
+            if pygame.mouse.get_pressed(num_buttons=3)[0]:
+                self.buttonSurface.fill(self.fillColors['pressed'])
+
+                if self.onePress:
+                    self.onclickFunction()
+
+                elif not self.alreadyPressed:
+                    self.onclickFunction()
+                    self.alreadyPressed = True
+
+            else:
+                self.alreadyPressed = False
+
+        self.buttonSurface.blit(self.buttonSurf, [
+            self.buttonRect.width/2 - self.buttonSurf.get_rect().width/2,
+            self.buttonRect.height/2 - self.buttonSurf.get_rect().height/2
+        ])
+        screen.blit(self.buttonSurface, self.buttonRect)
 
 
-"""
-import pygame
-import datetime
+def mainmenu():
+    objects.clear()
+    Button(width/2-200, 30, 400, 100, 'Button One (onePress)', choosescenario)
+    Image(width/2-200, 10, 200, 50, 'gfx/title.png')
 
-# Simple pygame program
 
-# Import and initialize the pygame library
-import pygame
-pygame.init()
+def choosescenario():
+    objects.clear()
+    Button(width/2-200, 130, 400, 100, 'Button One (onePress)', mainmenu)
+    for i in scenarios:
+        Button(width/2-200, 230, 400, 100, i)
 
-# Set up the drawing window
-screen = pygame.display.set_mode([500, 500])
 
-# Run until the user asks to quit
-running = True
-while running:
 
-    # Did the user click the window close button?
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
 
-    # Fill the background with white
-    screen.fill((255, 255, 255))
+if __name__ == "__main__":
+    scenarios=os.listdir('scenario')
+    scenarios=getvalidscenarios(scenarios)
+    scenarioname=getscenario(scenarios)
+    scenario=ScenarioHandler.main(scenarioname)
 
-    # Draw a solid blue circle in the center
-    pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
+    results=ResultHandler.main(scenario)
 
-    # Flip the display
-    pygame.display.flip()
+    pygame.init()
+    fps = 60
+    fpsClock = pygame.time.Clock()
+    width, height = 640, 480
+    screen = pygame.display.set_mode((width, height))
+    
+    font = pygame.font.SysFont('Arial', 40)
 
-# Done! Time to quit.
-pygame.quit()
-"""
+    objects = []
+
+    mainmenu()
+    
+    # Game loop.
+    while True:
+        screen.fill((20,20,20))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+    
+        for object in objects:
+            object.process()
+    
+        pygame.display.flip()
+        fpsClock.tick(fps)

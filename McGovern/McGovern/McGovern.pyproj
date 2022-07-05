@@ -32,7 +32,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="gfx\" />
     <Folder Include="scenario\" />
+    <Folder Include="scenario\uk1970\gfx\" />
     <Folder Include="scenario\uk1974\" />
     <Folder Include="scenario\uk1970\" />
   </ItemGroup>
