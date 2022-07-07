@@ -113,14 +113,58 @@ class Button():
 
         screen.blit(self.buttonSurface, self.buttonRect)
 
+class ImageButton():
+    def __init__(self, x, y, width, height, img, buttonText='Button', onclickFunction=None):
+            self.x = x
+            self.y = y
+            self.width = width
+            self.height = height
+            self.img = img
+            self.buttonText=buttonText
+            self.onclickFunction=onclickFunction
+
+            self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
+
+            objects.append(self)
+
+    def process(self):
+        mousePos = pygame.mouse.get_pos()
+        global isclicked
+        
+        image = pygame.image.load(self.img).convert_alpha()
+        image = pygame.transform.scale(image,(self.width, self.height))
+
+        if self.buttonRect.collidepoint(mousePos):
+            brighten = 50
+            image.fill((brighten, brighten, brighten), special_flags=pygame.BLEND_RGB_SUB)
+            if pygame.mouse.get_pressed(num_buttons=3)[0]:
+                if isclicked==False:
+                    self.onclickFunction()
+                    isclicked=True
+
+            else:
+                isclicked=False
+
+        textsurface = font.render(self.buttonText, True, (255,255,255))
+
+        image.blit(textsurface, [
+            self.width/2 - textsurface.get_rect().width/2,
+            self.height/2 - textsurface.get_rect().height/2
+        ])
+
+        screen.blit(image, (self.x,self.y))
+        #screen.blit(textsurface, (self.x+self.width/2,self.y+self.height/2))
+
+
+
 
 def mainmenu():
     objects.clear()
     Rectangle(0,screen_width/(1200/250),screen_width,screen_height, '#D4FFFD')
     button_size_x, button_size_y = screen_width/3, screen_height/(700/90)
-    Button(screen_width/2-(button_size_x/2), screen_width/(1200/300), button_size_x, button_size_y, 'Play', choosescenario)
-    Button(screen_width/2-(button_size_x/2), screen_width/(1200/400), button_size_x, button_size_y, 'Options', options)
-    Button(screen_width/2-(button_size_x/2), screen_width/(1200/500), button_size_x, button_size_y, 'Quit', quit)
+    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/300), button_size_x, button_size_y, 'gfx/button.png', 'Play', choosescenario)
+    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/400), button_size_x, button_size_y, 'gfx/button.png', 'Options', options)
+    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/500), button_size_x, button_size_y, 'gfx/button.png', 'Quit', quit)
     Image(0, screen_width/(1200/10), screen_width, screen_width/4.8, 'gfx/title.png')
 
 
@@ -167,6 +211,7 @@ if __name__ == "__main__":
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
+                break
     
         for object in objects:
             object.process()
