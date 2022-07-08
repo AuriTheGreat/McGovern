@@ -479,7 +479,7 @@ def regionissuehandler(scenarioname, regions, issues):
     for i in neededelements:
         f.write(i + ":" + "\n")
         f.write("\t" + "mean=0" + "\n")
-        f.write("\t" + "variance=0" + "\n")
+        f.write("\t" + "variance=1" + "\n")
         f.write("\t" + "importance=0" + "\n")
 
     for i in regions:

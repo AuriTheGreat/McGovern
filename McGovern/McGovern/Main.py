@@ -1,7 +1,7 @@
 import ScenarioHandler
 import ResultHandler
 import os
-import time
+import math
 import pygame
 from pygame.locals import *
 
@@ -160,19 +160,33 @@ class ImageButton():
 
 def mainmenu():
     objects.clear()
-    Rectangle(0,screen_width/(1200/250),screen_width,screen_height, '#D4FFFD')
-    button_size_x, button_size_y = screen_width/3, screen_height/(700/90)
+    #Rectangle(0,screen_width/(1200/250),screen_width,screen_height-(screen_height/(700/250)), '#D4FFFD')
+    Image(0,screen_width/(1200/250),screen_width,screen_height-(screen_height/(700/250)), 'gfx/menu.png')
+    button_size_x, button_size_y = screen_width/(1200/400), screen_height/(700/90)
     ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/300), button_size_x, button_size_y, 'gfx/button.png', 'Play', choosescenario)
     ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/400), button_size_x, button_size_y, 'gfx/button.png', 'Options', options)
     ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/500), button_size_x, button_size_y, 'gfx/button.png', 'Quit', quit)
     Image(0, screen_width/(1200/10), screen_width, screen_width/4.8, 'gfx/title.png')
 
 
+testscenarios=["nice", "indeed", "hello", "good", "fun", "destroy", "life", "great", "alright", "minecraft", "uk1970", "yes",
+               "scenario", "betterscenario", "worstscenario", "bestscenario", "indeed", "i like it", "yes"]
+
 def choosescenario():
     objects.clear()
-    Button(screen_width/2-200, 130, 400, 100, 'Go back', mainmenu)
-    for i in scenarios:
-        Button(screen_width/2-200, 230, 400, 100, i)
+    button_size_x, button_size_y = screen_width/(1200/400), screen_height/(700/90)
+    tile_size_x, tile_size_y = screen_width/(1200/200), screen_height/(700/200)
+    Button(screen_width/2-(button_size_x/2), screen_width/(1200/550), button_size_x, button_size_y, 'Go back', mainmenu)
+
+    objects_per_row=5
+    rows=3
+    x_outline, y_outline= screen_width/(1200/100),screen_height/(700/200)
+    tile_size_x=(screen_width-(objects_per_row*5+x_outline))/objects_per_row
+    tile_size_y=(screen_height-(objects_per_row*5+y_outline))/objects_per_row
+
+    for count, i in enumerate(testscenarios):
+        Button(screen_width/(1200/(x_outline/2))+(tile_size_x+5)*(count%objects_per_row), screen_height/(700/(y_outline/2))+(tile_size_y+5)*math.floor(count/objects_per_row), tile_size_x, tile_size_y, i , None)
+
 
 def options():
     objects.clear()

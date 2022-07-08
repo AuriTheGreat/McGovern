@@ -34,14 +34,18 @@
   <ItemGroup>
     <Folder Include="gfx\" />
     <Folder Include="scenario\" />
+    <Folder Include="scenario\usa1988\" />
     <Folder Include="scenario\uk1970\gfx\" />
     <Folder Include="scenario\uk1974\" />
     <Folder Include="scenario\uk1970\" />
+    <Folder Include="scenario\uk1974\gfx\" />
+    <Folder Include="scenario\usa1988\gfx\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
     <Content Include="scenario\uk1970\characters.txt" />
     <Content Include="scenario\uk1970\events.txt" />
+    <Content Include="scenario\uk1970\historicalresults.txt" />
     <Content Include="scenario\uk1970\ideologies.txt" />
     <Content Include="scenario\uk1970\issues.txt" />
     <Content Include="scenario\uk1970\main.txt" />
@@ -51,6 +55,8 @@
     <Content Include="scenario\uk1970\populations.txt" />
     <Content Include="scenario\uk1970\regionissue.txt" />
     <Content Include="scenario\uk1970\regions.txt" />
+    <Content Include="scenario\uk1974\main.txt" />
+    <Content Include="scenario\usa1988\main.txt" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">

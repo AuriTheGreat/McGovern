@@ -1,0 +1,9 @@
+name=United States Presidential Election of 1988
+nation=United States
+year=1988
+fiction=False
+description=This scenario is very very scenarioy 
+startdate=1988-05-05
+enddate=1988-11-10
+electiondate=1988-11-07
+turns=12

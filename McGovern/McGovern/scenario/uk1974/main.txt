@@ -1,0 +1,9 @@
+name=United Kingdom Election of 1974
+nation=United Kingdom
+year=1974
+fiction=False
+description=This scenario is very very scenarioy 
+startdate=1973-05-05
+enddate=1974-06-18
+electiondate=1974-06-18
+turns=12

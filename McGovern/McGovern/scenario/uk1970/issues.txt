@@ -4,10 +4,39 @@ immigration:
 		Opposed
 		Neutral
 		Supportive
-
-tariffs:
-	fullname=Tariffs
+welfarestate:
+	fullname=Welfare State
 	levels:
-		Low
+		Opposed
 		Neutral
-		High
+		Supportive
+tradeunions:
+	fullname=Trade Unions
+	levels:
+		Opposed
+		Neutral
+		Supportive
+europe:
+	fullname=European Economic Community
+	levels:
+		Opposed
+		Neutral
+		Supportive
+nato:
+	fullname=North Atlantic Treaty Organisation
+	levels:
+		Opposed
+		Neutral
+		Supportive
+devolution:
+	fullname=Devolution
+	levels:
+		Opposed
+		Neutral
+		Supportive
+nukes:
+	fullname=Nuclear Disarmament
+	levels:
+		Unilateral
+		Neutral
+		Multilateral

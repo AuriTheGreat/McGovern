@@ -1,96 +1,336 @@
 London-immigration:
+	mean=3
+	variance=2.5
+	importance=1
+London-welfarestate:
 	mean=2
+	variance=3
+	importance=1
+London-tradeunions:
+	mean=1
+	variance=4
+	importance=0.5
+London-europe:
+	mean=4
 	variance=1.5
-	importance=0.5
-London-tariffs:
-	mean=5
+	importance=1.5
+London-nato:
+	mean=4
 	variance=2
 	importance=0.5
-Scotland-immigration:
-	mean=0
-	variance=1
-	importance=1
-Scotland-tariffs:
-	mean=0
-	variance=1
-	importance=1
-Wales-immigration:
-	mean=0
-	variance=5
-	importance=1
-Wales-tariffs:
-	mean=0
-	variance=1
-	importance=1
-Northern Ireland-immigration:
-	mean=0
-	variance=1
-	importance=1
-Northern Ireland-tariffs:
-	mean=0
+London-devolution:
+	mean=-3
 	variance=2
-	importance=1
-South West-immigration:
-	mean=0
-	variance=1
-	importance=1
-South West-tariffs:
-	mean=0
-	variance=1
-	importance=1
-South East-immigration:
-	mean=0
-	variance=1
-	importance=1
-South East-tariffs:
-	mean=0
-	variance=1
-	importance=1
-West Midlands-immigration:
-	mean=0
-	variance=1
-	importance=1
-West Midlands-tariffs:
-	mean=0
-	variance=1
-	importance=1
-East Midlands-immigration:
-	mean=0
-	variance=1
-	importance=1
-East Midlands-tariffs:
-	mean=0
-	variance=1
-	importance=1
+	importance=0.5
+London-nukes:
+	mean=4
+	variance=3
+	importance=0.2
 North West-immigration:
 	mean=0
 	variance=1
 	importance=1
-North West-tariffs:
+North West-welfarestate:
+	mean=0
+	variance=1
+	importance=1
+North West-tradeunions:
+	mean=0
+	variance=1
+	importance=1
+North West-europe:
+	mean=0
+	variance=1
+	importance=1
+North West-nato:
+	mean=0
+	variance=1
+	importance=1
+North West-devolution:
+	mean=0
+	variance=1
+	importance=1
+North West-nukes:
+	mean=0
+	variance=1
+	importance=1
+South East-immigration:
+	mean=-1
+	variance=2
+	importance=1
+South East-welfarestate:
+	mean=-1
+	variance=2
+	importance=1
+South East-tradeunions:
+	mean=-2
+	variance=2
+	importance=1
+South East-europe:
+	mean=2
+	variance=2
+	importance=1
+South East-nato:
+	mean=5
+	variance=3
+	importance=0.5
+South East-devolution:
+	mean=-3
+	variance=2
+	importance=1
+South East-nukes:
+	mean=0
+	variance=1
+	importance=1
+Scotland-immigration:
+	mean=1
+	variance=3
+	importance=1
+Scotland-welfarestate:
+	mean=2
+	variance=3
+	importance=1
+Scotland-tradeunions:
+	mean=1
+	variance=2
+	importance=1
+Scotland-europe:
+	mean=-1
+	variance=3
+	importance=1
+Scotland-nato:
+	mean=4
+	variance=1
+	importance=0.5
+Scotland-devolution:
+	mean=3
+	variance=3
+	importance=1
+Scotland-nukes:
+	mean=2
+	variance=3
+	importance=0.5
+West Midlands-immigration:
+	mean=-1
+	variance=1.5
+	importance=1
+West Midlands-welfarestate:
+	mean=1
+	variance=3
+	importance=1
+West Midlands-tradeunions:
+	mean=1
+	variance=3
+	importance=1
+West Midlands-europe:
+	mean=0
+	variance=3
+	importance=1
+West Midlands-nato:
+	mean=4
+	variance=3
+	importance=0.5
+West Midlands-devolution:
+	mean=-2
+	variance=2
+	importance=0.5
+West Midlands-nukes:
+	mean=3
+	variance=2
+	importance=0.5
+Yorkshire and the Humber-immigration:
+	mean=0
+	variance=2
+	importance=1
+Yorkshire and the Humber-welfarestate:
+	mean=3
+	variance=2
+	importance=1
+Yorkshire and the Humber-tradeunions:
+	mean=4
+	variance=2
+	importance=1
+Yorkshire and the Humber-europe:
+	mean=3
+	variance=3
+	importance=1
+Yorkshire and the Humber-nato:
+	mean=3
+	variance=3
+	importance=0.5
+Yorkshire and the Humber-devolution:
+	mean=0
+	variance=2
+	importance=0.5
+Yorkshire and the Humber-nukes:
+	mean=3
+	variance=2
+	importance=0.5
+Eastern-immigration:
+	mean=0
+	variance=3
+	importance=1
+Eastern-welfarestate:
+	mean=0
+	variance=3
+	importance=1
+Eastern-tradeunions:
+	mean=-1
+	variance=2
+	importance=1
+Eastern-europe:
+	mean=1
+	variance=3
+	importance=1
+Eastern-nato:
+	mean=4
+	variance=2
+	importance=0.5
+Eastern-devolution:
+	mean=-3
+	variance=2
+	importance=0.5
+Eastern-nukes:
+	mean=3
+	variance=2
+	importance=0.5
+South West-immigration:
+	mean=0
+	variance=2
+	importance=1
+South West-welfarestate:
+	mean=0
+	variance=2
+	importance=1
+South West-tradeunions:
+	mean=0
+	variance=1.5
+	importance=1
+South West-europe:
+	mean=1
+	variance=2
+	importance=1
+South West-nato:
+	mean=5
+	variance=1.5
+	importance=0.5
+South West-devolution:
+	mean=-1
+	variance=1.5
+	importance=0.5
+South West-nukes:
+	mean=4
+	variance=2
+	importance=0.5
+East Midlands-immigration:
+	mean=-1
+	variance=2
+	importance=1
+East Midlands-welfarestate:
+	mean=1
+	variance=2
+	importance=1
+East Midlands-tradeunions:
+	mean=0
+	variance=1
+	importance=1
+East Midlands-europe:
+	mean=2
+	variance=2
+	importance=1
+East Midlands-nato:
+	mean=3
+	variance=2
+	importance=0.5
+East Midlands-devolution:
+	mean=-3
+	variance=3
+	importance=0.5
+East Midlands-nukes:
+	mean=4
+	variance=1.5
+	importance=0.5
+Wales-immigration:
+	mean=1
+	variance=3
+	importance=1
+Wales-welfarestate:
+	mean=2
+	variance=2
+	importance=1
+Wales-tradeunions:
+	mean=1
+	variance=3
+	importance=1
+Wales-europe:
+	mean=2
+	variance=2
+	importance=1
+Wales-nato:
+	mean=3
+	variance=2
+	importance=0.5
+Wales-devolution:
+	mean=-2
+	variance=3
+	importance=1
+Wales-nukes:
 	mean=0
 	variance=1
 	importance=1
 North East-immigration:
+	mean=-1
+	variance=3
+	importance=1.5
+North East-welfarestate:
+	mean=2
+	variance=3
+	importance=1
+North East-tradeunions:
+	mean=3
+	variance=2
+	importance=1
+North East-europe:
+	mean=2
+	variance=3
+	importance=0.5
+North East-nato:
+	mean=4
+	variance=3
+	importance=0.5
+North East-devolution:
+	mean=-3
+	variance=2
+	importance=0.5
+North East-nukes:
+	mean=4
+	variance=2
+	importance=0.5
+Northern Ireland-immigration:
 	mean=0
 	variance=1
 	importance=1
-North East-tariffs:
-	mean=0
-	variance=1
+Northern Ireland-welfarestate:
+	mean=-2
+	variance=1.5
+	importance=1.5
+Northern Ireland-tradeunions:
+	mean=-2
+	variance=1.5
 	importance=1
-Eastern-immigration:
-	mean=0
-	variance=1
+Northern Ireland-europe:
+	mean=-2
+	variance=3
+	importance=1.2
+Northern Ireland-nato:
+	mean=5
+	variance=2
 	importance=1
-Eastern-tariffs:
-	mean=0
-	variance=1
-	importance=1
-Yorkshire and the Humber-immigration:
-	mean=0
-	variance=1
-	importance=1
-Yorkshire and the Humber-tariffs:
-	mean=0
-	variance=1
-	importance=1
+Northern Ireland-devolution:
+	mean=1
+	variance=4
+	importance=2
+Northern Ireland-nukes:
+	mean=3
+	variance=3
+	importance=0.5
