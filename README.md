@@ -1,2 +1,2 @@
 # McGovern
-A political simulator that is still in development, but meant to have full mod support.
+A political election simulator, where the goal isn't only winning the election, but also not dooming the nation in the process. Eventually meant to have a full mod support for adding new scenarios.

@@ -4,9 +4,11 @@ from scipy.stats import norm
 import matplotlib.pyplot as plt
 
 class Results:
-    def __init__(self, scenario, partyregionresults=None):
+    def __init__(self, scenario, partyregionresults=None, totalpartyresults=None):
         self.scenario=scenario
         self.partyregionresults=partyregionresults
+        self.totalpartyresults=totalpartyresults
+
     def printresults(self):
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
         print("|", "RESULTS".center(93), "|")
@@ -29,8 +31,8 @@ class Results:
                 region=i.region
                 regionvotes=round(sum([sum(i.partyaxes[1]) for i in self.partyregionresults if i.region==region]))
             print("|", i.party.fullname[0:48].rjust(48), "|", f'{(round(sum(i.partyaxes[1]))):,}'[0:20].center(20), "|",
-                  (str(round(round(sum(i.partyaxes[1]))/sum([sum(i.partyaxes[1]) for i in self.partyregionresults if i.region==region])*100,1)) + "%")[0:10].center(10), "|", 
-                  str(round(sum(i.partyaxes[1])/sum([sum(i.partyaxes[1]) for i in self.partyregionresults if i.region==region])*i.region.seats))[0:6].center(6), "|")
+                  str(str(round(i.percentage,1))+"%")[0:10].center(10), "|", 
+                  str(i.seats)[0:6].center(6), "|")
         
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
         print("|", "Total".rjust(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
@@ -38,16 +40,31 @@ class Results:
         print("|", "".rjust(48), "|", f'{regionvotes:,}'[0:20].center(20), "|", "100.0%".center(10), "|", str(i.region.seats).center(6), "|")
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
 
+        #Total
+        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("|", "TOTAL".center(93), "|")
+        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("|", "Party".center(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
+        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+
+        for i in self.totalpartyresults:
+            print("|", i.party.fullname[0:48].rjust(48), "|", f'{(i.votes):,}'[0:20].center(20), "|",
+                  str(str(round(i.percentage,1))+"%")[0:10].center(10), "|", 
+                  str(i.seats)[0:6].center(6), "|")
+        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+
 
 class PartyRegionResult:
-      def __init__(self, region, party, regionaxes, partyaxes):
+      def __init__(self, region, party, regionaxes, partyaxes, seats=None, percentage=None):
         self.region = region
         self.party = party
         self.regionaxes=regionaxes
         self.partyaxes=partyaxes
+        self.seats=seats
+        self.percentage=percentage
 
 def issuepartyregiongrouper(scenario):
-    x_axis=arange(-10, 10, 0.01)
+    x_axis=arange(-20, 20, 0.1)
     issuepartyregionresults=[]
     class IssuePartyRegionResult:
       def __init__(self, region, party, issue, regionaxes, partyaxes):
@@ -142,14 +159,85 @@ def partyregiondistributer(scenario, partyregionresults):
 
     return partyregionresults
 
+def partyregionseats(scenario, partyregionresults):
+    def seatcalculation(partyregionresults, partypercentages, region):
+        def calculationbalancer(partyshares, partyseats, region): #function for distributing seats if the amount of seats doesn't match amount of distributed seats
+           while region.seats!=sum(partyseats.values()):
+               if region.seats>sum(partyseats.values()):
+                   maximalvalue,party=0,None
+                   for i in partyshares:
+                        if min(partyshares[i]/partyseats[i],partyshares[i])>maximalvalue:
+                            maximalvalue,party=min(partyshares[i]/partyseats[i],partyshares[i]),i
+                   partyseats[party]+=1
+                   #print(region.name, party.name, "+1")
+               else:
+                   minimalvalue,party=1,None
+                   for i in partyshares:
+                       if partyseats[i]>0 and min(partyshares[i]/partyseats[i],partyshares[i])<minimalvalue:
+                           minimalvalue,party=min(partyshares[i]/partyseats[i],partyshares[i]),i
+                   partyseats[party]-=1
+                   #print(region.name, party.name, "-1")
+
+           return partyseats
+        partyshares={}
+        partyseats={}
+        for j in partypercentages:
+            partyshares[j]=(0.00104*(partypercentages[j]*100)**2.8+0.17)/100
+        for j in partyshares:
+            partyseats[j]=round((partyshares[j]/sum(partyshares.values()))*region.seats)
+        partyseats=calculationbalancer(partyshares, partyseats, region)
+        for j in partyregionresults:
+            reachedregion=False
+            if j.region==region:
+                reachedregion=True
+                j.seats=partyseats[j.party]
+            elif reachedregion:
+                break
+
+
+    region=partyregionresults[0].region
+    partypercentages={}
+
+    for i in partyregionresults:
+        i.percentage=(sum(i.partyaxes[1])/sum([sum(j.partyaxes[1]) for j in partyregionresults if i.region==j.region]))*100
+        if i.region!=region:
+            seatcalculation(partyregionresults, partypercentages, region)
+            region=i.region
+            partypercentages={}
+        partypercentages[i.party]=sum(i.partyaxes[1])/sum(i.regionaxes[1])
+    seatcalculation(partyregionresults, partypercentages, region)
+
+    return partyregionresults
 
 def getpartyregionresults(scenario):
     issuepartyregionresults=issuepartyregiongrouper(scenario)
     partyregionresults=partyregionsummation(scenario, issuepartyregionresults)
-    return partyregiondistributer(scenario, partyregionresults)
+    partyregionresults=partyregiondistributer(scenario, partyregionresults)
+    return partyregionseats(scenario, partyregionresults)
+
+def gettotalresults(scenario, partyregionresults):
+    totalpartyresults=[]
+    class TotalPartyResult:
+          def __init__(self, party, votes, seats, percentage):
+            self.party = party
+            self.votes=votes
+            self.seats=seats
+            self.percentage=percentage
+
+    for i in scenario.parties:
+        totalpartyresults.append(TotalPartyResult(i, 
+        int(round(sum([sum(j.partyaxes[1]) for j in partyregionresults if i==j.party]),0)),
+        sum([j.seats for j in partyregionresults if i==j.party]),
+        sum([sum(j.partyaxes[1]) for j in partyregionresults if i==j.party])/sum([sum(j.partyaxes[1]) for j in partyregionresults])*100
+        ))
+
+    totalpartyresults.sort(key=lambda x: (x.seats, x.votes), reverse=True)
+    return totalpartyresults
+
 
 def main(scenario):
     results=Results(scenario)
     results.partyregionresults=getpartyregionresults(scenario)
-    #results.printresults()
+    results.totalpartyresults=gettotalresults(scenario, results.partyregionresults)
+    results.printresults()
     return results
