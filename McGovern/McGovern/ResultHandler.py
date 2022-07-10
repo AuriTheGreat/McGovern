@@ -30,9 +30,10 @@ class Results:
                 print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
                 region=i.region
                 regionvotes=round(sum([sum(i.partyaxes[1]) for i in self.partyregionresults if i.region==region]))
-            print("|", i.party.fullname[0:48].rjust(48), "|", f'{(round(sum(i.partyaxes[1]))):,}'[0:20].center(20), "|",
-                  str(str(round(i.percentage,1))+"%")[0:10].center(10), "|", 
-                  str(i.seats)[0:6].center(6), "|")
+            if round(sum(i.partyaxes[1]))>0:
+                print("|", i.party.fullname[0:48].rjust(48), "|", f'{(round(sum(i.partyaxes[1]))):,}'[0:20].center(20), "|",
+                      str(str(round(i.percentage,1))+"%")[0:10].center(10), "|", 
+                      str(i.seats)[0:6].center(6), "|")
         
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
         print("|", "Total".rjust(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
@@ -133,7 +134,7 @@ def partyregiondistributer(scenario, partyregionresults):
     regionsums={}
 
     for i in partyregionresults:
-        i.partyaxes[1]=i.partyaxes[1]*i.party.power
+        i.partyaxes[1]=i.partyaxes[1]*max(0,i.party.power+next((x.power for x in scenario.partyregions if x.party == i.party and x.region==i.region), None))
 
     for i in partyregionresults:
         if i.region.name in regionsums:

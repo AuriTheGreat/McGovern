@@ -3,7 +3,7 @@ import numpy as np
 import re
 
 class Scenario:
-      def __init__(self, name, main=None, issues=None, parties=None, ideologies=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partydemographics=None, regionissues=None, regiondemographics=None):
+      def __init__(self, name, main=None, issues=None, parties=None, ideologies=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partypopulations=None, regionissues=None, regionpopulations=None, partyregions=None):
         self.name = name
         self.main = main
         self.issues = issues
@@ -14,9 +14,10 @@ class Scenario:
         self.regions = regions
         self.populations = populations
         self.partyissues = partyissues
-        self.partydemographics = partydemographics
+        self.partypopulations = partypopulations
         self.regionissues = regionissues
-        self.regiondemographics = regiondemographics
+        self.regionpopulations = regionpopulations
+        self.partyregions = partyregions
       def printmain(self):
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
         print("|", "MAIN".center(93), "|")
@@ -41,7 +42,10 @@ class Scenario:
             print("|", i.name.center(93), "|")
             print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
             print("|", "Full name".rjust(20), "|", i.fullname[0:70].ljust(70), "|")
-            print("|", "Leader".rjust(20), "|", str(i.leader.name)[0:70].ljust(70), "|")
+            if i.leader!=None:
+                print("|", "Leader".rjust(20), "|", str(i.leader.name)[0:70].ljust(70), "|")
+            else:
+                print("|", "Leader".rjust(20), "|", "None"[0:70].ljust(70), "|")
             print("|", "Power".rjust(20), "|", str(round(i.power,4))[0:70].ljust(70), "|")
             print("|", "Ideologies".rjust(20), "|", ", ".join(i.ideologies)[0:70].ljust(70), "|")
             print("+" + "".join([chr(0x2015) for c in range(22)]) + "+" + "".join([chr(0x2015) for c in range(72)]) + "+")
@@ -51,6 +55,13 @@ class Scenario:
             for j in i.issues:
                 print("|", "".rjust(20), "|", j.issue.fullname[0:20].center(20).ljust(20), str(round(j.mean,4)).center(24).ljust(24), str(round(j.variance,4)).center(24).ljust(24), "|")
             print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+            print("|", "".rjust(20), "|", "Populations"[0:70].center(70).ljust(70), "|")
+            print("|", "".rjust(20), "|", "Name"[0:20].center(20).ljust(20), "Appeal"[0:70].center(49).ljust(49), "|")
+            print("|" + "".rjust(22) + "+" + "".join([chr(0x2015) for c in range(72)]) + "+")
+            for j in i.populations:
+                print("|", "".rjust(20), "|", j.population.fullname[0:20].center(20).ljust(20), str(round(j.appeal,4)).center(49).ljust(49), "|")
+            print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+
       def printregions(self):
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
         print("|", "REGIONS".center(93), "|")
@@ -67,6 +78,12 @@ class Scenario:
             print("|" + "".rjust(22) + "+" + "".join([chr(0x2015) for c in range(72)]) + "+")
             for j in i.issues:
                 print("|", "".rjust(20), "|", j.issue.fullname[0:20].center(20).ljust(20), str(round(j.mean,4)).center(15).ljust(15), str(round(j.variance,4)).center(16).ljust(16), str(round(j.importance,4)).center(16).ljust(16), "|")
+            print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+            print("|", "".rjust(20), "|", "Populations"[0:70].center(70).ljust(70), "|")
+            print("|", "".rjust(20), "|", "Name"[0:20].center(20).ljust(20), "Influence"[0:70].center(49).ljust(49), "|")
+            print("|" + "".rjust(22) + "+" + "".join([chr(0x2015) for c in range(72)]) + "+")
+            for j in i.populations:
+                print("|", "".rjust(20), "|", j.population.fullname[0:20].center(20).ljust(20), str(round(j.influence,4)).center(49).ljust(49), "|")
             print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
       def printcharacters(self):
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
@@ -200,16 +217,63 @@ def getissues(scenarioname):
 
     return issues
 
+def getpopulations(scenarioname):
+    populations=[]
+
+    class Population:
+      def __init__(self, name, fullname, pollingbias, financialpower, regions, parties):
+        self.name = name
+        self.fullname = fullname
+        self.pollingbias = pollingbias
+        self.financialpower = financialpower
+        self.regions=regions
+        self.parties=parties
+    
+    
+    f = open ( 'scenario/' + scenarioname + '/populations.txt' , 'r')
+    l = []
+    l = np.array([ line.split() for line in f], dtype=object)
+    
+    currentpopulation=None
+    fullname, pollingbias, financialpower=None,None,None
+    
+    for i in l:
+        newi=" ".join(i)
+        string=re.search("(.*):", newi)
+        if string:
+            if currentpopulation!=None:
+                populations.append(Population(currentpopulation, fullname, pollingbias, financialpower, [], []))
+            currentpopulation="".join(string[1].rstrip().lstrip())
+            fullname, pollingbias, financialpower=None,None,None
+        else:
+            string=re.search(".*fullname.*=(.*)", newi)
+            if string:
+                fullname="".join(string[1].rstrip().lstrip())
+                continue
+            string=re.search(".*pollingbias.*=(.*)", newi)
+            if string:
+                pollingbias="".join(string[1].rstrip().lstrip())
+                continue
+            string=re.search(".*financialpower.*=(.*)", newi)
+            if string:
+                financialpower="".join(string[1].rstrip().lstrip())
+                continue
+    
+    populations.append(Population(currentpopulation, fullname, pollingbias, financialpower, [], []))
+
+    return populations
+
 def getregions(scenarioname, main):
     regions=[]
 
     class Region:
-      def __init__(self, name, population, eligiblepopulation, seats, issues=None):
+      def __init__(self, name, population, eligiblepopulation, seats, issues=None, populations=None):
         self.name = name
         self.population = population
         self.eligiblepopulation = eligiblepopulation
         self.seats = seats
         self.issues = issues
+        self.populations = populations
     
     
     f = open ( 'scenario/' + scenarioname + '/regions.txt' , 'r')
@@ -254,12 +318,14 @@ def getparties(scenarioname):
     parties=[]
     
     class Party:
-      def __init__(self, name, fullname, power, ideologies, leader=None, issues=None, demographics=None):
+      def __init__(self, name, fullname, power, ideologies, issues=None, populations=None, leader=None):
         self.name = name
         self.fullname = fullname
         self.leader = leader
         self.power = power
         self.ideologies = ideologies
+        self.issues = issues
+        self.populations = populations
     
     
     f = open ( 'scenario/' + scenarioname + '/parties.txt' , 'r')
@@ -491,17 +557,184 @@ def regionissuehandler(scenarioname, regions, issues):
 
     return regionissues
 
+def regionpopulationhandler(scenarioname, regions, populations):
+    regionpopulations={}
 
+    class RegionPopulation:
+      def __init__(self, region, population, influence):
+        self.region = region
+        self.population = population
+        self.influence = influence
+
+    f = open ( 'scenario/' + scenarioname + '/regionpopulation.txt' , 'r')
+    l = []
+    l = np.array([ line.split() for line in f], dtype=object)
+
+    for i in regions:
+        for j in populations:
+            regionpopulations[str(str(i.name)+"-"+str(j.name))]=RegionPopulation(i,j,0)
+
+
+    regionnames=[x.name for x in regions]
+    populationnames=[x.name for x in populations]
+
+    region,population=None,None
+
+    for i in l:
+        newi=" ".join(i)
+        string=re.search("(.*):", newi)
+        if string:
+            if string[1] in regionnames:
+                region=next((x for x in regions if x.name == string[1]), None)
+            elif string[1] in populationnames:
+                population=next((x for x in populations if x.name == string[1]), None)
+            else:
+                population=None
+        else:
+            if population!=None:
+                string=re.search(".*influence.*=(.*)", newi)
+                if string:
+                    regionpopulations[str(region.name + "-" + population.name)].influence=float("".join(string[1].rstrip().lstrip()))
+                    continue
+
+    for i in regions:
+        i.populations=[]
+        for j in regionpopulations.values():
+            if j.region==i:
+                j.population.regions.append(j)
+                i.populations.append(j)
+
+    f = open ( 'scenario/' + scenarioname + '/regionpopulation.txt' , 'w')
+    for i in regions:
+        f.write(i.name + ":" + "\n")
+        for j in i.populations:
+            f.write("\t" + j.population.name + ":" + "\n")
+            f.write("\t\t" + "influence=" + str(j.influence) + "\n")
+
+    return regionpopulations.values()
+
+def partypopulationhandler(scenarioname, parties, populations):
+    partypopulations={}
+
+    class PartyPopulation:
+      def __init__(self, party, population, appeal):
+        self.party = party
+        self.population = population
+        self.appeal = appeal
+
+    f = open ( 'scenario/' + scenarioname + '/partypopulation.txt' , 'r')
+    l = []
+    l = np.array([ line.split() for line in f], dtype=object)
+
+    for i in parties:
+        for j in populations:
+            partypopulations[str(str(i.name)+"-"+str(j.name))]=PartyPopulation(i,j,0)
+
+
+    partynames=[x.name for x in parties]
+    populationnames=[x.name for x in populations]
+
+    party,population=None,None
+
+    for i in l:
+        newi=" ".join(i)
+        string=re.search("(.*):", newi)
+        if string:
+            if string[1] in partynames:
+                party=next((x for x in parties if x.name == string[1]), None)
+            elif string[1] in populationnames:
+                population=next((x for x in populations if x.name == string[1]), None)
+            else:
+                population=None
+        else:
+            if population!=None:
+                string=re.search(".*appeal.*=(.*)", newi)
+                if string:
+                    partypopulations[str(party.name + "-" + population.name)].appeal=float("".join(string[1].rstrip().lstrip()))
+                    continue
+
+    for i in parties:
+        i.populations=[]
+        for j in partypopulations.values():
+            if j.party==i:
+                j.population.parties.append(j)
+                i.populations.append(j)
+
+    f = open ( 'scenario/' + scenarioname + '/partypopulation.txt' , 'w')
+    for i in parties:
+        f.write(i.name + ":" + "\n")
+        for j in i.populations:
+            f.write("\t" + j.population.name + ":" + "\n")
+            f.write("\t\t" + "appeal=" + str(j.appeal) + "\n")
+
+    return partypopulations.values()
+
+def getlocalpowers(scenarioname, parties, regions):
+    partyregions={}
+
+    class PartyRegion:
+      def __init__(self, party, region, power):
+        self.party = party
+        self.region = region
+        self.power = power
+
+    f = open ( 'scenario/' + scenarioname + '/partyregion.txt' , 'r')
+    l = []
+    l = np.array([ line.split() for line in f], dtype=object)
+
+    for i in parties:
+        for j in regions:
+            partyregions[str(str(i.name)+"-"+str(j.name))]=PartyRegion(i,j,0)
+
+
+    partynames=[x.name for x in parties]
+    regionnames=[x.name for x in regions]
+
+    party,region=None,None
+
+    for i in l:
+        newi=" ".join(i)
+        string=re.search("(.*):", newi)
+        if string:
+            if string[1] in partynames:
+                party=next((x for x in parties if x.name == string[1]), None)
+            elif string[1] in regionnames:
+                region=next((x for x in regions if x.name == string[1]), None)
+            else:
+                region=None
+        else:
+            if region!=None:
+                string=re.search(".*power.*=(.*)", newi)
+                if string:
+                    partyregions[str(party.name + "-" + region.name)].power=float("".join(string[1].rstrip().lstrip()))
+                    continue
+
+    f = open ( 'scenario/' + scenarioname + '/partyregion.txt' , 'w')
+    party=None
+    for i in partyregions.values():
+        if i.party!=party:
+            party=i.party
+            f.write(i.party.name + ":" + "\n")
+            for j in partyregions.values():
+                if i.party==j.party:
+                    f.write("\t" + j.region.name + ":" + "\n")
+                    f.write("\t\t" + "power=" + str(j.power) + "\n")
+
+    return partyregions.values()
 
 def main(scenarioname):
     scenario=Scenario(scenarioname)
     scenario.main=getmain(scenarioname)
     scenario.parties=getparties(scenarioname)
     scenario.issues=getissues(scenarioname)
+    scenario.populations=getpopulations(scenarioname)
     scenario.regions=getregions(scenarioname, scenario.main)
     scenario.characters=getcharacters(scenarioname,scenario.parties)
     scenario.partyissues=partyissuehandler(scenarioname,scenario.parties,scenario.issues)
     scenario.regionissues=regionissuehandler(scenarioname,scenario.regions,scenario.issues)
+    scenario.regionpopulations=regionpopulationhandler(scenarioname,scenario.regions,scenario.populations)
+    scenario.partypopulations=partypopulationhandler(scenarioname,scenario.parties,scenario.populations)
+    scenario.partyregions=getlocalpowers(scenarioname, scenario.parties, scenario.regions)
 
     #scenario.printalldata()
 

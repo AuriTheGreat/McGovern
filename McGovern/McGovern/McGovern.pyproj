@@ -48,12 +48,15 @@
     <Content Include="scenario\uk1970\historicalresults.txt" />
     <Content Include="scenario\uk1970\ideologies.txt" />
     <Content Include="scenario\uk1970\issues.txt" />
+    <Content Include="scenario\uk1970\partyregion.txt" />
     <Content Include="scenario\uk1970\main.txt" />
     <Content Include="scenario\uk1970\outcomes.txt" />
     <Content Include="scenario\uk1970\parties.txt" />
     <Content Include="scenario\uk1970\partyissue.txt" />
+    <Content Include="scenario\uk1970\partypopulation.txt" />
     <Content Include="scenario\uk1970\populations.txt" />
     <Content Include="scenario\uk1970\regionissue.txt" />
+    <Content Include="scenario\uk1970\regionpopulation.txt" />
     <Content Include="scenario\uk1970\regions.txt" />
     <Content Include="scenario\uk1974\main.txt" />
     <Content Include="scenario\usa1988\main.txt" />

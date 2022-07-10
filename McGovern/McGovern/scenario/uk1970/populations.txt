@@ -1,4 +1,28 @@
 middleclass:
-	fullname='Middle Class'
+	fullname=Middle Class
+	pollingbias=1.2
+	financialpower=1
 wealthy:
-	fullname='The Wealthy'
+	fullname=The Wealthy
+	pollingbias=1.1
+	financialpower=1.3
+aristocrats:
+	fullname=The Aristocracy
+	pollingbias=1.1
+	financialpower=1.1
+poor:
+	fullname=The Poor
+	pollingbias=0.8
+	financialpower=0.5
+tradeunionists:
+	fullname=Trade Unionists
+	pollingbias=1
+	financialpower=1.1
+veterans:
+	fullname=Veterans
+	pollingbias=1
+	financialpower=1
+farmers:
+	fullname=Farmers
+	pollingbias=0.9
+	financialpower=1

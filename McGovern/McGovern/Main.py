@@ -11,7 +11,7 @@ def getvalidscenarios(scenarios):
     validscenarios=[]
     for i in scenarios:
         files=os.listdir('scenario/'+i)
-        if set(['parties.txt', 'characters.txt', 'main.txt', 'regions.txt', 'populations.txt', 'ideologies.txt', 'outcomes.txt', 'events.txt', 'issues.txt']).issubset(files):
+        if set(['parties.txt', 'characters.txt', 'main.txt', 'regions.txt', 'populations.txt', 'ideologies.txt', 'outcomes.txt', 'events.txt', 'issues.txt', 'partyregion.txt']).issubset(files):
             validscenarios.append(i)
     return validscenarios
 
