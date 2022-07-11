@@ -1,6 +1,6 @@
 labour:
 	middleclass:
-		appeal=0.8
+		appeal=0.9
 	wealthy:
 		appeal=0.5
 	aristocrats:
@@ -30,46 +30,46 @@ conservative:
 		appeal=0.9
 liberal:
 	middleclass:
-		appeal=0.0
+		appeal=1.0
 	wealthy:
-		appeal=0.0
+		appeal=0.9
 	aristocrats:
-		appeal=0.0
+		appeal=0.7
 	poor:
-		appeal=0.0
+		appeal=0.8
 	tradeunionists:
-		appeal=0.0
+		appeal=0.7
 	veterans:
-		appeal=0.0
+		appeal=0.6
 	farmers:
-		appeal=0.0
+		appeal=0.6
 snp:
 	middleclass:
-		appeal=0.0
+		appeal=0.7
 	wealthy:
-		appeal=0.0
+		appeal=0.6
 	aristocrats:
-		appeal=0.0
+		appeal=0.5
 	poor:
-		appeal=0.0
+		appeal=0.8
 	tradeunionists:
-		appeal=0.0
+		appeal=0.7
 	veterans:
-		appeal=0.0
+		appeal=0.7
 	farmers:
-		appeal=0.0
+		appeal=0.7
 plc:
 	middleclass:
-		appeal=0.0
+		appeal=0.7
 	wealthy:
-		appeal=0.0
+		appeal=0.5
 	aristocrats:
-		appeal=0.0
+		appeal=0.4
 	poor:
-		appeal=0.0
+		appeal=0.8
 	tradeunionists:
-		appeal=0.0
+		appeal=0.8
 	veterans:
-		appeal=0.0
+		appeal=0.7
 	farmers:
-		appeal=0.0
+		appeal=0.7

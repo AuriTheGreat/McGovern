@@ -134,7 +134,16 @@ def partyregiondistributer(scenario, partyregionresults):
     regionsums={}
 
     for i in partyregionresults:
-        i.partyaxes[1]=i.partyaxes[1]*max(0,i.party.power+next((x.power for x in scenario.partyregions if x.party == i.party and x.region==i.region), None))
+        regionpopulationinfluence=[x.influence for x in scenario.regionpopulations if x.region==i.region]
+        partypopulationappeal=[x.appeal for x in scenario.partypopulations if x.party==i.party]
+        populationinfluence=sum([a*b for a,b in zip(regionpopulationinfluence,partypopulationappeal)])/sum(regionpopulationinfluence)
+        localpower=next((x.power for x in scenario.partyregions if x.party == i.party and x.region==i.region), None)
+        i.partyaxes[1]=i.partyaxes[1]*max(0,i.party.power*populationinfluence+localpower)
+        """
+        print(i.region.name, regionpopulationinfluence)
+        print(i.party.name, partypopulationappeal)
+        print(populationinfluence)
+        """
 
     for i in partyregionresults:
         if i.region.name in regionsums:

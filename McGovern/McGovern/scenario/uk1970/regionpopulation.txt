@@ -2,7 +2,127 @@ London:
 	middleclass:
 		influence=1.1
 	wealthy:
+		influence=0.8
+	aristocrats:
+		influence=0.2
+	poor:
+		influence=0.9
+	tradeunionists:
 		influence=0.6
+	veterans:
+		influence=0.5
+	farmers:
+		influence=0.3
+North West:
+	middleclass:
+		influence=0.8
+	wealthy:
+		influence=0.4
+	aristocrats:
+		influence=0.4
+	poor:
+		influence=0.9
+	tradeunionists:
+		influence=0.9
+	veterans:
+		influence=0.5
+	farmers:
+		influence=0.5
+South East:
+	middleclass:
+		influence=0.8
+	wealthy:
+		influence=0.5
+	aristocrats:
+		influence=0.6
+	poor:
+		influence=0.8
+	tradeunionists:
+		influence=0.3
+	veterans:
+		influence=0.5
+	farmers:
+		influence=0.7
+Scotland:
+	middleclass:
+		influence=0.8
+	wealthy:
+		influence=0.4
+	aristocrats:
+		influence=0.2
+	poor:
+		influence=0.8
+	tradeunionists:
+		influence=0.5
+	veterans:
+		influence=0.5
+	farmers:
+		influence=0.4
+West Midlands:
+	middleclass:
+		influence=1.1
+	wealthy:
+		influence=0.4
+	aristocrats:
+		influence=0.3
+	poor:
+		influence=0.9
+	tradeunionists:
+		influence=0.6
+	veterans:
+		influence=0.5
+	farmers:
+		influence=0.5
+Yorkshire and the Humber:
+	middleclass:
+		influence=0.8
+	wealthy:
+		influence=0.3
+	aristocrats:
+		influence=0.3
+	poor:
+		influence=1.0
+	tradeunionists:
+		influence=0.9
+	veterans:
+		influence=0.5
+	farmers:
+		influence=0.5
+Eastern:
+	middleclass:
+		influence=0.7
+	wealthy:
+		influence=0.3
+	aristocrats:
+		influence=0.4
+	poor:
+		influence=0.8
+	tradeunionists:
+		influence=0.4
+	veterans:
+		influence=0.5
+	farmers:
+		influence=0.7
+South West:
+	middleclass:
+		influence=0.9
+	wealthy:
+		influence=0.5
+	aristocrats:
+		influence=0.4
+	poor:
+		influence=0.7
+	tradeunionists:
+		influence=0.5
+	veterans:
+		influence=0.5
+	farmers:
+		influence=0.7
+East Midlands:
+	middleclass:
+		influence=1.1
+	wealthy:
+		influence=0.4
 	aristocrats:
 		influence=0.3
 	poor:
@@ -10,171 +130,51 @@ London:
 	tradeunionists:
 		influence=0.7
 	veterans:
-		influence=0.6
+		influence=0.5
 	farmers:
-		influence=0.3
-North West:
-	middleclass:
-		influence=0.0
-	wealthy:
-		influence=0.0
-	aristocrats:
-		influence=0.0
-	poor:
-		influence=0.0
-	tradeunionists:
-		influence=0.0
-	veterans:
-		influence=0.0
-	farmers:
-		influence=0.0
-South East:
-	middleclass:
-		influence=0.0
-	wealthy:
-		influence=0.0
-	aristocrats:
-		influence=0.0
-	poor:
-		influence=0.0
-	tradeunionists:
-		influence=0.0
-	veterans:
-		influence=0.0
-	farmers:
-		influence=0.0
-Scotland:
-	middleclass:
-		influence=0.0
-	wealthy:
-		influence=0.0
-	aristocrats:
-		influence=0.0
-	poor:
-		influence=0.0
-	tradeunionists:
-		influence=0.0
-	veterans:
-		influence=0.0
-	farmers:
-		influence=0.0
-West Midlands:
-	middleclass:
-		influence=0.0
-	wealthy:
-		influence=0.0
-	aristocrats:
-		influence=0.0
-	poor:
-		influence=0.0
-	tradeunionists:
-		influence=0.0
-	veterans:
-		influence=0.0
-	farmers:
-		influence=0.0
-Yorkshire and the Humber:
-	middleclass:
-		influence=0.0
-	wealthy:
-		influence=0.0
-	aristocrats:
-		influence=0.0
-	poor:
-		influence=0.0
-	tradeunionists:
-		influence=0.0
-	veterans:
-		influence=0.0
-	farmers:
-		influence=0.0
-Eastern:
-	middleclass:
-		influence=0.0
-	wealthy:
-		influence=0.0
-	aristocrats:
-		influence=0.0
-	poor:
-		influence=0.0
-	tradeunionists:
-		influence=0.0
-	veterans:
-		influence=0.0
-	farmers:
-		influence=0.0
-South West:
-	middleclass:
-		influence=0.0
-	wealthy:
-		influence=0.0
-	aristocrats:
-		influence=0.0
-	poor:
-		influence=0.0
-	tradeunionists:
-		influence=0.0
-	veterans:
-		influence=0.0
-	farmers:
-		influence=0.0
-East Midlands:
-	middleclass:
-		influence=0.0
-	wealthy:
-		influence=0.0
-	aristocrats:
-		influence=0.0
-	poor:
-		influence=0.0
-	tradeunionists:
-		influence=0.0
-	veterans:
-		influence=0.0
-	farmers:
-		influence=0.0
+		influence=0.5
 Wales:
 	middleclass:
-		influence=0.0
+		influence=0.8
 	wealthy:
-		influence=0.0
+		influence=0.3
 	aristocrats:
-		influence=0.0
+		influence=0.2
 	poor:
-		influence=0.0
+		influence=1.0
 	tradeunionists:
-		influence=0.0
+		influence=0.9
 	veterans:
-		influence=0.0
+		influence=0.5
 	farmers:
-		influence=0.0
+		influence=0.6
 North East:
 	middleclass:
-		influence=0.0
+		influence=0.8
 	wealthy:
-		influence=0.0
+		influence=0.2
 	aristocrats:
-		influence=0.0
+		influence=0.2
 	poor:
-		influence=0.0
+		influence=1.0
 	tradeunionists:
-		influence=0.0
+		influence=0.9
 	veterans:
-		influence=0.0
+		influence=0.5
 	farmers:
-		influence=0.0
+		influence=0.6
 Northern Ireland:
 	middleclass:
-		influence=0.0
+		influence=0.7
 	wealthy:
-		influence=0.0
+		influence=0.2
 	aristocrats:
-		influence=0.0
+		influence=0.1
 	poor:
-		influence=0.0
+		influence=0.8
 	tradeunionists:
-		influence=0.0
+		influence=0.3
 	veterans:
-		influence=0.0
+		influence=0.5
 	farmers:
-		influence=0.0
+		influence=0.7
