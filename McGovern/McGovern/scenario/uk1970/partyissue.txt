@@ -1,105 +1,110 @@
-labour-immigration:
-	mean=2
-	variance=1.5
-labour-welfarestate:
-	mean=4
-	variance=2
-labour-tradeunions:
-	mean=3
-	variance=1.5
-labour-europe:
-	mean=1
-	variance=3
-labour-nato:
-	mean=2
-	variance=3.5
-labour-devolution:
-	mean=-1
-	variance=3
-labour-nukes:
-	mean=4
-	variance=2
-conservative-immigration:
-	mean=-1
-	variance=2
-conservative-welfarestate:
-	mean=1
-	variance=2.5
-conservative-tradeunions:
-	mean=-2
-	variance=1.5
-conservative-europe:
-	mean=3
-	variance=3.5
-conservative-nato:
-	mean=5
-	variance=1.5
-conservative-devolution:
-	mean=-4
-	variance=1.5
-conservative-nukes:
-	mean=5
-	variance=1.5
-liberal-immigration:
-	mean=3
-	variance=1.5
-liberal-welfarestate:
-	mean=0
-	variance=2.5
-liberal-tradeunions:
-	mean=-1
-	variance=2.5
-liberal-europe:
-	mean=5
-	variance=1.5
-liberal-nato:
-	mean=5
-	variance=1.5
-liberal-devolution:
-	mean=1
-	variance=2
-liberal-nukes:
-	mean=5
-	variance=1.5
-snp-immigration:
-	mean=1
-	variance=2
-snp-welfarestate:
-	mean=1
-	variance=2
-snp-tradeunions:
-	mean=1
-	variance=2
-snp-europe:
-	mean=-2
-	variance=2
-snp-nato:
-	mean=4
-	variance=2
-snp-devolution:
-	mean=3
-	variance=1.5
-snp-nukes:
-	mean=3
-	variance=3
-plc-immigration:
-	mean=2
-	variance=2
-plc-welfarestate:
-	mean=2
-	variance=3
-plc-tradeunions:
-	mean=2
-	variance=2
-plc-europe:
-	mean=-3
-	variance=1.5
-plc-nato:
-	mean=4
-	variance=1.5
-plc-devolution:
-	mean=3
-	variance=1.5
-plc-nukes:
-	mean=2
-	variance=2
+labour:
+	immigration:
+		mean=2.0
+		variance=1.5
+	welfarestate:
+		mean=4.0
+		variance=2.0
+	tradeunions:
+		mean=3.0
+		variance=1.5
+	europe:
+		mean=1.0
+		variance=3.0
+	nato:
+		mean=2.0
+		variance=3.5
+	devolution:
+		mean=-1.0
+		variance=3.0
+	nukes:
+		mean=4.0
+		variance=2.0
+conservative:
+	immigration:
+		mean=-1.0
+		variance=2.0
+	welfarestate:
+		mean=1.0
+		variance=2.5
+	tradeunions:
+		mean=-2.0
+		variance=1.5
+	europe:
+		mean=3.0
+		variance=3.5
+	nato:
+		mean=5.0
+		variance=1.5
+	devolution:
+		mean=-4.0
+		variance=1.5
+	nukes:
+		mean=5.0
+		variance=1.5
+liberal:
+	immigration:
+		mean=3.0
+		variance=1.5
+	welfarestate:
+		mean=0.0
+		variance=2.5
+	tradeunions:
+		mean=-1.0
+		variance=2.5
+	europe:
+		mean=5.0
+		variance=1.5
+	nato:
+		mean=5.0
+		variance=1.5
+	devolution:
+		mean=1.0
+		variance=2.0
+	nukes:
+		mean=5.0
+		variance=1.5
+snp:
+	immigration:
+		mean=1.0
+		variance=2.0
+	welfarestate:
+		mean=1.0
+		variance=2.0
+	tradeunions:
+		mean=1.0
+		variance=2.0
+	europe:
+		mean=-2.0
+		variance=2.0
+	nato:
+		mean=4.0
+		variance=2.0
+	devolution:
+		mean=3.0
+		variance=1.5
+	nukes:
+		mean=3.0
+		variance=3.0
+plc:
+	immigration:
+		mean=2.0
+		variance=2.0
+	welfarestate:
+		mean=2.0
+		variance=3.0
+	tradeunions:
+		mean=2.0
+		variance=2.0
+	europe:
+		mean=-3.0
+		variance=1.5
+	nato:
+		mean=4.0
+		variance=1.5
+	devolution:
+		mean=3.0
+		variance=1.5
+	nukes:
+		mean=2.0
+		variance=2.0

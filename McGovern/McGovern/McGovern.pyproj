@@ -48,11 +48,11 @@
     <Content Include="scenario\uk1970\historicalresults.txt" />
     <Content Include="scenario\uk1970\ideologies.txt" />
     <Content Include="scenario\uk1970\issues.txt" />
+    <Content Include="scenario\uk1970\partyissue.txt" />
     <Content Include="scenario\uk1970\partyregion.txt" />
     <Content Include="scenario\uk1970\main.txt" />
     <Content Include="scenario\uk1970\outcomes.txt" />
     <Content Include="scenario\uk1970\parties.txt" />
-    <Content Include="scenario\uk1970\partyissue.txt" />
     <Content Include="scenario\uk1970\partypopulation.txt" />
     <Content Include="scenario\uk1970\populations.txt" />
     <Content Include="scenario\uk1970\regionissue.txt" />

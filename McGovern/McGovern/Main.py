@@ -202,8 +202,10 @@ if __name__ == "__main__":
     scenarioname=getscenario(scenarios)
     scenario=ScenarioHandler.main(scenarioname)
 
+
     results=ResultHandler.main(scenario)
 
+    """
     pygame.init()
     pygame.display.set_caption('McGovern')
     pygame.display.set_icon(pygame.image.load('gfx/icon.png'))
@@ -232,3 +234,4 @@ if __name__ == "__main__":
     
         pygame.display.flip()
         fpsClock.tick(fps)
+"""

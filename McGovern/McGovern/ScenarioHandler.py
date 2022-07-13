@@ -434,9 +434,7 @@ def getcharacters(scenarioname, parties):
     return characters
 
 def partyissuehandler(scenarioname, parties, issues):
-    neededelements = [str(p + "-" + i) for p in (o.name for o in parties) for i in (o.name for o in issues)]
-    elements=[]
-    partyissues=[]
+    partyissues={}
 
     class PartyIssue:
       def __init__(self, party, issue, mean, variance):
@@ -449,53 +447,55 @@ def partyissuehandler(scenarioname, parties, issues):
     l = []
     l = np.array([ line.split() for line in f], dtype=object)
 
-    currentpartyissue=None
-    party,issue,mean,variance=None,None,None,None
+    for i in parties:
+        for j in issues:
+            partyissues[str(str(i.name)+"-"+str(j.name))]=PartyIssue(i,j,0,1)
+
+    partynames=[x.name for x in parties]
+    issuenames=[x.name for x in issues]
+
+    party,issue=None,None
 
     for i in l:
         newi=" ".join(i)
         string=re.search("(.*):", newi)
         if string:
-            if currentpartyissue!=None:
-                partyissues.append(PartyIssue(party, issue, mean, variance))
-            currentpartyissue="".join(string[1].rstrip().lstrip())
-            elements.append(currentpartyissue)
-            party=next((x for x in parties if x.name == re.search("(.*)-", currentpartyissue)[1]), None)
-            issue=next((x for x in issues if x.name == re.search("-(.*)", currentpartyissue)[1]), None)
-            mean,variance=None,None
+            if string[1] in partynames:
+                party=next((x for x in parties if x.name == string[1]), None)
+            elif string[1] in issuenames:
+                issue=next((x for x in issues if x.name == string[1]), None)
+            else:
+                issue=None
         else:
-            string=re.search(".*mean.*=(.*)", newi)
-            if string:
-                mean=float("".join(string[1].rstrip().lstrip()))
-                continue
-            string=re.search(".*variance.*=(.*)", newi)
-            if string:
-                variance=float("".join(string[1].rstrip().lstrip()))
-                continue
-
-    partyissues.append(PartyIssue(party, issue, mean, variance))
-
-    neededelements = [x for x in neededelements if x not in elements]
-
-    f = open ( 'scenario/' + scenarioname + '/partyissue.txt' , 'a')
-    for i in neededelements:
-        f.write(i + ":" + "\n")
-        f.write("\t" + "mean=0" + "\n")
-        f.write("\t" + "variance=1" + "\n")
+            if issue!=None:
+                string=re.search(".*mean.*=(.*)", newi)
+                if string:
+                    partyissues[str(party.name + "-" + issue.name)].mean=float("".join(string[1].rstrip().lstrip()))
+                    continue
+                string=re.search(".*variance.*=(.*)", newi)
+                if string:
+                    partyissues[str(party.name + "-" + issue.name)].variance=float("".join(string[1].rstrip().lstrip()))
+                    continue
 
     for i in parties:
         i.issues=[]
-        for j in partyissues:
+        for j in partyissues.values():
             if j.party==i:
                 j.issue.parties.append(j)
                 i.issues.append(j)
+
+    f = open ( 'scenario/' + scenarioname + '/partyissue.txt' , 'w')
+    for i in parties:
+        f.write(i.name + ":" + "\n")
+        for j in i.issues:
+            f.write("\t" + j.issue.name + ":" + "\n")
+            f.write("\t\t" + "mean=" + str(j.mean) + "\n")
+            f.write("\t\t" + "variance=" + str(j.variance) + "\n")
         
-    return partyissues
+    return partyissues.values()
 
 def regionissuehandler(scenarioname, regions, issues):
-    neededelements = [str(r + "-" + i) for r in (o.name for o in regions) for i in (o.name for o in issues)]
-    elements=[]
-    regionissues=[]
+    regionissues={}
 
     class RegionIssue:
       def __init__(self, region, issue, mean, variance, importance):
@@ -509,53 +509,58 @@ def regionissuehandler(scenarioname, regions, issues):
     l = []
     l = np.array([ line.split() for line in f], dtype=object)
 
-    currentregionissue=None
-    region,issue,mean,variance,importance=None,None,None,None, None
+    for i in regions:
+        for j in issues:
+            regionissues[str(str(i.name)+"-"+str(j.name))]=RegionIssue(i,j,0,1,0)
+
+
+    regionnames=[x.name for x in regions]
+    issuenames=[x.name for x in issues]
+
+    region,issue=None,None
 
     for i in l:
         newi=" ".join(i)
         string=re.search("(.*):", newi)
         if string:
-            if currentregionissue!=None:
-                regionissues.append(RegionIssue(region, issue, mean, variance, importance))
-            currentregionissue="".join(string[1].rstrip().lstrip())
-            elements.append(currentregionissue)
-            region=next((x for x in regions if x.name == re.search("(.*)-", currentregionissue)[1]), None)
-            issue=next((x for x in issues if x.name == re.search("-(.*)", currentregionissue)[1]), None)
-            mean,variance,importance=None,None,None
+            if string[1] in regionnames:
+                region=next((x for x in regions if x.name == string[1]), None)
+            elif string[1] in issuenames:
+                issue=next((x for x in issues if x.name == string[1]), None)
+            else:
+                issue=None
         else:
-            string=re.search(".*mean.*=(.*)", newi)
-            if string:
-                mean=float("".join(string[1].rstrip().lstrip()))
-                continue
-            string=re.search(".*variance.*=(.*)", newi)
-            if string:
-                variance=float("".join(string[1].rstrip().lstrip()))
-                continue
-            string=re.search(".*importance.*=(.*)", newi)
-            if string:
-                importance=float("".join(string[1].rstrip().lstrip()))
-                continue
-
-    regionissues.append(RegionIssue(region, issue, mean, variance, importance))
-
-    neededelements = [x for x in neededelements if x not in elements]
-
-    f = open ( 'scenario/' + scenarioname + '/regionissue.txt' , 'a')
-    for i in neededelements:
-        f.write(i + ":" + "\n")
-        f.write("\t" + "mean=0" + "\n")
-        f.write("\t" + "variance=1" + "\n")
-        f.write("\t" + "importance=0" + "\n")
+            if issue!=None:
+                string=re.search(".*mean.*=(.*)", newi)
+                if string:
+                    regionissues[str(region.name + "-" + issue.name)].mean=float("".join(string[1].rstrip().lstrip()))
+                    continue
+                string=re.search(".*variance.*=(.*)", newi)
+                if string:
+                    regionissues[str(region.name + "-" + issue.name)].variance=float("".join(string[1].rstrip().lstrip()))
+                    continue
+                string=re.search(".*importance.*=(.*)", newi)
+                if string:
+                    regionissues[str(region.name + "-" + issue.name)].importance=float("".join(string[1].rstrip().lstrip()))
+                    continue
 
     for i in regions:
         i.issues=[]
-        for j in regionissues:
+        for j in regionissues.values():
             if j.region==i:
                 j.issue.regions.append(j)
                 i.issues.append(j)
 
-    return regionissues
+    f = open ( 'scenario/' + scenarioname + '/regionissue.txt' , 'w')
+    for i in regions:
+        f.write(i.name + ":" + "\n")
+        for j in i.issues:
+            f.write("\t" + j.issue.name + ":" + "\n")
+            f.write("\t\t" + "mean=" + str(j.mean) + "\n")
+            f.write("\t\t" + "variance=" + str(j.variance) + "\n")
+            f.write("\t\t" + "importance=" + str(j.importance) + "\n")
+
+    return regionissues.values()
 
 def regionpopulationhandler(scenarioname, regions, populations):
     regionpopulations={}
