@@ -64,7 +64,7 @@ liberal:
 	Eastern:
 		power=0.0
 	South West:
-		power=0.0
+		power=20.0
 	East Midlands:
 		power=0.0
 	Wales:

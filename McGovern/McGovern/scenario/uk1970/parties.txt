@@ -13,7 +13,7 @@ liberal:
 	power=100
 snp:
 	fullname=Scottish National Party
-	power=130
+	power=120
 plc:
 	fullname=Plaid Cymru
-	power=135
+	power=125

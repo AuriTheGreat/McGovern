@@ -25,8 +25,12 @@ London:
 		importance=0.5
 	nukes:
 		mean=4.0
-		variance=1.0
+		variance=1.5
 		importance=0.2
+	socialreforms:
+		mean=2.0
+		variance=2.5
+		importance=0.5
 North West:
 	immigration:
 		mean=0.0
@@ -54,8 +58,12 @@ North West:
 		importance=0.5
 	nukes:
 		mean=4.0
-		variance=1.0
+		variance=1.5
 		importance=0.2
+	socialreforms:
+		mean=1.0
+		variance=2.5
+		importance=0.5
 South East:
 	immigration:
 		mean=-1.0
@@ -63,7 +71,7 @@ South East:
 		importance=1.0
 	welfarestate:
 		mean=-1.0
-		variance=2.0
+		variance=3.0
 		importance=1.0
 	tradeunions:
 		mean=-2.0
@@ -83,8 +91,12 @@ South East:
 		importance=0.5
 	nukes:
 		mean=4.0
-		variance=1.0
+		variance=2.0
 		importance=0.2
+	socialreforms:
+		mean=0.0
+		variance=2.5
+		importance=0.5
 Scotland:
 	immigration:
 		mean=1.0
@@ -108,12 +120,16 @@ Scotland:
 		importance=0.5
 	devolution:
 		mean=3.0
-		variance=3.0
+		variance=4.0
 		importance=1.0
 	nukes:
 		mean=2.0
 		variance=1.5
 		importance=0.3
+	socialreforms:
+		mean=1.0
+		variance=2.5
+		importance=0.5
 West Midlands:
 	immigration:
 		mean=-1.0
@@ -143,6 +159,10 @@ West Midlands:
 		mean=3.0
 		variance=1.5
 		importance=0.2
+	socialreforms:
+		mean=1.5
+		variance=2.5
+		importance=0.5
 Yorkshire and the Humber:
 	immigration:
 		mean=0.0
@@ -170,8 +190,12 @@ Yorkshire and the Humber:
 		importance=0.5
 	nukes:
 		mean=3.0
-		variance=1.0
+		variance=1.5
 		importance=0.2
+	socialreforms:
+		mean=1.0
+		variance=2.5
+		importance=0.5
 Eastern:
 	immigration:
 		mean=0.0
@@ -201,6 +225,10 @@ Eastern:
 		mean=3.0
 		variance=1.5
 		importance=0.2
+	socialreforms:
+		mean=0.0
+		variance=2.5
+		importance=0.5
 South West:
 	immigration:
 		mean=0.0
@@ -230,6 +258,10 @@ South West:
 		mean=4.0
 		variance=2.0
 		importance=0.3
+	socialreforms:
+		mean=2.0
+		variance=3.5
+		importance=1.0
 East Midlands:
 	immigration:
 		mean=-1.0
@@ -259,6 +291,10 @@ East Midlands:
 		mean=4.0
 		variance=1.5
 		importance=0.2
+	socialreforms:
+		mean=2.0
+		variance=2.5
+		importance=0.5
 Wales:
 	immigration:
 		mean=1.0
@@ -286,8 +322,12 @@ Wales:
 		importance=1.0
 	nukes:
 		mean=0.0
-		variance=1.0
+		variance=1.5
 		importance=0.3
+	socialreforms:
+		mean=0.0
+		variance=2.5
+		importance=0.5
 North East:
 	immigration:
 		mean=-1.0
@@ -317,6 +357,10 @@ North East:
 		mean=4.0
 		variance=2.0
 		importance=0.2
+	socialreforms:
+		mean=1.0
+		variance=2.5
+		importance=0.5
 Northern Ireland:
 	immigration:
 		mean=0.0
@@ -346,3 +390,7 @@ Northern Ireland:
 		mean=3.0
 		variance=1.5
 		importance=0.2
+	socialreforms:
+		mean=0.0
+		variance=2.5
+		importance=0.5

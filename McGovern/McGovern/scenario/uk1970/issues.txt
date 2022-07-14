@@ -40,3 +40,9 @@ nukes:
 		Unilateral
 		Neutral
 		Multilateral
+socialreforms:
+	fullname=Social Reforms
+	levels:
+		Conservative
+		Neutral
+		Libertarian

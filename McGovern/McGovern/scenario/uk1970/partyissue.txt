@@ -20,6 +20,9 @@ labour:
 	nukes:
 		mean=4.0
 		variance=2.0
+	socialreforms:
+		mean=3.0
+		variance=2.5
 conservative:
 	immigration:
 		mean=-1.0
@@ -42,6 +45,9 @@ conservative:
 	nukes:
 		mean=5.0
 		variance=1.5
+	socialreforms:
+		mean=-1.0
+		variance=2.5
 liberal:
 	immigration:
 		mean=3.0
@@ -64,6 +70,9 @@ liberal:
 	nukes:
 		mean=5.0
 		variance=1.5
+	socialreforms:
+		mean=4.0
+		variance=3.5
 snp:
 	immigration:
 		mean=1.0
@@ -86,6 +95,9 @@ snp:
 	nukes:
 		mean=3.0
 		variance=3.0
+	socialreforms:
+		mean=1.0
+		variance=1.5
 plc:
 	immigration:
 		mean=2.0
@@ -108,3 +120,6 @@ plc:
 	nukes:
 		mean=2.0
 		variance=2.0
+	socialreforms:
+		mean=1.0
+		variance=1.5
