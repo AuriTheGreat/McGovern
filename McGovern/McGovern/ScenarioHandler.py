@@ -3,7 +3,7 @@ import numpy as np
 import re
 
 class Scenario:
-      def __init__(self, name, main=None, issues=None, parties=None, ideologies=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partypopulations=None, regionissues=None, regionpopulations=None, partyregions=None):
+      def __init__(self, name, main=None, issues=None, parties=None, ideologies=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partypopulations=None, regionissues=None, regionpopulations=None, partyregions=None, events=None, decisions=None, triggers=None):
         self.name = name
         self.main = main
         self.issues = issues
@@ -18,6 +18,9 @@ class Scenario:
         self.regionissues = regionissues
         self.regionpopulations = regionpopulations
         self.partyregions = partyregions
+        self.events = events
+        self.decisions = decisions
+        self.triggers = triggers
       def printmain(self):
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
         print("|", "MAIN".center(93), "|")
@@ -727,6 +730,121 @@ def getlocalpowers(scenarioname, parties, regions):
 
     return partyregions.values()
 
+def getevents(scenarioname):
+    events=[]
+
+    class Event:
+      def __init__(self, identifier, name, description, effects):
+        self.identifier = identifier
+        self.name = name
+        self.description = description
+        self.effects = effects
+    
+    
+    f = open ( 'scenario/' + scenarioname + '/events.txt' , 'r')
+    l = []
+    l = np.array([ line.split() for line in f], dtype=object)
+    
+    currentevent=None
+    name, description, effects=None,None,[]
+    effectsreader=False
+    
+    for i in l:
+        newi=" ".join(i)
+        string=re.search("(.*):", newi)
+        if string:
+            effectsreader=False
+            if string.group(1)=='effects':
+                effectsreader=True
+            else:
+                if currentevent!=None:
+                    events.append(Event(currentevent, name, description, effects))
+                currentevent="".join(string[1].rstrip().lstrip())
+                name, description, effects=None,None,[]
+        else:
+            if effectsreader==True:
+                string=re.search("(.*)", newi)
+                if string:
+                    effects.append("".join(string[1].rstrip().lstrip()))
+            else:
+                string=re.search(".*name.*=(.*)", newi)
+                if string:
+                    name="".join(string[1].rstrip().lstrip())
+                    continue
+                string=re.search(".*description.*=(.*)", newi)
+                if string:
+                    description="".join(string[1].rstrip().lstrip())
+                    continue
+
+    
+    events.append(Event(currentevent, name, description, effects))
+
+    return events
+
+def getdecisions(scenarioname):
+    return None
+
+def gettriggers(scenarioname, events, decisions):
+    triggers=[]
+
+    class Trigger:
+      def __init__(self, identifier, condition, triggered):
+        self.identifier = identifier
+        self.condition = condition
+        self.triggered = triggered
+    
+    
+    f = open ( 'scenario/' + scenarioname + '/triggers.txt' , 'r')
+    l = []
+    l = np.array([ line.split() for line in f], dtype=object)
+    
+    currenttrigger=None
+    condition, triggered="",[]
+    conditionreader, triggeredreader=False, False
+    
+    for i in l:
+        newi=" ".join(i)
+        string=re.search("(.*):", newi)
+        if string:
+            conditionreader, triggeredreader=False, False
+            if string.group(1)=='if':
+                conditionreader=True
+            elif string.group(1)=='trigger':
+                triggeredreader=True
+            else:
+                if currenttrigger!=None:
+                    triggers.append(Trigger(currenttrigger, condition, triggered))
+                currenttrigger="".join(string[1].rstrip().lstrip())
+                condition, triggered="",[]
+        else:
+            if conditionreader==True:
+                string=re.search("(.*)", newi)
+                if string:
+                    condition+=" " + "".join(string[1].rstrip().lstrip())
+            elif triggeredreader==True:
+                string=re.search("(.*)", newi)
+                print(currenttrigger)
+                if string:
+                    string="".join(string[1].rstrip().lstrip())
+                    typeoftrigger=re.search("(.*)\.", string)
+                    if typeoftrigger:
+                        typeoftrigger="".join(typeoftrigger[1].rstrip().lstrip())
+                        if typeoftrigger=='event':
+                            event=re.search("\.(.*)", string)
+                            event="".join(event[1].rstrip().lstrip())
+                            triggered.append(next((x for x in events if x.identifier == event), None))
+                        elif typeoftrigger=='decision':
+                            decision=re.search("\.(.*)", string)
+                            decision="".join(event[1].rstrip().lstrip())
+                            triggered.append(next((x for x in decisions if x.identifier == decision), None))
+
+            else:
+                continue
+    
+    triggers.append(Trigger(currenttrigger, condition, triggered))
+
+    return triggers
+
 def main(scenarioname):
     scenario=Scenario(scenarioname)
     scenario.main=getmain(scenarioname)
@@ -740,6 +858,12 @@ def main(scenarioname):
     scenario.regionpopulations=regionpopulationhandler(scenarioname,scenario.regions,scenario.populations)
     scenario.partypopulations=partypopulationhandler(scenarioname,scenario.parties,scenario.populations)
     scenario.partyregions=getlocalpowers(scenarioname, scenario.parties, scenario.regions)
+    scenario.events=getevents(scenarioname)
+    scenario.decisions=getdecisions(scenarioname)
+    scenario.triggers=gettriggers(scenarioname, scenario.events, scenario.decisions)
+
+    for i in scenario.triggers:
+        print(i.identifier, i.condition, i.triggered)
 
     #scenario.printalldata()
 

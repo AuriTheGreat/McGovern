@@ -1,0 +1,13 @@
+worldcup:
+	if:
+		turn>3
+	trigger:
+		event.worldcup
+
+titanic:
+	if:
+		turn>3 and
+		love>10
+	trigger:
+		event.titanic
+		event.worldcup

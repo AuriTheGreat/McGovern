@@ -1,0 +1,40 @@
+powell:
+	name=Enoch Powell
+	description=Enoch Powell, one of the leading conservative members of parliament, has been accused for inciting racial tensions. How will you respond?
+	expiresafter: 3
+	ignorable: yes
+	ignoreeffects:
+		immigration.mean: -0.1
+		immigration.varriance: +0.1
+	options:
+		a:
+			optionname=Denounce Powellism
+			optionif:
+				None
+			maineffects:
+				immigration.mean: +0.3
+				immigration.variance: -0.1
+				immigration.nationwide.importance: +0.2
+		b:
+			optionname=Don't mention Powell
+			optionif:
+				None
+			maineffects:
+				if: 
+					party==labour
+					effects:
+						immigration.nationwide.importance: +0.1
+						immigration.variance: +0.2
+				if: 
+					party!=labour
+					effects:
+						immigration.variance: +0.3
+		c:
+			optionname=Powell is right
+			optionif:
+				None
+			maineffects:
+				immigration.mean: -0.3
+				immigration.variance: -0.1
+				immigration.nationwide.importance: +0.3
+

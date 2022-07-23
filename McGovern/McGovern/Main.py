@@ -1,5 +1,6 @@
 import ScenarioHandler
 import ResultHandler
+import TriggerHandler
 import os
 import math
 import pygame
