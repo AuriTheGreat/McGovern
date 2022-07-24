@@ -1,11 +1,13 @@
 from pickle import TRUE
 import numpy as np
 import re
+import datetime
 
 class Scenario:
-      def __init__(self, name, main=None, issues=None, parties=None, ideologies=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partypopulations=None, regionissues=None, regionpopulations=None, partyregions=None, events=None, decisions=None, triggers=None):
+      def __init__(self, name, main=None, base=None, issues=None, parties=None, ideologies=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partypopulations=None, regionissues=None, regionpopulations=None, partyregions=None, events=None, decisions=None, triggers=None):
         self.name = name
         self.main = main
+        self.base = base
         self.issues = issues
         self.parties = parties
         self.ideologies = ideologies
@@ -21,21 +23,21 @@ class Scenario:
         self.events = events
         self.decisions = decisions
         self.triggers = triggers
-      def printmain(self):
+      def printbase(self):
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
-        print("|", "MAIN".center(93), "|")
+        print("|", "BASE".center(93), "|")
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
-        print("|", "Name".rjust(20), "|", self.main.name[0:70].ljust(70), "|")
-        print("|", "Nation".rjust(20), "|", self.main.nation[0:70].ljust(70), "|")
-        print("|", "Year".rjust(20), "|", str(self.main.year)[0:70].ljust(70), "|")
-        print("|", "Fiction".rjust(20), "|", self.main.fiction[0:70].ljust(70), "|")
-        print("|", "Description".rjust(20), "|", self.main.description[0:70].ljust(70), "|")
-        print("|", "Start date".rjust(20), "|", self.main.startdate[0:70].ljust(70), "|")
-        print("|", "End date".rjust(20), "|", self.main.enddate[0:70].ljust(70), "|")
-        print("|", "Election date".rjust(20), "|", self.main.electiondate[0:70].ljust(70), "|")
-        print("|", "Turns".rjust(20), "|", str(self.main.turns)[0:70].ljust(70), "|")
-        print("|", "Population".rjust(20), "|", f'{self.main.population:,}'[0:70].ljust(70), "|")
-        print("|", "Seats".rjust(20), "|", str(self.main.seats)[0:70].ljust(70), "|")
+        print("|", "Name".rjust(20), "|", self.base.name[0:70].ljust(70), "|")
+        print("|", "Nation".rjust(20), "|", self.base.nation[0:70].ljust(70), "|")
+        print("|", "Year".rjust(20), "|", str(self.base.year)[0:70].ljust(70), "|")
+        print("|", "Fiction".rjust(20), "|", self.base.fiction[0:70].ljust(70), "|")
+        print("|", "Description".rjust(20), "|", self.base.description[0:70].ljust(70), "|")
+        print("|", "Start date".rjust(20), "|", str(self.base.startdate.date())[0:70].ljust(70), "|")
+        print("|", "End date".rjust(20), "|", str(self.base.enddate.date())[0:70].ljust(70), "|")
+        print("|", "Election date".rjust(20), "|", str(self.base.electiondate.date())[0:70].ljust(70), "|")
+        print("|", "Turns".rjust(20), "|", str(self.base.turns)[0:70].ljust(70), "|")
+        print("|", "Population".rjust(20), "|", f'{self.base.population:,}'[0:70].ljust(70), "|")
+        print("|", "Seats".rjust(20), "|", str(self.base.seats)[0:70].ljust(70), "|")
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
       def printparties(self):
         print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
@@ -100,7 +102,7 @@ class Scenario:
             print("|", "Ideologies".rjust(20), "|", ", ".join(i.ideologies)[0:70].ljust(70), "|")
             print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
       def printalldata(self):
-        self.printmain()
+        self.printbase()
         print("")
         self.printparties()
         print("")
@@ -110,8 +112,8 @@ class Scenario:
         print("")
 
 
-def getmain(scenarioname):
-    class Main:
+def getbase(scenarioname):
+    class Base:
       def __init__(self, name, nation, year, fiction, description, startdate, enddate, electiondate, turns, seats=None, population=None):
         self.name=name
         self.nation=nation
@@ -157,21 +159,37 @@ def getmain(scenarioname):
         string=re.search(".*startdate.*=(.*)", newi)
         if string:
             startdate="".join(string[1].rstrip().lstrip())
+            startdate=datetime.datetime.strptime(startdate, "%Y-%m-%d")
             continue
         string=re.search(".*enddate.*=(.*)", newi)
         if string:
             enddate="".join(string[1].rstrip().lstrip())
+            enddate=datetime.datetime.strptime(enddate, "%Y-%m-%d")
             continue
         string=re.search(".*electiondate.*=(.*)", newi)
         if string:
             electiondate="".join(string[1].rstrip().lstrip())
+            electiondate=datetime.datetime.strptime(electiondate, "%Y-%m-%d")
             continue
         string=re.search(".*turns.*=(.*)", newi)
         if string:
             turns=int("".join(string[1].rstrip().lstrip()))
             continue
 
-    return Main(name, nation, year, fiction, description, startdate, enddate, electiondate, turns)
+    return Base(name, nation, year, fiction, description, startdate, enddate, electiondate, turns)
+
+def getmain(scenarioname, base):
+    class Main:
+        def __init__(self, currentdate, turnlength):
+            self.currentdate = currentdate
+            self.turnlength = turnlength
+        def newturn(self):
+            self.currentdate+=self.turnlength
+
+    currentdate=base.startdate
+    turnlength=(base.enddate-currentdate)/base.turns
+
+    return Main(currentdate, turnlength)
 
 def getissues(scenarioname):
     issues=[]
@@ -266,7 +284,7 @@ def getpopulations(scenarioname):
 
     return populations
 
-def getregions(scenarioname, main):
+def getregions(scenarioname, base):
     regions=[]
 
     class Region:
@@ -310,8 +328,8 @@ def getregions(scenarioname, main):
     
     regions.append(Region(currentregion, population, eligiblepopulation, seats))
 
-    main.seats=sum(region.seats for region in regions)
-    main.population=sum(region.population for region in regions)
+    base.seats=sum(region.seats for region in regions)
+    base.population=sum(region.population for region in regions)
 
 
     regions.sort(key=lambda x: x.population, reverse=True)
@@ -823,7 +841,7 @@ def gettriggers(scenarioname, events, decisions):
                     condition+=" " + "".join(string[1].rstrip().lstrip())
             elif triggeredreader==True:
                 string=re.search("(.*)", newi)
-                print(currenttrigger)
+                #print(currenttrigger)
                 if string:
                     string="".join(string[1].rstrip().lstrip())
                     typeoftrigger=re.search("(.*)\.", string)
@@ -847,11 +865,12 @@ def gettriggers(scenarioname, events, decisions):
 
 def main(scenarioname):
     scenario=Scenario(scenarioname)
-    scenario.main=getmain(scenarioname)
+    scenario.base=getbase(scenarioname)
+    scenario.main=getmain(scenarioname, scenario.base)
     scenario.parties=getparties(scenarioname)
     scenario.issues=getissues(scenarioname)
     scenario.populations=getpopulations(scenarioname)
-    scenario.regions=getregions(scenarioname, scenario.main)
+    scenario.regions=getregions(scenarioname, scenario.base)
     scenario.characters=getcharacters(scenarioname,scenario.parties)
     scenario.partyissues=partyissuehandler(scenarioname,scenario.parties,scenario.issues)
     scenario.regionissues=regionissuehandler(scenarioname,scenario.regions,scenario.issues)

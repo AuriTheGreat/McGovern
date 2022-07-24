@@ -1,6 +1,6 @@
 worldcup:
 	if:
-		turn>3
+		date>1970-04-01
 	trigger:
 		event.worldcup
 

@@ -26,12 +26,13 @@ def getscenario(scenarios):
             print("Wrong input: scenario name needed.")
 
 class Rectangle():
-    def __init__(self, x, y, width, height, color):
+    def __init__(self, x, y, width, height, color, text=None):
             self.x = x
             self.y = y
             self.width = width
             self.height = height
             self.color = color
+            self.text = text
 
             objects.append(self)
 
@@ -41,6 +42,15 @@ class Rectangle():
 
     def process(self):
         screen.blit(self.Surface, self.Rect)
+
+        textsurface = font.render(self.text, True, (255,255,255))
+
+        self.Surface.blit(textsurface, [
+            self.width/2 - textsurface.get_rect().width/2,
+            self.height/2 - textsurface.get_rect().height/2
+        ])
+
+        screen.blit(self.Surface, (self.x,self.y))
 
 class Image():
     def __init__(self, x, y, width, height, img):
@@ -59,12 +69,13 @@ class Image():
         
 
 class Button():
-    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, onePress=False):
+    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, paramsFunction=[], onePress=False):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
         self.onclickFunction = onclickFunction
+        self.paramsFunction = paramsFunction
         self.onePress = onePress
 
         self.fillColors = {
@@ -95,11 +106,11 @@ class Button():
                 self.buttonSurface.fill(self.fillColors['pressed'])
 
                 if self.onePress:
-                    self.onclickFunction()
+                    self.onclickFunction(*self.paramsFunction)
 
                 elif not self.alreadyPressed:
                     if isclicked==False:
-                        self.onclickFunction()
+                        self.onclickFunction(*self.paramsFunction)
                         self.alreadyPressed = True
                         isclicked=True
 
@@ -115,7 +126,7 @@ class Button():
         screen.blit(self.buttonSurface, self.buttonRect)
 
 class ImageButton():
-    def __init__(self, x, y, width, height, img, buttonText='Button', onclickFunction=None):
+    def __init__(self, x, y, width, height, img, buttonText='Button', onclickFunction=None, paramsFunction=[]):
             self.x = x
             self.y = y
             self.width = width
@@ -123,6 +134,7 @@ class ImageButton():
             self.img = img
             self.buttonText=buttonText
             self.onclickFunction=onclickFunction
+            self.paramsFunction=paramsFunction
 
             self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
 
@@ -140,7 +152,7 @@ class ImageButton():
             image.fill((brighten, brighten, brighten), special_flags=pygame.BLEND_RGB_SUB)
             if pygame.mouse.get_pressed(num_buttons=3)[0]:
                 if isclicked==False:
-                    self.onclickFunction()
+                    self.onclickFunction(*self.paramsFunction)
                     isclicked=True
 
             else:
@@ -185,8 +197,41 @@ def choosescenario():
     tile_size_x=(screen_width-(objects_per_row*5+x_outline))/objects_per_row
     tile_size_y=(screen_height-(objects_per_row*5+y_outline))/objects_per_row
 
-    for count, i in enumerate(testscenarios):
-        Button(screen_width/(1200/(x_outline/2))+(tile_size_x+5)*(count%objects_per_row), screen_height/(700/(y_outline/2))+(tile_size_y+5)*math.floor(count/objects_per_row), tile_size_x, tile_size_y, i , None)
+    for count, i in enumerate(scenarios):
+        Button(screen_width/(1200/(x_outline/2))+(tile_size_x+5)*(count%objects_per_row), screen_height/(700/(y_outline/2))+(tile_size_y+5)*math.floor(count/objects_per_row), tile_size_x, tile_size_y, i , scenariomain, [i])
+
+
+def scenariomain(scenarioname, scenario=None):
+    objects.clear()
+    if scenario==None:
+        scenario=ScenarioHandler.main(scenarioname)
+
+    Rectangle(900,0,screen_width,screen_height, '#006699')
+    Rectangle(0,680,screen_width,screen_height, '#003366')
+    Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366')
+    Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366', str(scenario.main.currentdate.date()))
+    button_size_x, button_size_y = screen_width/(1200/200), screen_height/(700/80)
+    Button(10, screen_width/(1200/10), button_size_x, button_size_y, 'Escape', mainmenu)
+    Button(950, screen_width/(1200/10), button_size_x, button_size_y, 'Next Turn', nextturn, [scenarioname, scenario])
+    Button(950, screen_width/(1200/310), button_size_x, button_size_y, 'Polling', mainmenu)
+    Button(950, screen_width/(1200/410), button_size_x, button_size_y, 'Events', mainmenu)
+    Button(950, screen_width/(1200/510), button_size_x, button_size_y, 'Campaign', mainmenu)
+    Image(200,150,360,510, 'scenario/' + scenarioname + '/gfx/map.png')
+
+
+    results=ResultHandler.main(scenario)
+
+def nextturn(scenarioname, scenario):
+    objects.clear()
+    if scenario.base.enddate>scenario.main.currentdate:
+        scenario.main.newturn()
+        if scenario.main.currentdate<scenario.base.electiondate<scenario.main.currentdate+scenario.main.turnlength:
+            print(scenario.main.currentdate.date(), "ELECTION DAY")
+        else:
+            print(scenario.main.currentdate.date())
+    scenariomain(scenarioname, scenario)
+
+
 
 
 def options():
@@ -200,13 +245,8 @@ def quit():
 if __name__ == "__main__":
     scenarios=os.listdir('scenario')
     scenarios=getvalidscenarios(scenarios)
-    scenarioname=getscenario(scenarios)
-    scenario=ScenarioHandler.main(scenarioname)
+    #scenarioname=getscenario(scenarios)
 
-
-    results=ResultHandler.main(scenario)
-
-    """
     pygame.init()
     pygame.display.set_caption('McGovern')
     pygame.display.set_icon(pygame.image.load('gfx/icon.png'))
@@ -235,4 +275,3 @@ if __name__ == "__main__":
     
         pygame.display.flip()
         fpsClock.tick(fps)
-"""
