@@ -60,12 +60,14 @@ class Image():
             self.height = height
             self.img = img
 
+            self.image = pygame.image.load(self.img)
+            self.image = pygame.transform.scale(self.image,(self.width, self.height)).convert()
+
             objects.append(self)
 
     def process(self):
-        image = pygame.image.load(self.img)
-        image = pygame.transform.scale(image,(self.width, self.height))
-        screen.blit(image, (self.x,self.y))
+        #print(self.image.get_at((2, 2)))
+        screen.blit(self.image, (self.x,self.y))
         
 
 class Button():
@@ -216,10 +218,16 @@ def scenariomain(scenarioname, scenario=None):
     Button(950, screen_width/(1200/310), button_size_x, button_size_y, 'Polling', mainmenu)
     Button(950, screen_width/(1200/410), button_size_x, button_size_y, 'Events', mainmenu)
     Button(950, screen_width/(1200/510), button_size_x, button_size_y, 'Campaign', mainmenu)
-    Image(200,150,360,510, 'scenario/' + scenarioname + '/gfx/map.png')
-
+    countrymap=Image(200,150,360,510, 'scenario/' + scenarioname + '/gfx/map.png')
+  
 
     results=ResultHandler.main(scenario)
+
+    arr=pygame.PixelArray(countrymap.image)
+    [arr.replace(pygame.Color(i.color), pygame.Color(i.resultcolor)) for i in scenario.regions]
+    arr.close()
+    
+
 
 def nextturn(scenarioname, scenario):
     objects.clear()

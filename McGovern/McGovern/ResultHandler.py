@@ -166,6 +166,12 @@ def partyregionresulthandler(scenario, issuepartyregionresults):
         partypercentages[i.party]=i.percentage/100
     seatcalculation(partyregionresults, partypercentages, region)
 
+    for i in scenario.regions:
+        maxvalue, party=-1, None
+        for j in partyregionresults:
+            if i==j.region and maxvalue<j.seats:
+                maxvalue, party=j.seats, j.party
+        i.resultcolor=party.color
 
     partyregionresults.sort(key=lambda x: (x.region.seats, x.region.population,  x.seats, x.votes), reverse=True)
 

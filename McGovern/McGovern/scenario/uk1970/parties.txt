@@ -1,6 +1,7 @@
 labour:
 	fullname=Labour Party
 	power=500
+	color=220, 36, 31
 	aiideologies:
 		socialdemocracy
 	extraideologies:
@@ -8,12 +9,16 @@ labour:
 conservative:
 	fullname=Conservative Party
 	power=500
+	color=0, 136, 221
 liberal:
 	fullname=Liberal Party
 	power=100
+	color=250, 168, 19
 snp:
 	fullname=Scottish National Party
 	power=120
+	color=254, 246, 136
 plc:
 	fullname=Plaid Cymru
 	power=125
+	color=0, 130, 64

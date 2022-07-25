@@ -2,47 +2,59 @@ London:
 	population=7403534 
 	eligiblepopulation=0.7
 	seats=102
+	color=255, 0, 110
 South West:
 	population=4132770
 	eligiblepopulation=0.7
 	seats=43
+	color=255, 0, 220
 South East:
 	population=6718771
 	eligiblepopulation=0.7
 	seats=62
+	color=178, 0, 255
 West Midlands:
 	population=5108143 
 	eligiblepopulation=0.7
 	seats=54
+	color=0, 255, 33
 East Midlands:
 	population=3649606 
 	eligiblepopulation=0.7
 	seats=40
+	color=255, 107, 114
 North West:
 	population=7111778
 	eligiblepopulation=0.7
 	seats=83
+	color=0, 148, 255
 North East:
 	population=2665516 
 	eligiblepopulation=0.7
 	seats=31
+	color=149, 147, 255
 Eastern:
 	population=4442366 
 	eligiblepopulation=0.7
 	seats=41
+	color=0, 255, 144
 Yorkshire and the Humber:
 	population=4903447 
 	eligiblepopulation=0.7
 	seats=55
+	color=255, 106, 0
 Scotland:
 	population=5229000
 	eligiblepopulation=0.7
 	seats=71
+	color=255, 216, 0
 Northern Ireland:
 	population=1536065
 	eligiblepopulation=0.7
 	seats=12
+	color=127, 0, 55
 Wales:
 	population=2731204
 	eligiblepopulation=0.7
 	seats=36
+	color=0, 255, 255

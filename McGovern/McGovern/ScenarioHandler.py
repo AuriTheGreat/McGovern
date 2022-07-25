@@ -288,13 +288,15 @@ def getregions(scenarioname, base):
     regions=[]
 
     class Region:
-      def __init__(self, name, population, eligiblepopulation, seats, issues=None, populations=None):
+      def __init__(self, name, population, eligiblepopulation, seats, color, issues=None, populations=None, resultcolor=None):
         self.name = name
         self.population = population
         self.eligiblepopulation = eligiblepopulation
         self.seats = seats
+        self.color = color
         self.issues = issues
         self.populations = populations
+        self.resultcolor = resultcolor
     
     
     f = open ( 'scenario/' + scenarioname + '/regions.txt' , 'r')
@@ -302,16 +304,16 @@ def getregions(scenarioname, base):
     l = np.array([ line.split() for line in f], dtype=object)
     
     currentregion=None
-    population, eligiblepopulation, seats=None,None,None
+    population, eligiblepopulation, seats, color=None,None,None,None
     
     for i in l:
         newi=" ".join(i)
         string=re.search("(.*):", newi)
         if string:
             if currentregion!=None:
-                regions.append(Region(currentregion, population, eligiblepopulation, seats))
+                regions.append(Region(currentregion, population, eligiblepopulation, seats, color))
             currentregion="".join(string[1].rstrip().lstrip())
-            population, eligiblepopulation, seats=None,None,None
+            population, eligiblepopulation, seats, color=None,None,None,None
         else:
             string=re.search(".*eligiblepopulation.*=(.*)", newi)
             if string:
@@ -325,8 +327,22 @@ def getregions(scenarioname, base):
             if string:
                 seats=int("".join(string[1].rstrip().lstrip()))
                 continue
+            string=re.search(".*color.*=(.*)", newi)
+            if string:
+                tempcolor=list("".join(string[1].rstrip().lstrip()))
+                color=[[]]
+                for i in tempcolor:
+                    if i!=',':
+                        color[len(color)-1].append(i)
+                    else:
+                        color.append([])
+                for count,i in enumerate(color):
+                    color[count]=int("".join(i))
+                #color.append(255)
+                color=tuple(color)
+                continue
     
-    regions.append(Region(currentregion, population, eligiblepopulation, seats))
+    regions.append(Region(currentregion, population, eligiblepopulation, seats, color))
 
     base.seats=sum(region.seats for region in regions)
     base.population=sum(region.population for region in regions)
@@ -339,11 +355,12 @@ def getparties(scenarioname):
     parties=[]
     
     class Party:
-      def __init__(self, name, fullname, power, ideologies, issues=None, populations=None, leader=None):
+      def __init__(self, name, fullname, power, color, ideologies, issues=None, populations=None, leader=None):
         self.name = name
         self.fullname = fullname
         self.leader = leader
         self.power = power
+        self.color = color
         self.ideologies = ideologies
         self.issues = issues
         self.populations = populations
@@ -354,7 +371,7 @@ def getparties(scenarioname):
     l = np.array([ line.split() for line in f], dtype=object)
     
     currentparty=None
-    fullname,power,ideologies=None,None,[]
+    fullname,power,ideologies,color=None,None,[],None
     ideologyreader=None
     
     for i in l:
@@ -368,9 +385,9 @@ def getparties(scenarioname):
                 ideologyreader='extraideologies'
             else:
                 if currentparty!=None:
-                    parties.append(Party(currentparty, fullname, power, ideologies))
+                    parties.append(Party(currentparty, fullname, power, color, ideologies))
                 currentparty="".join(string[1].rstrip().lstrip())
-                fullname,power,ideologies=None,None,[]
+                fullname,power,ideologies,color=None,None,[],None
         else:
             if ideologyreader!=None:
                 string=re.search("(.*)", newi)
@@ -385,8 +402,22 @@ def getparties(scenarioname):
                 if string:
                     fullname="".join(string[1].rstrip().lstrip())
                     continue
+                string=re.search(".*color.*=(.*)", newi)
+                if string:
+                    tempcolor=list("".join(string[1].rstrip().lstrip()))
+                    color=[[]]
+                    for i in tempcolor:
+                        if i!=',':
+                            color[len(color)-1].append(i)
+                        else:
+                            color.append([])
+                    for count,i in enumerate(color):
+                        color[count]=int("".join(i))
+                    #color.append(255)
+                    color=tuple(color)
+                    continue
     
-    parties.append(Party(currentparty, fullname, power, ideologies))
+    parties.append(Party(currentparty, fullname, power, color, ideologies))
 
     return parties
 

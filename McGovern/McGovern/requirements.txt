@@ -14,3 +14,6 @@ scipy==1.8.1
 six==1.16.0
 pyperclip==1.8.2
 typing_extensions==4.3.0
+DateTime==4.5
+pytz==2022.1
+zope.interface==5.4.0
