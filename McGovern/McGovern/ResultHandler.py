@@ -217,5 +217,5 @@ def main(scenario):
     results=Results(scenario)
     results.partyregionresults=getpartyregionresults(scenario)
     results.totalpartyresults=gettotalresults(scenario, results.partyregionresults)
-    results.printresults()
+    #results.printresults()
     return results
