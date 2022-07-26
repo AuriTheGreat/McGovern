@@ -1,3 +1,4 @@
+from re import A
 import ScenarioHandler
 import ResultHandler
 import TriggerHandler
@@ -203,31 +204,46 @@ def choosescenario():
         Button(screen_width/(1200/(x_outline/2))+(tile_size_x+5)*(count%objects_per_row), screen_height/(700/(y_outline/2))+(tile_size_y+5)*math.floor(count/objects_per_row), tile_size_x, tile_size_y, i , scenariomain, [i])
 
 
-def scenariomain(scenarioname, scenario=None):
-    objects.clear()
+def scenariomain(scenarioname, scenario=None, recalculate=True):
     if scenario==None:
         scenario=ScenarioHandler.main(scenarioname)
 
+    if recalculate==True:
+        results=ResultHandler.main(scenario)
+
+    objects.clear()
     Rectangle(900,0,screen_width,screen_height, '#006699')
     Rectangle(0,680,screen_width,screen_height, '#003366')
     Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366')
     Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366', str(scenario.main.currentdate.date()))
     button_size_x, button_size_y = screen_width/(1200/200), screen_height/(700/80)
+    Image(980,screen_width/(1200/110),150,150, 'scenario/' + scenarioname + '/gfx/labour.png')
     Button(10, screen_width/(1200/10), button_size_x, button_size_y, 'Escape', mainmenu)
     Button(950, screen_width/(1200/10), button_size_x, button_size_y, 'Next Turn', nextturn, [scenarioname, scenario])
-    Button(950, screen_width/(1200/310), button_size_x, button_size_y, 'Polling', mainmenu)
-    Button(950, screen_width/(1200/410), button_size_x, button_size_y, 'Events', mainmenu)
-    Button(950, screen_width/(1200/510), button_size_x, button_size_y, 'Campaign', mainmenu)
+    Button(950, screen_width/(1200/280), button_size_x, button_size_y, 'Regions', mainmenu)
+    Button(950, screen_width/(1200/380), button_size_x, button_size_y, 'Polling', mainmenu)
+    Button(950, screen_width/(1200/480), button_size_x, button_size_y, 'Events', mainmenu)
+    Button(950, screen_width/(1200/580), button_size_x, button_size_y, 'Campaign', mainmenu)
+    Button(905, screen_width/(1200/280), screen_width/(1200/20), screen_height/(700/380), '<', regionview, [scenarioname, scenario])
     countrymap=Image(200,150,360,510, 'scenario/' + scenarioname + '/gfx/map.png')
-  
-
-    results=ResultHandler.main(scenario)
 
     arr=pygame.PixelArray(countrymap.image)
-    [arr.replace(pygame.Color(i.color), pygame.Color(i.resultcolor)) for i in scenario.regions]
+    [arr.replace(i.color, i.resultcolor) for i in scenario.regions]
     arr.close()
-    
 
+    for i in openwindows:
+        i(scenarioname, scenario, False)
+    
+def regionview(scenarioname, scenario, affectopenwindows=True):
+    if affectopenwindows:
+        if regionview in openwindows:
+            openwindows.remove(regionview)
+        else:
+            openwindows.append(regionview)
+        scenariomain(scenarioname, scenario, False)
+    else:
+        for count,i in enumerate(scenario.regions):
+            Rectangle(650,120+count*60,screen_width/(1200/250), screen_height/(700/50), '#003366', str(i.name))
 
 def nextturn(scenarioname, scenario):
     objects.clear()
@@ -266,6 +282,7 @@ if __name__ == "__main__":
     font = pygame.font.SysFont('Arial', int(screen_height/(700/40)))
 
     objects = []
+    openwindows = []
     isclicked=False
 
     mainmenu()

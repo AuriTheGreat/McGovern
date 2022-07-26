@@ -147,6 +147,22 @@ def partyregionresulthandler(scenario, issuepartyregionresults):
             elif reachedregion:
                 break
 
+    def regionresultcolorcalculation(regions, partyregionresults):
+        for i in regions:
+            maxvalue, party=-1, None
+
+            #seatweights=[j.seats/i.seats for j in partyregionresults if i==j.region]
+
+            seatweights=[(j.seats/i.seats)**2.5 for j in partyregionresults if i==j.region]
+            seatweights=[j/sum(seatweights) for j in seatweights]
+            resultcolor=[0,0,0]
+            for count, j in enumerate([k for k in partyregionresults if i==k.region]):
+                resultcolor=[seatweights[count]*j.party.color[colorcount]+k for colorcount,k in enumerate(resultcolor)]
+
+            #print(seatweights)
+            #print(resultcolor)
+            i.resultcolor=tuple(resultcolor)
+
     partyregionresults=[]
 
     for i in scenario.regions:
@@ -164,14 +180,9 @@ def partyregionresulthandler(scenario, issuepartyregionresults):
             region=i.region
             partypercentages={}
         partypercentages[i.party]=i.percentage/100
-    seatcalculation(partyregionresults, partypercentages, region)
 
-    for i in scenario.regions:
-        maxvalue, party=-1, None
-        for j in partyregionresults:
-            if i==j.region and maxvalue<j.seats:
-                maxvalue, party=j.seats, j.party
-        i.resultcolor=party.color
+    seatcalculation(partyregionresults, partypercentages, region)
+    regionresultcolorcalculation(scenario.regions, partyregionresults)
 
     partyregionresults.sort(key=lambda x: (x.region.seats, x.region.population,  x.seats, x.votes), reverse=True)
 
