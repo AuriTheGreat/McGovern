@@ -8,7 +8,7 @@ London:
 	poor:
 		influence=0.9
 	tradeunionists:
-		influence=0.6
+		influence=0.3
 	veterans:
 		influence=0.5
 	farmers:
@@ -141,13 +141,13 @@ Wales:
 	aristocrats:
 		influence=0.2
 	poor:
-		influence=1.0
+		influence=1.1
 	tradeunionists:
-		influence=0.9
+		influence=1.2
 	veterans:
 		influence=0.5
 	farmers:
-		influence=0.6
+		influence=0.8
 North East:
 	middleclass:
 		influence=0.8

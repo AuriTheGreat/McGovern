@@ -23,6 +23,9 @@ labour:
 	socialreforms:
 		mean=3.0
 		variance=2.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
 conservative:
 	immigration:
 		mean=-1.0
@@ -48,6 +51,9 @@ conservative:
 	socialreforms:
 		mean=-1.0
 		variance=2.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
 liberal:
 	immigration:
 		mean=3.0
@@ -73,6 +79,37 @@ liberal:
 	socialreforms:
 		mean=4.0
 		variance=3.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+communist:
+	immigration:
+		mean=4.0
+		variance=1.5
+	welfarestate:
+		mean=5.0
+		variance=1.5
+	tradeunions:
+		mean=5.0
+		variance=2.0
+	europe:
+		mean=-3.0
+		variance=3.0
+	nato:
+		mean=-4.0
+		variance=2.5
+	devolution:
+		mean=-1.0
+		variance=3.0
+	nukes:
+		mean=-3.0
+		variance=3.0
+	socialreforms:
+		mean=4.0
+		variance=2.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
 snp:
 	immigration:
 		mean=1.0
@@ -98,6 +135,9 @@ snp:
 	socialreforms:
 		mean=1.0
 		variance=1.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
 plc:
 	immigration:
 		mean=2.0
@@ -123,3 +163,146 @@ plc:
 	socialreforms:
 		mean=1.0
 		variance=1.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+unity:
+	immigration:
+		mean=2.0
+		variance=1.5
+	welfarestate:
+		mean=4.0
+		variance=2.0
+	tradeunions:
+		mean=3.0
+		variance=1.5
+	europe:
+		mean=1.0
+		variance=3.0
+	nato:
+		mean=2.0
+		variance=3.5
+	devolution:
+		mean=-1.0
+		variance=3.0
+	nukes:
+		mean=4.0
+		variance=2.0
+	socialreforms:
+		mean=3.0
+		variance=2.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+prounionist:
+	immigration:
+		mean=-1.0
+		variance=2.0
+	welfarestate:
+		mean=1.0
+		variance=2.5
+	tradeunions:
+		mean=-2.0
+		variance=1.5
+	europe:
+		mean=3.0
+		variance=3.5
+	nato:
+		mean=5.0
+		variance=1.5
+	devolution:
+		mean=-4.0
+		variance=1.5
+	nukes:
+		mean=5.0
+		variance=1.5
+	socialreforms:
+		mean=-1.0
+		variance=2.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+replabour:
+	immigration:
+		mean=2.0
+		variance=1.5
+	welfarestate:
+		mean=4.0
+		variance=2.0
+	tradeunions:
+		mean=3.0
+		variance=1.5
+	europe:
+		mean=1.0
+		variance=3.0
+	nato:
+		mean=2.0
+		variance=3.5
+	devolution:
+		mean=-1.0
+		variance=3.0
+	nukes:
+		mean=4.0
+		variance=2.0
+	socialreforms:
+		mean=3.0
+		variance=2.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+inderep:
+	immigration:
+		mean=2.0
+		variance=1.5
+	welfarestate:
+		mean=4.0
+		variance=2.0
+	tradeunions:
+		mean=3.0
+		variance=1.5
+	europe:
+		mean=1.0
+		variance=3.0
+	nato:
+		mean=2.0
+		variance=3.5
+	devolution:
+		mean=-1.0
+		variance=3.0
+	nukes:
+		mean=4.0
+		variance=2.0
+	socialreforms:
+		mean=3.0
+		variance=2.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+democratic:
+	immigration:
+		mean=-2.0
+		variance=2.0
+	welfarestate:
+		mean=-4.0
+		variance=1.5
+	tradeunions:
+		mean=-2.0
+		variance=1.5
+	europe:
+		mean=4.0
+		variance=1.5
+	nato:
+		mean=5.0
+		variance=1.0
+	devolution:
+		mean=-5.0
+		variance=1.0
+	nukes:
+		mean=5.0
+		variance=1.0
+	socialreforms:
+		mean=-1.0
+		variance=2.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0

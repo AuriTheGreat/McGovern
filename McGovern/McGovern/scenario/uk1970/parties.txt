@@ -14,6 +14,10 @@ liberal:
 	fullname=Liberal Party
 	power=100
 	color=250, 168, 19
+communist:
+	fullname=Communist Party
+	power=2
+	color=255, 0, 0
 snp:
 	fullname=Scottish National Party
 	power=120
@@ -22,3 +26,23 @@ plc:
 	fullname=Plaid Cymru
 	power=125
 	color=0, 130, 64
+unity:
+	fullname=Unity
+	power=200
+	color=128,128,0
+prounionist:
+	fullname=Protestant Unionist
+	power=30
+	color=212,106,76
+replabour:
+	fullname=Republican Labour
+	power=35
+	color=133, 222, 89
+inderep:
+	fullname=Independent Republican
+	power=125
+	color=209,255,178
+democratic:
+	fullname=Democratic Party
+	power=1
+	color=255,255,255

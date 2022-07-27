@@ -43,6 +43,21 @@ liberal:
 		appeal=0.6
 	farmers:
 		appeal=0.6
+communist:
+	middleclass:
+		appeal=0.4
+	wealthy:
+		appeal=0.1
+	aristocrats:
+		appeal=0.2
+	poor:
+		appeal=1.0
+	tradeunionists:
+		appeal=1.5
+	veterans:
+		appeal=0.6
+	farmers:
+		appeal=0.3
 snp:
 	middleclass:
 		appeal=0.7
@@ -73,3 +88,78 @@ plc:
 		appeal=0.7
 	farmers:
 		appeal=0.7
+unity:
+	middleclass:
+		appeal=0.9
+	wealthy:
+		appeal=0.5
+	aristocrats:
+		appeal=0.4
+	poor:
+		appeal=1.0
+	tradeunionists:
+		appeal=1.2
+	veterans:
+		appeal=0.8
+	farmers:
+		appeal=0.7
+prounionist:
+	middleclass:
+		appeal=0.9
+	wealthy:
+		appeal=1.0
+	aristocrats:
+		appeal=1.0
+	poor:
+		appeal=0.7
+	tradeunionists:
+		appeal=0.5
+	veterans:
+		appeal=0.8
+	farmers:
+		appeal=0.9
+replabour:
+	middleclass:
+		appeal=0.9
+	wealthy:
+		appeal=0.5
+	aristocrats:
+		appeal=0.4
+	poor:
+		appeal=1.0
+	tradeunionists:
+		appeal=1.2
+	veterans:
+		appeal=0.8
+	farmers:
+		appeal=0.7
+inderep:
+	middleclass:
+		appeal=0.9
+	wealthy:
+		appeal=0.5
+	aristocrats:
+		appeal=0.4
+	poor:
+		appeal=1.0
+	tradeunionists:
+		appeal=1.2
+	veterans:
+		appeal=0.8
+	farmers:
+		appeal=0.7
+democratic:
+	middleclass:
+		appeal=0.9
+	wealthy:
+		appeal=1.0
+	aristocrats:
+		appeal=1.0
+	poor:
+		appeal=0.4
+	tradeunionists:
+		appeal=0.1
+	veterans:
+		appeal=0.9
+	farmers:
+		appeal=0.9

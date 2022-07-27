@@ -43,9 +43,21 @@ Reginald Maudling:
 Jeremy Thorpe:
 	party=liberal
 	leader=True	
+John Gollan:
+	party=communist
+	leader=True	
 William Wolfe:
 	party=snp
 	leader=True	
 Gwynfor Evans:
 	party=plc
 	leader=True	
+Ian Paisley:
+	party=prounionist
+	leader=True	
+Gerry Fitt:
+	party=replabour
+	leader=True	
+Desmond Donnelly:
+	party=democratic
+	leader=True

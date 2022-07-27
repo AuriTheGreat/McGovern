@@ -31,6 +31,10 @@ London:
 		mean=2.0
 		variance=2.5
 		importance=0.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0
 North West:
 	immigration:
 		mean=0.0
@@ -64,6 +68,10 @@ North West:
 		mean=1.0
 		variance=2.5
 		importance=0.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0
 South East:
 	immigration:
 		mean=-1.0
@@ -97,6 +105,10 @@ South East:
 		mean=0.0
 		variance=2.5
 		importance=0.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0
 Scotland:
 	immigration:
 		mean=1.0
@@ -130,6 +142,10 @@ Scotland:
 		mean=1.0
 		variance=2.5
 		importance=0.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0
 West Midlands:
 	immigration:
 		mean=-1.0
@@ -163,6 +179,10 @@ West Midlands:
 		mean=1.5
 		variance=2.5
 		importance=0.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0
 Yorkshire and the Humber:
 	immigration:
 		mean=0.0
@@ -196,6 +216,10 @@ Yorkshire and the Humber:
 		mean=1.0
 		variance=2.5
 		importance=0.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0
 Eastern:
 	immigration:
 		mean=0.0
@@ -229,6 +253,10 @@ Eastern:
 		mean=0.0
 		variance=2.5
 		importance=0.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0
 South West:
 	immigration:
 		mean=0.0
@@ -262,6 +290,10 @@ South West:
 		mean=2.0
 		variance=3.5
 		importance=1.0
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0
 East Midlands:
 	immigration:
 		mean=-1.0
@@ -295,6 +327,10 @@ East Midlands:
 		mean=2.0
 		variance=2.5
 		importance=0.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0
 Wales:
 	immigration:
 		mean=1.0
@@ -328,6 +364,10 @@ Wales:
 		mean=0.0
 		variance=2.5
 		importance=0.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0
 North East:
 	immigration:
 		mean=-1.0
@@ -361,6 +401,10 @@ North East:
 		mean=1.0
 		variance=2.5
 		importance=0.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0
 Northern Ireland:
 	immigration:
 		mean=0.0
@@ -394,3 +438,7 @@ Northern Ireland:
 		mean=0.0
 		variance=2.5
 		importance=0.5
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0

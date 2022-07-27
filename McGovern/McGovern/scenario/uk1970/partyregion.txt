@@ -22,7 +22,7 @@ labour:
 	North East:
 		power=0.0
 	Northern Ireland:
-		power=0.0
+		power=-315.0
 conservative:
 	London:
 		power=0.0
@@ -58,7 +58,7 @@ liberal:
 	Scotland:
 		power=0.0
 	West Midlands:
-		power=0.0
+		power=-20.0
 	Yorkshire and the Humber:
 		power=0.0
 	Eastern:
@@ -66,13 +66,38 @@ liberal:
 	South West:
 		power=20.0
 	East Midlands:
+		power=-20.0
+	Wales:
+		power=0.0
+	North East:
+		power=0.0
+	Northern Ireland:
+		power=-65.0
+communist:
+	London:
+		power=0.0
+	North West:
+		power=0.0
+	South East:
+		power=0.0
+	Scotland:
+		power=0.0
+	West Midlands:
+		power=0.0
+	Yorkshire and the Humber:
+		power=0.0
+	Eastern:
+		power=0.0
+	South West:
+		power=0.0
+	East Midlands:
 		power=0.0
 	Wales:
 		power=0.0
 	North East:
 		power=0.0
 	Northern Ireland:
-		power=0.0
+		power=-100000000.0
 snp:
 	London:
 		power=-100000000.0
@@ -119,6 +144,131 @@ plc:
 		power=-100000000.0
 	Wales:
 		power=0.0
+	North East:
+		power=-100000000.0
+	Northern Ireland:
+		power=-100000000.0
+unity:
+	London:
+		power=-100000000.0
+	North West:
+		power=-100000000.0
+	South East:
+		power=-100000000.0
+	Scotland:
+		power=-100000000.0
+	West Midlands:
+		power=-100000000.0
+	Yorkshire and the Humber:
+		power=-100000000.0
+	Eastern:
+		power=-100000000.0
+	South West:
+		power=-100000000.0
+	East Midlands:
+		power=-100000000.0
+	Wales:
+		power=-100000000.0
+	North East:
+		power=-100000000.0
+	Northern Ireland:
+		power=0.0
+prounionist:
+	London:
+		power=-100000000.0
+	North West:
+		power=-100000000.0
+	South East:
+		power=-100000000.0
+	Scotland:
+		power=-100000000.0
+	West Midlands:
+		power=-100000000.0
+	Yorkshire and the Humber:
+		power=-100000000.0
+	Eastern:
+		power=-100000000.0
+	South West:
+		power=-100000000.0
+	East Midlands:
+		power=-100000000.0
+	Wales:
+		power=-100000000.0
+	North East:
+		power=-100000000.0
+	Northern Ireland:
+		power=0.0
+replabour:
+	London:
+		power=-100000000.0
+	North West:
+		power=-100000000.0
+	South East:
+		power=-100000000.0
+	Scotland:
+		power=-100000000.0
+	West Midlands:
+		power=-100000000.0
+	Yorkshire and the Humber:
+		power=-100000000.0
+	Eastern:
+		power=-100000000.0
+	South West:
+		power=-100000000.0
+	East Midlands:
+		power=-100000000.0
+	Wales:
+		power=-100000000.0
+	North East:
+		power=-100000000.0
+	Northern Ireland:
+		power=0.0
+inderep:
+	London:
+		power=-100000000.0
+	North West:
+		power=-100000000.0
+	South East:
+		power=-100000000.0
+	Scotland:
+		power=-100000000.0
+	West Midlands:
+		power=-100000000.0
+	Yorkshire and the Humber:
+		power=-100000000.0
+	Eastern:
+		power=-100000000.0
+	South West:
+		power=-100000000.0
+	East Midlands:
+		power=-100000000.0
+	Wales:
+		power=-100000000.0
+	North East:
+		power=-100000000.0
+	Northern Ireland:
+		power=0.0
+democratic:
+	London:
+		power=-100000000.0
+	North West:
+		power=0.0
+	South East:
+		power=-0.25
+	Scotland:
+		power=-100000000.0
+	West Midlands:
+		power=0.0
+	Yorkshire and the Humber:
+		power=-100000000.0
+	Eastern:
+		power=-100000000.0
+	South West:
+		power=0.0
+	East Midlands:
+		power=-100000000.0
+	Wales:
+		power=4.5
 	North East:
 		power=-100000000.0
 	Northern Ireland:

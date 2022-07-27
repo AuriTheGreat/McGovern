@@ -46,3 +46,9 @@ socialreforms:
 		Conservative
 		Neutral
 		Libertarian
+economicphilosophy:
+	fullname=Economic Philosophy
+	levels:
+		Keynesianism
+		Neutral
+		Monetarism
