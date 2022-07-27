@@ -337,11 +337,11 @@ Wales:
 		variance=3.0
 		importance=1.0
 	welfarestate:
-		mean=2.0
+		mean=3.0
 		variance=2.0
 		importance=1.0
 	tradeunions:
-		mean=1.0
+		mean=2.0
 		variance=3.0
 		importance=1.0
 	europe:
@@ -358,7 +358,7 @@ Wales:
 		importance=1.0
 	nukes:
 		mean=0.0
-		variance=1.5
+		variance=2.0
 		importance=0.3
 	socialreforms:
 		mean=0.0
