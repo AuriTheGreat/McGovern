@@ -46,3 +46,7 @@ democratic:
 	fullname=Democratic Party
 	power=1
 	color=255,255,255
+speaker:
+	fullname=Speaker
+	power=-100000000.0
+	color=255,255,255

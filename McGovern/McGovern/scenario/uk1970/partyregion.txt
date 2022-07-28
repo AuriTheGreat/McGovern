@@ -1,275 +1,444 @@
 labour:
 	London:
 		power=0.0
+		guaranteedseats=32
 	North West:
 		power=0.0
+		guaranteedseats=0
 	South East:
 		power=0.0
+		guaranteedseats=0
 	Scotland:
 		power=0.0
+		guaranteedseats=0
 	West Midlands:
 		power=0.0
+		guaranteedseats=0
 	Yorkshire and the Humber:
 		power=0.0
+		guaranteedseats=0
 	Eastern:
 		power=0.0
+		guaranteedseats=0
 	South West:
 		power=0.0
+		guaranteedseats=0
 	East Midlands:
 		power=0.0
+		guaranteedseats=0
 	Wales:
 		power=0.0
+		guaranteedseats=0
 	North East:
 		power=0.0
+		guaranteedseats=0
 	Northern Ireland:
 		power=-315.0
+		guaranteedseats=0
 conservative:
 	London:
 		power=0.0
+		guaranteedseats=25
 	North West:
 		power=0.0
+		guaranteedseats=0
 	South East:
 		power=0.0
+		guaranteedseats=0
 	Scotland:
 		power=0.0
+		guaranteedseats=0
 	West Midlands:
 		power=0.0
+		guaranteedseats=0
 	Yorkshire and the Humber:
 		power=0.0
+		guaranteedseats=0
 	Eastern:
 		power=0.0
+		guaranteedseats=0
 	South West:
 		power=0.0
+		guaranteedseats=0
 	East Midlands:
 		power=0.0
+		guaranteedseats=0
 	Wales:
 		power=0.0
+		guaranteedseats=0
 	North East:
 		power=0.0
+		guaranteedseats=0
 	Northern Ireland:
 		power=0.0
+		guaranteedseats=0
 liberal:
 	London:
 		power=0.0
+		guaranteedseats=0
 	North West:
 		power=0.0
+		guaranteedseats=0
 	South East:
 		power=0.0
+		guaranteedseats=0
 	Scotland:
 		power=0.0
+		guaranteedseats=3
 	West Midlands:
 		power=-20.0
+		guaranteedseats=0
 	Yorkshire and the Humber:
 		power=0.0
+		guaranteedseats=0
 	Eastern:
 		power=0.0
+		guaranteedseats=0
 	South West:
 		power=20.0
+		guaranteedseats=2
 	East Midlands:
 		power=-20.0
+		guaranteedseats=0
 	Wales:
 		power=0.0
+		guaranteedseats=0
 	North East:
 		power=0.0
+		guaranteedseats=0
 	Northern Ireland:
 		power=-65.0
+		guaranteedseats=0
 communist:
 	London:
 		power=0.0
+		guaranteedseats=0
 	North West:
 		power=0.0
+		guaranteedseats=0
 	South East:
 		power=0.0
+		guaranteedseats=0
 	Scotland:
 		power=0.0
+		guaranteedseats=0
 	West Midlands:
 		power=0.0
+		guaranteedseats=0
 	Yorkshire and the Humber:
 		power=0.0
+		guaranteedseats=0
 	Eastern:
 		power=0.0
+		guaranteedseats=0
 	South West:
 		power=0.0
+		guaranteedseats=0
 	East Midlands:
 		power=0.0
+		guaranteedseats=0
 	Wales:
 		power=0.0
+		guaranteedseats=0
 	North East:
 		power=0.0
+		guaranteedseats=0
 	Northern Ireland:
 		power=-100000000.0
+		guaranteedseats=0
 snp:
 	London:
 		power=-100000000.0
+		guaranteedseats=0
 	North West:
 		power=-100000000.0
+		guaranteedseats=0
 	South East:
 		power=-100000000.0
+		guaranteedseats=0
 	Scotland:
 		power=0.0
+		guaranteedseats=0
 	West Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Yorkshire and the Humber:
 		power=-100000000.0
+		guaranteedseats=0
 	Eastern:
 		power=-100000000.0
+		guaranteedseats=0
 	South West:
 		power=-100000000.0
+		guaranteedseats=0
 	East Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Wales:
 		power=-100000000.0
+		guaranteedseats=0
 	North East:
 		power=-100000000.0
+		guaranteedseats=0
 	Northern Ireland:
 		power=-100000000.0
+		guaranteedseats=0
 plc:
 	London:
 		power=-100000000.0
+		guaranteedseats=0
 	North West:
 		power=-100000000.0
+		guaranteedseats=0
 	South East:
 		power=-100000000.0
+		guaranteedseats=0
 	Scotland:
 		power=-100000000.0
+		guaranteedseats=0
 	West Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Yorkshire and the Humber:
 		power=-100000000.0
+		guaranteedseats=0
 	Eastern:
 		power=-100000000.0
+		guaranteedseats=0
 	South West:
 		power=-100000000.0
+		guaranteedseats=0
 	East Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Wales:
 		power=0.0
+		guaranteedseats=0
 	North East:
 		power=-100000000.0
+		guaranteedseats=0
 	Northern Ireland:
 		power=-100000000.0
+		guaranteedseats=0
 unity:
 	London:
 		power=-100000000.0
+		guaranteedseats=0
 	North West:
 		power=-100000000.0
+		guaranteedseats=0
 	South East:
 		power=-100000000.0
+		guaranteedseats=0
 	Scotland:
 		power=-100000000.0
+		guaranteedseats=0
 	West Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Yorkshire and the Humber:
 		power=-100000000.0
+		guaranteedseats=0
 	Eastern:
 		power=-100000000.0
+		guaranteedseats=0
 	South West:
 		power=-100000000.0
+		guaranteedseats=0
 	East Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Wales:
 		power=-100000000.0
+		guaranteedseats=0
 	North East:
 		power=-100000000.0
+		guaranteedseats=0
 	Northern Ireland:
 		power=0.0
+		guaranteedseats=2
 prounionist:
 	London:
 		power=-100000000.0
+		guaranteedseats=0
 	North West:
 		power=-100000000.0
+		guaranteedseats=0
 	South East:
 		power=-100000000.0
+		guaranteedseats=0
 	Scotland:
 		power=-100000000.0
+		guaranteedseats=0
 	West Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Yorkshire and the Humber:
 		power=-100000000.0
+		guaranteedseats=0
 	Eastern:
 		power=-100000000.0
+		guaranteedseats=0
 	South West:
 		power=-100000000.0
+		guaranteedseats=0
 	East Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Wales:
 		power=-100000000.0
+		guaranteedseats=0
 	North East:
 		power=-100000000.0
+		guaranteedseats=0
 	Northern Ireland:
 		power=0.0
+		guaranteedseats=1
 replabour:
 	London:
 		power=-100000000.0
+		guaranteedseats=0
 	North West:
 		power=-100000000.0
+		guaranteedseats=0
 	South East:
 		power=-100000000.0
+		guaranteedseats=0
 	Scotland:
 		power=-100000000.0
+		guaranteedseats=0
 	West Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Yorkshire and the Humber:
 		power=-100000000.0
+		guaranteedseats=0
 	Eastern:
 		power=-100000000.0
+		guaranteedseats=0
 	South West:
 		power=-100000000.0
+		guaranteedseats=0
 	East Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Wales:
 		power=-100000000.0
+		guaranteedseats=0
 	North East:
 		power=-100000000.0
+		guaranteedseats=0
 	Northern Ireland:
 		power=0.0
+		guaranteedseats=1
 inderep:
 	London:
 		power=-100000000.0
+		guaranteedseats=0
 	North West:
 		power=-100000000.0
+		guaranteedseats=0
 	South East:
 		power=-100000000.0
+		guaranteedseats=0
 	Scotland:
 		power=-100000000.0
+		guaranteedseats=0
 	West Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Yorkshire and the Humber:
 		power=-100000000.0
+		guaranteedseats=0
 	Eastern:
 		power=-100000000.0
+		guaranteedseats=0
 	South West:
 		power=-100000000.0
+		guaranteedseats=0
 	East Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Wales:
 		power=-100000000.0
+		guaranteedseats=0
 	North East:
 		power=-100000000.0
+		guaranteedseats=0
 	Northern Ireland:
 		power=0.0
+		guaranteedseats=0
 democratic:
 	London:
 		power=-100000000.0
+		guaranteedseats=0
 	North West:
 		power=0.0
+		guaranteedseats=0
 	South East:
 		power=-0.25
+		guaranteedseats=0
 	Scotland:
 		power=-100000000.0
+		guaranteedseats=0
 	West Midlands:
 		power=0.0
+		guaranteedseats=0
 	Yorkshire and the Humber:
 		power=-100000000.0
+		guaranteedseats=0
 	Eastern:
 		power=-100000000.0
+		guaranteedseats=0
 	South West:
 		power=0.0
+		guaranteedseats=0
 	East Midlands:
 		power=-100000000.0
+		guaranteedseats=0
 	Wales:
 		power=4.5
+		guaranteedseats=0
 	North East:
 		power=-100000000.0
+		guaranteedseats=0
 	Northern Ireland:
 		power=-100000000.0
+		guaranteedseats=0
+speaker:
+	London:
+		power=0.0
+		guaranteedseats=0
+	North West:
+		power=0.0
+		guaranteedseats=0
+	South East:
+		power=0.0
+		guaranteedseats=1
+	Scotland:
+		power=0.0
+		guaranteedseats=0
+	West Midlands:
+		power=0.0
+		guaranteedseats=0
+	Yorkshire and the Humber:
+		power=0.0
+		guaranteedseats=0
+	Eastern:
+		power=0.0
+		guaranteedseats=0
+	South West:
+		power=0.0
+		guaranteedseats=0
+	East Midlands:
+		power=0.0
+		guaranteedseats=0
+	Wales:
+		power=0.0
+		guaranteedseats=0
+	North East:
+		power=0.0
+		guaranteedseats=0
+	Northern Ireland:
+		power=0.0
+		guaranteedseats=0

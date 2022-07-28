@@ -726,14 +726,15 @@ def partypopulationhandler(scenarioname, parties, populations):
 
     return partypopulations.values()
 
-def getlocalpowers(scenarioname, parties, regions):
+def getpartyregions(scenarioname, parties, regions):
     partyregions={}
 
     class PartyRegion:
-      def __init__(self, party, region, power):
+      def __init__(self, party, region, power, guaranteedseats):
         self.party = party
         self.region = region
         self.power = power
+        self.guaranteedseats = guaranteedseats
 
     f = open ( 'scenario/' + scenarioname + '/partyregion.txt' , 'r')
     l = []
@@ -741,7 +742,7 @@ def getlocalpowers(scenarioname, parties, regions):
 
     for i in parties:
         for j in regions:
-            partyregions[str(str(i.name)+"-"+str(j.name))]=PartyRegion(i,j,0)
+            partyregions[str(str(i.name)+"-"+str(j.name))]=PartyRegion(i,j,0,0)
 
 
     partynames=[x.name for x in parties]
@@ -765,6 +766,10 @@ def getlocalpowers(scenarioname, parties, regions):
                 if string:
                     partyregions[str(party.name + "-" + region.name)].power=float("".join(string[1].rstrip().lstrip()))
                     continue
+                string=re.search(".*guaranteedseats.*=(.*)", newi)
+                if string:
+                    partyregions[str(party.name + "-" + region.name)].guaranteedseats=max(0, int("".join(string[1].rstrip().lstrip())))
+                    continue
 
     f = open ( 'scenario/' + scenarioname + '/partyregion.txt' , 'w')
     party=None
@@ -776,6 +781,7 @@ def getlocalpowers(scenarioname, parties, regions):
                 if i.party==j.party:
                     f.write("\t" + j.region.name + ":" + "\n")
                     f.write("\t\t" + "power=" + str(j.power) + "\n")
+                    f.write("\t\t" + "guaranteedseats=" + str(j.guaranteedseats) + "\n")
 
     return partyregions.values()
 
@@ -907,7 +913,7 @@ def main(scenarioname):
     scenario.regionissues=regionissuehandler(scenarioname,scenario.regions,scenario.issues)
     scenario.regionpopulations=regionpopulationhandler(scenarioname,scenario.regions,scenario.populations)
     scenario.partypopulations=partypopulationhandler(scenarioname,scenario.parties,scenario.populations)
-    scenario.partyregions=getlocalpowers(scenarioname, scenario.parties, scenario.regions)
+    scenario.partyregions=getpartyregions(scenarioname, scenario.parties, scenario.regions)
     scenario.events=getevents(scenarioname)
     scenario.decisions=getdecisions(scenarioname)
     scenario.triggers=gettriggers(scenarioname, scenario.events, scenario.decisions)

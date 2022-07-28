@@ -110,9 +110,9 @@ def partyregionissuehandler(scenario):
 
 def partyregionresulthandler(scenario, issuepartyregionresults):
     def seatcalculation(partyregionresults, partypercentages, region):
-        def calculationbalancer(partyshares, partyseats, region): #function for distributing seats if the amount of seats doesn't match amount of distributed seats
-           while region.seats!=sum(partyseats.values()):
-               if region.seats>sum(partyseats.values()):
+        def calculationbalancer(partyshares, partyseats, neededseats): #function for distributing seats if the amount of seats doesn't match amount of distributed seats
+           while neededseats!=sum(partyseats.values()):
+               if neededseats>sum(partyseats.values()):
                    maximalvalue,party=0,None
                    for i in partyshares:
                         if partyseats[i]==0:
@@ -138,12 +138,12 @@ def partyregionresulthandler(scenario, issuepartyregionresults):
             partyshares[j]=(0.00104*(partypercentages[j]*100)**2.8+0.17)/100
         for j in partyshares:
             partyseats[j]=round((partyshares[j]/sum(partyshares.values()))*region.seats)
-        partyseats=calculationbalancer(partyshares, partyseats, region)
+        partyseats=calculationbalancer(partyshares, partyseats, region.seats-sum([x.guaranteedseats for x in scenario.partyregions if x.region == region]))
         for j in partyregionresults:
             reachedregion=False
             if j.region==region:
                 reachedregion=True
-                j.seats=partyseats[j.party]
+                j.seats=partyseats[j.party]+next((x for x in scenario.partyregions if x.region==j.region and x.party==j.party), None).guaranteedseats
             elif reachedregion:
                 break
 

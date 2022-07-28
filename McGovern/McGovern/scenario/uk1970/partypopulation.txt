@@ -163,3 +163,18 @@ democratic:
 		appeal=0.9
 	farmers:
 		appeal=0.9
+speaker:
+	middleclass:
+		appeal=0.0
+	wealthy:
+		appeal=0.0
+	aristocrats:
+		appeal=0.0
+	poor:
+		appeal=0.0
+	tradeunionists:
+		appeal=0.0
+	veterans:
+		appeal=0.0
+	farmers:
+		appeal=0.0

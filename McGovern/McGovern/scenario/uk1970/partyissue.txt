@@ -306,3 +306,31 @@ democratic:
 	economicphilosophy:
 		mean=0.0
 		variance=1.0
+speaker:
+	immigration:
+		mean=0.0
+		variance=1.0
+	welfarestate:
+		mean=0.0
+		variance=1.0
+	tradeunions:
+		mean=0.0
+		variance=1.0
+	europe:
+		mean=0.0
+		variance=1.0
+	nato:
+		mean=0.0
+		variance=1.0
+	devolution:
+		mean=0.0
+		variance=1.0
+	nukes:
+		mean=0.0
+		variance=1.0
+	socialreforms:
+		mean=0.0
+		variance=1.0
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
