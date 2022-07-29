@@ -165,16 +165,16 @@ democratic:
 		appeal=0.9
 speaker:
 	middleclass:
-		appeal=0.0
+		appeal=0.1
 	wealthy:
-		appeal=0.0
+		appeal=0.1
 	aristocrats:
-		appeal=0.0
+		appeal=0.1
 	poor:
-		appeal=0.0
+		appeal=0.1
 	tradeunionists:
-		appeal=0.0
+		appeal=0.1
 	veterans:
-		appeal=0.0
+		appeal=0.1
 	farmers:
-		appeal=0.0
+		appeal=0.1

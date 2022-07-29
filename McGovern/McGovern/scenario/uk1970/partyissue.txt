@@ -308,29 +308,29 @@ democratic:
 		variance=1.0
 speaker:
 	immigration:
-		mean=0.0
-		variance=1.0
+		mean=-1.0
+		variance=2.0
 	welfarestate:
-		mean=0.0
-		variance=1.0
+		mean=-1.0
+		variance=3.0
 	tradeunions:
-		mean=0.0
-		variance=1.0
+		mean=-2.0
+		variance=2.0
 	europe:
-		mean=0.0
-		variance=1.0
+		mean=2.0
+		variance=2.0
 	nato:
-		mean=0.0
-		variance=1.0
+		mean=5.0
+		variance=3.0
 	devolution:
-		mean=0.0
-		variance=1.0
+		mean=-3.0
+		variance=2.0
 	nukes:
-		mean=0.0
-		variance=1.0
+		mean=4.0
+		variance=2.0
 	socialreforms:
 		mean=0.0
-		variance=1.0
+		variance=2.5
 	economicphilosophy:
 		mean=0.0
 		variance=1.0

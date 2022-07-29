@@ -425,7 +425,8 @@ def getcharacters(scenarioname, parties):
     characters=[]
     
     class Character:
-      def __init__(self, name, party, leader, ideologies):
+      def __init__(self, identifier, name, party, leader, ideologies):
+        self.identifier = identifier
         self.name = name
         self.party = party
         self.leader = leader
@@ -437,7 +438,7 @@ def getcharacters(scenarioname, parties):
     l = np.array([ line.split() for line in f], dtype=object)
     
     currentcharacter=None
-    party,leader,ideologies=None,False,[]
+    name, party,leader,ideologies=None, None,False,[]
     ideologyreader=None
     currentparty, currentindex=None,None
     
@@ -450,17 +451,21 @@ def getcharacters(scenarioname, parties):
                 ideologyreader='aiideologies'
             else:
                 if currentcharacter!=None:
-                    characters.append(Character(currentcharacter, party, leader, ideologies))
+                    characters.append(Character(currentcharacter, name, party, leader, ideologies))
                     if leader==True:
                         currentindex.leader=characters[len(characters)-1]
                 currentcharacter="".join(string[1].rstrip().lstrip())
-                party,leader,ideologies=None,False,[]
+                name, party,leader,ideologies=None, None,False,[]
         else:
             if ideologyreader!=None:
                 string=re.search("(.*)", newi)
                 if string:
                     ideologies.append("".join(string[1].rstrip().lstrip()))
             else:
+                string=re.search(".*name.*=(.*)", newi)
+                if string:
+                    name="".join(string[1].rstrip().lstrip())
+                    continue
                 string=re.search(".*party.*=(.*)", newi)
                 if string:
                     party="".join(string[1].rstrip().lstrip())
@@ -478,7 +483,7 @@ def getcharacters(scenarioname, parties):
                         leader=False
                     continue
     
-    characters.append(Character(currentcharacter, party, leader, ideologies))
+    characters.append(Character(currentcharacter, name, party, leader, ideologies))
     if leader==True:
         currentindex.leader=characters[len(characters)-1]
 

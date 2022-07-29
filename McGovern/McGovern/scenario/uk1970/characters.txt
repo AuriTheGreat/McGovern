@@ -1,66 +1,83 @@
-Harold Wilson:
+wilson:
+	name=Harold Wilson
 	party=labour
 	leader=True
 	aiideologies:
 		socialdemocracy
-James Callaghan:
+callaghan:
+	name=James Callaghan
 	party=labour
 	leader=False
 	aiideologies:
 		socialdemocracy
-Roy Jenkins:
+jenkins:
+	name=Roy Jenkins
 	party=labour
 	leader=False
 	aiideologies:
 		socialdemocracy
 		liberalism
-Denis Healey:
+healey:
+	name=Denis Healey
 	party=labour
 	leader=False
 	aiideologies:
 		socialdemocracy
 		multilateralism
-Tony Benn:
+benn:
+	name=Tony Benn
 	party=labour
 	leader=False
 	aiideologies:
 		socialism
-Michael Foot:
+foot:
+	name=Michael Foot
 	party=labour
 	leader=False
 	aiideologies:
 		socialism
 		unilateralism
-Edward Heath:
+heath:
+	name=Edward Heath
 	party=conservative
 	leader=True	
-Enoch Powell:
+powell:
+	name=Enoch Powell
 	party=conservative
 	leader=False	
-Reginald Maudling:
+maudling:
+	name=Reginald Maudling
 	party=conservative
 	leader=False	
-Jeremy Thorpe:
+thorpe:
+	name=Jeremy Thorpe
 	party=liberal
 	leader=True	
-John Gollan:
+gollan:
+	name=John Gollan
 	party=communist
 	leader=True	
-William Wolfe:
+wolfe:
+	name=William Wolfe
 	party=snp
 	leader=True	
-Gwynfor Evans:
+evans:
+	name=Gwynfor Evans
 	party=plc
 	leader=True	
-Ian Paisley:
+paisley:
+	name=Ian Paisley
 	party=prounionist
 	leader=True	
-Gerry Fitt:
+fitt:
+	name=Gerry Fitt
 	party=replabour
 	leader=True	
-Desmond Donnelly:
+donnelly:
+	name=Desmond Donnelly
 	party=democratic
 	leader=True
-Horace King:
+king:
+	name=Horace King
 	party=speaker
 	leader=True

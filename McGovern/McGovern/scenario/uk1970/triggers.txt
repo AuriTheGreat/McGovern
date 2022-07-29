@@ -1,13 +1,5 @@
 worldcup:
 	if:
-		date>1970-04-01
+		date>"1970-04-01" and date<"1970-09-02" and labour.leader==wilson
 	trigger:
-		event.worldcup
-
-titanic:
-	if:
-		turn>3 and
-		love>10
-	trigger:
-		event.titanic
 		event.worldcup

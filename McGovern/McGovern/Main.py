@@ -277,7 +277,7 @@ def partysharechart(x, y, width, height, gamedata, region='National', mode='vote
     Rectangle(x+width/2+width/4,y, width/(360/1), height/(50/5), (255,255,255))
     Rectangle(x+width/2+width/4,y+(height-height/(50/5)), width/(360/1), height/(50/5), (255,255,255))
 
-def parliamentarychart(x, y, width, height, gamedata, mode='westminster', rulingparties=None, speaker=None, columns=6):
+def parliamentarychart(x, y, width, height, gamedata, mode='westminster', rulingparties=None, speaker=None, columns=8):
     y+=height/2
 
 
@@ -537,6 +537,7 @@ def nextturn(scenarioname, gamedata):
     objects.clear()
     if gamedata.scenario.base.enddate>gamedata.scenario.main.currentdate:
         gamedata.scenario.main.newturn()
+        TriggerHandler.main(gamedata)
         if gamedata.scenario.main.currentdate<gamedata.scenario.base.electiondate<gamedata.scenario.main.currentdate+gamedata.scenario.main.turnlength:
             print(gamedata.scenario.main.currentdate.date(), "ELECTION DAY")
         else:

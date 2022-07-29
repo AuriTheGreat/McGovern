@@ -413,7 +413,7 @@ speaker:
 		power=0.0
 		guaranteedseats=0
 	South East:
-		power=0.0
+		power=10000002.0
 		guaranteedseats=1
 	Scotland:
 		power=0.0

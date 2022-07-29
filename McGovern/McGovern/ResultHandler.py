@@ -87,7 +87,7 @@ def partyregionissuehandler(scenario):
                 newissuepartyregionresult=IssuePartyRegionResult(i.region, j.party, i.issue, 
                                                                       [x, norm.pdf(x, i.mean, i.variance)],
                                                                       [x, norm.pdf(x, j.mean, j.variance)])
-                newissuepartyregionresult.regionaxes[1]*=i.region.population/sum(newissuepartyregionresult.regionaxes[1])
+                newissuepartyregionresult.regionaxes[1]*=i.region.population*i.region.eligiblepopulation/sum(newissuepartyregionresult.regionaxes[1])
                 newissuepartyregionresult.partyaxes[1]*=max(0,j.party.power*populationinfluence+localpower)
                 issuepartyregionresults.append(newissuepartyregionresult)
 
