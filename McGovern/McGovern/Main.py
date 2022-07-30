@@ -8,9 +8,10 @@ import pygame
 from pygame.locals import *
 
 class GameData:
-    def __init__(self, scenario, results=None):
+    def __init__(self, scenario, results=None, polling=None):
         self.scenario = scenario
         self.results = results
+        self.polling = polling
 
 def getvalidscenarios(scenarios):
     validscenarios=[]
@@ -366,7 +367,9 @@ def scenariomain(scenarioname, gamedata=None, recalculate=True):
         gamedata=GameData(ScenarioHandler.main(scenarioname))
 
     if recalculate==True:
-        gamedata.results=ResultHandler.main(gamedata.scenario)
+        gamedata.results=ResultHandler.getresults(gamedata.scenario)
+        gamedata.polling=ResultHandler.getpolling(gamedata.scenario, gamedata.polling)
+
 
     #print(gamedata)
     #print(gamedata.scenario)

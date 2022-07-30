@@ -44,7 +44,7 @@ conservative:
 		guaranteedseats=0
 	South East:
 		power=0.0
-		guaranteedseats=0
+		guaranteedseats=5
 	Scotland:
 		power=0.0
 		guaranteedseats=0
@@ -56,7 +56,7 @@ conservative:
 		guaranteedseats=0
 	Eastern:
 		power=0.0
-		guaranteedseats=0
+		guaranteedseats=2
 	South West:
 		power=0.0
 		guaranteedseats=0

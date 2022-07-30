@@ -2,6 +2,12 @@ from doctest import register_optionflag
 from numpy import arange
 from scipy.stats import norm
 import matplotlib.pyplot as plt
+import random
+import math
+
+#####################################################################################
+###################################### Results ######################################
+#####################################################################################
 
 class Results:
     def __init__(self, scenario, partyregionresults=None, totalpartyresults=None):
@@ -63,7 +69,7 @@ class PartyRegionResult:
         self.seats=seats
         self.percentage=percentage
 
-def partyregionissuehandler(scenario):
+def partyregionissuehandler(scenario, mode='normal'):
     x=arange(-20, 20, 0.1)
 
     issuepartyregionresults=[]
@@ -91,14 +97,18 @@ def partyregionissuehandler(scenario):
                 newissuepartyregionresult.partyaxes[1]*=max(0,j.party.power*populationinfluence+localpower)
                 issuepartyregionresults.append(newissuepartyregionresult)
 
-
     for i in scenario.issues:
         for j in scenario.regions:
             axessum=sum([x.partyaxes[1] for x in issuepartyregionresults if x.issue==i and x.region==j])
             regionissues=[x for x in issuepartyregionresults if x.issue==i and x.region==j]
             importancesum=sum([x.importance for x in scenario.regionissues if x.region==j])
             for k in regionissues:
-                k.partyaxes[1]=k.partyaxes[1]/axessum*k.regionaxes[1]*(next((x.importance for x in k.region.issues if x.issue == i), None)/importancesum)
+                if mode=='normal':
+                    k.partyaxes[1]=k.partyaxes[1]/axessum*k.regionaxes[1]*(next((x.importance for x in k.region.issues if x.issue == i), None)/importancesum)
+                elif mode=='polling':
+                    pollingbias=math.sqrt(sum([x.influence/sum([k.influence for k in scenario.regionpopulations if x.region==j])*random.uniform(0.75, 1.25+x.population.pollingbias)*y.appeal for x in scenario.regionpopulations for y in scenario.partypopulations if x.region==j and x.population==y.population and k.party==y.party]))
+                    #print(i.name, j.name, k.party.name, pollingbias)
+                    k.partyaxes[1]=k.partyaxes[1]/axessum*k.regionaxes[1]*(next((x.importance for x in k.region.issues if x.issue == i), None)/importancesum)*pollingbias
 
     """
     for i in issuepartyregionresults:
@@ -108,7 +118,7 @@ def partyregionissuehandler(scenario):
     return issuepartyregionresults
 
 
-def partyregionresulthandler(scenario, issuepartyregionresults):
+def partyregionresulthandler(scenario, issuepartyregionresults, mode='normal'):
     def seatcalculation(partyregionresults, partypercentages, region):
         def calculationbalancer(partyshares, partyseats, neededseats): #function for distributing seats if the amount of seats doesn't match amount of distributed seats
            while neededseats!=sum(partyseats.values()):
@@ -182,16 +192,17 @@ def partyregionresulthandler(scenario, issuepartyregionresults):
         partypercentages[i.party]=i.percentage/100
 
     seatcalculation(partyregionresults, partypercentages, region)
-    regionresultcolorcalculation(scenario.regions, partyregionresults)
+    if mode=='normal':
+        regionresultcolorcalculation(scenario.regions, partyregionresults)
 
     partyregionresults.sort(key=lambda x: (x.region.seats, x.region.population,  x.seats, x.votes), reverse=True)
 
     return partyregionresults
 
 
-def getpartyregionresults(scenario):
-    issuepartyregionresults=partyregionissuehandler(scenario)
-    return partyregionresulthandler(scenario, issuepartyregionresults)
+def getpartyregionresults(scenario, mode='normal'):
+    issuepartyregionresults=partyregionissuehandler(scenario, mode)
+    return partyregionresulthandler(scenario, issuepartyregionresults, mode)
 
 def gettotalresults(scenario, partyregionresults):
     totalpartyresults=[]
@@ -213,9 +224,38 @@ def gettotalresults(scenario, partyregionresults):
     return totalpartyresults
 
 
-def main(scenario):
+def getresults(scenario):
     results=Results(scenario)
     results.partyregionresults=getpartyregionresults(scenario)
     results.totalpartyresults=gettotalresults(scenario, results.partyregionresults)
+
     #results.printresults()
     return results
+
+
+
+#####################################################################################
+###################################### Polling ######################################
+#####################################################################################
+
+class Polling:
+    def __init__(self, scenario, aggregated=None, polls=None):
+        self.scenario=scenario
+        self.aggregated=aggregated
+        self.polls=polls
+
+def getnewpoll(scenario):
+    poll=Results(scenario)
+    poll.partyregionresults=getpartyregionresults(scenario, 'polling')
+    poll.totalpartyresults=gettotalresults(scenario, poll.partyregionresults)
+
+    #poll.printresults()
+
+    return poll
+
+def getpolling(scenario, polling=None):
+    if polling==None:
+        polling=Polling(scenario, None, [])
+    polling.polls.append(getnewpoll(scenario))
+
+    return polling

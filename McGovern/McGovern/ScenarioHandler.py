@@ -273,11 +273,11 @@ def getpopulations(scenarioname):
                 continue
             string=re.search(".*pollingbias.*=(.*)", newi)
             if string:
-                pollingbias="".join(string[1].rstrip().lstrip())
+                pollingbias=float("".join(string[1].rstrip().lstrip()))
                 continue
             string=re.search(".*financialpower.*=(.*)", newi)
             if string:
-                financialpower="".join(string[1].rstrip().lstrip())
+                financialpower=float("".join(string[1].rstrip().lstrip()))
                 continue
     
     populations.append(Population(currentpopulation, fullname, pollingbias, financialpower, [], []))
