@@ -189,8 +189,6 @@ class Map():
             self.colormode = colormode
             self.party = party
 
-            self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
-
             objects.append(self)
 
     def process(self):
@@ -198,11 +196,14 @@ class Map():
         global isclicked
         
         self.image = pygame.image.load(self.img)
-        self.image = pygame.transform.scale(self.image,(self.width, self.height)).convert()
+        reducesizeby=max(self.image.get_width()/self.width, self.image.get_height()/self.height)
+        self.image = pygame.transform.scale(self.image,(round(self.image.get_width()/reducesizeby), round(self.image.get_height()/reducesizeby))).convert()
+        self.newx, self.newy=round(self.x+((self.width-self.image.get_width())/2)), round(self.y+((self.height-self.image.get_height())/2))
+        self.buttonRect = pygame.Rect(self.newx, self.newy, self.image.get_width(), self.image.get_height())
         arr=pygame.PixelArray(self.image)
 
         if self.buttonRect.collidepoint(mousePos):
-            color=self.image.get_at((mousePos[0]-self.x, mousePos[1]-self.y))
+            color=self.image.get_at((mousePos[0]-self.newx, mousePos[1]-self.newy))
             if color!=(0,0,0,255):
                 [arr.replace(color, (80,80,80)) for i in self.gamedata.scenario.regions]
                 if pygame.mouse.get_pressed(num_buttons=3)[0]:
@@ -224,7 +225,7 @@ class Map():
         arr.close()
 
         #print(self.image.get_at((2, 2)))
-        screen.blit(self.image, (self.x,self.y))
+        screen.blit(self.image, (self.newx, self.newy))
 
 
 #####################################################################################
@@ -389,7 +390,8 @@ def scenariomain(scenarioname, gamedata=None, recalculate=True):
     Button(950, screen_width/(1200/480), button_size_x, button_size_y, 'Events', escape, [scenarioname, gamedata])
     Button(950, screen_width/(1200/580), button_size_x, button_size_y, 'Campaign', escape, [scenarioname, gamedata])
     Button(905, screen_width/(1200/280), screen_width/(1200/20), screen_height/(700/380), '<', addon, [scenarioname, gamedata])
-    Map(200,150,360,510, 'scenario/' + scenarioname + '/gfx/map.png', gamedata)
+    Map(0,125,900,555, 'scenario/' + scenarioname + '/gfx/map.png', gamedata)
+
     partysharechart(0, 100, 900, 25, gamedata, 'National', 'seats')
 
     for i in openwindows:
@@ -505,7 +507,7 @@ def partyview(scenarioname, gamedata, limit=None):
         Button(220,420,screen_width/(1200/350), screen_height/(700/50), lowestregion[0:15] + " (" + str(round(lowestregionpercentage, 1)) + "%)", regionview,
                [scenarioname, gamedata, lowestregion], '#003366' )
 
-        Map(650,200,360*0.9,510*0.9, 'scenario/' + scenarioname + '/gfx/map.png', gamedata, 'party', currentparty)
+        Map(600,180,360,500, 'scenario/' + scenarioname + '/gfx/map.png', gamedata, 'party', currentparty)
 
         Rectangle(990,180,screen_width/(1200/200), screen_height/(700/250), '#003366')
         Button(1000, screen_width/(1200/190), screen_width/(1200/180), screen_height/(700/50), 'General', escape, [scenarioname, gamedata])

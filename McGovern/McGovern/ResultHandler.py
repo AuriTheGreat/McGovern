@@ -4,6 +4,7 @@ from scipy.stats import norm
 import matplotlib.pyplot as plt
 import random
 import math
+from datetime import datetime
 
 #####################################################################################
 ###################################### Results ######################################
@@ -180,6 +181,8 @@ def partyregionresulthandler(scenario, issuepartyregionresults, mode='normal'):
             votes=round(sum([sum(x.partyaxes[1]) for x in issuepartyregionresults if x.region==i and x.party==j]))
             partyregionresults.append(PartyRegionResult(i,j,votes))
 
+
+
     region=partyregionresults[0].region
     partypercentages={}
 
@@ -202,7 +205,8 @@ def partyregionresulthandler(scenario, issuepartyregionresults, mode='normal'):
 
 def getpartyregionresults(scenario, mode='normal'):
     issuepartyregionresults=partyregionissuehandler(scenario, mode)
-    return partyregionresulthandler(scenario, issuepartyregionresults, mode)
+    partyregionresults=partyregionresulthandler(scenario, issuepartyregionresults, mode)
+    return partyregionresults
 
 def gettotalresults(scenario, partyregionresults):
     totalpartyresults=[]
