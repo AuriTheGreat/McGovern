@@ -217,8 +217,8 @@ class Map():
             [arr.replace(i.color, i.resultcolor) for i in self.gamedata.scenario.regions]
         elif self.colormode=='party':
             colors={}
-            for i in [i for i in self.gamedata.results.partyregionresults if i.party.fullname==self.party.fullname]:
-                multiplicator=i.percentage/max([j.percentage for j in self.gamedata.results.partyregionresults if j.party.fullname==self.party.fullname])
+            for i in [i for i in self.gamedata.polling.aggregated.partyregionresults if i.party.fullname==self.party.fullname]:
+                multiplicator=i.percentage/max([j.percentage for j in self.gamedata.polling.aggregated.partyregionresults if j.party.fullname==self.party.fullname])
                 colors[i.region.name]=tuple([max(40,j*multiplicator) for j in i.party.color])
             [arr.replace(i.color, colors[i.name]) for i in self.gamedata.scenario.regions]
 
@@ -238,11 +238,11 @@ def partysharechart(x, y, width, height, gamedata, region='National', mode='vote
 
     if region=='National':
         if mode=='votes':
-            sizes={i:i.percentage/100*width for i in gamedata.results.totalpartyresults}
+            sizes={i:i.percentage/100*width for i in gamedata.polling.aggregated.totalpartyresults}
         else:
-            sizes={i:i.seats/sum([j.seats for j in gamedata.results.totalpartyresults])*width for i in gamedata.results.totalpartyresults}
+            sizes={i:i.seats/sum([j.seats for j in gamedata.polling.aggregated.totalpartyresults])*width for i in gamedata.polling.aggregated.totalpartyresults}
     else:
-        partyregionresultslist=[j for j in gamedata.results.partyregionresults if j.region.name==region and j.votes>0]
+        partyregionresultslist=[j for j in gamedata.polling.aggregated.partyregionresults if j.region.name==region and j.votes>0]
         if mode=='votes':
             sizes={i:i.percentage/100*width for i in partyregionresultslist}
         else:
@@ -259,11 +259,11 @@ def partysharechart(x, y, width, height, gamedata, region='National', mode='vote
 
 
     if region=='National':
-        for i in gamedata.results.totalpartyresults:
+        for i in gamedata.polling.aggregated.totalpartyresults:
             Rectangle(x+reachedsize,y,sizes[i], height, i.party.color)
             reachedsize+=sizes[i]
     else:
-        partyregionresultslist=[j for j in gamedata.results.partyregionresults if j.region.name==region and j.votes>0]
+        partyregionresultslist=[j for j in gamedata.polling.aggregated.partyregionresults if j.region.name==region and j.votes>0]
         for i in partyregionresultslist:
             size=i.percentage/100*width
             Rectangle(x+reachedsize,y,sizes[i], height, i.party.color)
@@ -284,14 +284,14 @@ def parliamentarychart(x, y, width, height, gamedata, mode='westminster', ruling
 
 
     if rulingparties==None:
-        rulingparties=[gamedata.results.totalpartyresults[0].party]
+        rulingparties=[gamedata.polling.aggregated.totalpartyresults[0].party]
 
-    speaker=next((x.party for x in gamedata.results.totalpartyresults if x.party.name.lower()=="speaker" and x.seats==1), rulingparties[0])
+    speaker=next((x.party for x in gamedata.polling.aggregated.totalpartyresults if x.party.name.lower()=="speaker" and x.seats==1), rulingparties[0])
 
     if speaker not in rulingparties:
-        lengthinseats=max(sum([i.seats for i in gamedata.results.totalpartyresults if i.party in rulingparties]), sum([i.seats for i in gamedata.results.totalpartyresults if i.party not in rulingparties])-1)
+        lengthinseats=max(sum([i.seats for i in gamedata.polling.aggregated.totalpartyresults if i.party in rulingparties]), sum([i.seats for i in gamedata.polling.aggregated.totalpartyresults if i.party not in rulingparties])-1)
     else:
-        lengthinseats=max(sum([i.seats for i in gamedata.results.totalpartyresults if i.party in rulingparties]), sum([i.seats for i in gamedata.results.totalpartyresults if i.party not in rulingparties]))
+        lengthinseats=max(sum([i.seats for i in gamedata.polling.aggregated.totalpartyresults if i.party in rulingparties]), sum([i.seats for i in gamedata.polling.aggregated.totalpartyresults if i.party not in rulingparties]))
 
     radius=min(height/((columns+1.5)*2)/2, (width/(math.ceil((lengthinseats)/columns)+1))/2)
 
@@ -300,8 +300,8 @@ def parliamentarychart(x, y, width, height, gamedata, mode='westminster', ruling
     frontrowposition=[x+radius*3, y+radius*3]
     position=[0, 0]
 
-    for i in [j for j in gamedata.results.totalpartyresults if j.party in rulingparties]:
-        for j in range(next((x.seats for x in gamedata.results.totalpartyresults if i.party == x.party), None)):
+    for i in [j for j in gamedata.polling.aggregated.totalpartyresults if j.party in rulingparties]:
+        for j in range(next((x.seats for x in gamedata.polling.aggregated.totalpartyresults if i.party == x.party), None)):
             if i.party==speaker:
                 if j+1==i.seats:
                     continue
@@ -315,8 +315,8 @@ def parliamentarychart(x, y, width, height, gamedata, mode='westminster', ruling
     frontrowposition=[x+radius*3, y-radius*3]
     position=[0, 0]
 
-    for i in [j for j in gamedata.results.totalpartyresults if j.party not in rulingparties]:
-        for j in range(next((x.seats for x in gamedata.results.totalpartyresults if i.party == x.party), None)):
+    for i in [j for j in gamedata.polling.aggregated.totalpartyresults if j.party not in rulingparties]:
+        for j in range(next((x.seats for x in gamedata.polling.aggregated.totalpartyresults if i.party == x.party), None)):
             if i.party==speaker:
                 if j+1==i.seats:
                     continue
@@ -369,7 +369,7 @@ def scenariomain(scenarioname, gamedata=None, recalculate=True):
 
     if recalculate==True:
         gamedata.results=ResultHandler.getresults(gamedata.scenario)
-        gamedata.polling=ResultHandler.getpolling(gamedata.scenario, gamedata.polling)
+        gamedata.polling=ResultHandler.getpolling(gamedata, gamedata.polling, 5)
 
 
     #print(gamedata)
@@ -428,16 +428,16 @@ def regionview(scenarioname, gamedata, limit='National', page=0):
     Rectangle(70,120,screen_width/(1200/1060), screen_height/(700/50), '#003366', limit)
     Button(1140,120,screen_width/(1200/50), screen_height/(700/50), '>', regionview, [scenarioname, gamedata, regions[rightlimit]])
     if limit=='National':
-        partycount=len([j for j in gamedata.results.totalpartyresults if j.votes>0 or j.seats>0])
-        for count, i in enumerate([j for j in gamedata.results.totalpartyresults if j.votes>0 or j.seats>0]):
+        partycount=len([j for j in gamedata.polling.aggregated.totalpartyresults if j.votes>0 or j.seats>0])
+        for count, i in enumerate([j for j in gamedata.polling.aggregated.totalpartyresults if j.votes>0 or j.seats>0]):
             if page*partiesperpage<=count<(page+1)*partiesperpage:
                 Button(10,180+count%partiesperpage*60,screen_width/(1200/350), screen_height/(700/50), str(i.party.fullname), partyview, [scenarioname, gamedata, i.party.fullname], "#003366")
                 Rectangle(370,180+count%partiesperpage*60,screen_width/(1200/100), screen_height/(700/50), '#003366', str(round(i.percentage,1)) + "%")
                 Rectangle(480,180+count%partiesperpage*60,screen_width/(1200/100), screen_height/(700/50), '#003366', str(i.seats))
                 Rectangle(590,180+count%partiesperpage*60,screen_width/(1200/380), screen_height/(700/50), '#003366', f'{i.votes:,}')
     else:
-        partycount=len([j for j in gamedata.results.partyregionresults if j.region.name==limit and (j.votes>0 or j.seats>0)])
-        for count, i in enumerate([j for j in gamedata.results.partyregionresults if j.region.name==limit and (j.votes>0 or j.seats>0)]):
+        partycount=len([j for j in gamedata.polling.aggregated.partyregionresults if j.region.name==limit and (j.votes>0 or j.seats>0)])
+        for count, i in enumerate([j for j in gamedata.polling.aggregated.partyregionresults if j.region.name==limit and (j.votes>0 or j.seats>0)]):
             if page*partiesperpage<=count<(page+1)*partiesperpage:
                 Button(10,180+count%partiesperpage*60,screen_width/(1200/350), screen_height/(700/50), str(i.party.fullname), partyview, [scenarioname, gamedata, i.party.fullname], "#003366")
                 Rectangle(370,180+count%partiesperpage%partycount*60,screen_width/(1200/100), screen_height/(700/50), '#003366', str(round(i.percentage,1)) + "%")
@@ -491,14 +491,14 @@ def partyview(scenarioname, gamedata, limit=None):
     else:
         Button(220,180,screen_width/(1200/350), screen_height/(700/50), currentparty.leader.name, leaderview, [scenarioname, gamedata, currentparty], '#003366' )
     Rectangle(10,240,screen_width/(1200/200), screen_height/(700/50), '#003366', "Votes")
-    Rectangle(220,240,screen_width/(1200/250), screen_height/(700/50), '#003366', f'{next((x for x in gamedata.results.totalpartyresults if x.party == currentparty), None).votes:,}')
-    Rectangle(480,240,screen_width/(1200/90), screen_height/(700/50), '#003366', str(round(next((x for x in gamedata.results.totalpartyresults if x.party == currentparty), None).percentage,1))+"%")
+    Rectangle(220,240,screen_width/(1200/250), screen_height/(700/50), '#003366', f'{next((x for x in gamedata.polling.aggregated.totalpartyresults if x.party == currentparty), None).votes:,}')
+    Rectangle(480,240,screen_width/(1200/90), screen_height/(700/50), '#003366', str(round(next((x for x in gamedata.polling.aggregated.totalpartyresults if x.party == currentparty), None).percentage,1))+"%")
     Rectangle(10,300,screen_width/(1200/200), screen_height/(700/50), '#003366', "Seats")
     biggestregionpercentage, lowestregionpercentage = None,None
-    if next((x.votes for x in gamedata.results.totalpartyresults if x.party.fullname == limit), 0):
-        biggestregionpercentage, lowestregionpercentage=max([j.percentage for j in gamedata.results.partyregionresults if j.party.fullname==limit]), min([j.percentage for j in gamedata.results.partyregionresults if j.party.fullname==limit and j.percentage>0])
-        biggestregion, lowestregion=next((x for x in gamedata.results.partyregionresults if x.party == currentparty and x.percentage==biggestregionpercentage), None).region.name, next((x for x in gamedata.results.partyregionresults if x.party == currentparty and x.percentage==lowestregionpercentage), None).region.name
-    Rectangle(220,300,screen_width/(1200/350), screen_height/(700/50), '#003366', str(next((x for x in gamedata.results.totalpartyresults if x.party == currentparty), None).seats))
+    if next((x.votes for x in gamedata.polling.aggregated.totalpartyresults if x.party.fullname == limit), 0):
+        biggestregionpercentage, lowestregionpercentage=max([j.percentage for j in gamedata.polling.aggregated.partyregionresults if j.party.fullname==limit]), min([j.percentage for j in gamedata.polling.aggregated.partyregionresults if j.party.fullname==limit and j.percentage>0])
+        biggestregion, lowestregion=next((x for x in gamedata.polling.aggregated.partyregionresults if x.party == currentparty and x.percentage==biggestregionpercentage), None).region.name, next((x for x in gamedata.polling.aggregated.partyregionresults if x.party == currentparty and x.percentage==lowestregionpercentage), None).region.name
+    Rectangle(220,300,screen_width/(1200/350), screen_height/(700/50), '#003366', str(next((x for x in gamedata.polling.aggregated.totalpartyresults if x.party == currentparty), None).seats))
     if biggestregionpercentage!=None:
         Rectangle(10,360,screen_width/(1200/200), screen_height/(700/50), '#003366', "Strongest at")
         Button(220,360,screen_width/(1200/350), screen_height/(700/50), biggestregion[0:15] + " (" + str(round(biggestregionpercentage, 1)) + "%)", regionview,
