@@ -2,6 +2,7 @@ import tarfile
 import pyparsing
 import operator
 import datetime
+import re
 
 ops = {"+": (lambda x,y: x+y), 
    "-": (lambda x,y: x-y),
@@ -24,6 +25,7 @@ listofvariables={}
 
 def generatevariables(gamedata):
     listofvariables.update({"date": gamedata.scenario.main.currentdate})
+    """
     listofvariables.update({i.party.name+"."+"leader":i.identifier for i in gamedata.scenario.characters if i.leader==True})
     listofvariables.update({i.issue.name+'.'+ i.region.name+"."+"mean":i.mean for i in gamedata.scenario.regionissues})
     listofvariables.update({i.issue.name+'.'+ i.region.name+"."+"variance":i.variance for i in gamedata.scenario.regionissues})
@@ -32,13 +34,74 @@ def generatevariables(gamedata):
     listofvariables.update({i.issue.name+'.'+ i.party.name+"."+"variance":i.variance for i in gamedata.scenario.partyissues})
     listofvariables.update({i.population.name+'.'+ i.party.name+"."+"appeal":i.appeal for i in gamedata.scenario.partypopulations})
     listofvariables.update({i.population.name+'.'+ i.region.name+"."+"influence":i.influence for i in gamedata.scenario.regionpopulations})
+    """
 
 
 def getvariable(gamedata, value):
-    result=None
-
     if value in listofvariables:
         return listofvariables[value]
+
+    if value.count('.')==1:
+        string=re.search("(.*)\.", value)
+        if string:
+            foundstring="".join(string[1].rstrip().lstrip())
+            party=next((x for x in gamedata.scenario.parties if x.name == foundstring), None)
+            if party:
+                string=re.search("\.(.*)", value)
+                if string:
+                    foundstring="".join(string[1].rstrip().lstrip())
+                    if foundstring=="leader":
+                        return party.leader.identifier
+    elif value.count('.')==2:
+        string=re.search("(.*)\..*\.", value)
+        if string:
+            foundstring="".join(string[1].rstrip().lstrip())
+            issue=next((x for x in gamedata.scenario.issues if x.name == foundstring), None)
+            if issue:
+                string=re.search("\.(.*)\.", value)
+                if string:
+                    foundstring="".join(string[1].rstrip().lstrip())
+                    region=next((x for x in gamedata.scenario.regions if x.name == foundstring), None)
+                    if region:
+                        string=re.search("\..*\.(.*)", value)
+                        if string:
+                            foundstring="".join(string[1].rstrip().lstrip())
+                            if foundstring=='mean':
+                                return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).mean
+                            elif foundstring=='variance':
+                                return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).variance
+                            elif foundstring=='importance':
+                                return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).importance
+                    party=next((x for x in gamedata.scenario.parties if x.name == foundstring), None)
+                    if party:
+                        string=re.search("\..*\.(.*)", value)
+                        if string:
+                            foundstring="".join(string[1].rstrip().lstrip())
+                            if foundstring=='mean':
+                                return next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).mean
+                            elif foundstring=='variance':
+                                return next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).variance
+            population=next((x for x in gamedata.scenario.populations if x.name == foundstring), None)
+            if population:
+                string=re.search("\.(.*)\.", value)
+                if string:
+                    foundstring="".join(string[1].rstrip().lstrip())
+                    region=next((x for x in gamedata.scenario.regions if x.name == foundstring), None)
+                    if region:
+                        string=re.search("\..*\.(.*)", value)
+                        if string:
+                            foundstring="".join(string[1].rstrip().lstrip())
+                            if foundstring=='influence':
+                                return next((x for x in gamedata.scenario.regionpopulations if x.population == population and x.region==region), None).influence
+                    party=next((x for x in gamedata.scenario.parties if x.name == foundstring), None)
+                    if party:
+                        string=re.search("\..*\.(.*)", value)
+                        if string:
+                            foundstring="".join(string[1].rstrip().lstrip())
+                            if foundstring=='appeal':
+                                return next((x for x in gamedata.scenario.partypopulations if x.population == population and x.party==party), None).appeal
+
+
 
 
     try:
@@ -63,7 +126,7 @@ def calculatequerydeeper(gamedata, parsedtext):
                         parsedtext[count]=[0, parsedtext[count], parsedtext[count+1]]
                         del parsedtext[count+1]
                     elif i[0]=='.':
-                        parsedtext[count]=[parsedtext[count-1] + parsedtext[count] + parsedtext[count+1]]
+                        parsedtext[count]=''.join([parsedtext[count-1] + parsedtext[count] + parsedtext[count+1]])
                         del parsedtext[count+1]
                         del parsedtext[count-1]
                     else:

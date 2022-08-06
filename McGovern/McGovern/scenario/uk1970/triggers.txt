@@ -1,5 +1,5 @@
 worldcup:
 	if:
-		date>"1970-04-01" and date<"1970-09-02" and labour.leader==wilson
+		date>"1970-04-01" and date<"1970-09-02" and labour.leader==wilson and wealthy.labour.appeal==2
 	trigger:
 		event.worldcup
