@@ -1,5 +1,17 @@
 worldcup:
+	triggerable=True
+	triggeronce=True
+	chance=100%
 	if:
-		date>"1970-04-01" and date<"1970-09-02" and labour.leader==wilson and wealthy.labour.appeal==2
+		date>"1970-04-01" and date<"1970-09-02" and labour.leader==wilson
 	trigger:
 		event.worldcup
+
+titanic:
+	triggerable=True
+	triggeronce=True
+	chance=100%
+	if:
+		date>"1966-04-01" and date<"1970-09-02" and labour.leader==wilson
+	trigger:
+		event.titanic

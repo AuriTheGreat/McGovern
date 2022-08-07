@@ -2,11 +2,10 @@ worldcup:
 	name=World Cup
 	description=As defending world champions, England's venture in world cup is attracting a much keener public interest than the general election. 
 	effects:
-		immigration.mean +0.3
+		immigration.London.mean+0.3
 
 titanic:
 	name=Titanic
 	description=Titanic has sunk
 	effects:
-		immigration.mean +0.8
-		love.mean +0.8
+		immigration.London.mean+0.8

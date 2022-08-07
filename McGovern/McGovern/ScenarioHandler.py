@@ -1,3 +1,4 @@
+from operator import truediv
 from pickle import TRUE
 import numpy as np
 import re
@@ -848,10 +849,13 @@ def gettriggers(scenarioname, events, decisions):
     triggers=[]
 
     class Trigger:
-      def __init__(self, identifier, condition, triggered):
+      def __init__(self, identifier, condition, triggered, triggerable, triggeronce, chance):
         self.identifier = identifier
         self.condition = condition
         self.triggered = triggered
+        self.triggerable = triggerable
+        self.triggeronce = triggeronce
+        self.chance = chance
     
     
     f = open ( 'scenario/' + scenarioname + '/triggers.txt' , 'r')
@@ -859,7 +863,7 @@ def gettriggers(scenarioname, events, decisions):
     l = np.array([ line.split() for line in f], dtype=object)
     
     currenttrigger=None
-    condition, triggered="",[]
+    condition, triggered, triggerable, triggeronce, chance ="",[], True, True, 0
     conditionreader, triggeredreader=False, False
     
     for i in l:
@@ -873,9 +877,9 @@ def gettriggers(scenarioname, events, decisions):
                 triggeredreader=True
             else:
                 if currenttrigger!=None:
-                    triggers.append(Trigger(currenttrigger, condition, triggered))
+                    triggers.append(Trigger(currenttrigger, condition, triggered, triggerable, triggeronce, chance))
                 currenttrigger="".join(string[1].rstrip().lstrip())
-                condition, triggered="",[]
+                condition, triggered, triggerable, triggeronce, chance ="",[], True, True, 0
         else:
             if conditionreader==True:
                 string=re.search("(.*)", newi)
@@ -895,13 +899,32 @@ def gettriggers(scenarioname, events, decisions):
                             triggered.append(next((x for x in events if x.identifier == event), None))
                         elif typeoftrigger=='decision':
                             decision=re.search("\.(.*)", string)
-                            decision="".join(event[1].rstrip().lstrip())
+                            decision="".join(decision[1].rstrip().lstrip())
                             triggered.append(next((x for x in decisions if x.identifier == decision), None))
 
             else:
-                continue
+                string=re.search(".*triggerable.*=(.*)", newi)
+                if string:
+                    word="".join(string[1].rstrip().lstrip())
+                    if word=="True":
+                        triggerable=True
+                    elif word=="False":
+                        triggerable=False
+                    continue
+                string=re.search(".*triggeronce.*=(.*)", newi)
+                if string:
+                    word="".join(string[1].rstrip().lstrip())
+                    if word=="True":
+                        triggeronce=True
+                    elif word=="False":
+                        triggeronce=False
+                    continue
+                string=re.search(".*chance.*=(.*)%", newi)
+                if string:
+                    chance=float("".join(string[1].rstrip().lstrip()))/100
+                    continue
     
-    triggers.append(Trigger(currenttrigger, condition, triggered))
+    triggers.append(Trigger(currenttrigger, condition, triggered, triggerable, triggeronce, chance))
 
     return triggers
 

@@ -1,8 +1,8 @@
-import tarfile
 import pyparsing
 import operator
 import datetime
 import re
+import random
 
 ops = {"+": (lambda x,y: x+y), 
    "-": (lambda x,y: x-y),
@@ -37,7 +37,8 @@ def generatevariables(gamedata):
     """
 
 
-def getvariable(gamedata, value):
+def variablehandler(gamedata, value, mode='get', variable=None, operator=None):
+    #modes: 'get', 'set'
     if value in listofvariables:
         return listofvariables[value]
 
@@ -51,7 +52,25 @@ def getvariable(gamedata, value):
                 if string:
                     foundstring="".join(string[1].rstrip().lstrip())
                     if foundstring=="leader":
-                        return party.leader.identifier
+                        if mode=='get':
+                            return party.leader.identifier
+                        elif mode=='set':
+                            if operator=='=':
+                                pass #Write the function to replace party leader
+                    if foundstring=="power":
+                        if mode=='get':
+                            return party.power
+                        elif mode=='set':
+                            if operator=='=':
+                                party.power=float(variable)
+                                return None
+                            elif operator=='+':
+                                party.power+=float(variable)
+                                return None
+                            elif operator=='-':
+                                party.power-=float(variable)
+                                return None
+                        
     elif value.count('.')==2:
         string=re.search("(.*)\..*\.", value)
         if string:
@@ -67,20 +86,76 @@ def getvariable(gamedata, value):
                         if string:
                             foundstring="".join(string[1].rstrip().lstrip())
                             if foundstring=='mean':
-                                return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).mean
+                                if mode=='get':
+                                    return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).mean
+                                elif mode=='set':
+                                    if operator=='=':
+                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).mean=float(variable)
+                                        return None
+                                    elif operator=='+':
+                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).mean+=float(variable)
+                                        return None
+                                    elif operator=='-':
+                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).mean-=float(variable)
+                                        return None
                             elif foundstring=='variance':
-                                return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).variance
+                                if mode=='get':
+                                    return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).variance
+                                elif mode=='set':
+                                    if operator=='=':
+                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).variance=float(variable)
+                                        return None
+                                    elif operator=='+':
+                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).variance+=float(variable)
+                                        return None
+                                    elif operator=='-':
+                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).variance-=float(variable)
+                                        return None
                             elif foundstring=='importance':
-                                return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).importance
+                                if mode=='get':
+                                    return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).importance
+                                elif mode=='set':
+                                    if operator=='=':
+                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).importance=float(variable)
+                                        return None
+                                    elif operator=='+':
+                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).importance+=float(variable)
+                                        return None
+                                    elif operator=='-':
+                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).importance-=float(variable)
+                                        return None
+                    
                     party=next((x for x in gamedata.scenario.parties if x.name == foundstring), None)
                     if party:
                         string=re.search("\..*\.(.*)", value)
                         if string:
                             foundstring="".join(string[1].rstrip().lstrip())
                             if foundstring=='mean':
-                                return next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).mean
+                                if mode=='get':
+                                    return next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).mean
+                                elif mode=='set':
+                                    if operator=='=':
+                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).mean=float(variable)
+                                        return None
+                                    elif operator=='+':
+                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).mean+=float(variable)
+                                        return None
+                                    elif operator=='-':
+                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).mean-=float(variable)
+                                        return None
                             elif foundstring=='variance':
-                                return next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).variance
+                                if mode=='get':
+                                    return next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).variance
+                                elif mode=='set':
+                                    if operator=='=':
+                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).variance=float(variable)
+                                        return None
+                                    elif operator=='+':
+                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).variance+=float(variable)
+                                        return None
+                                    elif operator=='-':
+                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).variance-=float(variable)
+                                        return None
             population=next((x for x in gamedata.scenario.populations if x.name == foundstring), None)
             if population:
                 string=re.search("\.(.*)\.", value)
@@ -92,17 +167,36 @@ def getvariable(gamedata, value):
                         if string:
                             foundstring="".join(string[1].rstrip().lstrip())
                             if foundstring=='influence':
-                                return next((x for x in gamedata.scenario.regionpopulations if x.population == population and x.region==region), None).influence
+                                if mode=='get':
+                                    return next((x for x in gamedata.scenario.regionpopulations if x.population == population and x.region==region), None).influence
+                                elif mode=='set':
+                                    if operator=='=':
+                                        next((x for x in gamedata.scenario.regionpopulations if x.population == population and x.region==region), None).influence=float(variable)
+                                        return None
+                                    elif operator=='+':
+                                        next((x for x in gamedata.scenario.regionpopulations if x.population == population and x.region==region), None).influence+=float(variable)
+                                        return None
+                                    elif operator=='-':
+                                        next((x for x in gamedata.scenario.regionpopulations if x.population == population and x.region==region), None).influence-=float(variable)
+                                        return None
                     party=next((x for x in gamedata.scenario.parties if x.name == foundstring), None)
                     if party:
                         string=re.search("\..*\.(.*)", value)
                         if string:
                             foundstring="".join(string[1].rstrip().lstrip())
                             if foundstring=='appeal':
-                                return next((x for x in gamedata.scenario.partypopulations if x.population == population and x.party==party), None).appeal
-
-
-
+                                if mode=='get':
+                                    return next((x for x in gamedata.scenario.partypopulations if x.population == population and x.party==party), None).appeal
+                                elif mode=='set':
+                                    if operator=='=':
+                                        next((x for x in gamedata.scenario.partypopulations if x.population == population and x.party==party), None).appeal=float(variable)
+                                        return None
+                                    elif operator=='+':
+                                        next((x for x in gamedata.scenario.partypopulations if x.population == population and x.party==party), None).appeal+=float(variable)
+                                        return None
+                                    elif operator=='-':
+                                        next((x for x in gamedata.scenario.partypopulations if x.population == population and x.party==party), None).appeal-=float(variable)
+                                        return None
 
     try:
         return datetime.datetime.strptime(str(value), '"%Y-%m-%d"')
@@ -161,7 +255,7 @@ def calculatequerydeeper(gamedata, parsedtext):
                     value=ops[action] (value,float(i))
                     print(value)
             else:
-                newvalue=getvariable(gamedata, i)
+                newvalue=variablehandler(gamedata, i)
                 if newvalue!=None:
                     if action==None:
                         value=newvalue
@@ -191,13 +285,45 @@ def checkcondition(gamedata, condition):
 def checktriggers(gamedata):
     triggeredevents=[]
 
-    [triggeredevents.extend(i.triggered) for i in gamedata.scenario.triggers if checkcondition(gamedata, i.condition)==True]
+    triggeredtriggers=[i for i in gamedata.scenario.triggers if i.triggerable==True and checkcondition(gamedata, i.condition)==True and random.uniform(0, 1)<=i.chance]
+    for i in triggeredtriggers:
+        if i.triggeronce==True:
+            i.triggerable=False
+
+    [triggeredevents.extend(i.triggered) for i in triggeredtriggers]
 
     triggeredevents=set(triggeredevents)
 
     return triggeredevents
 
+def executeeffect(gamedata, effect):
+    print(effect)
+    operator, value=None, None
+    string=re.search(".*\+(.*)", effect)
+    if string:
+        value="".join(string[1].rstrip().lstrip())
+        operator="+"
+    string=re.search(".*\-(.*)", effect)
+    if string:
+        value="".join(string[1].rstrip().lstrip())
+        operator="-"
+    string=re.search(".*\=(.*)", effect)
+    if string:
+        value="".join(string[1].rstrip().lstrip())
+        operator="="
+
+    string=re.search("(.*)[\+\-\=].*", effect)
+    if string:
+        variable="".join(string[1].rstrip().lstrip())
+
+    variablehandler(gamedata, variable, "set", value, operator)
+
+
+def executeevents(gamedata, triggeredevents):
+    [executeeffect(gamedata, j) for i in triggeredevents for j in i.effects]
+
 def main(gamedata):
     generatevariables(gamedata)
     triggeredevents=checktriggers(gamedata)
+    executeevents(gamedata, triggeredevents)
     print(triggeredevents)
