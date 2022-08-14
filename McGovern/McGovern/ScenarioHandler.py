@@ -795,9 +795,10 @@ def getevents(scenarioname):
     events=[]
 
     class Event:
-      def __init__(self, identifier, name, description, effects):
+      def __init__(self, identifier, name, hidden, description, effects):
         self.identifier = identifier
         self.name = name
+        self.hidden = hidden
         self.description = description
         self.effects = effects
     
@@ -807,39 +808,52 @@ def getevents(scenarioname):
     l = np.array([ line.split() for line in f], dtype=object)
     
     currentevent=None
-    name, description, effects=None,None,[]
-    effectsreader=False
+    name, description, effects, hidden=None,[],[], False
+    descriptionreader=effectsreader=False
     
     for i in l:
         newi=" ".join(i)
         string=re.search("(.*):", newi)
         if string:
-            effectsreader=False
-            if string.group(1)=='effects':
+            descriptionreader=effectsreader=False
+            if string.group(1)=='description':
+                descriptionreader=True
+            elif string.group(1)=='effects':
                 effectsreader=True
             else:
                 if currentevent!=None:
-                    events.append(Event(currentevent, name, description, effects))
+                    events.append(Event(currentevent, name, hidden, description, effects))
                 currentevent="".join(string[1].rstrip().lstrip())
-                name, description, effects=None,None,[]
+                name, description, effects, hidden=None,[],[], False
         else:
             if effectsreader==True:
                 string=re.search("(.*)", newi)
                 if string:
                     effects.append("".join(string[1].rstrip().lstrip()))
+            elif descriptionreader==True:
+                string=re.search("(.*)", newi)
+                if string:
+                    description.append("".join(string[1].rstrip().lstrip()))
             else:
                 string=re.search(".*name.*=(.*)", newi)
                 if string:
                     name="".join(string[1].rstrip().lstrip())
                     continue
-                string=re.search(".*description.*=(.*)", newi)
+                string=re.search(".*hidden.*=(.*)", newi)
                 if string:
-                    description="".join(string[1].rstrip().lstrip())
+                    text="".join(string[1].rstrip().lstrip())
+                    if text=="True":
+                        hidden=True
+                    else:
+                        hidden=False
                     continue
 
     
-    events.append(Event(currentevent, name, description, effects))
+    events.append(Event(currentevent, name, hidden, description, effects))
 
+    for i in events:
+        print(i.description)
+     
     return events
 
 def getdecisions(scenarioname):

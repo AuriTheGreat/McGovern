@@ -39,6 +39,7 @@ def generatevariables(gamedata):
 
 def variablehandler(gamedata, value, mode='get', variable=None, operator=None):
     #modes: 'get', 'set'
+
     if value in listofvariables:
         return listofvariables[value]
 
@@ -297,6 +298,8 @@ def checktriggers(gamedata):
     return triggeredevents
 
 def executeeffect(gamedata, effect):
+    if effect=="":
+        return
     print(effect)
     operator, value=None, None
     string=re.search(".*\+(.*)", effect)

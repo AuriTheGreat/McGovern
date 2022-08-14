@@ -15,3 +15,12 @@ titanic:
 		date>"1966-04-01" and date<"1970-09-02" and labour.leader==wilson
 	trigger:
 		event.titanic
+
+devaluation:
+	triggerable=True
+	triggeronce=True
+	chance=100%
+	if:
+		date>"1967-11-16"
+	trigger:
+		event.devaluation

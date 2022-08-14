@@ -1,6 +1,6 @@
 labour:
 	fullname=Labour Party
-	power=500
+	power=600
 	color=220, 36, 31
 	aiideologies:
 		socialdemocracy

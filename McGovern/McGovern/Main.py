@@ -5,6 +5,7 @@ import TriggerHandler
 import os
 import math
 import pygame
+import pygame.freetype
 from pygame.locals import *
 
 class GameData:
@@ -26,13 +27,24 @@ def getvalidscenarios(scenarios):
 #####################################################################################
 
 class Rectangle():
-    def __init__(self, x, y, width, height, color, text=None):
+    def __init__(self, x, y, width, height, color, text="", fontstyle=None, fontsize=None):
             self.x = x
             self.y = y
             self.width = width
             self.height = height
             self.color = color
             self.text = text
+
+            if fontstyle!=None:
+                self.fontstyle=fontstyle
+            else:
+                self.fontstyle=mainfontstyle
+            if fontsize!=None:
+                self.fontsize=int(screen_height/(700/fontsize))
+            else:
+                self.fontsize=mainfontsize
+
+            self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)            
 
             objects.append(self)
 
@@ -43,12 +55,9 @@ class Rectangle():
     def process(self):
         screen.blit(self.Surface, self.Rect)
 
-        textsurface = font.render(self.text, True, (255,255,255))
-
-        self.Surface.blit(textsurface, [
-            self.width/2 - textsurface.get_rect().width/2,
-            self.height/2 - textsurface.get_rect().height/2
-        ])
+        text_rect = mainfont.get_rect(self.text)
+        text_rect.center = self.Surface.get_rect().center
+        self.font.render_to(self.Surface, text_rect.topleft, self.text, (255,255,255))
 
         screen.blit(self.Surface, (self.x,self.y))
 
@@ -83,7 +92,7 @@ class Image():
         
 
 class Button():
-    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, paramsFunction=[], color="#250045", onePress=False):
+    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, paramsFunction=[], color="#250045", onePress=False, fontstyle=None, fontsize=None):
         self.x = x
         self.y = y
         self.width = width
@@ -92,13 +101,25 @@ class Button():
         self.paramsFunction = paramsFunction
         self.onePress = onePress
         self.color=color
+        self.buttonText=buttonText
 
         self.buttonSurface = pygame.Surface((self.width, self.height))
         self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
 
-        self.buttonSurf = font.render(buttonText, True, (255, 255, 255))
+        #self.buttonSurf = mainfont.render(buttonText, True, (255, 255, 255))
 
         self.alreadyPressed = False
+
+        if fontstyle!=None:
+            self.fontstyle=fontstyle
+        else:
+            self.fontstyle=mainfontstyle
+        if fontsize!=None:
+            self.fontsize=int(screen_height/(700/fontsize))
+        else:
+            self.fontsize=mainfontsize
+
+        self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)
 
         objects.append(self)
 
@@ -128,15 +149,14 @@ class Button():
                 self.alreadyPressed = False
                 isclicked=False
 
-        self.buttonSurface.blit(self.buttonSurf, [
-            self.buttonRect.width/2 - self.buttonSurf.get_rect().width/2,
-            self.buttonRect.height/2 - self.buttonSurf.get_rect().height/2
-        ])
+        text_rect = mainfont.get_rect(self.buttonText)
+        text_rect.center = self.buttonSurface.get_rect().center
+        self.font.render_to(self.buttonSurface, text_rect.topleft, self.buttonText, (255,255,255))
 
         screen.blit(self.buttonSurface, self.buttonRect)
 
 class ImageButton():
-    def __init__(self, x, y, width, height, img, buttonText='Button', onclickFunction=None, paramsFunction=[]):
+    def __init__(self, x, y, width, height, img, buttonText='Button', onclickFunction=None, paramsFunction=[], fontstyle=None, fontsize=None):
             self.x = x
             self.y = y
             self.width = width
@@ -147,6 +167,17 @@ class ImageButton():
             self.paramsFunction=paramsFunction
 
             self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
+
+            if fontstyle!=None:
+                self.fontstyle=fontstyle
+            else:
+                self.fontstyle=mainfontstyle
+            if fontsize!=None:
+                self.fontsize=int(screen_height/(700/fontsize))
+            else:
+                self.fontsize=mainfontsize
+
+            self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)
 
             objects.append(self)
 
@@ -168,15 +199,11 @@ class ImageButton():
             else:
                 isclicked=False
 
-        textsurface = font.render(self.buttonText, True, (255,255,255))
-
-        image.blit(textsurface, [
-            self.width/2 - textsurface.get_rect().width/2,
-            self.height/2 - textsurface.get_rect().height/2
-        ])
+        text_rect = mainfont.get_rect(self.buttonText)
+        text_rect.center = image.get_rect().center
+        self.font.render_to(image, text_rect.topleft, self.buttonText, (255,255,255))
 
         screen.blit(image, (self.x,self.y))
-        #screen.blit(textsurface, (self.x+self.width/2,self.y+self.height/2))
 
 class Map():
     def __init__(self, x, y, width, height, img, gamedata, colormode='main', party=None):
@@ -574,17 +601,18 @@ def issueview(scenarioname, gamedata, issue=None, region=None):
         regionissue=next((x for x in gamedata.scenario.regionissues if x.issue.fullname == issue and x.region.name==region), None)
         #Rectangle(400+regionissue.mean*100,340,screen_width/(1200/(100*regionissue.variance)), screen_height/(700/10), (200, 200, 200))
         for count, i in enumerate(reversed([j for j in gamedata.scenario.partyissues if j.issue.fullname==issue])):
-            Rectangle(400+i.mean*100,350-count*10,screen_width/(1200/(100*i.variance)), screen_height/(700/10), i.party.color)
-        Rectangle(400+regionissue.mean*100,350-len(gamedata.scenario.parties)*10,screen_width/(1200/(100*regionissue.variance)), screen_height/(700/10), (200, 200, 200))
+            Rectangle(0+(i.mean+5)*100-50*i.variance,350-count*10,screen_width/(1200/(100*i.variance)), screen_height/(700/10), i.party.color)
+        Rectangle(100+(regionissue.mean+5)*100,350-len(gamedata.scenario.parties)*10,screen_width/(1200/(100*regionissue.variance)), screen_height/(700/10), (200, 200, 200))
+        Rectangle(100,350-(len(gamedata.scenario.parties)+1)*10,screen_width/(1200/(100*10)), screen_height/(700/10), (200, 240, 200))
 
 
-
+    """
     Rectangle(990,180,screen_width/(1200/200), screen_height/(700/250), '#003366')
     Button(1000, screen_width/(1200/190), screen_width/(1200/180), screen_height/(700/50), 'General', regionview, [scenarioname, gamedata, region])
     Button(1000, screen_width/(1200/250), screen_width/(1200/180), screen_height/(700/50), 'Issues', issueview, [scenarioname, gamedata, issue, region])
     Button(1000, screen_width/(1200/310), screen_width/(1200/180), screen_height/(700/50), 'Influence', escape, [scenarioname, gamedata])
     Button(1000, screen_width/(1200/370), screen_width/(1200/180), screen_height/(700/50), 'Polling', escape, [scenarioname, gamedata])
-
+    """
 
 def nextturn(scenarioname, gamedata):
     objects.clear()
@@ -630,7 +658,9 @@ if __name__ == "__main__":
     screen_width, screen_height = 1200, 700
     screen = pygame.display.set_mode((screen_width, screen_height))
 
-    font = pygame.font.SysFont('Arial', int(screen_height/(700/40)))
+    mainfontstyle='Arial'
+    mainfontsize=int(screen_height/(700/40))
+    mainfont = pygame.freetype.SysFont(mainfontstyle, mainfontsize)
 
     objects = []
     openwindows = []

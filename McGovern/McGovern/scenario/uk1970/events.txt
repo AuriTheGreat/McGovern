@@ -1,11 +1,32 @@
 worldcup:
 	name=World Cup
-	description=As defending world champions, England's venture in world cup is attracting a much keener public interest than the general election. 
+	hidden=False
+	description:
+		As defending world champions, England's venture in world cup 
+		is attracting a much keener public interest than the general election. 
 	effects:
 		immigration.London.mean+0.3
 
 titanic:
 	name=Titanic
-	description=Titanic has sunk
+	hidden=False
+	description:
+		Titanic has sunk
 	effects:
 		immigration.London.mean+0.8
+
+devaluation:
+	name=Devaluation
+	hidden=False
+	description:
+		When Labour, led by Harold Wilson, took office in October 1964, it was immediately faced 
+		with a deficit of £800 million, which contributed to a series of sterling crises. 
+		A possible solution was to devalue the pound against other currencies to make imports 
+		more expensive (which meant more inflation), but exports cheaper, causing an increase.
+
+		By the summer of 1966, the pressure on sterling was acute but Wilson was determined to 
+		resist devaluation. To him the pound was a symbol of national status, of Britain’s role 
+		in the world as a key player. On 12 July 1966 the Cabinet rejected the devaluation option 
+		and agreed to a tough package of deflation and austerity instead.
+	effects:
+		labour.power-100
