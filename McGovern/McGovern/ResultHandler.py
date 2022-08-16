@@ -255,9 +255,14 @@ class Polling:
         self.aggregated=aggregated
         self.polls=polls
 
+class Poll(Results):
+    def __init__(self, scenario, date, partyregionresults=None, totalpartyresults=None):
+        super().__init__(scenario, partyregionresults, totalpartyresults)
+        self.date=date
+
 
 def getnewpoll(gamedata):
-    poll=Results(gamedata.scenario)
+    poll=Poll(gamedata.scenario, gamedata.scenario.main.currentdate)
     poll.partyregionresults=[]
 
     #randomizing percentages
@@ -283,7 +288,7 @@ def getnewpoll(gamedata):
     return poll
 
 def aggregatepolls(gamedata, polling):
-    poll=Results(gamedata.scenario)
+    poll=Poll(gamedata.scenario, gamedata.scenario.main.currentdate)
     poll.partyregionresults=[]
 
     #x = np.linspace(1,len([j for i in polling.polls for j in i.partyregionresults]),len([j for i in polling.polls for j in i.partyregionresults]))
@@ -321,5 +326,15 @@ def getpolling(gamedata, polling=None, count=1):
         polling.polls.append(getnewpoll(gamedata))
 
     polling.aggregated=aggregatepolls(gamedata, polling)
+
+
+    #Sort polls by current winner
+    regionsort=[str(i.party.fullname+"-"+i.region.name) for i in polling.aggregated.partyregionresults]
+    totalsort=[str(i.party.fullname) for i in polling.aggregated.totalpartyresults]
+    
+    for i in polling.polls:
+        i.partyregionresults=sorted(i.partyregionresults, key=lambda x: regionsort.index(str(x.party.fullname+"-"+x.region.name)))
+        i.totalpartyresults=sorted(i.totalpartyresults, key=lambda x: totalsort.index(str(x.party.fullname)))
+
 
     return polling
