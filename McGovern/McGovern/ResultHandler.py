@@ -240,7 +240,7 @@ def getresults(scenario):
     results.partyregionresults=getpartyregionresults(scenario)
     results.totalpartyresults=gettotalresults(scenario, results.partyregionresults)
 
-    #results.printresults()
+    results.printresults()
     return results
 
 
@@ -268,7 +268,8 @@ def getnewpoll(gamedata):
     #randomizing percentages
     for i in gamedata.results.partyregionresults:
         pollingbias=sum([x.influence/sum([k.influence for k in gamedata.scenario.regionpopulations if x.region==i.region])*y.appeal for x in gamedata.scenario.regionpopulations for y in gamedata.scenario.partypopulations if x.region==i.region and x.population==y.population and i.party==y.party])
-        randomvalue=random.uniform(0.85, 1+pollingbias)
+        #randomvalue=random.uniform(0.85, 1+pollingbias)
+        randomvalue=random.triangular(0.7+pollingbias, 1+pollingbias, 1.3+pollingbias)
         poll.partyregionresults.append(PartyRegionResult(i.region, i.party, i.votes*randomvalue, 0, i.percentage*randomvalue))
 
     #fixing percentages so they add to 1
