@@ -19,9 +19,9 @@ class Results:
         self.totalpartyresults=totalpartyresults
 
     def printresults(self):
-        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
         print("|", "RESULTS".center(93), "|")
-        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
         print("|", "Party".center(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
         
         region=None
@@ -29,14 +29,14 @@ class Results:
         
         for i in self.partyregionresults:
             if i.region!=region:
-                print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+                print("+" + "".join(["-" for c in range(95)]) + "+")
                 if region!=None:
                     print("|", "Total".rjust(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
-                    print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+                    print("+" + "".join(["-" for c in range(95)]) + "+")
                     print("|", "".rjust(48), "|", f'{regionvotes:,}'[0:20].center(20), "|", "100.0%".center(10), "|", str(region.seats).center(6), "|")
-                    print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+                    print("+" + "".join(["-" for c in range(95)]) + "+")
                 print("|", i.region.name.center(93), "|")
-                print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+                print("+" + "".join(["-" for c in range(95)]) + "+")
                 region=i.region
                 regionvotes=round(sum([i.votes for i in self.partyregionresults if i.region==region]))
             if i.votes>0 or i.percentage>0:
@@ -44,24 +44,24 @@ class Results:
                       str(str(round(i.percentage,1))+"%")[0:10].center(10), "|", 
                       str(i.seats)[0:6].center(6), "|")
         
-        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
         print("|", "Total".rjust(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
-        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
         print("|", "".rjust(48), "|", f'{regionvotes:,}'[0:20].center(20), "|", "100.0%".center(10), "|", str(i.region.seats).center(6), "|")
-        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
 
         #Total
-        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
         print("|", "TOTAL".center(93), "|")
-        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
         print("|", "Party".center(48), "|", "Votes".center(20), "|", "Percentage".center(10), "|", "Seats".center(6), "|")
-        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
 
         for i in self.totalpartyresults:
             print("|", i.party.fullname[0:48].rjust(48), "|", f'{(i.votes):,}'[0:20].center(20), "|",
                   str(str(round(i.percentage,1))+"%")[0:10].center(10), "|", 
                   str(i.seats)[0:6].center(6), "|")
-        print("+" + "".join([chr(0x2015) for c in range(95)]) + "+")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
 
 
 class PartyRegionResult:

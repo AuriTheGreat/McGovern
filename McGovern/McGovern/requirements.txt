@@ -20,3 +20,7 @@ zope.interface==5.4.0
 pandas==1.4.3
 patsy==0.5.2
 statsmodels==0.13.2
+altgraph==0.17.2
+future==0.18.2
+pefile==2022.5.30
+pywin32-ctypes==0.2.0
