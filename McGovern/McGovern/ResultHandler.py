@@ -154,6 +154,10 @@ def partyregionresulthandler(scenario, issuepartyregionresults=None, mode='norma
         for j in partypercentages:
             partyshares[j]=(0.00104*(partypercentages[j]*100)**2.8+0.17)/100
         for j in partyshares:
+            """
+            print(partyshares[j], sum(partyshares.values()), region.seats)
+            print((partyshares[j]/sum(partyshares.values()))*region.seats)
+            print(round((partyshares[j]/sum(partyshares.values()))*region.seats))"""
             partyseats[j]=round((partyshares[j]/sum(partyshares.values()))*region.seats)
         partyseats=calculationbalancer(partyshares, partyseats, region.seats-sum([x.guaranteedseats for x in scenario.partyregions if x.region == region]))
         for j in partyregionresults:
@@ -240,7 +244,7 @@ def getresults(scenario):
     results.partyregionresults=getpartyregionresults(scenario)
     results.totalpartyresults=gettotalresults(scenario, results.partyregionresults)
 
-    results.printresults()
+    #results.printresults()
     return results
 
 
@@ -300,7 +304,7 @@ def aggregatepolls(gamedata, polling):
         x=range(len(y))
         lowess = sm.nonparametric.lowess(y, x, frac=0.6)
 
-        poll.partyregionresults.append(PartyRegionResult(k.region, k.party, round(lowess[len(y)-1][1]), 0, 0))
+        poll.partyregionresults.append(PartyRegionResult(k.region, k.party, max(0,round(lowess[len(y)-1][1])), 0, 0))
 
         """
         print(y)

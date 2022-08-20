@@ -184,8 +184,18 @@ def getmain(scenarioname, base):
         def __init__(self, currentdate, turnlength):
             self.currentdate = currentdate
             self.turnlength = turnlength
+
         def newturn(self):
             self.currentdate+=self.turnlength
+
+        def validvariables(self):
+            return {"currentdate": "date"}
+        
+        def getvariable(self, attr):
+            return super(Main, self).__getattribute__(attr)
+    
+        def setvariable(self, attr, newvalue):
+            object.__setattr__(self, attr, newvalue)
 
     currentdate=base.startdate
     turnlength=(base.enddate-currentdate)/base.turns
@@ -237,7 +247,7 @@ def getissues(scenarioname):
     
     issues.append(Issue(currentissue, fullname, levels, [], []))
 
-    return issues
+    return np.array(issues)
 
 def getpopulations(scenarioname):
     populations=[]
@@ -283,7 +293,7 @@ def getpopulations(scenarioname):
     
     populations.append(Population(currentpopulation, fullname, pollingbias, financialpower, [], []))
 
-    return populations
+    return np.array(populations)
 
 def getregions(scenarioname, base):
     regions=[]
@@ -350,7 +360,7 @@ def getregions(scenarioname, base):
 
 
     regions.sort(key=lambda x: x.population, reverse=True)
-    return regions
+    return np.array(regions)
 
 def getparties(scenarioname):
     parties=[]
@@ -365,6 +375,28 @@ def getparties(scenarioname):
         self.ideologies = ideologies
         self.issues = issues
         self.populations = populations
+
+    
+      def validvariables(self):
+          #The key is the name of the attribute. The value describes how the variable is formatted.
+          return {"leader": self.name+".leader", "power": self.name+".power"}
+      
+      def getvariable(self, attr):
+          if attr=="leader":
+            return super(Party, self).__getattribute__(attr).identifier
+          else:
+            return super(Party, self).__getattribute__(attr)
+    
+      def setvariable(self, attr, variable, operator):
+          if attr=="leader":
+              pass
+          else:
+            if operator=="+":
+                object.__setattr__(self, attr, super(Party, self).__getattribute__(attr)+float(variable))
+            elif operator=="-":
+                object.__setattr__(self, attr, super(Party, self).__getattribute__(attr)-float(variable))
+            elif operator=="=":
+                object.__setattr__(self, attr, float(variable))
     
     
     f = open ( 'scenario/' + scenarioname + '/parties.txt' , 'r')
@@ -420,7 +452,7 @@ def getparties(scenarioname):
     
     parties.append(Party(currentparty, fullname, power, color, ideologies))
 
-    return parties
+    return np.array(parties)
 
 def getcharacters(scenarioname, parties):
     characters=[]
@@ -489,7 +521,7 @@ def getcharacters(scenarioname, parties):
         currentindex.leader=characters[len(characters)-1]
 
     characters.sort(key=lambda x: x.leader, reverse=True)
-    return characters
+    return np.array(characters)
 
 def partyissuehandler(scenarioname, parties, issues):
     partyissues={}
@@ -500,6 +532,22 @@ def partyissuehandler(scenarioname, parties, issues):
         self.issue = issue
         self.mean = mean
         self.variance = variance
+
+      def validvariables(self):
+          #The key is the name of the attribute. The value describes how the variable is formatted.
+          return {"mean": self.issue.name+"."+self.party.name+".mean",
+                  "variance": self.issue.name+"."+self.party.name+".variance"}
+      
+      def getvariable(self, attr):
+          return super(PartyIssue, self).__getattribute__(attr)
+    
+      def setvariable(self, attr, variable, operator):
+          if operator=="+":
+              object.__setattr__(self, attr, super(PartyIssue, self).__getattribute__(attr)+float(variable))
+          elif operator=="-":
+              object.__setattr__(self, attr, super(PartyIssue, self).__getattribute__(attr)-float(variable))
+          elif operator=="=":
+              object.__setattr__(self, attr, float(variable))
 
     f = open ( 'scenario/' + scenarioname + '/partyissue.txt' , 'r')
     l = []
@@ -550,7 +598,7 @@ def partyissuehandler(scenarioname, parties, issues):
             f.write("\t\t" + "mean=" + str(j.mean) + "\n")
             f.write("\t\t" + "variance=" + str(j.variance) + "\n")
         
-    return partyissues.values()
+    return list(partyissues.values())
 
 def regionissuehandler(scenarioname, regions, issues):
     regionissues={}
@@ -562,6 +610,24 @@ def regionissuehandler(scenarioname, regions, issues):
         self.mean = mean
         self.variance = variance
         self.importance = importance
+
+      def validvariables(self):
+          #The key is the name of the attribute. The value describes how the variable is formatted.
+          return {"mean": self.issue.name+"."+self.region.name+".mean",
+                  "variance": self.issue.name+"."+self.region.name+".variance",
+                  "importance": self.issue.name+"."+self.region.name+".importance"}
+      
+      def getvariable(self, attr):
+          return super(RegionIssue, self).__getattribute__(attr)
+    
+      def setvariable(self, attr, variable, operator):
+          if operator=="+":
+              object.__setattr__(self, attr, super(RegionIssue, self).__getattribute__(attr)+float(variable))
+          elif operator=="-":
+              object.__setattr__(self, attr, super(RegionIssue, self).__getattribute__(attr)-float(variable))
+          elif operator=="=":
+              object.__setattr__(self, attr, float(variable))
+
 
     f = open ( 'scenario/' + scenarioname + '/regionissue.txt' , 'r')
     l = []
@@ -618,7 +684,7 @@ def regionissuehandler(scenarioname, regions, issues):
             f.write("\t\t" + "variance=" + str(j.variance) + "\n")
             f.write("\t\t" + "importance=" + str(j.importance) + "\n")
 
-    return regionissues.values()
+    return list(regionissues.values())
 
 def regionpopulationhandler(scenarioname, regions, populations):
     regionpopulations={}
@@ -628,6 +694,21 @@ def regionpopulationhandler(scenarioname, regions, populations):
         self.region = region
         self.population = population
         self.influence = influence
+
+      def validvariables(self):
+          #The key is the name of the attribute. The value describes how the variable is formatted.
+          return {"influence": self.population.name+"."+self.region.name+".influence"}
+      
+      def getvariable(self, attr):
+          return super(RegionPopulation, self).__getattribute__(attr)
+    
+      def setvariable(self, attr, variable, operator):
+          if operator=="+":
+              object.__setattr__(self, attr, super(RegionPopulation, self).__getattribute__(attr)+float(variable))
+          elif operator=="-":
+              object.__setattr__(self, attr, super(RegionPopulation, self).__getattribute__(attr)-float(variable))
+          elif operator=="=":
+              object.__setattr__(self, attr, float(variable))
 
     f = open ( 'scenario/' + scenarioname + '/regionpopulation.txt' , 'r')
     l = []
@@ -674,7 +755,7 @@ def regionpopulationhandler(scenarioname, regions, populations):
             f.write("\t" + j.population.name + ":" + "\n")
             f.write("\t\t" + "influence=" + str(j.influence) + "\n")
 
-    return regionpopulations.values()
+    return list(regionpopulations.values())
 
 def partypopulationhandler(scenarioname, parties, populations):
     partypopulations={}
@@ -684,6 +765,21 @@ def partypopulationhandler(scenarioname, parties, populations):
         self.party = party
         self.population = population
         self.appeal = appeal
+
+      def validvariables(self):
+          #The key is the name of the attribute. The value describes how the variable is formatted.
+          return {"appeal": self.population.name+"."+self.party.name+".appeal"}
+      
+      def getvariable(self, attr):
+          return super(PartyPopulation, self).__getattribute__(attr)
+    
+      def setvariable(self, attr, variable, operator):
+          if operator=="+":
+              object.__setattr__(self, attr, super(PartyPopulation, self).__getattribute__(attr)+float(variable))
+          elif operator=="-":
+              object.__setattr__(self, attr, super(PartyPopulation, self).__getattribute__(attr)-float(variable))
+          elif operator=="=":
+              object.__setattr__(self, attr, float(variable))
 
     f = open ( 'scenario/' + scenarioname + '/partypopulation.txt' , 'r')
     l = []
@@ -730,7 +826,7 @@ def partypopulationhandler(scenarioname, parties, populations):
             f.write("\t" + j.population.name + ":" + "\n")
             f.write("\t\t" + "appeal=" + str(j.appeal) + "\n")
 
-    return partypopulations.values()
+    return list(partypopulations.values())
 
 def getpartyregions(scenarioname, parties, regions):
     partyregions={}
@@ -789,7 +885,7 @@ def getpartyregions(scenarioname, parties, regions):
                     f.write("\t\t" + "power=" + str(j.power) + "\n")
                     f.write("\t\t" + "guaranteedseats=" + str(j.guaranteedseats) + "\n")
 
-    return partyregions.values()
+    return list(partyregions.values())
 
 def getevents(scenarioname):
     events=[]
@@ -850,11 +946,8 @@ def getevents(scenarioname):
 
     
     events.append(Event(currentevent, name, hidden, description, effects))
-
-    for i in events:
-        print(i.description)
      
-    return events
+    return np.array(events)
 
 def getdecisions(scenarioname):
     return None
@@ -940,7 +1033,7 @@ def gettriggers(scenarioname, events, decisions):
     
     triggers.append(Trigger(currenttrigger, condition, triggered, triggerable, triggeronce, chance))
 
-    return triggers
+    return np.array(triggers)
 
 def main(scenarioname):
     scenario=Scenario(scenarioname)
@@ -959,9 +1052,6 @@ def main(scenarioname):
     scenario.events=getevents(scenarioname)
     scenario.decisions=getdecisions(scenarioname)
     scenario.triggers=gettriggers(scenarioname, scenario.events, scenario.decisions)
-
-    for i in scenario.triggers:
-        print(i.identifier, i.condition, i.triggered)
 
     #scenario.printalldata()
 

@@ -24,181 +24,39 @@ orderofoperations=[['.'], ['**'], ['*','/'], ['+', '-'], ['>', '>=', '<', '<=', 
 listofvariables={}
 
 def generatevariables(gamedata):
-    listofvariables.update({"date": gamedata.scenario.main.currentdate})
+    iterablevariableobjects=[gamedata.scenario.parties, gamedata.scenario.regionissues, gamedata.scenario.partyissues, 
+                             gamedata.scenario.partypopulations, gamedata.scenario.regionpopulations]
+    variableobjects=[gamedata.scenario.main]
+    #listofvariables.update({"date": gamedata.scenario.main.currentdate})
+    for i in variableobjects:
+            listofvariables.update({i.validvariables()[k]:((i.getvariable, [k]), (i.setvariable, [k])) for k in i.validvariables()})
+
+    for i in iterablevariableobjects:
+        for j in i:
+            """
+            The variable key is described in the object function, and is used by users to describe variables when writing triggers.
+            The variable value is more complicated; the value is a tuple, consisting out of two other tuples - the first used for 
+            getting the variable and the second used for setting the variable. Getter and setter tuples are made up of two members - 
+            the first one directs to the getting/setting function of the object, and second one are the parameters for the function.
+            """
+            listofvariables.update({j.validvariables()[k]:((j.getvariable, [k]), (j.setvariable, [k])) for k in j.validvariables()})
+
     """
-    listofvariables.update({i.party.name+"."+"leader":i.identifier for i in gamedata.scenario.characters if i.leader==True})
-    listofvariables.update({i.issue.name+'.'+ i.region.name+"."+"mean":i.mean for i in gamedata.scenario.regionissues})
-    listofvariables.update({i.issue.name+'.'+ i.region.name+"."+"variance":i.variance for i in gamedata.scenario.regionissues})
-    listofvariables.update({i.issue.name+'.'+ i.region.name+"."+"importance":i.importance for i in gamedata.scenario.regionissues})
-    listofvariables.update({i.issue.name+'.'+ i.party.name+"."+"mean":i.mean for i in gamedata.scenario.partyissues})
-    listofvariables.update({i.issue.name+'.'+ i.party.name+"."+"variance":i.variance for i in gamedata.scenario.partyissues})
-    listofvariables.update({i.population.name+'.'+ i.party.name+"."+"appeal":i.appeal for i in gamedata.scenario.partypopulations})
-    listofvariables.update({i.population.name+'.'+ i.region.name+"."+"influence":i.influence for i in gamedata.scenario.regionpopulations})
+    print("####################################################################")
+    print(listofvariables)
+    print(listofvariables["date"][0][0](*listofvariables["date"][0][1]))
     """
 
 
 def variablehandler(gamedata, value, mode='get', variable=None, operator=None):
     #modes: 'get', 'set'
-
     if value in listofvariables:
-        return listofvariables[value]
-
-    if value.count('.')==1:
-        string=re.search("(.*)\.", value)
-        if string:
-            foundstring="".join(string[1].rstrip().lstrip())
-            party=next((x for x in gamedata.scenario.parties if x.name == foundstring), None)
-            if party:
-                string=re.search("\.(.*)", value)
-                if string:
-                    foundstring="".join(string[1].rstrip().lstrip())
-                    if foundstring=="leader":
-                        if mode=='get':
-                            return party.leader.identifier
-                        elif mode=='set':
-                            if operator=='=':
-                                pass #Write the function to replace party leader
-                    if foundstring=="power":
-                        if mode=='get':
-                            return party.power
-                        elif mode=='set':
-                            if operator=='=':
-                                party.power=float(variable)
-                                return None
-                            elif operator=='+':
-                                party.power+=float(variable)
-                                return None
-                            elif operator=='-':
-                                party.power-=float(variable)
-                                return None
-                        
-    elif value.count('.')==2:
-        string=re.search("(.*)\..*\.", value)
-        if string:
-            foundstring="".join(string[1].rstrip().lstrip())
-            issue=next((x for x in gamedata.scenario.issues if x.name == foundstring), None)
-            if issue:
-                string=re.search("\.(.*)\.", value)
-                if string:
-                    foundstring="".join(string[1].rstrip().lstrip())
-                    region=next((x for x in gamedata.scenario.regions if x.name == foundstring), None)
-                    if region:
-                        string=re.search("\..*\.(.*)", value)
-                        if string:
-                            foundstring="".join(string[1].rstrip().lstrip())
-                            if foundstring=='mean':
-                                if mode=='get':
-                                    return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).mean
-                                elif mode=='set':
-                                    if operator=='=':
-                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).mean=float(variable)
-                                        return None
-                                    elif operator=='+':
-                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).mean+=float(variable)
-                                        return None
-                                    elif operator=='-':
-                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).mean-=float(variable)
-                                        return None
-                            elif foundstring=='variance':
-                                if mode=='get':
-                                    return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).variance
-                                elif mode=='set':
-                                    if operator=='=':
-                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).variance=float(variable)
-                                        return None
-                                    elif operator=='+':
-                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).variance+=float(variable)
-                                        return None
-                                    elif operator=='-':
-                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).variance-=float(variable)
-                                        return None
-                            elif foundstring=='importance':
-                                if mode=='get':
-                                    return next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).importance
-                                elif mode=='set':
-                                    if operator=='=':
-                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).importance=float(variable)
-                                        return None
-                                    elif operator=='+':
-                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).importance+=float(variable)
-                                        return None
-                                    elif operator=='-':
-                                        next((x for x in gamedata.scenario.regionissues if x.issue == issue and x.region==region), None).importance-=float(variable)
-                                        return None
-                    
-                    party=next((x for x in gamedata.scenario.parties if x.name == foundstring), None)
-                    if party:
-                        string=re.search("\..*\.(.*)", value)
-                        if string:
-                            foundstring="".join(string[1].rstrip().lstrip())
-                            if foundstring=='mean':
-                                if mode=='get':
-                                    return next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).mean
-                                elif mode=='set':
-                                    if operator=='=':
-                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).mean=float(variable)
-                                        return None
-                                    elif operator=='+':
-                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).mean+=float(variable)
-                                        return None
-                                    elif operator=='-':
-                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).mean-=float(variable)
-                                        return None
-                            elif foundstring=='variance':
-                                if mode=='get':
-                                    return next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).variance
-                                elif mode=='set':
-                                    if operator=='=':
-                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).variance=float(variable)
-                                        return None
-                                    elif operator=='+':
-                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).variance+=float(variable)
-                                        return None
-                                    elif operator=='-':
-                                        next((x for x in gamedata.scenario.partyissues if x.issue == issue and x.party==party), None).variance-=float(variable)
-                                        return None
-            population=next((x for x in gamedata.scenario.populations if x.name == foundstring), None)
-            if population:
-                string=re.search("\.(.*)\.", value)
-                if string:
-                    foundstring="".join(string[1].rstrip().lstrip())
-                    region=next((x for x in gamedata.scenario.regions if x.name == foundstring), None)
-                    if region:
-                        string=re.search("\..*\.(.*)", value)
-                        if string:
-                            foundstring="".join(string[1].rstrip().lstrip())
-                            if foundstring=='influence':
-                                if mode=='get':
-                                    return next((x for x in gamedata.scenario.regionpopulations if x.population == population and x.region==region), None).influence
-                                elif mode=='set':
-                                    if operator=='=':
-                                        next((x for x in gamedata.scenario.regionpopulations if x.population == population and x.region==region), None).influence=float(variable)
-                                        return None
-                                    elif operator=='+':
-                                        next((x for x in gamedata.scenario.regionpopulations if x.population == population and x.region==region), None).influence+=float(variable)
-                                        return None
-                                    elif operator=='-':
-                                        next((x for x in gamedata.scenario.regionpopulations if x.population == population and x.region==region), None).influence-=float(variable)
-                                        return None
-                    party=next((x for x in gamedata.scenario.parties if x.name == foundstring), None)
-                    if party:
-                        string=re.search("\..*\.(.*)", value)
-                        if string:
-                            foundstring="".join(string[1].rstrip().lstrip())
-                            if foundstring=='appeal':
-                                if mode=='get':
-                                    return next((x for x in gamedata.scenario.partypopulations if x.population == population and x.party==party), None).appeal
-                                elif mode=='set':
-                                    if operator=='=':
-                                        next((x for x in gamedata.scenario.partypopulations if x.population == population and x.party==party), None).appeal=float(variable)
-                                        return None
-                                    elif operator=='+':
-                                        next((x for x in gamedata.scenario.partypopulations if x.population == population and x.party==party), None).appeal+=float(variable)
-                                        return None
-                                    elif operator=='-':
-                                        next((x for x in gamedata.scenario.partypopulations if x.population == population and x.party==party), None).appeal-=float(variable)
-                                        return None
-
+        if mode=='get':
+            return listofvariables[value][0][0](*listofvariables[value][0][1])
+        else:
+            listofvariables[value][1][0](*listofvariables[value][1][1], variable, operator)
+            return None
+    
     try:
         return datetime.datetime.strptime(str(value), '"%Y-%m-%d"')
         #print(datetime.datetime.strptime(value, '"%Y-%m-%d"'))
@@ -207,9 +65,11 @@ def variablehandler(gamedata, value, mode='get', variable=None, operator=None):
 
     return value
 
-
 def calculatequerydeeper(gamedata, parsedtext):
-    print("ORDERING ON", parsedtext)
+    debuggingmode=False
+
+    if debuggingmode==True:
+        print("ORDERING ON", parsedtext)
     #Order of Operations 
 
     for i in orderofoperations:
@@ -230,8 +90,8 @@ def calculatequerydeeper(gamedata, parsedtext):
                         del parsedtext[count+1]
                         del parsedtext[count-1]
     
-    
-    print("OPERATIONS ON", parsedtext)
+    if debuggingmode==True:
+        print("OPERATIONS ON", parsedtext)
     
     #Executing Operations
     value=0
@@ -242,9 +102,11 @@ def calculatequerydeeper(gamedata, parsedtext):
             if action==None:
                 value=answer
             else:
-                print(value, action, answer)
+                if debuggingmode==True:
+                    print(value, action, answer)
                 value=ops[action] (value,answer)
-                print(value)
+                if debuggingmode==True:
+                    print(value)
         else:
             if i in ops:
                 action=i
@@ -252,20 +114,25 @@ def calculatequerydeeper(gamedata, parsedtext):
                 if action==None:
                     value=float(i)
                 else:
-                    print(value, action, float(i))
+                    if debuggingmode==True:
+                        print(value, action, float(i))
                     value=ops[action] (value,float(i))
-                    print(value)
+                    if debuggingmode==True:
+                        print(value)
             else:
                 newvalue=variablehandler(gamedata, i)
                 if newvalue!=None:
                     if action==None:
                         value=newvalue
                     else:
-                        print(value, action, newvalue)
+                        if debuggingmode==True:
+                            print(value, action, newvalue)
                         value=ops[action] (value,newvalue)
-                        print(value)
+                        if debuggingmode==True:
+                            print(value)
             #print(i)
-    print(value)
+    if debuggingmode==True:
+        print(value)
     return value
 
 def checkcondition(gamedata, condition):
@@ -326,7 +193,8 @@ def executeevents(gamedata, triggeredevents):
     [executeeffect(gamedata, j) for i in triggeredevents for j in i.effects]
 
 def main(gamedata):
-    generatevariables(gamedata)
+    if len(listofvariables)==0:
+        generatevariables(gamedata)
     triggeredevents=checktriggers(gamedata)
     executeevents(gamedata, triggeredevents)
     print(triggeredevents)
