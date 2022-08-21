@@ -30,3 +30,4 @@ devaluation:
 		and agreed to a tough package of deflation and austerity instead.
 	effects:
 		labour.power-100
+		labour.powerofright-0.1

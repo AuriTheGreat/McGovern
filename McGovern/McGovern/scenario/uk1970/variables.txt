@@ -1,0 +1,6 @@
+# This file is meant for writing additional variables.
+# Only use numeric values for the variable values.
+
+# Labour
+labour.powerofleft=0.6
+labour.powerofright=0.9

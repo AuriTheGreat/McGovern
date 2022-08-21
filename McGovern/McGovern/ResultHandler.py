@@ -154,10 +154,6 @@ def partyregionresulthandler(scenario, issuepartyregionresults=None, mode='norma
         for j in partypercentages:
             partyshares[j]=(0.00104*(partypercentages[j]*100)**2.8+0.17)/100
         for j in partyshares:
-            """
-            print(partyshares[j], sum(partyshares.values()), region.seats)
-            print((partyshares[j]/sum(partyshares.values()))*region.seats)
-            print(round((partyshares[j]/sum(partyshares.values()))*region.seats))"""
             partyseats[j]=round((partyshares[j]/sum(partyshares.values()))*region.seats)
         partyseats=calculationbalancer(partyshares, partyseats, region.seats-sum([x.guaranteedseats for x in scenario.partyregions if x.region == region]))
         for j in partyregionresults:

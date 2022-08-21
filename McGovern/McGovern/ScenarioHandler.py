@@ -5,7 +5,7 @@ import re
 import datetime
 
 class Scenario:
-      def __init__(self, name, main=None, base=None, issues=None, parties=None, ideologies=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partypopulations=None, regionissues=None, regionpopulations=None, partyregions=None, events=None, decisions=None, triggers=None):
+      def __init__(self, name, main=None, base=None, issues=None, parties=None, ideologies=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partypopulations=None, regionissues=None, regionpopulations=None, partyregions=None, events=None, decisions=None, triggers=None, variables=None):
         self.name = name
         self.main = main
         self.base = base
@@ -24,6 +24,7 @@ class Scenario:
         self.events = events
         self.decisions = decisions
         self.triggers = triggers
+        self.variables = variables
       def printbase(self):
         print("+" + "".join(["-" for c in range(95)]) + "+")
         print("|", "BASE".center(93), "|")
@@ -136,7 +137,9 @@ def getbase(scenarioname):
     name=nation=year=fiction=description=startdate=enddate=electiondate=turns=seats=None
     
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search(".*name.*=(.*)", newi)
         if string:
             name="".join(string[1].rstrip().lstrip())
@@ -223,7 +226,9 @@ def getissues(scenarioname):
     levelreader=None
     
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             levelreader=None
@@ -270,7 +275,9 @@ def getpopulations(scenarioname):
     fullname, pollingbias, financialpower=None,None,None
     
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             if currentpopulation!=None:
@@ -318,7 +325,9 @@ def getregions(scenarioname, base):
     population, eligiblepopulation, seats, color=None,None,None,None
     
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             if currentregion!=None:
@@ -408,7 +417,9 @@ def getparties(scenarioname):
     ideologyreader=None
     
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             ideologyreader=None
@@ -476,7 +487,9 @@ def getcharacters(scenarioname, parties):
     currentparty, currentindex=None,None
     
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             ideologyreader=None
@@ -563,7 +576,9 @@ def partyissuehandler(scenarioname, parties, issues):
     party,issue=None,None
 
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             if string[1] in partynames:
@@ -591,6 +606,7 @@ def partyissuehandler(scenarioname, parties, issues):
                 i.issues.append(j)
 
     f = open ( 'scenario/' + scenarioname + '/partyissue.txt' , 'w')
+    f.write("### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.\n")
     for i in parties:
         f.write(i.name + ":" + "\n")
         for j in i.issues:
@@ -644,7 +660,9 @@ def regionissuehandler(scenarioname, regions, issues):
     region,issue=None,None
 
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             if string[1] in regionnames:
@@ -676,6 +694,7 @@ def regionissuehandler(scenarioname, regions, issues):
                 i.issues.append(j)
 
     f = open ( 'scenario/' + scenarioname + '/regionissue.txt' , 'w')
+    f.write("### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.\n")
     for i in regions:
         f.write(i.name + ":" + "\n")
         for j in i.issues:
@@ -725,7 +744,9 @@ def regionpopulationhandler(scenarioname, regions, populations):
     region,population=None,None
 
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             if string[1] in regionnames:
@@ -749,6 +770,7 @@ def regionpopulationhandler(scenarioname, regions, populations):
                 i.populations.append(j)
 
     f = open ( 'scenario/' + scenarioname + '/regionpopulation.txt' , 'w')
+    f.write("### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.\n")
     for i in regions:
         f.write(i.name + ":" + "\n")
         for j in i.populations:
@@ -796,7 +818,9 @@ def partypopulationhandler(scenarioname, parties, populations):
     party,population=None,None
 
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             if string[1] in partynames:
@@ -820,6 +844,7 @@ def partypopulationhandler(scenarioname, parties, populations):
                 i.populations.append(j)
 
     f = open ( 'scenario/' + scenarioname + '/partypopulation.txt' , 'w')
+    f.write("### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.\n")
     for i in parties:
         f.write(i.name + ":" + "\n")
         for j in i.populations:
@@ -853,7 +878,9 @@ def getpartyregions(scenarioname, parties, regions):
     party,region=None,None
 
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             if string[1] in partynames:
@@ -874,6 +901,7 @@ def getpartyregions(scenarioname, parties, regions):
                     continue
 
     f = open ( 'scenario/' + scenarioname + '/partyregion.txt' , 'w')
+    f.write("### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.\n")
     party=None
     for i in partyregions.values():
         if i.party!=party:
@@ -908,7 +936,9 @@ def getevents(scenarioname):
     descriptionreader=effectsreader=False
     
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             descriptionreader=effectsreader=False
@@ -974,7 +1004,9 @@ def gettriggers(scenarioname, events, decisions):
     conditionreader, triggeredreader=False, False
     
     for i in l:
-        newi=" ".join(i)
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
         string=re.search("(.*):", newi)
         if string:
             conditionreader, triggeredreader=False, False
@@ -1035,6 +1067,49 @@ def gettriggers(scenarioname, events, decisions):
 
     return np.array(triggers)
 
+def getvariables(scenarioname):
+    variables=[]
+
+    class Variable:
+      def __init__(self, identifier, value):
+        self.identifier = identifier
+        self.value = value
+
+      def validvariables(self):
+          #The key is the name of the attribute. The value describes how the variable is formatted.
+          return {"value": self.identifier}
+      
+      def getvariable(self, attr):
+          return super(Variable, self).__getattribute__(attr)
+    
+      def setvariable(self, attr, variable, operator):
+          if operator=="+":
+              object.__setattr__(self, attr, super(Variable, self).__getattribute__(attr)+float(variable))
+          elif operator=="-":
+              object.__setattr__(self, attr, super(Variable, self).__getattribute__(attr)-float(variable))
+          elif operator=="=":
+              object.__setattr__(self, attr, float(variable))
+
+    f = open ( 'scenario/' + scenarioname + '/variables.txt' , 'r')
+    l = []
+    l = np.array([ line.split() for line in f], dtype=object)
+    
+    identifier=value=None
+    
+    for i in l:
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
+        string1=re.search("(.*)=.*", newi)
+        string2=re.search(".*=(.*)", newi)
+        if string1 and string2:
+            identifier="".join(string1[1].rstrip().lstrip())
+            value=float("".join(string2[1].rstrip().lstrip()))
+            variables.append(Variable(identifier, value))
+            continue
+
+    return variables
+
 def main(scenarioname):
     scenario=Scenario(scenarioname)
     scenario.base=getbase(scenarioname)
@@ -1052,6 +1127,7 @@ def main(scenarioname):
     scenario.events=getevents(scenarioname)
     scenario.decisions=getdecisions(scenarioname)
     scenario.triggers=gettriggers(scenarioname, scenario.events, scenario.decisions)
+    scenario.variables=getvariables(scenarioname)
 
     #scenario.printalldata()
 

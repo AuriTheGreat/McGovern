@@ -1,3 +1,4 @@
+### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.
 London:
 	middleclass:
 		influence=1.1
