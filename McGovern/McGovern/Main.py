@@ -44,7 +44,15 @@ class Rectangle():
             else:
                 self.fontsize=mainfontsize
 
-            self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)            
+            self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)
+
+            while self.text!="": #Runs in case the font is too big for the rectangle
+                self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)      
+                text_rect = self.font.get_rect(self.text)
+                if text_rect.width<self.width and text_rect.height<self.height:
+                    break
+                else:
+                    self.fontsize-=1
 
             objects.append(self)
 
@@ -55,7 +63,7 @@ class Rectangle():
     def process(self):
         screen.blit(self.Surface, self.Rect)
 
-        text_rect = mainfont.get_rect(self.text)
+        text_rect = self.font.get_rect(self.text)
         text_rect.center = self.Surface.get_rect().center
         self.font.render_to(self.Surface, text_rect.topleft, self.text, (255,255,255))
 
@@ -92,7 +100,7 @@ class Image():
         
 
 class Button():
-    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, paramsFunction=[], color="#250045", onePress=False, fontstyle=None, fontsize=None):
+    def __init__(self, x, y, width, height, text='', onclickFunction=None, paramsFunction=[], color="#250045", onePress=False, fontstyle=None, fontsize=None):
         self.x = x
         self.y = y
         self.width = width
@@ -101,7 +109,7 @@ class Button():
         self.paramsFunction = paramsFunction
         self.onePress = onePress
         self.color=color
-        self.buttonText=buttonText
+        self.text=text
 
         self.buttonSurface = pygame.Surface((self.width, self.height))
         self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
@@ -120,6 +128,13 @@ class Button():
             self.fontsize=mainfontsize
 
         self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)
+        while self.text!="": #Runs in case the font is too big for the rectangle
+                self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)      
+                text_rect = self.font.get_rect(self.text)
+                if text_rect.width<self.width and text_rect.height<self.height:
+                    break
+                else:
+                    self.fontsize-=1
 
         objects.append(self)
 
@@ -149,20 +164,20 @@ class Button():
                 self.alreadyPressed = False
                 isclicked=False
 
-        text_rect = mainfont.get_rect(self.buttonText)
+        text_rect = self.font.get_rect(self.text)
         text_rect.center = self.buttonSurface.get_rect().center
-        self.font.render_to(self.buttonSurface, text_rect.topleft, self.buttonText, (255,255,255))
+        self.font.render_to(self.buttonSurface, text_rect.topleft, self.text, (255,255,255))
 
         screen.blit(self.buttonSurface, self.buttonRect)
 
 class ImageButton():
-    def __init__(self, x, y, width, height, img, buttonText='Button', onclickFunction=None, paramsFunction=[], fontstyle=None, fontsize=None):
+    def __init__(self, x, y, width, height, img, text='', onclickFunction=None, paramsFunction=[], fontstyle=None, fontsize=None):
             self.x = x
             self.y = y
             self.width = width
             self.height = height
             self.img = img
-            self.buttonText=buttonText
+            self.text=text
             self.onclickFunction=onclickFunction
             self.paramsFunction=paramsFunction
 
@@ -178,6 +193,13 @@ class ImageButton():
                 self.fontsize=mainfontsize
 
             self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)
+            while self.text!="": #Runs in case the font is too big for the rectangle
+                self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)      
+                text_rect = self.font.get_rect(self.text)
+                if text_rect.width<self.width and text_rect.height<self.height:
+                    break
+                else:
+                    self.fontsize-=1
 
             objects.append(self)
 
@@ -185,23 +207,28 @@ class ImageButton():
         mousePos = pygame.mouse.get_pos()
         global isclicked
         
-        image = pygame.image.load(self.img).convert_alpha()
-        image = pygame.transform.scale(image,(self.width, self.height))
+        image = pygame.image.load(self.img)
+        image = pygame.transform.scale(image,(self.width, self.height)).convert()
+
+        self.newx, self.newy=round(self.x+((self.width-image.get_width())/2)), round(self.y+((self.height-image.get_height())/2))
+        self.buttonRect = pygame.Rect(self.newx, self.newy, image.get_width(), image.get_height())
 
         if self.buttonRect.collidepoint(mousePos):
-            brighten = 50
-            image.fill((brighten, brighten, brighten), special_flags=pygame.BLEND_RGB_SUB)
-            if pygame.mouse.get_pressed(num_buttons=3)[0]:
-                if isclicked==False:
-                    self.onclickFunction(*self.paramsFunction)
-                    isclicked=True
+            color=image.get_at((mousePos[0]-self.newx, mousePos[1]-self.newy))
+            if color!=(0,0,0,0) and color!=(0,0,0,255):
+                brighten = 50
+                image.fill((brighten, brighten, brighten), special_flags=pygame.BLEND_RGB_SUB)
+                if pygame.mouse.get_pressed(num_buttons=3)[0]:
+                    if isclicked==False:
+                        self.onclickFunction(*self.paramsFunction)
+                        isclicked=True
 
-            else:
-                isclicked=False
+                else:
+                    isclicked=False
 
-        text_rect = mainfont.get_rect(self.buttonText)
+        text_rect = self.font.get_rect(self.text)
         text_rect.center = image.get_rect().center
-        self.font.render_to(image, text_rect.topleft, self.buttonText, (255,255,255))
+        self.font.render_to(image, text_rect.topleft, self.text, (255,255,255))
 
         screen.blit(image, (self.x,self.y))
 
@@ -310,15 +337,18 @@ def parliamentarychart(x, y, width, height, gamedata, mode='westminster', ruling
     y+=height/2
 
 
-    if rulingparties==None:
-        rulingparties=[gamedata.polling.aggregated.totalpartyresults[0].party]
+    rulingparties=[i for i in gamedata.scenario.parties if i.ruling==True]
 
-    speaker=next((x.party for x in gamedata.polling.aggregated.totalpartyresults if x.party.name.lower()=="speaker" and x.seats==1), rulingparties[0])
+    if len(rulingparties)==0:
+        maximalseats=max([i.nationalseats for i in gamedata.scenario.parties])
+        rulingparties=[i for i in gamedata.scenario.parties if i.nationalseats==maximalseats][0]
+
+    speaker=next((x for x in gamedata.scenario.parties if x.name.lower()=="speaker" and x.nationalseats==1), rulingparties[0])
 
     if speaker not in rulingparties:
-        lengthinseats=max(sum([i.seats for i in gamedata.polling.aggregated.totalpartyresults if i.party in rulingparties]), sum([i.seats for i in gamedata.polling.aggregated.totalpartyresults if i.party not in rulingparties])-1)
+        lengthinseats=max(sum([i.nationalseats for i in gamedata.scenario.parties if i in rulingparties]), sum([i.nationalseats for i in gamedata.scenario.parties if i not in rulingparties])-1)
     else:
-        lengthinseats=max(sum([i.seats for i in gamedata.polling.aggregated.totalpartyresults if i.party in rulingparties]), sum([i.seats for i in gamedata.polling.aggregated.totalpartyresults if i.party not in rulingparties]))
+        lengthinseats=max(sum([i.nationalseats for i in gamedata.scenario.parties if i in rulingparties]), sum([i.nationalseats for i in gamedata.scenario.parties if i not in rulingparties]))
 
     radius=min(height/((columns+1.5)*2)/2, (width/(math.ceil((lengthinseats)/columns)+1))/2)
 
@@ -327,12 +357,12 @@ def parliamentarychart(x, y, width, height, gamedata, mode='westminster', ruling
     frontrowposition=[x+radius*3, y+radius*3]
     position=[0, 0]
 
-    for i in [j for j in gamedata.polling.aggregated.totalpartyresults if j.party in rulingparties]:
-        for j in range(next((x.seats for x in gamedata.polling.aggregated.totalpartyresults if i.party == x.party), None)):
-            if i.party==speaker:
-                if j+1==i.seats:
+    for i in [j for j in gamedata.scenario.parties if j in rulingparties]:
+        for j in range(next((x.nationalseats for x in gamedata.scenario.parties if i == x), None)):
+            if i==speaker:
+                if j+1==i.nationalseats:
                     continue
-            Circle(frontrowposition[0]+position[0]*(radius*2), frontrowposition[1]+position[1]*(radius*2), radius, i.party.color)
+            Circle(frontrowposition[0]+position[0]*(radius*2), frontrowposition[1]+position[1]*(radius*2), radius, i.color)
             position[1]+=1
             #print(frontrowposition[1]+position[1]*10, frontrowposition[0]+position[0]*10)
             if position[1]>columns-1:
@@ -342,12 +372,12 @@ def parliamentarychart(x, y, width, height, gamedata, mode='westminster', ruling
     frontrowposition=[x+radius*3, y-radius*3]
     position=[0, 0]
 
-    for i in [j for j in gamedata.polling.aggregated.totalpartyresults if j.party not in rulingparties]:
-        for j in range(next((x.seats for x in gamedata.polling.aggregated.totalpartyresults if i.party == x.party), None)):
-            if i.party==speaker:
-                if j+1==i.seats:
+    for i in [j for j in gamedata.scenario.parties if j not in rulingparties]:
+        for j in range(next((x.nationalseats for x in gamedata.scenario.parties if i == x), None)):
+            if i==speaker:
+                if j+1==i.nationalseats:
                     continue
-            Circle(frontrowposition[0]+position[0]*(radius*2), frontrowposition[1]-position[1]*(radius*2), radius, i.party.color)
+            Circle(frontrowposition[0]+position[0]*(radius*2), frontrowposition[1]-position[1]*(radius*2), radius, i.color)
             position[1]+=1
             #print(frontrowposition[1]+position[1]*10, frontrowposition[0]-position[0]*10)
             if position[1]>columns-1:
@@ -387,13 +417,33 @@ def choosescenario():
     tile_size_y=(screen_height-(objects_per_row*5+y_outline))/objects_per_row
 
     for count, i in enumerate(scenarios):
-        Button(screen_width/(1200/(x_outline/2))+(tile_size_x+5)*(count%objects_per_row), screen_height/(700/(y_outline/2))+(tile_size_y+5)*math.floor(count/objects_per_row), tile_size_x, tile_size_y, i , scenariomain, [i])
+        Button(screen_width/(1200/(x_outline/2))+(tile_size_x+5)*(count%objects_per_row), screen_height/(700/(y_outline/2))+(tile_size_y+5)*math.floor(count/objects_per_row), tile_size_x, tile_size_y, i , choosescenarioplayer, [i])
+
+def choosescenarioplayer(scenarioname):
+    def playerchosen(scenarioname, gamedata, party):
+        party.player=True
+        scenariomain(scenarioname, gamedata)
+
+    objects.clear()
+    gamedata=GameData(ScenarioHandler.main(scenarioname))
+    TriggerHandler.generatevariables(gamedata)
+
+    button_size_x, button_size_y = screen_width/(1200/400), screen_height/(700/90)
+    tile_size_x, tile_size_y = screen_width/(1200/200), screen_height/(700/200)
+    Button(screen_width/2-(button_size_x/2), screen_width/(1200/550), button_size_x, button_size_y, 'Go back', choosescenario)
+
+    objects_per_row=5
+    rows=3
+    x_outline, y_outline= screen_width/(1200/100),screen_height/(700/200)
+    tile_size_x=(screen_width-(objects_per_row*5+x_outline))/objects_per_row
+    tile_size_y=(screen_height-(objects_per_row*5+y_outline))/objects_per_row
+
+    for count, i in enumerate([j for j in gamedata.scenario.parties if j.playable==True]):
+        Button(screen_width/(1200/(x_outline/2))+(tile_size_x+5)*(count%objects_per_row), screen_height/(700/(y_outline/2))+(tile_size_y+5)*math.floor(count/objects_per_row), tile_size_x, tile_size_y, i.name , playerchosen, [scenarioname, gamedata, i], color=i.color)
+
 
 
 def scenariomain(scenarioname, gamedata=None, recalculate=True):
-    if gamedata==None:
-        gamedata=GameData(ScenarioHandler.main(scenarioname))
-
     if recalculate==True:
         gamedata.results=ResultHandler.getresults(gamedata.scenario)
         gamedata.polling=ResultHandler.getpolling(gamedata, gamedata.polling, 5)
@@ -409,7 +459,11 @@ def scenariomain(scenarioname, gamedata=None, recalculate=True):
     Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366')
     Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366', str(gamedata.scenario.main.currentdate.date()))
     button_size_x, button_size_y = screen_width/(1200/200), screen_height/(700/80)
-    Image(980,screen_width/(1200/110),150,150, 'scenario/' + scenarioname + '/gfx/labour.png')
+    playedparty=[i.name for i in gamedata.scenario.parties if i.player==True][0]
+    if playedparty+'.png' in os.listdir('scenario/' + scenarioname + '/gfx/'):
+        Image(980,screen_width/(1200/110),150,150, 'scenario/' + scenarioname + '/gfx/'+playedparty+'.png')
+    else:
+        Image(980,screen_width/(1200/110),150,150, 'scenario/' + scenarioname + '/gfx/main.png')
     Button(10, screen_width/(1200/10), button_size_x, button_size_y, 'Escape', escape, [scenarioname, gamedata])
     Button(950, screen_width/(1200/10), button_size_x, button_size_y, 'Next Turn', nextturn, [scenarioname, gamedata])
     Button(950, screen_width/(1200/280), button_size_x, button_size_y, 'Government', governmentview, [scenarioname, gamedata])
@@ -471,11 +525,11 @@ def regionview(scenarioname, gamedata, region='National', page=0):
                 Rectangle(480,180+count%partiesperpage%partycount*60,screen_width/(1200/100), screen_height/(700/50), '#003366', str(i.seats))
                 Rectangle(590,180+count%partiesperpage%partycount*60,screen_width/(1200/380), screen_height/(700/50), '#003366', f'{i.votes:,}')
 
-    Rectangle(990,180,screen_width/(1200/200), screen_height/(700/250), '#003366')
-    Button(1000, screen_width/(1200/190), screen_width/(1200/180), screen_height/(700/50), 'General', regionview, [scenarioname, gamedata, region])
-    Button(1000, screen_width/(1200/250), screen_width/(1200/180), screen_height/(700/50), 'Issues', issueview, [scenarioname, gamedata, None, region])
-    Button(1000, screen_width/(1200/310), screen_width/(1200/180), screen_height/(700/50), 'Influence', escape, [scenarioname, gamedata])
-    Button(1000, screen_width/(1200/370), screen_width/(1200/180), screen_height/(700/50), 'Polling', pollingview, [scenarioname, gamedata, region])
+    Rectangle(990,240,screen_width/(1200/200), screen_height/(700/250), '#003366')
+    Button(1000, screen_width/(1200/250), screen_width/(1200/180), screen_height/(700/50), 'General', regionview, [scenarioname, gamedata, region])
+    Button(1000, screen_width/(1200/310), screen_width/(1200/180), screen_height/(700/50), 'Issues', issueview, [scenarioname, gamedata, None, region])
+    Button(1000, screen_width/(1200/370), screen_width/(1200/180), screen_height/(700/50), 'Influence', escape, [scenarioname, gamedata])
+    Button(1000, screen_width/(1200/430), screen_width/(1200/180), screen_height/(700/50), 'Polling', pollingview, [scenarioname, gamedata, region])
 
     partysharechart(10, 480, 960, 50, gamedata, region, 'votes')
     partysharechart(10, 540, 960, 50, gamedata, region, 'seats')
@@ -536,11 +590,11 @@ def partyview(scenarioname, gamedata, limit=None):
 
         Map(600,180,360,500, 'scenario/' + scenarioname + '/gfx/map.png', gamedata, 'party', currentparty)
 
-        Rectangle(990,180,screen_width/(1200/200), screen_height/(700/250), '#003366')
-        Button(1000, screen_width/(1200/190), screen_width/(1200/180), screen_height/(700/50), 'General', escape, [scenarioname, gamedata])
-        Button(1000, screen_width/(1200/250), screen_width/(1200/180), screen_height/(700/50), 'Issues', escape, [scenarioname, gamedata])
-        Button(1000, screen_width/(1200/310), screen_width/(1200/180), screen_height/(700/50), 'Influence', escape, [scenarioname, gamedata])
-        Button(1000, screen_width/(1200/370), screen_width/(1200/180), screen_height/(700/50), 'Polling', pollingview, [scenarioname, gamedata])
+        Rectangle(990,240,screen_width/(1200/200), screen_height/(700/250), '#003366')
+        Button(1000, screen_width/(1200/250), screen_width/(1200/180), screen_height/(700/50), 'General', escape, [scenarioname, gamedata])
+        Button(1000, screen_width/(1200/310), screen_width/(1200/180), screen_height/(700/50), 'Issues', escape, [scenarioname, gamedata])
+        Button(1000, screen_width/(1200/370), screen_width/(1200/180), screen_height/(700/50), 'Influence', escape, [scenarioname, gamedata])
+        Button(1000, screen_width/(1200/430), screen_width/(1200/180), screen_height/(700/50), 'Polling', pollingview, [scenarioname, gamedata])
 
 def leaderview(scenarioname, gamedata, party):
     objects.clear()
@@ -564,8 +618,9 @@ def governmentview(scenarioname, gamedata):
     Button(10, screen_width/(1200/10), button_size_x, button_size_y, 'Back', scenariomain, [scenarioname, gamedata, False])
     parliamentarychart(10, 100, 1180, 575, gamedata)
 
-def issueview(scenarioname, gamedata, issue=None, region=None):
+def issueview(scenarioname, gamedata, issue=None, region=None, page=0):
     objects.clear()
+    partiesperpage=5
     Rectangle(0,680,screen_width,screen_height, '#003366')
     Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366')
     Rectangle(350,0,500,screen_height-(screen_height/(700/600)), '#003366', "Issue Information")
@@ -573,6 +628,8 @@ def issueview(scenarioname, gamedata, issue=None, region=None):
     button_size_x, button_size_y = screen_width/(1200/200), screen_height/(700/80)
     Button(10, screen_width/(1200/10), button_size_x, button_size_y, 'Back', scenariomain, [scenarioname, gamedata, False])
     regions=['National'] + [i.name for i in gamedata.scenario.regions]
+    if not region:
+        region=regions[0]
     leftregion=regions.index(region)-1
     if leftregion<0:
         leftregion=len(regions)-1
@@ -591,28 +648,57 @@ def issueview(scenarioname, gamedata, issue=None, region=None):
     rightissue=issues.index(issue)+1
     if rightissue>len(issues)-1:
         rightissue=0
-    Button(10,620,screen_width/(1200/50), screen_height/(700/50), '<', issueview, [scenarioname, gamedata, issues[leftissue], region])
-    Rectangle(70,620,screen_width/(1200/1060), screen_height/(700/50), '#003366', issue)
-    Button(1140,620,screen_width/(1200/50), screen_height/(700/50), '>', issueview, [scenarioname, gamedata, issues[rightissue], region])
+    Button(10,180,screen_width/(1200/50), screen_height/(700/50), '<', issueview, [scenarioname, gamedata, issues[leftissue], region])
+    Rectangle(70,180,screen_width/(1200/1060), screen_height/(700/50), '#003366', issue)
+    Button(1140,180,screen_width/(1200/50), screen_height/(700/50), '>', issueview, [scenarioname, gamedata, issues[rightissue], region])
 
     if region=='National':
-        pass
+        partycount=len(gamedata.scenario.parties)
+        for count, i in enumerate([j for j in gamedata.scenario.partyissues if issue==j.issue.fullname]):
+            if page*partiesperpage<=count<(page+1)*partiesperpage:
+                if i.variance>2:
+                    division="Divided"
+                else:
+                    division="United"
+                #print(i.party.name, i.issue.name, i.mean, i.variance, division, min(math.floor((i.mean+5)/+(10/len(i.issue.levels))),len(i.issue.levels)-1))
+                #print(i.party.name, i.issue.name, i.mean, i.variance, division, i.issue.levels[min(math.floor((i.mean+5)/+(10/len(i.issue.levels))),len(i.issue.levels)-1)])
+                Button(10,240+count%partiesperpage*60,screen_width/(1200/350), screen_height/(700/50), str(i.party.fullname), partyview, [scenarioname, gamedata, i.party.fullname], "#003366")
+                Rectangle(370,240+count%partiesperpage%partycount*60,screen_width/(1200/300), screen_height/(700/50), '#003366', division)
+                Rectangle(680,240+count%partiesperpage%partycount*60,screen_width/(1200/300), screen_height/(700/50), '#003366', i.issue.levels[min(math.floor((i.mean+5)/+(10/len(i.issue.levels))),len(i.issue.levels)-1)])
     else:
-        regionissue=next((x for x in gamedata.scenario.regionissues if x.issue.fullname == issue and x.region.name==region), None)
-        #Rectangle(400+regionissue.mean*100,340,screen_width/(1200/(100*regionissue.variance)), screen_height/(700/10), (200, 200, 200))
-        for count, i in enumerate(reversed([j for j in gamedata.scenario.partyissues if j.issue.fullname==issue])):
-            Rectangle(0+(i.mean+5)*100-50*i.variance,350-count*10,screen_width/(1200/(100*i.variance)), screen_height/(700/10), i.party.color)
-        Rectangle(100+(regionissue.mean+5)*100,350-len(gamedata.scenario.parties)*10,screen_width/(1200/(100*regionissue.variance)), screen_height/(700/10), (200, 200, 200))
-        Rectangle(100,350-(len(gamedata.scenario.parties)+1)*10,screen_width/(1200/(100*10)), screen_height/(700/10), (200, 240, 200))
+        partycount=len(gamedata.scenario.parties)
+        currentregionissue=next((x for x in gamedata.scenario.regionissues if issue==x.issue.fullname and region==x.region.name), None)
+        if currentregionissue.variance>2:
+            division="Divided"
+        else:
+            division="United"
+        Button(10,240,screen_width/(1200/350), screen_height/(700/50), str(currentregionissue.region.name), regionview, [scenarioname, gamedata, region], "#003366")
+        Rectangle(370,240,screen_width/(1200/300), screen_height/(700/50), '#003366', division)
+        Rectangle(680,240,screen_width/(1200/300), screen_height/(700/50), '#003366', currentregionissue.issue.levels[min(math.floor((currentregionissue.mean+5)/+(10/len(currentregionissue.issue.levels))),len(currentregionissue.issue.levels)-1)])
+        for count, i in enumerate([j for j in gamedata.scenario.partyissues if issue==j.issue.fullname]):
+            if page*partiesperpage<=count<(page+1)*partiesperpage:
+                if i.variance>2:
+                    division="Divided"
+                else:
+                    division="United"
+                #print(i.party.name, i.issue.name, i.mean, i.variance, division, min(math.floor((i.mean+5)/+(10/len(i.issue.levels))),len(i.issue.levels)-1))
+                #print(i.party.name, i.issue.name, i.mean, i.variance, division, i.issue.levels[min(math.floor((i.mean+5)/+(10/len(i.issue.levels))),len(i.issue.levels)-1)])
+                Button(10,300+count%partiesperpage*60,screen_width/(1200/350), screen_height/(700/50), str(i.party.fullname), partyview, [scenarioname, gamedata, i.party.fullname], "#003366")
+                Rectangle(370,300+count%partiesperpage%partycount*60,screen_width/(1200/300), screen_height/(700/50), '#003366', division)
+                Rectangle(680,300+count%partiesperpage%partycount*60,screen_width/(1200/300), screen_height/(700/50), '#003366', i.issue.levels[min(math.floor((i.mean+5)/+(10/len(i.issue.levels))),len(i.issue.levels)-1)])
 
+    Rectangle(990,240,screen_width/(1200/200), screen_height/(700/250), '#003366')
+    Button(1000, screen_width/(1200/250), screen_width/(1200/180), screen_height/(700/50), 'General', regionview, [scenarioname, gamedata, region])
+    Button(1000, screen_width/(1200/310), screen_width/(1200/180), screen_height/(700/50), 'Issues', issueview, [scenarioname, gamedata, None, region])
+    Button(1000, screen_width/(1200/370), screen_width/(1200/180), screen_height/(700/50), 'Influence', escape, [scenarioname, gamedata])
+    Button(1000, screen_width/(1200/430), screen_width/(1200/180), screen_height/(700/50), 'Polling', pollingview, [scenarioname, gamedata, region])
 
-    """
-    Rectangle(990,180,screen_width/(1200/200), screen_height/(700/250), '#003366')
-    Button(1000, screen_width/(1200/190), screen_width/(1200/180), screen_height/(700/50), 'General', regionview, [scenarioname, gamedata, region])
-    Button(1000, screen_width/(1200/250), screen_width/(1200/180), screen_height/(700/50), 'Issues', issueview, [scenarioname, gamedata, issue, region])
-    Button(1000, screen_width/(1200/310), screen_width/(1200/180), screen_height/(700/50), 'Influence', escape, [scenarioname, gamedata])
-    Button(1000, screen_width/(1200/370), screen_width/(1200/180), screen_height/(700/50), 'Polling', escape, [scenarioname, gamedata])
-    """
+    if page!=0:
+        Button(400,600,screen_width/(1200/50), screen_height/(700/50), '<', issueview, [scenarioname, gamedata, issue, region, page-1])
+    if partycount>partiesperpage:
+        Rectangle(460,600,screen_width/(1200/50), screen_height/(700/50), '#003366', str(page+1))
+    if partycount>(page+1)*partiesperpage:
+        Button(520,600,screen_width/(1200/50), screen_height/(700/50), '>', issueview, [scenarioname, gamedata, issue, region, page+1])
 
 def pollingview(scenarioname, gamedata, region="National", page=0):
     objects.clear()
@@ -642,35 +728,21 @@ def pollingview(scenarioname, gamedata, region="National", page=0):
                 Button(10,180+count%pollsperpage*60,screen_width/(1200/350), screen_height/(700/50), str(i.date.strftime('%Y-%m-%d')), pollview, [scenarioname, gamedata, i, region], '#003366')
                 for partycount, j in enumerate(i.totalpartyresults):
                     if partycount<5:
-                        #Button(10+partycount*60,180+count%pollsperpage*60,screen_width/(1200/350), screen_height/(700/50), str(j.party.fullname), partyview, [scenarioname, gamedata, j.party.fullname], "#003366")
                         Button(370+partycount*110,180+count%pollsperpage*60,screen_width/(1200/100), screen_height/(700/50), str(j.seats), partyview, [scenarioname, gamedata, j.party.fullname], "#003366")
-                        """
-                        Button(10,180+count%pollsperpage*60,screen_width/(1200/350), screen_height/(700/50), str(i.party.fullname), partyview, [scenarioname, gamedata, i.party.fullname], "#003366")
-                        Rectangle(370,180+count%pollsperpage*60,screen_width/(1200/100), screen_height/(700/50), '#003366', str(round(i.percentage,1)) + "%")
-                        Rectangle(480,180+count%pollsperpage*60,screen_width/(1200/100), screen_height/(700/50), '#003366', str(i.seats))
-                        Rectangle(590,180+count%pollsperpage*60,screen_width/(1200/380), screen_height/(700/50), '#003366', f'{i.votes:,}')
-                        """
     else:
         for count, i in enumerate(reversed([j for j in gamedata.polling.polls])):
             if page*pollsperpage<=count<(page+1)*pollsperpage:
                 Button(10,180+count%pollsperpage*60,screen_width/(1200/350), screen_height/(700/50), str(i.date.strftime('%Y-%m-%d')), pollview, [scenarioname, gamedata, i, region], '#003366')
                 for partycount, j in enumerate([k for k in i.partyregionresults if k.region.name==region]):
                     if partycount<5:
-                        #Button(10+partycount*60,180+count%pollsperpage*60,screen_width/(1200/350), screen_height/(700/50), str(j.party.fullname), partyview, [scenarioname, gamedata, j.party.fullname], "#003366")
                         Button(370+partycount*110,180+count%pollsperpage*60,screen_width/(1200/100), screen_height/(700/50), str(j.seats), partyview, [scenarioname, gamedata, j.party.fullname], "#003366")
-                        """
-                        Button(10,180+count%pollsperpage*60,screen_width/(1200/350), screen_height/(700/50), str(i.party.fullname), partyview, [scenarioname, gamedata, i.party.fullname], "#003366")
-                        Rectangle(370,180+count%pollsperpage*60,screen_width/(1200/100), screen_height/(700/50), '#003366', str(round(i.percentage,1)) + "%")
-                        Rectangle(480,180+count%pollsperpage*60,screen_width/(1200/100), screen_height/(700/50), '#003366', str(i.seats))
-                        Rectangle(590,180+count%pollsperpage*60,screen_width/(1200/380), screen_height/(700/50), '#003366', f'{i.votes:,}')
-                        """
 
 
-    Rectangle(990,180,screen_width/(1200/200), screen_height/(700/250), '#003366')
-    Button(1000, screen_width/(1200/190), screen_width/(1200/180), screen_height/(700/50), 'General', regionview, [scenarioname, gamedata, region])
-    Button(1000, screen_width/(1200/250), screen_width/(1200/180), screen_height/(700/50), 'Issues', issueview, [scenarioname, gamedata])
-    Button(1000, screen_width/(1200/310), screen_width/(1200/180), screen_height/(700/50), 'Influence', escape, [scenarioname, gamedata])
-    Button(1000, screen_width/(1200/370), screen_width/(1200/180), screen_height/(700/50), 'Polling', pollingview, [scenarioname, gamedata, region, 0])
+    Rectangle(990,240,screen_width/(1200/200), screen_height/(700/250), '#003366')
+    Button(1000, screen_width/(1200/250), screen_width/(1200/180), screen_height/(700/50), 'General', regionview, [scenarioname, gamedata, region])
+    Button(1000, screen_width/(1200/310), screen_width/(1200/180), screen_height/(700/50), 'Issues', issueview, [scenarioname, gamedata])
+    Button(1000, screen_width/(1200/370), screen_width/(1200/180), screen_height/(700/50), 'Influence', escape, [scenarioname, gamedata])
+    Button(1000, screen_width/(1200/430), screen_width/(1200/180), screen_height/(700/50), 'Polling', pollingview, [scenarioname, gamedata, region, 0])
 
     if page!=0:
         Button(400,600,screen_width/(1200/50), screen_height/(700/50), '<', pollingview, [scenarioname, gamedata, region, page-1])
@@ -717,11 +789,11 @@ def pollview(scenarioname, gamedata, poll, region='National', page=0):
                 Rectangle(590,180+count%partiesperpage*60,screen_width/(1200/100), screen_height/(700/50), '#003366', str(i.seats-next((x for x in gamedata.polling.aggregated.partyregionresults if x.party == i.party and x.region==i.region), None).seats))
                 Rectangle(700,180+count%partiesperpage*60,screen_width/(1200/100), screen_height/(700/50), '#003366', str(round(i.percentage-next((x for x in gamedata.polling.aggregated.partyregionresults if x.party == i.party and x.region==i.region), None).percentage,1)) + "%")
 
-    Rectangle(990,180,screen_width/(1200/200), screen_height/(700/250), '#003366')
-    Button(1000, screen_width/(1200/190), screen_width/(1200/180), screen_height/(700/50), 'General', regionview, [scenarioname, gamedata, region])
-    Button(1000, screen_width/(1200/250), screen_width/(1200/180), screen_height/(700/50), 'Issues', issueview, [scenarioname, gamedata, None, region])
-    Button(1000, screen_width/(1200/310), screen_width/(1200/180), screen_height/(700/50), 'Influence', escape, [scenarioname, gamedata])
-    Button(1000, screen_width/(1200/370), screen_width/(1200/180), screen_height/(700/50), 'Polling', pollingview, [scenarioname, gamedata, region])
+    Rectangle(990,240,screen_width/(1200/200), screen_height/(700/250), '#003366')
+    Button(1000, screen_width/(1200/250), screen_width/(1200/180), screen_height/(700/50), 'General', regionview, [scenarioname, gamedata, region])
+    Button(1000, screen_width/(1200/310), screen_width/(1200/180), screen_height/(700/50), 'Issues', issueview, [scenarioname, gamedata, None, region])
+    Button(1000, screen_width/(1200/370), screen_width/(1200/180), screen_height/(700/50), 'Influence', escape, [scenarioname, gamedata])
+    Button(1000, screen_width/(1200/430), screen_width/(1200/180), screen_height/(700/50), 'Polling', pollingview, [scenarioname, gamedata, region])
 
     partysharechart(10, 480, 960, 50, gamedata, region, 'votes')
     partysharechart(10, 540, 960, 50, gamedata, region, 'seats')
@@ -742,6 +814,7 @@ def nextturn(scenarioname, gamedata):
             print(gamedata.scenario.main.currentdate.date(), "ELECTION DAY")
         else:
             print(gamedata.scenario.main.currentdate.date())
+
     scenariomain(scenarioname, gamedata)
 
 

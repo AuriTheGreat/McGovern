@@ -193,8 +193,6 @@ def executeevents(gamedata, triggeredevents):
     [executeeffect(gamedata, j) for i in triggeredevents for j in i.effects]
 
 def main(gamedata):
-    if len(listofvariables)==0:
-        generatevariables(gamedata)
     triggeredevents=checktriggers(gamedata)
     executeevents(gamedata, triggeredevents)
     print(triggeredevents)

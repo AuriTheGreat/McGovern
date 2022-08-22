@@ -1,5 +1,7 @@
 labour:
 	fullname=Labour Party
+	playable=True
+	ruling=True
 	power=600
 	color=220, 36, 31
 	aiideologies:
@@ -8,45 +10,66 @@ labour:
 		socialism
 conservative:
 	fullname=Conservative Party
+	playable=True
+	ruling=False
 	power=500
 	color=0, 136, 221
 liberal:
 	fullname=Liberal Party
+	playable=False
+	ruling=False
 	power=100
 	color=250, 168, 19
 communist:
 	fullname=Communist Party
+	playable=False
+	ruling=False
 	power=2
 	color=255, 0, 0
 snp:
 	fullname=Scottish National Party
+	playable=False
+	ruling=False
 	power=120
 	color=254, 246, 136
 plc:
 	fullname=Plaid Cymru
+	playable=False
+	ruling=False
 	power=125
 	color=0, 130, 64
 unity:
 	fullname=Unity
+	playable=False
 	power=200
 	color=128,128,0
 prounionist:
 	fullname=Protestant Unionist
+	playable=False
+	ruling=False
 	power=30
 	color=212,106,76
 replabour:
 	fullname=Republican Labour
+	playable=False
+	ruling=False
 	power=35
 	color=133, 222, 89
 inderep:
 	fullname=Independent Republican
+	playable=False
+	ruling=False
 	power=125
 	color=209,255,178
 democratic:
 	fullname=Democratic Party
+	playable=False
+	ruling=False
 	power=1
 	color=255,255,255
 speaker:
 	fullname=Speaker
+	playable=False
+	ruling=False
 	power=-100000000.0
 	color=255,255,255

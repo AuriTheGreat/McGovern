@@ -375,15 +375,20 @@ def getparties(scenarioname):
     parties=[]
     
     class Party:
-      def __init__(self, name, fullname, power, color, ideologies, issues=None, populations=None, leader=None):
+      def __init__(self, name, fullname, power, playable, color, ideologies, ruling=False, issues=None, populations=None, leader=None, player=False, nationalseats=0):
         self.name = name
         self.fullname = fullname
         self.leader = leader
         self.power = power
+        self.playable = playable
         self.color = color
         self.ideologies = ideologies
         self.issues = issues
         self.populations = populations
+        self.player = player
+        self.ruling = ruling
+        self.nationalseats = nationalseats
+
 
     
       def validvariables(self):
@@ -413,7 +418,7 @@ def getparties(scenarioname):
     l = np.array([ line.split() for line in f], dtype=object)
     
     currentparty=None
-    fullname,power,ideologies,color=None,None,[],None
+    fullname,playable,ruling,power,ideologies,color=None,False,False,None,[],None
     ideologyreader=None
     
     for i in l:
@@ -429,15 +434,29 @@ def getparties(scenarioname):
                 ideologyreader='extraideologies'
             else:
                 if currentparty!=None:
-                    parties.append(Party(currentparty, fullname, power, color, ideologies))
+                    parties.append(Party(currentparty, fullname, power, playable, color, ideologies, ruling))
                 currentparty="".join(string[1].rstrip().lstrip())
-                fullname,power,ideologies,color=None,None,[],None
+                fullname,playable,ruling,power,ideologies,color=None,False,False,None,[],None
         else:
             if ideologyreader!=None:
                 string=re.search("(.*)", newi)
                 if string:
                     ideologies.append("".join(string[1].rstrip().lstrip()))
             else:
+                string=re.search(".*playable.*=(.*)", newi)
+                if string:
+                    if "".join(string[1].rstrip().lstrip())=="True":
+                        playable=True
+                    else:
+                        playable=False
+                    continue
+                string=re.search(".*ruling.*=(.*)", newi)
+                if string:
+                    if "".join(string[1].rstrip().lstrip())=="True":
+                        ruling=True
+                    else:
+                        ruling=False
+                    continue
                 string=re.search(".*power.*=(.*)", newi)
                 if string:
                     power=float("".join(string[1].rstrip().lstrip()))
@@ -461,7 +480,7 @@ def getparties(scenarioname):
                     color=tuple(color)
                     continue
     
-    parties.append(Party(currentparty, fullname, power, color, ideologies))
+    parties.append(Party(currentparty, fullname, power, playable, color, ideologies, ruling))
 
     return np.array(parties)
 
@@ -857,10 +876,11 @@ def getpartyregions(scenarioname, parties, regions):
     partyregions={}
 
     class PartyRegion:
-      def __init__(self, party, region, power, guaranteedseats):
+      def __init__(self, party, region, power, controlledseats, guaranteedseats):
         self.party = party
         self.region = region
         self.power = power
+        self.controlledseats = controlledseats
         self.guaranteedseats = guaranteedseats
 
     f = open ( 'scenario/' + scenarioname + '/partyregion.txt' , 'r')
@@ -869,7 +889,7 @@ def getpartyregions(scenarioname, parties, regions):
 
     for i in parties:
         for j in regions:
-            partyregions[str(str(i.name)+"-"+str(j.name))]=PartyRegion(i,j,0,0)
+            partyregions[str(str(i.name)+"-"+str(j.name))]=PartyRegion(i,j,0,0,0)
 
 
     partynames=[x.name for x in parties]
@@ -895,6 +915,11 @@ def getpartyregions(scenarioname, parties, regions):
                 if string:
                     partyregions[str(party.name + "-" + region.name)].power=float("".join(string[1].rstrip().lstrip()))
                     continue
+                string=re.search(".*controlledseats.*=(.*)", newi)
+                if string:
+                    partyregions[str(party.name + "-" + region.name)].controlledseats=max(0, int("".join(string[1].rstrip().lstrip())))
+                    party.nationalseats+=partyregions[str(party.name + "-" + region.name)].controlledseats
+                    continue
                 string=re.search(".*guaranteedseats.*=(.*)", newi)
                 if string:
                     partyregions[str(party.name + "-" + region.name)].guaranteedseats=max(0, int("".join(string[1].rstrip().lstrip())))
@@ -911,7 +936,8 @@ def getpartyregions(scenarioname, parties, regions):
                 if i.party==j.party:
                     f.write("\t" + j.region.name + ":" + "\n")
                     f.write("\t\t" + "power=" + str(j.power) + "\n")
-                    f.write("\t\t" + "guaranteedseats=" + str(j.guaranteedseats) + "\n")
+                    f.write("\t\t" + "controlledseats=" + str(j.controlledseats) + " #These are seats that party currently has in parliament." + "\n")
+                    f.write("\t\t" + "guaranteedseats=" + str(j.guaranteedseats) + " #This is the lowest amount of seats the party will win in next election." + "\n")
 
     return list(partyregions.values())
 
