@@ -30,6 +30,7 @@
     <Compile Include="ScenarioHandler.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="setup.py" />
     <Compile Include="TriggerHandler.py" />
   </ItemGroup>
   <ItemGroup>

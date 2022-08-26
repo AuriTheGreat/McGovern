@@ -3,6 +3,7 @@ import ScenarioHandler
 import ResultHandler
 import TriggerHandler
 import os
+import sys
 import math
 import pygame
 import pygame.freetype
@@ -831,6 +832,7 @@ def options():
 
 def quit():
     pygame.quit()
+    sys.exit()
 
 
 #####################################################################################
@@ -838,7 +840,14 @@ def quit():
 #####################################################################################
 
 if __name__ == "__main__":
-    scenarios=os.listdir('scenario')
+    if 'scenario' in os.listdir():
+        scenarios=os.listdir('scenario')
+    else:
+        os.chdir('../../')
+        if 'scenario' in os.listdir():
+            scenarios=os.listdir('scenario')
+        else:
+            sys.exit("ERROR")
     scenarios=getvalidscenarios(scenarios)
     #scenarioname=getscenario(scenarios)
 

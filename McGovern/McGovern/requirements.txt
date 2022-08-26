@@ -1,7 +1,7 @@
 numpy==1.22.4
 pygame==2.1.2
 pip==21.2.4
-setuptools==58.1.0
+setuptools==60.10.0
 cycler==0.11.0
 fonttools==4.33.3
 kiwisolver==1.4.2
@@ -24,3 +24,5 @@ altgraph==0.17.2
 future==0.18.2
 pefile==2022.5.30
 pywin32-ctypes==0.2.0
+cx-Freeze==6.11.1
+lief==0.12.1
