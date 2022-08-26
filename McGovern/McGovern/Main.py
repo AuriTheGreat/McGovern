@@ -282,6 +282,98 @@ class Map():
         #print(self.image.get_at((2, 2)))
         screen.blit(self.image, (self.newx, self.newy))
 
+class MultipleLineText():
+    def __init__(self, x, y, width, height, color, text="", fontstyle=None, fontsize=None):
+            self.x = x
+            self.y = y
+            self.width = width
+            self.height = height
+            self.color = color
+            self.text = text
+
+            if fontstyle!=None:
+                self.fontstyle=fontstyle
+            else:
+                self.fontstyle=mainfontstyle
+            if fontsize!=None:
+                self.fontsize=int(screen_height/(700/fontsize))
+            else:
+                self.fontsize=mainfontsize
+
+            self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)
+            while text: #This loop is to decrease the font if the height is not enough
+                self.text = text.copy()
+                self.font=pygame.freetype.SysFont(self.fontstyle, self.fontsize)
+                while True: #This loop is to divide the string in a way that it fits within the width
+                    changed=False
+                    newtext=[]
+                    for count, i in enumerate(self.text):
+                        text_rect = self.font.get_rect(i)
+                        #print(i, "hello", text_rect.width, len(i))
+                        if text_rect.width>self.width:
+                            changed=True
+                            if text_rect.width>self.width*2.5: #Generates a quicker split in case string is big
+                                words=i.split()
+                                newtext.append(" ".join(words[:-math.floor(len(words)/2)]))
+                                newtext.append(" ".join(words[-math.floor(len(words)/2):]))
+                                continue
+                            words=i.split()
+                            for j in range(len(words)):
+                                if j==0:
+                                    continue
+                                testedtext=words[:-j] #sequentially reduces the string by removing last word
+                                #print(testedtext, j)
+                                text_rect = self.font.get_rect(" ".join(testedtext))
+                                if text_rect.width>self.width:
+                                    continue
+                                else:
+                                    newtext.append(" ".join(testedtext))
+                                    if len(self.text)-1>count:
+                                        if self.text[count+1]!="":
+                                            self.text[count+1]=" ".join(words[-j:])+ " " + self.text[count+1]
+                                        else:
+                                            newtext.append(" ".join(words[-j:]))
+                                    else:
+                                        newtext.append(" ".join(words[-j:]))
+                                    break
+                        else:
+                            newtext.append(i)
+                    self.text=newtext
+                    if not changed:
+                        break
+                totalheight=sum([self.font.get_rect(i).height for i in newtext])
+                if totalheight<self.height:
+                    self.text=newtext
+                    break
+                else:
+                    self.fontsize-=1
+
+            objects.append(self)
+
+            self.Surface = pygame.Surface((self.width, self.height))
+            self.Surface.fill(self.color)
+            self.Rect = pygame.Rect(self.x, self.y, self.width, self.height)
+
+    def process(self):
+        screen.blit(self.Surface, self.Rect)
+
+        #text_rect = self.font.get_rect(self.text)
+        #print(sum([self.font.get_rect(i).height for i in self.text]))
+        previous_height_total=0
+        heightofline=self.font.get_rect("Tg").height
+        for i in self.text:
+            text_rect = self.font.get_rect(i)
+            text_rect.y+=previous_height_total+(heightofline-text_rect.height)/2
+            previous_height_total+=heightofline
+
+            self.font.render_to(self.Surface, text_rect.topleft, i, (255,255,255))
+
+        """
+        text_rect.center = self.Surface.get_rect().center
+        self.font.render_to(self.Surface, text_rect.topleft, self.text, (255,255,255))
+        """
+
+        screen.blit(self.Surface, (self.x,self.y))
 
 #####################################################################################
 ##################### Functions for adding groups of components #####################
@@ -469,7 +561,7 @@ def scenariomain(scenarioname, gamedata=None, recalculate=True):
     Button(950, screen_width/(1200/10), button_size_x, button_size_y, 'Next Turn', nextturn, [scenarioname, gamedata])
     Button(950, screen_width/(1200/280), button_size_x, button_size_y, 'Government', governmentview, [scenarioname, gamedata])
     Button(950, screen_width/(1200/380), button_size_x, button_size_y, 'Regions', regionview, [scenarioname, gamedata])
-    Button(950, screen_width/(1200/480), button_size_x, button_size_y, 'Events', escape, [scenarioname, gamedata])
+    Button(950, screen_width/(1200/480), button_size_x, button_size_y, 'Events', eventview, [scenarioname, gamedata])
     Button(950, screen_width/(1200/580), button_size_x, button_size_y, 'Campaign', escape, [scenarioname, gamedata])
     Button(905, screen_width/(1200/280), screen_width/(1200/20), screen_height/(700/380), '<', addon, [scenarioname, gamedata])
     Map(0,125,900,555, 'scenario/' + scenarioname + '/gfx/map.png', gamedata)
@@ -805,6 +897,18 @@ def pollview(scenarioname, gamedata, poll, region='National', page=0):
         Rectangle(460,600,screen_width/(1200/50), screen_height/(700/50), '#003366', str(page+1))
     if partycount>(page+1)*partiesperpage:
         Button(520,600,screen_width/(1200/50), screen_height/(700/50), '>', pollview, [scenarioname, gamedata, poll, region, page+1])
+
+def eventview(scenarioname, gamedata):
+    objects.clear()
+    Rectangle(0,680,screen_width,screen_height, '#003366')
+    Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366')
+    Rectangle(350,0,500,screen_height-(screen_height/(700/600)), '#003366', "Events' View")
+    Rectangle(950,0,300,screen_height-(screen_height/(700/600)), '#003366', str(gamedata.scenario.main.currentdate.date()))
+    button_size_x, button_size_y = screen_width/(1200/200), screen_height/(700/80)
+    Button(10, screen_width/(1200/10), button_size_x, button_size_y, 'Back', scenariomain, [scenarioname, gamedata, False])
+
+    MultipleLineText(10,100, 1180, 575, '#003366', gamedata.scenario.events[2].description)
+    #parliamentarychart(10, 100, 1180, 575, gamedata)
 
 def nextturn(scenarioname, gamedata):
     objects.clear()

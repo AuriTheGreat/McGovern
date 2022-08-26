@@ -21,7 +21,7 @@ liberal:
 	power=100
 	color=250, 168, 19
 communist:
-	fullname=Communist Party
+	fullname=Communist Party of Great Britain
 	playable=False
 	ruling=False
 	power=2
@@ -44,13 +44,13 @@ unity:
 	power=200
 	color=128,128,0
 prounionist:
-	fullname=Protestant Unionist
+	fullname=Protestant Unionist Party
 	playable=False
 	ruling=False
 	power=30
 	color=212,106,76
 replabour:
-	fullname=Republican Labour
+	fullname=Republican Labour Party
 	playable=False
 	ruling=False
 	power=35

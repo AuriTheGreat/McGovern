@@ -963,7 +963,7 @@ def getevents(scenarioname):
     
     for i in l:
         newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
-        if not newi:
+        if not newi and descriptionreader==False:
             continue
         string=re.search("(.*):", newi)
         if string:
@@ -985,7 +985,9 @@ def getevents(scenarioname):
             elif descriptionreader==True:
                 string=re.search("(.*)", newi)
                 if string:
-                    description.append("".join(string[1].rstrip().lstrip()))
+                    description.append("" + "".join(string[1].rstrip().lstrip()))
+                else:
+                    description.append("")
             else:
                 string=re.search(".*name.*=(.*)", newi)
                 if string:
