@@ -985,7 +985,7 @@ def getevents(scenarioname):
             elif descriptionreader==True:
                 string=re.search("(.*)", newi)
                 if string:
-                    description.append("" + "".join(string[1].rstrip().lstrip()))
+                    description.append("".join(string[1].rstrip().lstrip()))
                 else:
                     description.append("")
             else:

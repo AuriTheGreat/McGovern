@@ -947,11 +947,7 @@ if __name__ == "__main__":
     if 'scenario' in os.listdir():
         scenarios=os.listdir('scenario')
     else:
-        os.chdir('../../')
-        if 'scenario' in os.listdir():
-            scenarios=os.listdir('scenario')
-        else:
-            sys.exit("ERROR")
+        sys.exit("ERROR: no scenario folder found")
     scenarios=getvalidscenarios(scenarios)
     #scenarioname=getscenario(scenarios)
 
