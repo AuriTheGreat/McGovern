@@ -520,6 +520,7 @@ def choosescenarioplayer(scenarioname):
     objects.clear()
     gamedata=GameData(ScenarioHandler.main(scenarioname))
     TriggerHandler.generatevariables(gamedata)
+    ScenarioHandler.initialisescenario(gamedata.scenario)
 
     button_size_x, button_size_y = screen_width/(1200/400), screen_height/(700/90)
     tile_size_x, tile_size_y = screen_width/(1200/200), screen_height/(700/200)
@@ -699,7 +700,23 @@ def leaderview(scenarioname, gamedata, party):
     button_size_x, button_size_y = screen_width/(1200/200), screen_height/(700/80)
     Button(10, screen_width/(1200/10), button_size_x, button_size_y, 'Back', partyview, [scenarioname, gamedata, party.fullname])
 
-    Button(0,120,screen_width/(1200/350), screen_height/(700/50), str(party.fullname), partyview, [scenarioname, gamedata, party.fullname], "#003366")
+    #Button(0,120,screen_width/(1200/350), screen_height/(700/50), str(party.fullname), partyview, [scenarioname, gamedata, party.fullname], "#003366")
+    Rectangle(10,120,screen_width/(1200/1180), screen_height/(700/50), '#003366', party.leader.name)
+    Rectangle(10,180,screen_width/(1200/250), screen_height/(700/50), '#003366', "Ideologies")
+    for count, i in enumerate(party.leader.ideologies):
+        Rectangle(10,240+count*60,screen_width/(1200/250), screen_height/(700/50), '#003366', i.fullname)
+    Rectangle(270,180,screen_width/(1200/250), screen_height/(700/50), '#003366', "Traits")
+    for count, i in enumerate(party.leader.traits):
+        Rectangle(270,240+count*60,screen_width/(1200/250), screen_height/(700/50), '#003366', i.fullname)
+    Rectangle(10,540,screen_width/(1200/250), screen_height/(700/50), '#003366', "Potential Leaders")
+    for count, i in enumerate([j for j in party.characters if j!=party.leader]):
+        Rectangle(10+count*190,600,screen_width/(1200/180), screen_height/(700/50), '#003366', i.name)
+
+    if party.leader.identifier+'.png' in os.listdir('scenario/' + scenarioname + '/gfx/'):
+        Image(890,180,screen_width/(1200/300),screen_height/(700/350), 'scenario/' + scenarioname + '/gfx/'+party.leader.identifier+'.png')
+    else:
+        Image(890,180,screen_width/(1200/300),screen_height/(700/350), 'scenario/' + scenarioname + '/gfx/nocharacter.png')
+
 
 def governmentview(scenarioname, gamedata):
     objects.clear()
@@ -914,7 +931,7 @@ def nextturn(scenarioname, gamedata):
     objects.clear()
     if gamedata.scenario.base.enddate>gamedata.scenario.main.currentdate:
         gamedata.scenario.main.newturn()
-        TriggerHandler.main(gamedata)
+        TriggerHandler.main(gamedata.scenario)
         if gamedata.scenario.main.currentdate<gamedata.scenario.base.electiondate<gamedata.scenario.main.currentdate+gamedata.scenario.main.turnlength:
             print(gamedata.scenario.main.currentdate.date(), "ELECTION DAY")
         else:

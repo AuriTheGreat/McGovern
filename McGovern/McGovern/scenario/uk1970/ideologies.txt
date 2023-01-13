@@ -1,3 +1,39 @@
 socialdemocracy:
-
+	fullname=Social Democracy
+	effects:
+		poor.appeal+0.1
+		tradeunionists.appeal+0.1
+		wealthy.appeal-0.1
+		welfarestate.mean+0.5
+		tradeunions.mean+0.5
 socialism:
+	fullname=Socialism
+	effects:
+		poor.appeal+0.2
+		tradeunionists.appeal+0.3
+		wealthy.appeal-0.2
+		middleclass.appeal-0.1
+		welfarestate.mean+1
+		tradeunions.mean+1
+		nato.mean-0.2
+		europe.mean-0.1
+communism:
+	fullname=Communism
+	effects:
+		poor.appeal+0.2
+		tradeunionists.appeal+0.5
+		wealthy.appeal-0.4
+		middleclass.appeal-0.2
+		welfarestate.mean+2
+		tradeunions.mean+1.5
+		nato.mean-0.5
+		europe.mean-0.2
+
+liberalism:
+	fullname=Liberalism
+	effects:
+		middleclass.appeal+0.1
+		wealthy.appeal+0.1
+		tradeunionists.appeal-0.1
+		socialreforms.mean+0.7
+		europe.mean+0.3

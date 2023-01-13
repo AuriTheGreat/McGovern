@@ -61,6 +61,7 @@
     <Content Include="scenario\uk1970\regionissue.txt" />
     <Content Include="scenario\uk1970\regionpopulation.txt" />
     <Content Include="scenario\uk1970\regions.txt" />
+    <Content Include="scenario\uk1970\traits.txt" />
     <Content Include="scenario\uk1970\triggers.txt" />
     <Content Include="scenario\uk1970\variables.txt" />
     <Content Include="scenario\uk1974\main.txt" />

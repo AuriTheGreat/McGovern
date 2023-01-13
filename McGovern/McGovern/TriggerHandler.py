@@ -27,7 +27,7 @@ def generatevariables(gamedata):
     iterablevariableobjects=[gamedata.scenario.parties, gamedata.scenario.regionissues, gamedata.scenario.partyissues, 
                              gamedata.scenario.partypopulations, gamedata.scenario.regionpopulations, gamedata.scenario.variables]
     variableobjects=[gamedata.scenario.main]
-    #listofvariables.update({"date": gamedata.scenario.main.currentdate})
+    #listofvariables.update({"date": currecurrentcurrentscenario.main.currentdate})
     for i in variableobjects:
             listofvariables.update({i.validvariables()[k]:((i.getvariable, [k]), (i.setvariable, [k])) for k in i.validvariables()})
 
@@ -43,29 +43,37 @@ def generatevariables(gamedata):
 
     """
     print("####################################################################")
-    print(listofvariables)
+    print(listofvariables.keys())
     print(listofvariables["date"][0][0](*listofvariables["date"][0][1]))
     """
 
 
-def variablehandler(gamedata, value, mode='get', variable=None, operator=None):
+def variablehandler(value, mode='get', variable=None, operator=None):
     #modes: 'get', 'set'
+    errorcount=0
     if value in listofvariables:
         if mode=='get':
             return listofvariables[value][0][0](*listofvariables[value][0][1])
         else:
+            print(mode, value, operator, variable)
             listofvariables[value][1][0](*listofvariables[value][1][1], variable, operator)
             return None
-    
+    else:
+        errorcount+=1
+
     try:
         return datetime.datetime.strptime(str(value), '"%Y-%m-%d"')
         #print(datetime.datetime.strptime(value, '"%Y-%m-%d"'))
     except ValueError:
-        pass
+        errorcount+=1
+
+    if errorcount==2:
+        print(mode, variable, operator, value, "NOT FOUND")
+    
 
     return value
 
-def calculatequerydeeper(gamedata, parsedtext):
+def calculatequerydeeper(parsedtext):
     debuggingmode=False
 
     if debuggingmode==True:
@@ -98,7 +106,7 @@ def calculatequerydeeper(gamedata, parsedtext):
     action=None
     for i in parsedtext:
         if isinstance(i, list):
-            answer=calculatequerydeeper(gamedata, i)
+            answer=calculatequerydeeper(i)
             if action==None:
                 value=answer
             else:
@@ -120,7 +128,7 @@ def calculatequerydeeper(gamedata, parsedtext):
                     if debuggingmode==True:
                         print(value)
             else:
-                newvalue=variablehandler(gamedata, i)
+                newvalue=variablehandler(i)
                 if newvalue!=None:
                     if action==None:
                         value=newvalue
@@ -135,7 +143,7 @@ def calculatequerydeeper(gamedata, parsedtext):
         print(value)
     return value
 
-def checkcondition(gamedata, condition):
+def checkcondition(condition):
     condition=condition.replace('^', '**').replace('&&', ' and ').replace('||', ' or ')
     condition='('+condition+')'
 
@@ -143,17 +151,17 @@ def checkcondition(gamedata, condition):
     parens     = pyparsing.nestedExpr( '(', ')', content=thecontent)
     parsedtext=parens.parseString(condition).asList()
 
-    value=calculatequerydeeper(gamedata, parsedtext)
+    value=calculatequerydeeper(parsedtext)
 
     print(value, parsedtext)
 
     return value
     
 
-def checktriggers(gamedata):
+def checktriggers():
     triggeredevents=[]
 
-    triggeredtriggers=[i for i in gamedata.scenario.triggers if i.triggerable==True and checkcondition(gamedata, i.condition)==True and random.uniform(0, 1)<=i.chance]
+    triggeredtriggers=[i for i in currentscenario.triggers if i.triggerable==True and checkcondition(i.condition)==True and random.uniform(0, 1)<=i.chance]
     for i in triggeredtriggers:
         if i.triggeronce==True:
             i.triggerable=False
@@ -164,10 +172,9 @@ def checktriggers(gamedata):
 
     return triggeredevents
 
-def executeeffect(gamedata, effect):
+def executeeffect(effect, reverse=False):
     if effect=="":
         return
-    print(effect)
     operator, value=None, None
     string=re.search(".*\+(.*)", effect)
     if string:
@@ -186,13 +193,23 @@ def executeeffect(gamedata, effect):
     if string:
         variable="".join(string[1].rstrip().lstrip())
 
-    variablehandler(gamedata, variable, "set", value, operator)
+    if reverse: # makes operator the opposite, for example if you want to add to variable, it will remove instead
+        if operator=="+":
+            variablehandler(variable, "set", value, "-")
+        elif operator=="-":
+            variablehandler(variable, "set", value, "+")
+        else:
+            variablehandler(variable, "set", value, operator)
+    else:
+        variablehandler(variable, "set", value, operator)
 
 
-def executeevents(gamedata, triggeredevents):
-    [executeeffect(gamedata, j) for i in triggeredevents for j in i.effects]
+def executeevents(triggeredevents):
+    [executeeffect(j) for i in triggeredevents for j in i.effects]
 
-def main(gamedata):
-    triggeredevents=checktriggers(gamedata)
-    executeevents(gamedata, triggeredevents)
+def main(scenario):
+    global currentscenario
+    currentscenario=scenario
+    triggeredevents=checktriggers()
+    executeevents(triggeredevents)
     print(triggeredevents)

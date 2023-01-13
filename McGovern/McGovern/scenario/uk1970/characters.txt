@@ -2,49 +2,69 @@ wilson:
 	name=Harold Wilson
 	party=labour
 	leader=True
-	aiideologies:
+	ideologies:
 		socialdemocracy
+	traits:
+		silver-tongued
+		intellectual
 callaghan:
 	name=James Callaghan
 	party=labour
 	leader=False
-	aiideologies:
+	ideologies:
 		socialdemocracy
+	traits:
+		warveteran	
 jenkins:
 	name=Roy Jenkins
 	party=labour
 	leader=False
-	aiideologies:
+	ideologies:
 		socialdemocracy
 		liberalism
 healey:
 	name=Denis Healey
 	party=labour
 	leader=False
-	aiideologies:
+	ideologies:
 		socialdemocracy
 		multilateralism
+	traits:
+		hot-tempered
+		warveteran
 benn:
 	name=Tony Benn
 	party=labour
 	leader=False
-	aiideologies:
+	ideologies:
 		socialism
+	traits:
+		silver-tongued
 foot:
 	name=Michael Foot
 	party=labour
 	leader=False
-	aiideologies:
+	ideologies:
 		socialism
-		unilateralism
+		unilateralism		
 heath:
 	name=Edward Heath
 	party=conservative
 	leader=True	
+	ideologies:
+		conservative
+	traits:
+		warveteran
 powell:
 	name=Enoch Powell
 	party=conservative
-	leader=False	
+	leader=False
+	ideologies:
+		monetarist
+		anti-immigration
+	traits:
+		intellectual
+		warveteran
 maudling:
 	name=Reginald Maudling
 	party=conservative
@@ -53,10 +73,14 @@ thorpe:
 	name=Jeremy Thorpe
 	party=liberal
 	leader=True	
+	ideologies:
+		liberalism
 gollan:
 	name=John Gollan
 	party=communist
 	leader=True	
+	ideologies:
+		communism
 wolfe:
 	name=William Wolfe
 	party=snp

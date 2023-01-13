@@ -3,15 +3,17 @@ from pickle import TRUE
 import numpy as np
 import re
 import datetime
+import TriggerHandler
 
 class Scenario:
-      def __init__(self, name, main=None, base=None, issues=None, parties=None, ideologies=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partypopulations=None, regionissues=None, regionpopulations=None, partyregions=None, events=None, decisions=None, triggers=None, variables=None):
+      def __init__(self, name, main=None, base=None, issues=None, parties=None, ideologies=None, traits=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partypopulations=None, regionissues=None, regionpopulations=None, partyregions=None, events=None, decisions=None, triggers=None, variables=None):
         self.name = name
         self.main = main
         self.base = base
         self.issues = issues
         self.parties = parties
         self.ideologies = ideologies
+        self.traits = traits
         self.characters = characters
         self.outcomes = outcomes
         self.regions = regions
@@ -54,7 +56,6 @@ class Scenario:
             else:
                 print("|", "Leader".rjust(20), "|", "None"[0:70].ljust(70), "|")
             print("|", "Power".rjust(20), "|", str(round(i.power,4))[0:70].ljust(70), "|")
-            print("|", "Ideologies".rjust(20), "|", ", ".join(i.ideologies)[0:70].ljust(70), "|")
             print("+" + "".join(["-" for c in range(22)]) + "+" + "".join(["-" for c in range(72)]) + "+")
             print("|", "".rjust(20), "|", "Issues"[0:70].center(70).ljust(70), "|")
             print("|", "".rjust(20), "|", "Name"[0:20].center(20).ljust(20), "Mean"[0:70].center(24).ljust(24), "Variance"[0:70].center(24).ljust(24), "|")
@@ -97,11 +98,14 @@ class Scenario:
         print("|", "CHARACTERS".center(93), "|")
         print("+" + "".join(["-" for c in range(95)]) + "+")
         for i in self.characters:
+            if i.name==None:
+                continue
             print("|", i.name.center(93), "|")
             print("+" + "".join(["-" for c in range(95)]) + "+")
             print("|", "Name".rjust(20), "|", i.name[0:70].ljust(70), "|")
             print("|", "Party".rjust(20), "|", str(i.party.fullname)[0:70].ljust(70), "|")
-            print("|", "Ideologies".rjust(20), "|", ", ".join(i.ideologies)[0:70].ljust(70), "|")
+            print("|", "Ideologies".rjust(20), "|", ", ".join([j.fullname for j in i.ideologies])[0:70].ljust(70), "|")
+            print("|", "Traits".rjust(20), "|", ", ".join([j.fullname for j in i.traits])[0:70].ljust(70), "|")
             print("+" + "".join(["-" for c in range(95)]) + "+")
       def printalldata(self):
         self.printbase()
@@ -302,6 +306,100 @@ def getpopulations(scenarioname):
 
     return np.array(populations)
 
+def getideologies(scenarioname):
+    ideologies=[]
+    class Ideology:
+      def __init__(self, name, fullname, effects):
+        self.name = name
+        self.fullname = fullname
+        self.effects = effects
+    
+    
+    f = open ( 'scenario/' + scenarioname + '/ideologies.txt' , 'r')
+    l = []
+    l = np.array([ line.split() for line in f], dtype=object)
+
+    currentideology=None
+    fullname, effects="",[]
+    effectreader=False
+    
+    for i in l:
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
+        string=re.search("(.*):", newi)
+        if string:
+            effectreader=False
+            if string.group(1)=='effects':
+                effectreader=True
+            else:
+                if currentideology!=None:
+                    ideologies.append(Ideology(currentideology, fullname, effects))
+                currentideology="".join(string[1].rstrip().lstrip())
+                fullname, effects="",[]
+        else:
+            if effectreader==True:
+                string=re.search("(.*)", newi)
+                if string:
+                    effects.append("".join(string[1].rstrip().lstrip()))
+            else:
+                string=re.search(".*fullname.*=(.*)", newi)
+                if string:
+                    word="".join(string[1].rstrip().lstrip())
+                    fullname=word
+                    continue
+    
+    ideologies.append(Ideology(currentideology, fullname, effects))
+
+    return np.array(ideologies)
+
+def gettraits(scenarioname):
+    traits=[]
+    class Trait:
+      def __init__(self, name, fullname, effects):
+        self.name = name
+        self.fullname = fullname
+        self.effects = effects
+    
+    
+    f = open ( 'scenario/' + scenarioname + '/traits.txt' , 'r')
+    l = []
+    l = np.array([ line.split() for line in f], dtype=object)
+
+    currenttrait=None
+    fullname, effects="",[]
+    effectreader=False
+    
+    for i in l:
+        newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
+        if not newi:
+            continue
+        string=re.search("(.*):", newi)
+        if string:
+            effectreader=False
+            if string.group(1)=='effects':
+                effectreader=True
+            else:
+                if currenttrait!=None:
+                    traits.append(Trait(currenttrait, fullname, effects))
+                currenttrait="".join(string[1].rstrip().lstrip())
+                fullname, effects="",[]
+        else:
+            if effectreader==True:
+                string=re.search("(.*)", newi)
+                if string:
+                    effects.append("".join(string[1].rstrip().lstrip()))
+            else:
+                string=re.search(".*fullname.*=(.*)", newi)
+                if string:
+                    word="".join(string[1].rstrip().lstrip())
+                    fullname=word
+                    continue
+    
+    traits.append(Trait(currenttrait, fullname, effects))
+
+    return np.array(traits)
+
 def getregions(scenarioname, base):
     regions=[]
 
@@ -375,10 +473,11 @@ def getparties(scenarioname):
     parties=[]
     
     class Party:
-      def __init__(self, name, fullname, power, playable, color, ideologies, ruling=False, issues=None, populations=None, leader=None, player=False, nationalseats=0):
+      def __init__(self, name, fullname, power, playable, color, ideologies, ruling=False, issues=None, populations=None, leader=None, player=False, characters=None, nationalseats=0):
         self.name = name
         self.fullname = fullname
         self.leader = leader
+        self.characters=characters
         self.power = power
         self.playable = playable
         self.color = color
@@ -403,7 +502,24 @@ def getparties(scenarioname):
     
       def setvariable(self, attr, variable, operator):
           if attr=="leader":
-              pass
+              if operator=="=":
+                  newleader=next((x for x in self.characters if x.identifier == variable), None)
+                  if newleader:
+                    #Removes effects from old leader
+                    for i in self.leader.ideologies:
+                        for j in i.effects:
+                            TriggerHandler.executeeffect(self.name+ "." + j, True)
+                    for i in self.leader.traits:
+                        for j in i.effects:
+                            TriggerHandler.executeeffect(self.name+ "." + j, True)
+                    #Adds effcets from new leader
+                    for i in newleader.ideologies:
+                        for j in i.effects:
+                            TriggerHandler.executeeffect(self.name+ "." + j)
+                    for i in newleader.traits:
+                        for j in i.effects:
+                            TriggerHandler.executeeffect(self.name+ "." + j)
+                    object.__setattr__(self, attr, newleader)
           else:
             if operator=="+":
                 object.__setattr__(self, attr, super(Party, self).__getattribute__(attr)+float(variable))
@@ -484,16 +600,17 @@ def getparties(scenarioname):
 
     return np.array(parties)
 
-def getcharacters(scenarioname, parties):
+def getcharacters(scenarioname, parties, mainideologies, maintraits):
     characters=[]
     
     class Character:
-      def __init__(self, identifier, name, party, leader, ideologies):
+      def __init__(self, identifier, name, party, leader, ideologies, traits):
         self.identifier = identifier
         self.name = name
         self.party = party
         self.leader = leader
         self.ideologies = ideologies
+        self.traits = traits
     
     
     f = open ( 'scenario/' + scenarioname + '/characters.txt' , 'r')
@@ -501,31 +618,43 @@ def getcharacters(scenarioname, parties):
     l = np.array([ line.split() for line in f], dtype=object)
     
     currentcharacter=None
-    name, party,leader,ideologies=None, None,False,[]
-    ideologyreader=None
+    name, party, leader, ideologies, traits=None, None, False, [], []
+    ideologyreader, traitreader=False, False
     currentparty, currentindex=None,None
-    
+
     for i in l:
         newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
         if not newi:
             continue
         string=re.search("(.*):", newi)
         if string:
-            ideologyreader=None
-            if string.group(1)=='aiideologies':
-                ideologyreader='aiideologies'
+            ideologyreader, traitreader=False, False
+            if string.group(1)=='ideologies':
+                ideologyreader=True
+            elif string.group(1)=='traits':
+                traitreader=True
             else:
                 if currentcharacter!=None:
-                    characters.append(Character(currentcharacter, name, party, leader, ideologies))
+                    characters.append(Character(currentcharacter, name, party, leader, ideologies, traits))
                     if leader==True:
                         currentindex.leader=characters[len(characters)-1]
                 currentcharacter="".join(string[1].rstrip().lstrip())
-                name, party,leader,ideologies=None, None,False,[]
+                name, party, leader, ideologies, traits=None, None, False, [], []
         else:
-            if ideologyreader!=None:
+            if ideologyreader:
                 string=re.search("(.*)", newi)
                 if string:
-                    ideologies.append("".join(string[1].rstrip().lstrip()))
+                    string="".join(string[1].rstrip().lstrip())
+                    ideology=next((x for x in mainideologies if x.name == string), None)
+                    if ideology:
+                        ideologies.append(ideology)
+            elif traitreader:
+                string=re.search("(.*)", newi)
+                if string:
+                    string="".join(string[1].rstrip().lstrip())
+                    trait=next((x for x in maintraits if x.name == string), None)
+                    if trait:
+                        traits.append(trait)
             else:
                 string=re.search(".*name.*=(.*)", newi)
                 if string:
@@ -548,11 +677,18 @@ def getcharacters(scenarioname, parties):
                         leader=False
                     continue
     
-    characters.append(Character(currentcharacter, name, party, leader, ideologies))
+    characters.append(Character(currentcharacter, name, party, leader, ideologies, traits))
     if leader==True:
         currentindex.leader=characters[len(characters)-1]
 
     characters.sort(key=lambda x: x.leader, reverse=True)
+
+    for i in parties:
+        i.characters=[]
+        for j in characters:
+            if j.party==i:
+                i.characters.append(j)
+
     return np.array(characters)
 
 def partyissuehandler(scenarioname, parties, issues):
@@ -565,10 +701,15 @@ def partyissuehandler(scenarioname, parties, issues):
         self.mean = mean
         self.variance = variance
 
+      def __getattribute__(self, item):
+          if item=="mean":
+              return min(max(super(PartyIssue, self).__getattribute__(item), -5.0),5.0)
+          return super(PartyIssue, self).__getattribute__(item)
+
       def validvariables(self):
           #The key is the name of the attribute. The value describes how the variable is formatted.
-          return {"mean": self.issue.name+"."+self.party.name+".mean",
-                  "variance": self.issue.name+"."+self.party.name+".variance"}
+          return {"mean": self.party.name+"."+self.issue.name+".mean",
+                  "variance": self.party.name+"."+self.issue.name+".variance"}
       
       def getvariable(self, attr):
           return super(PartyIssue, self).__getattribute__(attr)
@@ -646,11 +787,16 @@ def regionissuehandler(scenarioname, regions, issues):
         self.variance = variance
         self.importance = importance
 
+      def __getattribute__(self, item):
+        if item=="mean":
+            return min(max(super(RegionIssue, self).__getattribute__(item), -5.0),5.0)
+        return super(RegionIssue, self).__getattribute__(item)
+
       def validvariables(self):
           #The key is the name of the attribute. The value describes how the variable is formatted.
-          return {"mean": self.issue.name+"."+self.region.name+".mean",
-                  "variance": self.issue.name+"."+self.region.name+".variance",
-                  "importance": self.issue.name+"."+self.region.name+".importance"}
+          return {"mean": self.region.name+"."+self.issue.name+".mean",
+                  "variance": self.region.name+"."+self.issue.name+".variance",
+                  "importance": self.region.name+"."+self.issue.name+".importance"}
       
       def getvariable(self, attr):
           return super(RegionIssue, self).__getattribute__(attr)
@@ -735,7 +881,7 @@ def regionpopulationhandler(scenarioname, regions, populations):
 
       def validvariables(self):
           #The key is the name of the attribute. The value describes how the variable is formatted.
-          return {"influence": self.population.name+"."+self.region.name+".influence"}
+          return {"influence": self.region.name+"."+self.population.name+".influence"}
       
       def getvariable(self, attr):
           return super(RegionPopulation, self).__getattribute__(attr)
@@ -809,7 +955,7 @@ def partypopulationhandler(scenarioname, parties, populations):
 
       def validvariables(self):
           #The key is the name of the attribute. The value describes how the variable is formatted.
-          return {"appeal": self.population.name+"."+self.party.name+".appeal"}
+          return {"appeal": self.party.name+"."+self.population.name+".appeal"}
       
       def getvariable(self, attr):
           return super(PartyPopulation, self).__getattribute__(attr)
@@ -1138,6 +1284,18 @@ def getvariables(scenarioname):
 
     return variables
 
+def initialisescenario(scenario): #is executed after trigger variable creation
+    #Triggering leader ideological effects
+    for i in scenario.parties:
+        if i.leader:
+            for j in i.leader.ideologies:
+                for k in j.effects:
+                    TriggerHandler.executeeffect(i.name+"."+k)
+            for j in i.leader.traits:
+                for k in j.effects:
+                    TriggerHandler.executeeffect(i.name+"."+k)
+
+
 def main(scenarioname):
     scenario=Scenario(scenarioname)
     scenario.base=getbase(scenarioname)
@@ -1145,8 +1303,10 @@ def main(scenarioname):
     scenario.parties=getparties(scenarioname)
     scenario.issues=getissues(scenarioname)
     scenario.populations=getpopulations(scenarioname)
+    scenario.ideologies=getideologies(scenarioname)
+    scenario.traits=gettraits(scenarioname)
     scenario.regions=getregions(scenarioname, scenario.base)
-    scenario.characters=getcharacters(scenarioname,scenario.parties)
+    scenario.characters=getcharacters(scenarioname,scenario.parties,scenario.ideologies,scenario.traits)
     scenario.partyissues=partyissuehandler(scenarioname,scenario.parties,scenario.issues)
     scenario.regionissues=regionissuehandler(scenarioname,scenario.regions,scenario.issues)
     scenario.regionpopulations=regionpopulationhandler(scenarioname,scenario.regions,scenario.populations)

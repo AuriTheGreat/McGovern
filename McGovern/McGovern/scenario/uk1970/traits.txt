@@ -1,0 +1,4 @@
+warveteran:
+	fullname=War Veteran
+	effects:
+		veterans.appeal+0.1
