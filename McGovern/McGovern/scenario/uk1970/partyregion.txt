@@ -1,589 +1,589 @@
 ### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.
 labour:
-	London:
+	london:
 		power=0.0
 		controlledseats=65 #These are seats that party currently has in parliament.
 		guaranteedseats=32 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=0.0
 		controlledseats=57 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=0.0
 		controlledseats=12 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=0.0
 		controlledseats=46 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=0.0
 		controlledseats=32 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=0.0
 		controlledseats=39 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=0.0
 		controlledseats=15 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=0.0
 		controlledseats=11 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=0.0
 		controlledseats=27 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=0.0
 		controlledseats=32 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=0.0
 		controlledseats=27 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=-315.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 conservative:
-	London:
+	london:
 		power=0.0
 		controlledseats=36 #These are seats that party currently has in parliament.
 		guaranteedseats=25 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=0.0
 		controlledseats=25 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=0.0
 		controlledseats=49 #These are seats that party currently has in parliament.
 		guaranteedseats=5 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=0.0
 		controlledseats=20 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=0.0
 		controlledseats=22 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=0.0
 		controlledseats=15 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=0.0
 		controlledseats=26 #These are seats that party currently has in parliament.
 		guaranteedseats=2 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=0.0
 		controlledseats=29 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=0.0
 		controlledseats=13 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=0.0
 		controlledseats=3 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=0.0
 		controlledseats=4 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=0.0
 		controlledseats=11 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 liberal:
-	London:
+	london:
 		power=0.0
 		controlledseats=1 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=0.0
 		controlledseats=1 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=0.0
 		controlledseats=5 #These are seats that party currently has in parliament.
 		guaranteedseats=3 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=-20.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=0.0
 		controlledseats=1 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=20.0
 		controlledseats=3 #These are seats that party currently has in parliament.
 		guaranteedseats=2 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=-20.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=0.0
 		controlledseats=1 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=-65.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 communist:
-	London:
+	london:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 snp:
-	London:
+	london:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 plc:
-	London:
+	london:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 unity:
-	London:
+	london:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=2 #This is the lowest amount of seats the party will win in next election.
 prounionist:
-	London:
+	london:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=1 #This is the lowest amount of seats the party will win in next election.
 replabour:
-	London:
+	london:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=0.0
 		controlledseats=1 #These are seats that party currently has in parliament.
 		guaranteedseats=1 #This is the lowest amount of seats the party will win in next election.
 inderep:
-	London:
+	london:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 democratic:
-	London:
+	london:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=-0.25
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=4.5
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 speaker:
-	London:
+	london:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North West:
+	northwest:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South East:
+	southeast:
 		power=10000002.0
 		controlledseats=1 #These are seats that party currently has in parliament.
 		guaranteedseats=1 #This is the lowest amount of seats the party will win in next election.
-	Scotland:
+	scotland:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	West Midlands:
+	westmidlands:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Yorkshire and the Humber:
+	yorkshire:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Eastern:
+	eastern:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	South West:
+	southwest:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	East Midlands:
+	eastmidlands:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Wales:
+	wales:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	North East:
+	northeast:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
-	Northern Ireland:
+	northernireland:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.

@@ -600,7 +600,7 @@ def regionview(scenarioname, gamedata, region='National', page=0):
     if rightlimit>len(regions)-1:
         rightlimit=0
     Button(10,120,screen_width/(1200/50), screen_height/(700/50), '<', regionview, [scenarioname, gamedata, regions[leftlimit]])
-    Rectangle(70,120,screen_width/(1200/1060), screen_height/(700/50), '#003366', region)
+    Rectangle(70,120,screen_width/(1200/1060), screen_height/(700/50), '#003366', region if region=="National" else [i.fullname for i in gamedata.scenario.regions if region==i.name][0])
     Button(1140,120,screen_width/(1200/50), screen_height/(700/50), '>', regionview, [scenarioname, gamedata, regions[rightlimit]])
     if region=='National':
         partycount=len([j for j in gamedata.polling.aggregated.totalpartyresults if j.votes>0 or j.seats>0])
@@ -672,14 +672,15 @@ def partyview(scenarioname, gamedata, limit=None):
     biggestregionpercentage, lowestregionpercentage = None,None
     if next((x.votes for x in gamedata.polling.aggregated.totalpartyresults if x.party.fullname == limit), 0):
         biggestregionpercentage, lowestregionpercentage=max([j.percentage for j in gamedata.polling.aggregated.partyregionresults if j.party.fullname==limit]), min([j.percentage for j in gamedata.polling.aggregated.partyregionresults if j.party.fullname==limit and j.percentage>0])
-        biggestregion, lowestregion=next((x for x in gamedata.polling.aggregated.partyregionresults if x.party == currentparty and x.percentage==biggestregionpercentage), None).region.name, next((x for x in gamedata.polling.aggregated.partyregionresults if x.party == currentparty and x.percentage==lowestregionpercentage), None).region.name
-    Rectangle(220,300,screen_width/(1200/350), screen_height/(700/50), '#003366', str(next((x for x in gamedata.polling.aggregated.totalpartyresults if x.party == currentparty), None).seats))
+        biggestregion, lowestregion=next((x for x in gamedata.polling.aggregated.partyregionresults if x.party == currentparty and x.percentage==biggestregionpercentage), None).region.fullname, next((x for x in gamedata.polling.aggregated.partyregionresults if x.party == currentparty and x.percentage==lowestregionpercentage), None).region.fullname
+    projectedseats=next((x for x in gamedata.polling.aggregated.totalpartyresults if x.party == currentparty), None).seats
+    Rectangle(220,300,screen_width/(1200/350), screen_height/(700/50), '#003366', str(currentparty.nationalseats) + " (projecting " + str(projectedseats) + ")")
     if biggestregionpercentage!=None:
         Rectangle(10,360,screen_width/(1200/200), screen_height/(700/50), '#003366', "Strongest at")
-        Button(220,360,screen_width/(1200/350), screen_height/(700/50), biggestregion[0:15] + " (" + str(round(biggestregionpercentage, 1)) + "%)", regionview,
+        Button(220,360,screen_width/(1200/350), screen_height/(700/50), biggestregion + " (" + str(round(biggestregionpercentage, 1)) + "%)", regionview,
                [scenarioname, gamedata, biggestregion], '#003366' )
         Rectangle(10,420,screen_width/(1200/200), screen_height/(700/50), '#003366', "Weakest at")
-        Button(220,420,screen_width/(1200/350), screen_height/(700/50), lowestregion[0:15] + " (" + str(round(lowestregionpercentage, 1)) + "%)", regionview,
+        Button(220,420,screen_width/(1200/350), screen_height/(700/50), lowestregion + " (" + str(round(lowestregionpercentage, 1)) + "%)", regionview,
                [scenarioname, gamedata, lowestregion], '#003366' )
 
         Map(600,180,360,500, 'scenario/' + scenarioname + '/gfx/map.png', gamedata, 'party', currentparty)
@@ -708,6 +709,8 @@ def leaderview(scenarioname, gamedata, party):
     Rectangle(270,180,screen_width/(1200/250), screen_height/(700/50), '#003366', "Traits")
     for count, i in enumerate(party.leader.traits):
         Rectangle(270,240+count*60,screen_width/(1200/250), screen_height/(700/50), '#003366', i.fullname)
+    Rectangle(10,480,screen_width/(1200/250), screen_height/(700/50), '#003366', "Home Region")
+    Rectangle(270,480,screen_width/(1200/250), screen_height/(700/50), '#003366', party.leader.homeregion.fullname)
     Rectangle(10,540,screen_width/(1200/250), screen_height/(700/50), '#003366', "Potential Leaders")
     for count, i in enumerate([j for j in party.characters if j!=party.leader]):
         Rectangle(10+count*190,600,screen_width/(1200/180), screen_height/(700/50), '#003366', i.name)
@@ -747,7 +750,7 @@ def issueview(scenarioname, gamedata, issue=None, region=None, page=0):
     if rightregion>len(regions)-1:
         rightregion=0
     Button(10,120,screen_width/(1200/50), screen_height/(700/50), '<', issueview, [scenarioname, gamedata, issue, regions[leftregion]])
-    Rectangle(70,120,screen_width/(1200/1060), screen_height/(700/50), '#003366', region)
+    Rectangle(70,120,screen_width/(1200/1060), screen_height/(700/50), '#003366', region if region=="National" else [i.fullname for i in gamedata.scenario.regions if region==i.name][0])
     Button(1140,120,screen_width/(1200/50), screen_height/(700/50), '>', issueview, [scenarioname, gamedata, issue, regions[rightregion]])
     issues=[i.fullname for i in gamedata.scenario.issues]
     if not issue:
@@ -782,7 +785,7 @@ def issueview(scenarioname, gamedata, issue=None, region=None, page=0):
             division="Divided"
         else:
             division="United"
-        Button(10,240,screen_width/(1200/350), screen_height/(700/50), str(currentregionissue.region.name), regionview, [scenarioname, gamedata, region], "#003366")
+        Button(10,240,screen_width/(1200/350), screen_height/(700/50), str(currentregionissue.region.fullname), regionview, [scenarioname, gamedata, region], "#003366")
         Rectangle(370,240,screen_width/(1200/300), screen_height/(700/50), '#003366', division)
         Rectangle(680,240,screen_width/(1200/300), screen_height/(700/50), '#003366', currentregionissue.issue.levels[min(math.floor((currentregionissue.mean+5)/+(10/len(currentregionissue.issue.levels))),len(currentregionissue.issue.levels)-1)])
         for count, i in enumerate([j for j in gamedata.scenario.partyissues if issue==j.issue.fullname]):
@@ -827,7 +830,7 @@ def pollingview(scenarioname, gamedata, region="National", page=0):
     if rightlimit>len(regions)-1:
         rightlimit=0
     Button(10,120,screen_width/(1200/50), screen_height/(700/50), '<', pollingview, [scenarioname, gamedata, regions[leftlimit], 0])
-    Rectangle(70,120,screen_width/(1200/1060), screen_height/(700/50), '#003366', region)
+    Rectangle(70,120,screen_width/(1200/1060), screen_height/(700/50), '#003366', region if region=="National" else [i.fullname for i in gamedata.scenario.regions if region==i.name][0])
     Button(1140,120,screen_width/(1200/50), screen_height/(700/50), '>', pollingview, [scenarioname, gamedata, regions[rightlimit], 0])
 
     pollcount=len(gamedata.polling.polls)
@@ -878,7 +881,7 @@ def pollview(scenarioname, gamedata, poll, region='National', page=0):
     if rightlimit>len(regions)-1:
         rightlimit=0
     Button(10,120,screen_width/(1200/50), screen_height/(700/50), '<', pollview, [scenarioname, gamedata, poll, regions[leftlimit]])
-    Rectangle(70,120,screen_width/(1200/1060), screen_height/(700/50), '#003366', region)
+    Rectangle(70,120,screen_width/(1200/1060), screen_height/(700/50), '#003366', region if region=="National" else [i.fullname for i in gamedata.scenario.regions if region==i.name][0])
     Button(1140,120,screen_width/(1200/50), screen_height/(700/50), '>', pollview, [scenarioname, gamedata, poll, regions[rightlimit]])
     if region=='National':
         partycount=len([j for j in poll.totalpartyresults if j.votes>0 or j.seats>0])

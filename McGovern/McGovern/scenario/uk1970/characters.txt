@@ -2,15 +2,17 @@ wilson:
 	name=Harold Wilson
 	party=labour
 	leader=True
+	homeregion=northwest
 	ideologies:
 		socialdemocracy
 	traits:
-		silver-tongued
+		silvertongued
 		intellectual
 callaghan:
 	name=James Callaghan
 	party=labour
 	leader=False
+	homeregion=wales
 	ideologies:
 		socialdemocracy
 	traits:
@@ -19,39 +21,49 @@ jenkins:
 	name=Roy Jenkins
 	party=labour
 	leader=False
+	homeregion=westmidlands
 	ideologies:
 		socialdemocracy
 		liberalism
+	traits:
+		warveteran
 healey:
 	name=Denis Healey
 	party=labour
 	leader=False
+	homeregion=yorkshire
 	ideologies:
 		socialdemocracy
 		multilateralism
 	traits:
-		hot-tempered
+		hottempered
 		warveteran
 benn:
 	name=Tony Benn
 	party=labour
 	leader=False
+	homeregion=southwest
 	ideologies:
 		socialism
 	traits:
-		silver-tongued
+		silvertongued
 foot:
 	name=Michael Foot
 	party=labour
 	leader=False
+	homeregion=wales
 	ideologies:
 		socialism
 		unilateralism		
+	traits:
+		unifier
 heath:
 	name=Edward Heath
 	party=conservative
 	leader=True	
+	homeregion=london
 	ideologies:
+		onenationtory
 		conservative
 	traits:
 		warveteran
@@ -59,6 +71,7 @@ powell:
 	name=Enoch Powell
 	party=conservative
 	leader=False
+	homeregion=westmidlands
 	ideologies:
 		monetarist
 		anti-immigration
@@ -69,39 +82,63 @@ maudling:
 	name=Reginald Maudling
 	party=conservative
 	leader=False	
+	homeregion=london
+	ideologies:
+		conservative
+	traits:
+		unifier
 thorpe:
 	name=Jeremy Thorpe
 	party=liberal
 	leader=True	
+	homeregion=southwest
 	ideologies:
 		liberalism
 gollan:
 	name=John Gollan
 	party=communist
-	leader=True	
+	leader=True
+	homeregion=scotland
 	ideologies:
 		communism
 wolfe:
 	name=William Wolfe
 	party=snp
-	leader=True	
+	leader=True
+	homeregion=scotland
+	ideologies:
+		nationalism
 evans:
 	name=Gwynfor Evans
 	party=plc
-	leader=True	
+	leader=True
+	homeregion=wales
+	ideologies:
+		nationalism
 paisley:
 	name=Ian Paisley
 	party=prounionist
 	leader=True	
+	homeregion=northernireland
 fitt:
 	name=Gerry Fitt
 	party=replabour
 	leader=True	
+	homeregion=northernireland
+	ideologies:
+		nationalism
 donnelly:
 	name=Desmond Donnelly
 	party=democratic
 	leader=True
+	homeregion=wales
+	ideologies:
+		monetarism
+		conservative
+	traits:
+		warveteran
 king:
 	name=Horace King
 	party=speaker
 	leader=True
+	homeregion=southeast

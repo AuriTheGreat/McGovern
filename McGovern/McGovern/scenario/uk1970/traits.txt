@@ -1,4 +1,27 @@
 warveteran:
 	fullname=War Veteran
 	effects:
-		veterans.appeal+0.1
+		party.veterans.appeal+0.1
+
+unifier:
+	fullname=Unifier
+	effects:
+		party.powerofleft+0.1
+		party.powerofright+0.1
+
+hottempered:
+	fullname=Hot-tempered
+	effects:
+		party.powerofleft-0.1
+		party.powerofright-0.1
+
+intellectual:
+	fullname=Intellectual
+	effects:
+		party.aristocrats.appeal+0.05
+		party.middleclass.appeal+0.05
+
+silvertongued:
+	fullname=Silver-tongued
+	effects:
+		party.middleclass.appeal+0.1

@@ -5,7 +5,7 @@ worldcup:
 		As defending world champions, England's venture in world cup 
 		is attracting a much keener public interest than the general election. 
 	effects:
-		London.immigration.mean+0.3
+		london.immigration.mean+0.3
 
 titanic:
 	name=Titanic
@@ -13,7 +13,7 @@ titanic:
 	description:
 		Titanic has sunk
 	effects:
-		London.immigration.mean+0.8
+		london.immigration.mean+0.8
 
 devaluation:
 	name=Devaluation
@@ -29,5 +29,5 @@ devaluation:
 		in the world as a key player. On 12 July 1966 the Cabinet rejected the devaluation option 
 		and agreed to a tough package of deflation and austerity instead.
 	effects:
-		labour.power-100
+		labour.power*0.833333
 		labour.powerofright-0.1

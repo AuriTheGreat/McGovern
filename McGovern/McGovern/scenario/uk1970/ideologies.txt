@@ -1,39 +1,71 @@
 socialdemocracy:
 	fullname=Social Democracy
 	effects:
-		poor.appeal+0.1
-		tradeunionists.appeal+0.1
-		wealthy.appeal-0.1
-		welfarestate.mean+0.5
-		tradeunions.mean+0.5
+		party.poor.appeal+0.1
+		party.tradeunionists.appeal+0.1
+		party.wealthy.appeal-0.1
+		party.welfarestate.mean+0.5
+		party.tradeunions.mean+0.5
 socialism:
 	fullname=Socialism
 	effects:
-		poor.appeal+0.2
-		tradeunionists.appeal+0.3
-		wealthy.appeal-0.2
-		middleclass.appeal-0.1
-		welfarestate.mean+1
-		tradeunions.mean+1
-		nato.mean-0.2
-		europe.mean-0.1
+		party.poor.appeal+0.2
+		party.tradeunionists.appeal+0.3
+		party.wealthy.appeal-0.2
+		party.middleclass.appeal-0.1
+		party.welfarestate.mean+1
+		party.tradeunions.mean+1
+		party.nato.mean-0.2
+		party.europe.mean-0.1
 communism:
 	fullname=Communism
 	effects:
-		poor.appeal+0.2
-		tradeunionists.appeal+0.5
-		wealthy.appeal-0.4
-		middleclass.appeal-0.2
-		welfarestate.mean+2
-		tradeunions.mean+1.5
-		nato.mean-0.5
-		europe.mean-0.2
+		party.poor.appeal+0.2
+		party.tradeunionists.appeal+0.5
+		party.wealthy.appeal-0.4
+		party.middleclass.appeal-0.2
+		party.welfarestate.mean+2
+		party.tradeunions.mean+1.5
+		party.nato.mean-0.5
+		party.europe.mean-0.2
 
 liberalism:
 	fullname=Liberalism
 	effects:
-		middleclass.appeal+0.1
-		wealthy.appeal+0.1
-		tradeunionists.appeal-0.1
-		socialreforms.mean+0.7
-		europe.mean+0.3
+		party.middleclass.appeal+0.1
+		party.wealthy.appeal+0.1
+		party.tradeunionists.appeal-0.1
+		party.socialreforms.mean+0.7
+		party.europe.mean+0.3
+
+nationalism:
+	fullname=Nationalism
+	effects:
+		party.devolution.mean+0.5
+
+monetarism:
+	fullname=Monetarism
+	effects:
+		party.economicphilosophy.mean-1
+		party.welfarestate.mean-0.25
+		party.tradeunions.mean-0.5
+		party.wealthy.appeal+0.2
+		party.middleclass.appeal+0.1
+		party.poor.appeal-0.1
+		party.tradeunionists.appeal-0.2
+
+conservative:
+	fullname=Conservatism
+	effects:
+		party.economicphilosophy.mean-0.5
+		party.welfarestate.mean-0.25
+		party.tradeunions.mean-0.25
+		party.farmers.appeal+0.1
+		party.aristocrats.appeal+0.1
+
+onenationtory:
+	fullname=One Nation Tory
+	effects:
+		party.economicphilosophy.mean+0.5
+		party.welfarestate.mean+0.35
+		party.tradeunions.mean+0.25

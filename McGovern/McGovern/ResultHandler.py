@@ -6,7 +6,7 @@ import statsmodels.api as sm
 import numpy as np
 import random
 import math
-#from datetime import datetime
+from datetime import datetime
 
 #####################################################################################
 ###################################### Results ######################################
@@ -262,7 +262,7 @@ class Poll(Results):
 
 
 def getnewpoll(gamedata):
-    poll=Poll(gamedata.scenario, gamedata.scenario.main.currentdate)
+    poll=Poll(gamedata.scenario, gamedata.scenario.main.currentdate-gamedata.scenario.main.turnlength*random.uniform(0,1)) #randomizes date inbetween interval of previous turn and current one
     poll.partyregionresults=[]
 
     #randomizing percentages
@@ -295,7 +295,7 @@ def aggregatepolls(gamedata, polling):
     #x = np.linspace(1,len([j for i in polling.polls for j in i.partyregionresults]),len([j for i in polling.polls for j in i.partyregionresults]))
     #print([i.totalpartyresults.percentage for i in polling.polls if i.totalpartyresults.party.name=='labour'])
 
-    for k in [i for i in polling.polls[0].partyregionresults]:
+    for count,k in enumerate([i for i in polling.polls[0].partyregionresults]):
         y = [j.votes for i in polling.polls for j in i.partyregionresults if j.party==k.party and j.region==k.region]
         x=range(len(y))
         lowess = sm.nonparametric.lowess(y, x, frac=0.6)
@@ -303,13 +303,15 @@ def aggregatepolls(gamedata, polling):
         poll.partyregionresults.append(PartyRegionResult(k.region, k.party, max(0,round(lowess[len(y)-1][1])), 0, 0))
 
         """
-        print(y)
-        print(lowess)
-        print(lowess[len(y)-1][1])
-        plt.plot(x, y, '+')
-        plt.plot(lowess[:, 0], lowess[:, 1])
-        plt.show()
+        if count==0:
+            print(y)
+            print(lowess)
+            print(lowess[len(y)-1][1])
+            plt.plot(x, y, '+')
+            plt.plot(lowess[:, 0], lowess[:, 1])
+            plt.show()
         """
+        
     partyregionresulthandler(gamedata.scenario, mode='polling', partyregionresults=poll.partyregionresults)
 
     poll.totalpartyresults=gettotalresults(gamedata.scenario, poll.partyregionresults)
@@ -326,8 +328,8 @@ def getpolling(gamedata, polling=None, count=1):
     for i in range(count):
         polling.polls.append(getnewpoll(gamedata))
 
+    polling.polls=sorted(polling.polls, key=lambda x: x.date)
     polling.aggregated=aggregatepolls(gamedata, polling)
-
 
     #Sort polls by current winner
     regionsort=[str(i.party.fullname+"-"+i.region.name) for i in polling.aggregated.partyregionresults]
@@ -336,6 +338,5 @@ def getpolling(gamedata, polling=None, count=1):
     for i in polling.polls:
         i.partyregionresults=sorted(i.partyregionresults, key=lambda x: regionsort.index(str(x.party.fullname+"-"+x.region.name)))
         i.totalpartyresults=sorted(i.totalpartyresults, key=lambda x: totalsort.index(str(x.party.fullname)))
-
 
     return polling

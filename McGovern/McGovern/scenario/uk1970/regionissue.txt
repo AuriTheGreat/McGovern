@@ -1,5 +1,5 @@
 ### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.
-London:
+london:
 	immigration:
 		mean=3.0
 		variance=2.5
@@ -36,7 +36,7 @@ London:
 		mean=0.0
 		variance=1.0
 		importance=0.0
-North West:
+northwest:
 	immigration:
 		mean=0.0
 		variance=3.0
@@ -73,7 +73,7 @@ North West:
 		mean=0.0
 		variance=1.0
 		importance=0.0
-South East:
+southeast:
 	immigration:
 		mean=-1.0
 		variance=2.0
@@ -110,7 +110,7 @@ South East:
 		mean=0.0
 		variance=1.0
 		importance=0.0
-Scotland:
+scotland:
 	immigration:
 		mean=1.0
 		variance=3.0
@@ -147,7 +147,7 @@ Scotland:
 		mean=0.0
 		variance=1.0
 		importance=0.0
-West Midlands:
+westmidlands:
 	immigration:
 		mean=-1.0
 		variance=1.5
@@ -184,7 +184,7 @@ West Midlands:
 		mean=0.0
 		variance=1.0
 		importance=0.0
-Yorkshire and the Humber:
+yorkshire:
 	immigration:
 		mean=0.0
 		variance=2.0
@@ -221,7 +221,7 @@ Yorkshire and the Humber:
 		mean=0.0
 		variance=1.0
 		importance=0.0
-Eastern:
+eastern:
 	immigration:
 		mean=0.0
 		variance=3.0
@@ -258,7 +258,7 @@ Eastern:
 		mean=0.0
 		variance=1.0
 		importance=0.0
-South West:
+southwest:
 	immigration:
 		mean=0.0
 		variance=2.0
@@ -295,7 +295,7 @@ South West:
 		mean=0.0
 		variance=1.0
 		importance=0.0
-East Midlands:
+eastmidlands:
 	immigration:
 		mean=-1.0
 		variance=2.0
@@ -332,7 +332,7 @@ East Midlands:
 		mean=0.0
 		variance=1.0
 		importance=0.0
-Wales:
+wales:
 	immigration:
 		mean=1.0
 		variance=3.0
@@ -369,7 +369,7 @@ Wales:
 		mean=0.0
 		variance=1.0
 		importance=0.0
-North East:
+northeast:
 	immigration:
 		mean=-1.0
 		variance=3.0
@@ -406,7 +406,7 @@ North East:
 		mean=0.0
 		variance=1.0
 		importance=0.0
-Northern Ireland:
+northernireland:
 	immigration:
 		mean=0.0
 		variance=1.0

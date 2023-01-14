@@ -104,6 +104,7 @@ class Scenario:
             print("+" + "".join(["-" for c in range(95)]) + "+")
             print("|", "Name".rjust(20), "|", i.name[0:70].ljust(70), "|")
             print("|", "Party".rjust(20), "|", str(i.party.fullname)[0:70].ljust(70), "|")
+            print("|", "Region".rjust(20), "|", str(i.homeregion.fullname)[0:70].ljust(70), "|")
             print("|", "Ideologies".rjust(20), "|", ", ".join([j.fullname for j in i.ideologies])[0:70].ljust(70), "|")
             print("|", "Traits".rjust(20), "|", ", ".join([j.fullname for j in i.traits])[0:70].ljust(70), "|")
             print("+" + "".join(["-" for c in range(95)]) + "+")
@@ -404,8 +405,9 @@ def getregions(scenarioname, base):
     regions=[]
 
     class Region:
-      def __init__(self, name, population, eligiblepopulation, seats, color, issues=None, populations=None, resultcolor=None):
+      def __init__(self, name, fullname, population, eligiblepopulation, seats, color, issues=None, populations=None, resultcolor=None):
         self.name = name
+        self.fullname = fullname
         self.population = population
         self.eligiblepopulation = eligiblepopulation
         self.seats = seats
@@ -420,7 +422,7 @@ def getregions(scenarioname, base):
     l = np.array([ line.split() for line in f], dtype=object)
     
     currentregion=None
-    population, eligiblepopulation, seats, color=None,None,None,None
+    population, fullname, eligiblepopulation, seats, color=None,None,None,None,None
     
     for i in l:
         newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
@@ -429,10 +431,14 @@ def getregions(scenarioname, base):
         string=re.search("(.*):", newi)
         if string:
             if currentregion!=None:
-                regions.append(Region(currentregion, population, eligiblepopulation, seats, color))
+                regions.append(Region(currentregion, fullname, population, eligiblepopulation, seats, color))
             currentregion="".join(string[1].rstrip().lstrip())
-            population, eligiblepopulation, seats, color=None,None,None,None
+            population, fullname, eligiblepopulation, seats, color=None,None,None,None,None
         else:
+            string=re.search(".*fullname.*=(.*)", newi)
+            if string:
+                fullname="".join(string[1].rstrip().lstrip())
+                continue
             string=re.search(".*eligiblepopulation.*=(.*)", newi)
             if string:
                 eligiblepopulation=float("".join(string[1].rstrip().lstrip()))
@@ -460,7 +466,7 @@ def getregions(scenarioname, base):
                 color=tuple(color)
                 continue
     
-    regions.append(Region(currentregion, population, eligiblepopulation, seats, color))
+    regions.append(Region(currentregion, fullname, population, eligiblepopulation, seats, color))
 
     base.seats=sum(region.seats for region in regions)
     base.population=sum(region.population for region in regions)
@@ -508,23 +514,25 @@ def getparties(scenarioname):
                     #Removes effects from old leader
                     for i in self.leader.ideologies:
                         for j in i.effects:
-                            TriggerHandler.executeeffect(self.name+ "." + j, True)
+                            TriggerHandler.executeeffect(j.replace('party', self.name), True)
                     for i in self.leader.traits:
                         for j in i.effects:
-                            TriggerHandler.executeeffect(self.name+ "." + j, True)
+                            TriggerHandler.executeeffect(j.replace('party', self.name), True)
                     #Adds effcets from new leader
                     for i in newleader.ideologies:
                         for j in i.effects:
-                            TriggerHandler.executeeffect(self.name+ "." + j)
+                            TriggerHandler.executeeffect(j.replace('party', self.name))
                     for i in newleader.traits:
                         for j in i.effects:
-                            TriggerHandler.executeeffect(self.name+ "." + j)
+                            TriggerHandler.executeeffect(j.replace('party', self.name))
                     object.__setattr__(self, attr, newleader)
           else:
             if operator=="+":
                 object.__setattr__(self, attr, super(Party, self).__getattribute__(attr)+float(variable))
             elif operator=="-":
                 object.__setattr__(self, attr, super(Party, self).__getattribute__(attr)-float(variable))
+            elif operator=="*":
+                object.__setattr__(self, attr, super(Party, self).__getattribute__(attr)*float(variable))
             elif operator=="=":
                 object.__setattr__(self, attr, float(variable))
     
@@ -600,15 +608,16 @@ def getparties(scenarioname):
 
     return np.array(parties)
 
-def getcharacters(scenarioname, parties, mainideologies, maintraits):
+def getcharacters(scenarioname, parties, mainideologies, maintraits, regions):
     characters=[]
     
     class Character:
-      def __init__(self, identifier, name, party, leader, ideologies, traits):
+      def __init__(self, identifier, name, party, leader, homeregion, ideologies, traits):
         self.identifier = identifier
         self.name = name
         self.party = party
         self.leader = leader
+        self.homeregion = homeregion
         self.ideologies = ideologies
         self.traits = traits
     
@@ -618,7 +627,7 @@ def getcharacters(scenarioname, parties, mainideologies, maintraits):
     l = np.array([ line.split() for line in f], dtype=object)
     
     currentcharacter=None
-    name, party, leader, ideologies, traits=None, None, False, [], []
+    name, party, leader, homeregion, ideologies, traits=None, None, False, regions[0], [], []
     ideologyreader, traitreader=False, False
     currentparty, currentindex=None,None
 
@@ -635,11 +644,11 @@ def getcharacters(scenarioname, parties, mainideologies, maintraits):
                 traitreader=True
             else:
                 if currentcharacter!=None:
-                    characters.append(Character(currentcharacter, name, party, leader, ideologies, traits))
+                    characters.append(Character(currentcharacter, name, party, leader, homeregion, ideologies, traits))
                     if leader==True:
                         currentindex.leader=characters[len(characters)-1]
                 currentcharacter="".join(string[1].rstrip().lstrip())
-                name, party, leader, ideologies, traits=None, None, False, [], []
+                name, party, leader, homeregion, ideologies, traits=None, None, False, regions[0], [], []
         else:
             if ideologyreader:
                 string=re.search("(.*)", newi)
@@ -669,6 +678,11 @@ def getcharacters(scenarioname, parties, mainideologies, maintraits):
                         currentindex=next((x for x in parties if x.name == party), None)
                         party=currentindex
                     continue
+                string=re.search(".*homeregion.*=(.*)", newi)
+                if string:
+                    homeregion="".join(string[1].rstrip().lstrip())
+                    homeregion=next((x for x in regions if x.name == homeregion), regions[0])
+                    continue
                 string=re.search(".*leader.*=(.*)", newi)
                 if string:
                     if "".join(string[1].rstrip().lstrip())=="True":
@@ -677,7 +691,7 @@ def getcharacters(scenarioname, parties, mainideologies, maintraits):
                         leader=False
                     continue
     
-    characters.append(Character(currentcharacter, name, party, leader, ideologies, traits))
+    characters.append(Character(currentcharacter, name, party, leader, homeregion, ideologies, traits))
     if leader==True:
         currentindex.leader=characters[len(characters)-1]
 
@@ -719,6 +733,8 @@ def partyissuehandler(scenarioname, parties, issues):
               object.__setattr__(self, attr, super(PartyIssue, self).__getattribute__(attr)+float(variable))
           elif operator=="-":
               object.__setattr__(self, attr, super(PartyIssue, self).__getattribute__(attr)-float(variable))
+          elif operator=="*":
+                object.__setattr__(self, attr, super(PartyIssue, self).__getattribute__(attr)*float(variable))
           elif operator=="=":
               object.__setattr__(self, attr, float(variable))
 
@@ -806,6 +822,8 @@ def regionissuehandler(scenarioname, regions, issues):
               object.__setattr__(self, attr, super(RegionIssue, self).__getattribute__(attr)+float(variable))
           elif operator=="-":
               object.__setattr__(self, attr, super(RegionIssue, self).__getattribute__(attr)-float(variable))
+          elif operator=="*":
+                object.__setattr__(self, attr, super(RegionIssue, self).__getattribute__(attr)*float(variable))
           elif operator=="=":
               object.__setattr__(self, attr, float(variable))
 
@@ -891,6 +909,8 @@ def regionpopulationhandler(scenarioname, regions, populations):
               object.__setattr__(self, attr, super(RegionPopulation, self).__getattribute__(attr)+float(variable))
           elif operator=="-":
               object.__setattr__(self, attr, super(RegionPopulation, self).__getattribute__(attr)-float(variable))
+          elif operator=="*":
+                object.__setattr__(self, attr, super(RegionPopulation, self).__getattribute__(attr)*float(variable))
           elif operator=="=":
               object.__setattr__(self, attr, float(variable))
 
@@ -965,6 +985,8 @@ def partypopulationhandler(scenarioname, parties, populations):
               object.__setattr__(self, attr, super(PartyPopulation, self).__getattribute__(attr)+float(variable))
           elif operator=="-":
               object.__setattr__(self, attr, super(PartyPopulation, self).__getattribute__(attr)-float(variable))
+          elif operator=="*":
+                object.__setattr__(self, attr, super(PartyPopulation, self).__getattribute__(attr)*float(variable))
           elif operator=="=":
               object.__setattr__(self, attr, float(variable))
 
@@ -1261,6 +1283,8 @@ def getvariables(scenarioname):
               object.__setattr__(self, attr, super(Variable, self).__getattribute__(attr)+float(variable))
           elif operator=="-":
               object.__setattr__(self, attr, super(Variable, self).__getattribute__(attr)-float(variable))
+          elif operator=="*":
+                object.__setattr__(self, attr, super(Variable, self).__getattribute__(attr)*float(variable))
           elif operator=="=":
               object.__setattr__(self, attr, float(variable))
 
@@ -1290,10 +1314,10 @@ def initialisescenario(scenario): #is executed after trigger variable creation
         if i.leader:
             for j in i.leader.ideologies:
                 for k in j.effects:
-                    TriggerHandler.executeeffect(i.name+"."+k)
+                    TriggerHandler.executeeffect(k.replace('party', i.name))
             for j in i.leader.traits:
                 for k in j.effects:
-                    TriggerHandler.executeeffect(i.name+"."+k)
+                    TriggerHandler.executeeffect(k.replace('party', i.name))
 
 
 def main(scenarioname):
@@ -1306,7 +1330,7 @@ def main(scenarioname):
     scenario.ideologies=getideologies(scenarioname)
     scenario.traits=gettraits(scenarioname)
     scenario.regions=getregions(scenarioname, scenario.base)
-    scenario.characters=getcharacters(scenarioname,scenario.parties,scenario.ideologies,scenario.traits)
+    scenario.characters=getcharacters(scenarioname,scenario.parties,scenario.ideologies,scenario.traits,scenario.regions)
     scenario.partyissues=partyissuehandler(scenarioname,scenario.parties,scenario.issues)
     scenario.regionissues=regionissuehandler(scenarioname,scenario.regions,scenario.issues)
     scenario.regionpopulations=regionpopulationhandler(scenarioname,scenario.regions,scenario.populations)

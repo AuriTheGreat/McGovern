@@ -15,6 +15,7 @@ if sys.platform == "win32":
 setup(
     name="McGovern",
     version="0.1.0",
+    author="AuriTheGreat",
     description="A political simulator game",
     options={"build_exe": build_exe_options},
     executables=[Executable("Main.py", base=base, target_name='McGovern.exe', icon="gfx/icon.ico")],

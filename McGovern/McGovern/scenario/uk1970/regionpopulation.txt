@@ -1,5 +1,5 @@
 ### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.
-London:
+london:
 	middleclass:
 		influence=1.1
 	wealthy:
@@ -14,7 +14,7 @@ London:
 		influence=0.5
 	farmers:
 		influence=0.3
-North West:
+northwest:
 	middleclass:
 		influence=0.8
 	wealthy:
@@ -29,7 +29,7 @@ North West:
 		influence=0.5
 	farmers:
 		influence=0.5
-South East:
+southeast:
 	middleclass:
 		influence=0.8
 	wealthy:
@@ -44,7 +44,7 @@ South East:
 		influence=0.5
 	farmers:
 		influence=0.7
-Scotland:
+scotland:
 	middleclass:
 		influence=0.8
 	wealthy:
@@ -59,7 +59,7 @@ Scotland:
 		influence=0.5
 	farmers:
 		influence=0.4
-West Midlands:
+westmidlands:
 	middleclass:
 		influence=1.1
 	wealthy:
@@ -74,7 +74,7 @@ West Midlands:
 		influence=0.5
 	farmers:
 		influence=0.5
-Yorkshire and the Humber:
+yorkshire:
 	middleclass:
 		influence=0.8
 	wealthy:
@@ -89,7 +89,7 @@ Yorkshire and the Humber:
 		influence=0.5
 	farmers:
 		influence=0.5
-Eastern:
+eastern:
 	middleclass:
 		influence=0.7
 	wealthy:
@@ -104,7 +104,7 @@ Eastern:
 		influence=0.5
 	farmers:
 		influence=0.7
-South West:
+southwest:
 	middleclass:
 		influence=0.9
 	wealthy:
@@ -119,7 +119,7 @@ South West:
 		influence=0.5
 	farmers:
 		influence=0.7
-East Midlands:
+eastmidlands:
 	middleclass:
 		influence=1.1
 	wealthy:
@@ -134,7 +134,7 @@ East Midlands:
 		influence=0.5
 	farmers:
 		influence=0.5
-Wales:
+wales:
 	middleclass:
 		influence=0.8
 	wealthy:
@@ -149,7 +149,7 @@ Wales:
 		influence=0.5
 	farmers:
 		influence=0.8
-North East:
+northeast:
 	middleclass:
 		influence=0.8
 	wealthy:
@@ -164,7 +164,7 @@ North East:
 		influence=0.5
 	farmers:
 		influence=0.6
-Northern Ireland:
+northernireland:
 	middleclass:
 		influence=0.7
 	wealthy:
