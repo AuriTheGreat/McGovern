@@ -65,7 +65,7 @@ democratic:
 	fullname=Democratic Party
 	playable=False
 	ruling=False
-	power=1
+	power=-100000000.0
 	color=255,255,255
 speaker:
 	fullname=Speaker

@@ -7,16 +7,8 @@ worldcup:
 	effects:
 		london.immigration.mean+0.3
 
-titanic:
-	name=Titanic
-	hidden=False
-	description:
-		Titanic has sunk
-	effects:
-		london.immigration.mean+0.8
-
 devaluation:
-	name=Devaluation
+	name=Devaluation crisis
 	hidden=False
 	description:
 		When Labour, led by Harold Wilson, took office in October 1964, it was immediately faced 
@@ -31,3 +23,16 @@ devaluation:
 	effects:
 		labour.power*0.833333
 		labour.powerofright-0.1
+
+democraticpartyfounded:
+	name=Founding of Democratic Party
+	hidden=False
+	description:
+		Member of Parliament for Pembrokeshire Desmond Donnely has defected from the labour party, calling for the prime minister's resignation. 
+	effects:
+		democratic.power=1
+		pembrokeshire=3
+		labour.wales.controlledseats-1
+		democratic.wales.controlledseats+1
+		labour.wales.guaranteedseats-1
+		democratic.wales.guaranteedseats+1

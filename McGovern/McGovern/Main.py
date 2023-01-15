@@ -918,7 +918,7 @@ def pollview(scenarioname, gamedata, poll, region='National', page=0):
     if partycount>(page+1)*partiesperpage:
         Button(520,600,screen_width/(1200/50), screen_height/(700/50), '>', pollview, [scenarioname, gamedata, poll, region, page+1])
 
-def eventview(scenarioname, gamedata):
+def eventview(scenarioname, gamedata, currentevent=None):
     objects.clear()
     Rectangle(0,680,screen_width,screen_height, '#003366')
     Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366')
@@ -927,7 +927,17 @@ def eventview(scenarioname, gamedata):
     button_size_x, button_size_y = screen_width/(1200/200), screen_height/(700/80)
     Button(10, screen_width/(1200/10), button_size_x, button_size_y, 'Back', scenariomain, [scenarioname, gamedata, False])
 
-    MultipleLineText(10,100, 1180, 575, '#003366', gamedata.scenario.events[2].description)
+    Rectangle(10, 110, screen_width/(1200/190), screen_width/(1200/565), '#003366')
+    if not gamedata.scenario.news:
+        Rectangle(15, 115, screen_width/(1200/180), screen_width/(1200/80), '#250045', "No events so far")
+    else:
+        for count, i in enumerate(reversed(gamedata.scenario.news)):
+            Button(15, 115+count*90, screen_width/(1200/180), screen_width/(1200/80), i.event.name, eventview, [scenarioname, gamedata, i.event])
+
+    if currentevent==None:
+        pass
+    else:
+        MultipleLineText(210,110, 580, 565, '#003366', currentevent.description, fontsize=30)
     #parliamentarychart(10, 100, 1180, 575, gamedata)
 
 def nextturn(scenarioname, gamedata):

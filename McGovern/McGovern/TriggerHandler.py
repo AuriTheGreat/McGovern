@@ -25,7 +25,8 @@ listofvariables={}
 
 def generatevariables(gamedata):
     iterablevariableobjects=[gamedata.scenario.parties, gamedata.scenario.regionissues, gamedata.scenario.partyissues, 
-                             gamedata.scenario.partypopulations, gamedata.scenario.regionpopulations, gamedata.scenario.variables]
+                             gamedata.scenario.partypopulations, gamedata.scenario.regionpopulations, gamedata.scenario.partyregions,
+                             gamedata.scenario.variables]
     variableobjects=[gamedata.scenario.main]
     #listofvariables.update({"date": currentscenario.main.currentdate})
     for i in variableobjects:
@@ -68,7 +69,7 @@ def variablehandler(value, mode='get', variable=None, operator=None):
         errorcount+=1
 
     if errorcount==2:
-        print(mode, variable, operator, value, "NOT FOUND")
+        print(mode, value, operator, variable, "NOT FOUND")
     
 
     return value
@@ -212,8 +213,13 @@ def executeevents(triggeredevents):
     [executeeffect(j) for i in triggeredevents for j in i.effects]
 
 def main(scenario):
+    class NewsEvent:
+        def __init__(self, date, event):
+            self.date = date
+            self.event = event
     global currentscenario
     currentscenario=scenario
     triggeredevents=checktriggers()
+    scenario.news.extend([NewsEvent(scenario.main.currentdate, i) for i in triggeredevents if i.hidden==False])
     executeevents(triggeredevents)
     print(triggeredevents)

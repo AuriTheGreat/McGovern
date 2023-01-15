@@ -229,19 +229,19 @@ replabour:
 		variance=1.5
 	welfarestate:
 		mean=4.0
-		variance=2.0
+		variance=1.5
 	tradeunions:
 		mean=3.0
 		variance=1.5
 	europe:
-		mean=1.0
-		variance=3.0
+		mean=-3.0
+		variance=2.0
 	nato:
 		mean=2.0
 		variance=3.5
 	devolution:
-		mean=-1.0
-		variance=3.0
+		mean=2.0
+		variance=2.0
 	nukes:
 		mean=4.0
 		variance=2.0

@@ -4,3 +4,8 @@
 # Labour
 labour.powerofleft=0.6
 labour.powerofright=0.9
+
+
+
+# Other
+pembrokeshire=0.0 # if 0, means desmond donnely has not yet defected. If 1, labour will win, if 2, conservatives, if 3, donnely 

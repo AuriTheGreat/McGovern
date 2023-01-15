@@ -1,40 +1,62 @@
-powell:
-	name=Enoch Powell
+riversofblood:
+	name=Rivers of Blood
 	description=Enoch Powell, one of the leading conservative members of parliament, has been accused for inciting racial tensions. How will you respond?
 	expiresafter: 3
 	ignorable: yes
 	ignoreeffects:
-		immigration.mean: -0.1
-		immigration.varriance: +0.1
+		party.immigration.mean: -0.1
+		party.immigration.varriance: +0.1
 	options:
 		a:
 			optionname=Denounce Powellism
-			optionif:
-				None
+			ifparty:
+
+			ifnotparty:
+
+			if:
+				
 			maineffects:
-				immigration.mean: +0.3
-				immigration.variance: -0.1
-				immigration.nationwide.importance: +0.2
+				party.immigration.mean: +0.3
+				party.immigration.variance: -0.1
+				national.immigration.importance: +0.2
 		b:
 			optionname=Don't mention Powell
-			optionif:
-				None
+			ifparty:
+
+			ifnotparty:
+
+			if:
+				
 			maineffects:
-				if: 
-					party==labour
+				effect:
+					ifparty:
+						labour
+					ifnotparty:
+
+					if:
+						
 					effects:
-						immigration.nationwide.importance: +0.1
-						immigration.variance: +0.2
-				if: 
-					party!=labour
+						national.immigration.importance: +0.1
+						party.immigration.variance: +0.2
+				effect:
+					ifparty:
+						
+					ifnotparty:
+						labour
+					if:
+						
 					effects:
-						immigration.variance: +0.3
+						party.immigration.variance: +0.3
 		c:
 			optionname=Powell is right
-			optionif:
-				None
+			ifparty:
+
+			ifnotparty:
+
+			if:
+				
 			maineffects:
-				immigration.mean: -0.3
-				immigration.variance: -0.1
-				immigration.nationwide.importance: +0.3
+				party.immigration.mean: -0.3
+				party.immigration.variance: -0.1
+				national.immigration.nationwide.importance: +0.3
 
