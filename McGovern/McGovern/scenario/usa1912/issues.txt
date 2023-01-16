@@ -1,0 +1,6 @@
+prohibition:
+	fullname=Prohibition
+	levels:
+		Wet
+		Neutral
+		Dry

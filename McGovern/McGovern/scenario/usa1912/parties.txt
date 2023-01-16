@@ -1,0 +1,20 @@
+republican:
+	fullname=Republican Party
+	playable=True
+	ruling=True
+	power=400
+	color=240,120,99
+
+democratic:
+	fullname=Democratic Party
+	playable=True
+	ruling=False
+	power=400
+	color=105,142,198
+
+progressive:
+	fullname=Progressive Party
+	playable=True
+	ruling=False
+	power=200
+	color=163,238,113

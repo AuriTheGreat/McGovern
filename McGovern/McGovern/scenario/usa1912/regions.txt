@@ -1,0 +1,300 @@
+alabama:
+	fullname=Alabama
+	population=2199972 
+	eligiblepopulation=0.3
+	seats=12
+	color=0, 165, 79
+alaska:
+	fullname=Alaska
+	population=64509 
+	eligiblepopulation=0.3
+	seats=3
+	color=123, 204, 198
+arizona:
+	fullname=Arizona
+	population=220639 
+	eligiblepopulation=0.3
+	seats=3
+	color=146, 185, 216
+arkansas:
+	fullname=Arkansas
+	population=1627026 
+	eligiblepopulation=0.3
+	seats=9
+	color=179, 211, 52
+california:
+	fullname=California
+	population=2556048 
+	eligiblepopulation=0.3
+	seats=11
+	color=178, 81, 152
+colorado:
+	fullname=Colorado
+	population=957749 
+	eligiblepopulation=0.3
+	seats=6
+	color=1, 178, 106
+connecticut:
+	fullname=Connecticut
+	population=1319539 
+	eligiblepopulation=0.3
+	seats=7
+	color=241, 155, 156
+delaware:
+	fullname=Delaware
+	population=205839 
+	eligiblepopulation=0.3
+	seats=3
+	color=53,44,153
+florida:
+	fullname=Florida
+	population=797434 
+	eligiblepopulation=0.3
+	seats=6
+	color=254,242,0
+georgia:
+	fullname=Georgia
+	population=2687679 
+	eligiblepopulation=0.3
+	seats=14
+	color=241,92,88
+hawaii:
+	fullname=Hawaii
+	population=199449 
+	eligiblepopulation=0.3
+	seats=3
+	color=58,181,74
+idaho:
+	fullname=Idaho
+	population=358358 
+	eligiblepopulation=0.3
+	seats=4
+	color=216,205,0
+illinois:
+	fullname=Illinois
+	population=5801999 
+	eligiblepopulation=0.3
+	seats=29
+	color=255,243,95
+indiana:
+	fullname=Indiana
+	population=2737759 
+	eligiblepopulation=0.3
+	seats=15
+	color=197,156,110
+iowa:
+	fullname=Iowa
+	population=2223355 
+	eligiblepopulation=0.3
+	seats=13
+	color=196,223,156
+kansas:
+	fullname=Kansas
+	population=1735040 
+	eligiblepopulation=0.3
+	seats=10
+	color=240,198,150
+kentucky:
+	fullname=Kentucky
+	population=2318451 
+	eligiblepopulation=0.3
+	seats=13
+	color=8,163,168
+louisiana:
+	fullname=Louisiana
+	population=1711341 
+	eligiblepopulation=0.3
+	seats=10
+	color=141,100,170
+maine:
+	fullname=Maine
+	population=751952 
+	eligiblepopulation=0.3
+	seats=6
+	color=249,173,113
+maryland:
+	fullname=Maryland
+	population=1316806 
+	eligiblepopulation=0.3
+	seats=8
+	color=158,0,58
+massachusetts:
+	fullname=Massachusetts
+	population=3478630 
+	eligiblepopulation=0.3
+	seats=18
+	color=201,177,151
+michigan:
+	fullname=Michigan
+	population=2888011 
+	eligiblepopulation=0.3
+	seats=15
+	color=0,186,86
+minnesota:
+	fullname=Minnesota
+	population=2140571 
+	eligiblepopulation=0.3
+	seats=12
+	color=253,197,138
+mississippi:
+	fullname=Mississippi
+	population=1846283 
+	eligiblepopulation=0.3
+	seats=10
+	color=250,167,75
+missouri:
+	fullname=Missouri
+	population=3330669 
+	eligiblepopulation=0.3
+	seats=18
+	color=38,187,229
+montana:
+	fullname=Montana
+	population=402598 
+	eligiblepopulation=0.3
+	seats=4
+	color=186,224,243
+nebraska:
+	fullname=Nebraska
+	population=1217397 
+	eligiblepopulation=0.3
+	seats=8
+	color=237,25,65
+nevada:
+	fullname=Nevada
+	population=89783 
+	eligiblepopulation=0.3
+	seats=3
+	color=254,219,181
+newhampshire:
+	fullname=New Hampshire
+	population=434369 
+	eligiblepopulation=0.3
+	seats=4
+	color=244,0,139
+newjersey:
+	fullname=New Jersey
+	population=2667867 
+	eligiblepopulation=0.3
+	seats=14
+	color=143,98,56
+newmexico:
+	fullname=New Mexico
+	population=388855 
+	eligiblepopulation=0.3
+	seats=3
+	color=255,203,5
+newyork:
+	fullname=New York
+	population=9482558 
+	eligiblepopulation=0.3
+	seats=45
+	color=241,102,97
+northcarolina:
+	fullname=North Carolina
+	population=2268782 
+	eligiblepopulation=0.3
+	seats=12
+	color=0,171,223
+northdakota:
+	fullname=North Dakota
+	population=628638 
+	eligiblepopulation=0.3
+	seats=5
+	color=128,122,186
+ohio:
+	fullname=Ohio
+	population=4889036 
+	eligiblepopulation=0.3
+	seats=24
+	color=247,148,29
+oklahoma:
+	fullname=Oklahoma
+	population=1830508 
+	eligiblepopulation=0.3
+	seats=10
+	color=166,102,75
+oregon:
+	fullname=Oregon
+	population=724611 
+	eligiblepopulation=0.3
+	seats=5
+	color=185,133,109
+pennsylvania:
+	fullname=Pennsylvania
+	population=7937710 
+	eligiblepopulation=0.3
+	seats=38
+	color=179,182,101
+rhodeisland:
+	fullname=Rhode Island
+	population=565421 
+	eligiblepopulation=0.3
+	seats=5
+	color=0,163,86
+southcarolina:
+	fullname=South Carolina
+	population=1550417 
+	eligiblepopulation=0.3
+	seats=9
+	color=116,200,234
+southdakota:
+	fullname=South Dakota
+	population=692634 
+	eligiblepopulation=0.3
+	seats=5
+	color=110,208,247
+tennessee:
+	fullname=Tennessee
+	population=2217624 
+	eligiblepopulation=0.3
+	seats=12
+	color=243,112,32
+texas:
+	fullname=Texas
+	population=4066108 
+	eligiblepopulation=0.3
+	seats=20
+	color=156,165,60
+utah:
+	fullname=Utah
+	population=392671 
+	eligiblepopulation=0.3
+	seats=4
+	color=249,149,73
+vermont:
+	fullname=Vermont
+	population=358419 
+	eligiblepopulation=0.3
+	seats=4
+	color=0,173,239
+virginia:
+	fullname=Virginia
+	population=2103098 
+	eligiblepopulation=0.3
+	seats=12
+	color=155,97,140
+washington:
+	fullname=Washington
+	population=1266767 
+	eligiblepopulation=0.3
+	seats=7
+	color=88,189,133
+westvirginia:
+	fullname=West Virginia
+	population=1463425 
+	eligiblepopulation=0.3
+	seats=8
+	color=255,247,154
+wisconsin:
+	fullname=Wisconsin
+	population=2386824 
+	eligiblepopulation=0.3
+	seats=13
+	color=160,135,190
+wyoming:
+	fullname=Wyoming
+	population=156652 
+	eligiblepopulation=0.3
+	seats=3
+	color=193,120,173

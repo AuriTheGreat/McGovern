@@ -198,7 +198,7 @@ def partyregionresulthandler(scenario, issuepartyregionresults=None, mode='norma
     if mode=='normal':
         regionresultcolorcalculation(scenario.regions, partyregionresults)
 
-    partyregionresults.sort(key=lambda x: (x.region.seats, x.region.population,  x.seats, x.votes), reverse=True)
+    partyregionresults.sort(key=lambda x: (x.region.seats, x.region.population, x.region.name, x.seats, x.votes), reverse=True)
 
     return partyregionresults
 

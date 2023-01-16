@@ -4,6 +4,7 @@ import numpy as np
 import re
 import datetime
 import TriggerHandler
+import os
 
 class Scenario:
       def __init__(self, name, main=None, base=None, issues=None, parties=None, ideologies=None, traits=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partypopulations=None, regionissues=None, regionpopulations=None, partyregions=None, events=None, decisions=None, triggers=None, news=None, variables=None):
@@ -1359,9 +1360,21 @@ def initialisescenario(scenario): #is executed after trigger variable creation
                 for k in j.effects:
                     TriggerHandler.executeeffect(k.replace('party', i.name))
 
+def createmissingfiles(scenarioname):
+    files=os.listdir('scenario/'+scenarioname)
+
+    neededfiles=['characters.txt', 'decisions.txt', 'events.txt', 'gfx', 'historicalresults.txt', 'ideologies.txt', 'issues.txt', 'main.txt', 'outcomes.txt', 'parties.txt', 'partyissue.txt', 'partypopulation.txt', 'partyregion.txt', 'populations.txt', 'regionissue.txt', 'regionpopulation.txt', 'regions.txt', 'traits.txt', 'triggers.txt', 'variables.txt']
+
+    for i in neededfiles:
+        if i not in files:
+            f = open('scenario/'+scenarioname+"/"+i, "w")
+            f.close()
+
+
 
 def main(scenarioname):
     scenario=Scenario(scenarioname)
+    createmissingfiles(scenarioname)
     scenario.base=getbase(scenarioname)
     scenario.main=getmain(scenarioname, scenario.base)
     scenario.parties=getparties(scenarioname)

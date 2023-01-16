@@ -1,0 +1,251 @@
+### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.
+newyork:
+	prohibition:
+		mean=-3.0
+		variance=1.5
+		importance=0.6
+pennsylvania:
+	prohibition:
+		mean=-1.0
+		variance=1.5
+		importance=0.6
+illinois:
+	prohibition:
+		mean=-3.0
+		variance=2.0
+		importance=0.6
+ohio:
+	prohibition:
+		mean=2.0
+		variance=2.0
+		importance=0.6
+texas:
+	prohibition:
+		mean=2.0
+		variance=1.5
+		importance=0.6
+massachusetts:
+	prohibition:
+		mean=-2.0
+		variance=2.0
+		importance=0.6
+missouri:
+	prohibition:
+		mean=0.0
+		variance=3.0
+		importance=0.6
+michigan:
+	prohibition:
+		mean=-3.0
+		variance=1.5
+		importance=0.6
+indiana:
+	prohibition:
+		mean=3.0
+		variance=2.0
+		importance=0.6
+georgia:
+	prohibition:
+		mean=3.0
+		variance=1.5
+		importance=0.6
+newjersey:
+	prohibition:
+		mean=-4.0
+		variance=1.5
+		importance=0.6
+california:
+	prohibition:
+		mean=-3.0
+		variance=1.5
+		importance=0.6
+wisconsin:
+	prohibition:
+		mean=-3.0
+		variance=2.0
+		importance=0.6
+kentucky:
+	prohibition:
+		mean=1.0
+		variance=2.0
+		importance=0.6
+northcarolina:
+	prohibition:
+		mean=2.0
+		variance=1.5
+		importance=0.6
+iowa:
+	prohibition:
+		mean=-2.0
+		variance=2.0
+		importance=0.6
+tennessee:
+	prohibition:
+		mean=2.0
+		variance=2.0
+		importance=0.6
+alabama:
+	prohibition:
+		mean=4.0
+		variance=1.5
+		importance=0.6
+minnesota:
+	prohibition:
+		mean=-3.0
+		variance=2.0
+		importance=0.6
+virginia:
+	prohibition:
+		mean=2.0
+		variance=1.5
+		importance=0.6
+mississippi:
+	prohibition:
+		mean=4.0
+		variance=1.5
+		importance=0.6
+oklahoma:
+	prohibition:
+		mean=1.0
+		variance=2.5
+		importance=0.6
+kansas:
+	prohibition:
+		mean=2.0
+		variance=2.0
+		importance=0.6
+louisiana:
+	prohibition:
+		mean=1.0
+		variance=2.0
+		importance=0.6
+arkansas:
+	prohibition:
+		mean=3.0
+		variance=2.0
+		importance=0.6
+southcarolina:
+	prohibition:
+		mean=3.0
+		variance=2.0
+		importance=0.6
+westvirginia:
+	prohibition:
+		mean=1.0
+		variance=2.0
+		importance=0.6
+connecticut:
+	prohibition:
+		mean=1.0
+		variance=2.0
+		importance=0.6
+maryland:
+	prohibition:
+		mean=0.0
+		variance=2.5
+		importance=0.6
+washington:
+	prohibition:
+		mean=-3.0
+		variance=2.0
+		importance=0.6
+nebraska:
+	prohibition:
+		mean=3.0
+		variance=2.0
+		importance=0.6
+colorado:
+	prohibition:
+		mean=-2.0
+		variance=1.5
+		importance=0.6
+florida:
+	prohibition:
+		mean=4.0
+		variance=2.0
+		importance=0.6
+maine:
+	prohibition:
+		mean=-0.5
+		variance=2.0
+		importance=0.6
+oregon:
+	prohibition:
+		mean=-3.0
+		variance=1.5
+		importance=0.6
+southdakota:
+	prohibition:
+		mean=1.0
+		variance=2.0
+		importance=0.6
+northdakota:
+	prohibition:
+		mean=-1.0
+		variance=2.0
+		importance=0.6
+rhodeisland:
+	prohibition:
+		mean=1.0
+		variance=1.5
+		importance=0.6
+newhampshire:
+	prohibition:
+		mean=0.5
+		variance=2.0
+		importance=0.6
+montana:
+	prohibition:
+		mean=-3.0
+		variance=2.0
+		importance=0.6
+utah:
+	prohibition:
+		mean=2.0
+		variance=1.5
+		importance=0.6
+newmexico:
+	prohibition:
+		mean=-1.0
+		variance=1.5
+		importance=0.6
+vermont:
+	prohibition:
+		mean=-2.0
+		variance=2.0
+		importance=0.6
+idaho:
+	prohibition:
+		mean=-3.0
+		variance=2.0
+		importance=0.6
+arizona:
+	prohibition:
+		mean=-2.0
+		variance=2.0
+		importance=0.6
+delaware:
+	prohibition:
+		mean=0.0
+		variance=2.0
+		importance=0.6
+hawaii:
+	prohibition:
+		mean=-3.0
+		variance=2.0
+		importance=0.6
+wyoming:
+	prohibition:
+		mean=3.0
+		variance=2.0
+		importance=0.6
+nevada:
+	prohibition:
+		mean=-3.0
+		variance=2.0
+		importance=0.6
+alaska:
+	prohibition:
+		mean=-2.0
+		variance=2.0
+		importance=0.6

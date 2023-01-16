@@ -36,6 +36,8 @@
   <ItemGroup>
     <Folder Include="gfx\" />
     <Folder Include="scenario\" />
+    <Folder Include="scenario\usa1912\" />
+    <Folder Include="scenario\usa1912\gfx\" />
     <Folder Include="scenario\usa1988\" />
     <Folder Include="scenario\uk1970\gfx\" />
     <Folder Include="scenario\uk1974\" />
@@ -44,10 +46,20 @@
     <Folder Include="scenario\usa1988\gfx\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="gfx\button.png" />
+    <Content Include="gfx\icon.ico" />
+    <Content Include="gfx\icon.png" />
+    <Content Include="gfx\menu.png" />
+    <Content Include="gfx\title.png" />
     <Content Include="requirements.txt" />
     <Content Include="scenario\uk1970\characters.txt" />
     <Content Include="scenario\uk1970\decisions.txt" />
     <Content Include="scenario\uk1970\events.txt" />
+    <Content Include="scenario\uk1970\gfx\labour.png" />
+    <Content Include="scenario\uk1970\gfx\main.png" />
+    <Content Include="scenario\uk1970\gfx\map.png" />
+    <Content Include="scenario\uk1970\gfx\nocharacter.png" />
+    <Content Include="scenario\uk1970\gfx\wilson.png" />
     <Content Include="scenario\uk1970\historicalresults.txt" />
     <Content Include="scenario\uk1970\ideologies.txt" />
     <Content Include="scenario\uk1970\issues.txt" />
@@ -65,6 +77,28 @@
     <Content Include="scenario\uk1970\triggers.txt" />
     <Content Include="scenario\uk1970\variables.txt" />
     <Content Include="scenario\uk1974\main.txt" />
+    <Content Include="scenario\usa1912\characters.txt" />
+    <Content Include="scenario\usa1912\decisions.txt" />
+    <Content Include="scenario\usa1912\events.txt" />
+    <Content Include="scenario\usa1912\gfx\main.png" />
+    <Content Include="scenario\usa1912\gfx\map.png" />
+    <Content Include="scenario\usa1912\gfx\nocharacter.png" />
+    <Content Include="scenario\usa1912\historicalresults.txt" />
+    <Content Include="scenario\usa1912\ideologies.txt" />
+    <Content Include="scenario\usa1912\issues.txt" />
+    <Content Include="scenario\usa1912\main.txt" />
+    <Content Include="scenario\usa1912\outcomes.txt" />
+    <Content Include="scenario\usa1912\parties.txt" />
+    <Content Include="scenario\usa1912\partyissue.txt" />
+    <Content Include="scenario\usa1912\partypopulation.txt" />
+    <Content Include="scenario\usa1912\partyregion.txt" />
+    <Content Include="scenario\usa1912\populations.txt" />
+    <Content Include="scenario\usa1912\regionissue.txt" />
+    <Content Include="scenario\usa1912\regionpopulation.txt" />
+    <Content Include="scenario\usa1912\regions.txt" />
+    <Content Include="scenario\usa1912\traits.txt" />
+    <Content Include="scenario\usa1912\triggers.txt" />
+    <Content Include="scenario\usa1912\variables.txt" />
     <Content Include="scenario\usa1988\main.txt" />
   </ItemGroup>
   <ItemGroup>

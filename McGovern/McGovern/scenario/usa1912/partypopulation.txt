@@ -1,0 +1,10 @@
+### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.
+republican:
+	middleclass:
+		appeal=0.9
+democratic:
+	middleclass:
+		appeal=0.8
+progressive:
+	middleclass:
+		appeal=0.6

@@ -1,0 +1,604 @@
+### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.
+republican:
+	newyork:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	pennsylvania:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	illinois:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	ohio:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	texas:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	massachusetts:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	missouri:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	michigan:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	indiana:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	georgia:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	newjersey:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	california:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	wisconsin:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	kentucky:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	northcarolina:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	iowa:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	tennessee:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	alabama:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	minnesota:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	virginia:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	mississippi:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	oklahoma:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	kansas:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	louisiana:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	arkansas:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	southcarolina:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	westvirginia:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	connecticut:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	maryland:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	washington:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	nebraska:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	colorado:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	florida:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	maine:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	oregon:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	southdakota:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	northdakota:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	rhodeisland:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	newhampshire:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	montana:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	utah:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	newmexico:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	vermont:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	idaho:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	arizona:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	delaware:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	hawaii:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	wyoming:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	nevada:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	alaska:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+democratic:
+	newyork:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	pennsylvania:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	illinois:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	ohio:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	texas:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	massachusetts:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	missouri:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	michigan:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	indiana:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	georgia:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	newjersey:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	california:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	wisconsin:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	kentucky:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	northcarolina:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	iowa:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	tennessee:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	alabama:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	minnesota:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	virginia:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	mississippi:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	oklahoma:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	kansas:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	louisiana:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	arkansas:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	southcarolina:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	westvirginia:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	connecticut:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	maryland:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	washington:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	nebraska:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	colorado:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	florida:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	maine:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	oregon:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	southdakota:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	northdakota:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	rhodeisland:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	newhampshire:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	montana:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	utah:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	newmexico:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	vermont:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	idaho:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	arizona:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	delaware:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	hawaii:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	wyoming:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	nevada:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	alaska:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+progressive:
+	newyork:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	pennsylvania:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	illinois:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	ohio:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	texas:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	massachusetts:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	missouri:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	michigan:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	indiana:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	georgia:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	newjersey:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	california:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	wisconsin:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	kentucky:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	northcarolina:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	iowa:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	tennessee:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	alabama:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	minnesota:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	virginia:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	mississippi:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	oklahoma:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	kansas:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	louisiana:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	arkansas:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	southcarolina:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	westvirginia:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	connecticut:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	maryland:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	washington:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	nebraska:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	colorado:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	florida:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	maine:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	oregon:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	southdakota:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	northdakota:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	rhodeisland:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	newhampshire:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	montana:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	utah:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	newmexico:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	vermont:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	idaho:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	arizona:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	delaware:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	hawaii:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	wyoming:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	nevada:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	alaska:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.

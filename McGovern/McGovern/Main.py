@@ -19,7 +19,7 @@ def getvalidscenarios(scenarios):
     validscenarios=[]
     for i in scenarios:
         files=os.listdir('scenario/'+i)
-        if set(['gfx', 'parties.txt', 'characters.txt', 'main.txt', 'regions.txt', 'populations.txt', 'ideologies.txt', 'outcomes.txt', 'events.txt', 'issues.txt', 'partyregion.txt']).issubset(files):
+        if set(['gfx', 'parties.txt', 'characters.txt', 'main.txt', 'regions.txt', 'populations.txt', 'ideologies.txt', 'traits.txt', 'outcomes.txt', 'events.txt', 'issues.txt', 'partyregion.txt']).issubset(files):
             validscenarios.append(i)
     return validscenarios
 
@@ -678,10 +678,10 @@ def partyview(scenarioname, gamedata, limit=None):
     if biggestregionpercentage!=None:
         Rectangle(10,360,screen_width/(1200/200), screen_height/(700/50), '#003366', "Strongest at")
         Button(220,360,screen_width/(1200/350), screen_height/(700/50), biggestregion + " (" + str(round(biggestregionpercentage, 1)) + "%)", regionview,
-               [scenarioname, gamedata, biggestregion], '#003366' )
+               [scenarioname, gamedata, biggestregion if lowestregion=="National" else [i.name for i in gamedata.scenario.regions if biggestregion==i.fullname][0]], '#003366' )
         Rectangle(10,420,screen_width/(1200/200), screen_height/(700/50), '#003366', "Weakest at")
         Button(220,420,screen_width/(1200/350), screen_height/(700/50), lowestregion + " (" + str(round(lowestregionpercentage, 1)) + "%)", regionview,
-               [scenarioname, gamedata, lowestregion], '#003366' )
+               [scenarioname, gamedata, lowestregion if lowestregion=="National" else [i.name for i in gamedata.scenario.regions if lowestregion==i.fullname][0]], '#003366' )
 
         Map(600,180,360,500, 'scenario/' + scenarioname + '/gfx/map.png', gamedata, 'party', currentparty)
 

@@ -1,0 +1,151 @@
+### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.
+newyork:
+	middleclass:
+		influence=1.0
+pennsylvania:
+	middleclass:
+		influence=1.0
+illinois:
+	middleclass:
+		influence=1.0
+ohio:
+	middleclass:
+		influence=1.0
+texas:
+	middleclass:
+		influence=1.0
+massachusetts:
+	middleclass:
+		influence=1.0
+missouri:
+	middleclass:
+		influence=1.0
+michigan:
+	middleclass:
+		influence=1.0
+indiana:
+	middleclass:
+		influence=1.0
+georgia:
+	middleclass:
+		influence=1.0
+newjersey:
+	middleclass:
+		influence=1.0
+california:
+	middleclass:
+		influence=1.0
+wisconsin:
+	middleclass:
+		influence=1.0
+kentucky:
+	middleclass:
+		influence=1.0
+northcarolina:
+	middleclass:
+		influence=1.0
+iowa:
+	middleclass:
+		influence=1.0
+tennessee:
+	middleclass:
+		influence=1.0
+alabama:
+	middleclass:
+		influence=1.0
+minnesota:
+	middleclass:
+		influence=1.0
+virginia:
+	middleclass:
+		influence=1.0
+mississippi:
+	middleclass:
+		influence=1.0
+oklahoma:
+	middleclass:
+		influence=1.0
+kansas:
+	middleclass:
+		influence=1.0
+louisiana:
+	middleclass:
+		influence=1.0
+arkansas:
+	middleclass:
+		influence=1.0
+southcarolina:
+	middleclass:
+		influence=1.0
+westvirginia:
+	middleclass:
+		influence=1.0
+connecticut:
+	middleclass:
+		influence=1.0
+maryland:
+	middleclass:
+		influence=1.0
+washington:
+	middleclass:
+		influence=1.0
+nebraska:
+	middleclass:
+		influence=1.0
+colorado:
+	middleclass:
+		influence=1.0
+florida:
+	middleclass:
+		influence=1.0
+maine:
+	middleclass:
+		influence=1.0
+oregon:
+	middleclass:
+		influence=1.0
+southdakota:
+	middleclass:
+		influence=1.0
+northdakota:
+	middleclass:
+		influence=1.0
+rhodeisland:
+	middleclass:
+		influence=1.0
+newhampshire:
+	middleclass:
+		influence=1.0
+montana:
+	middleclass:
+		influence=1.0
+utah:
+	middleclass:
+		influence=1.0
+newmexico:
+	middleclass:
+		influence=1.0
+vermont:
+	middleclass:
+		influence=1.0
+idaho:
+	middleclass:
+		influence=1.0
+arizona:
+	middleclass:
+		influence=1.0
+delaware:
+	middleclass:
+		influence=1.0
+hawaii:
+	middleclass:
+		influence=1.0
+wyoming:
+	middleclass:
+		influence=1.0
+nevada:
+	middleclass:
+		influence=1.0
+alaska:
+	middleclass:
+		influence=1.0

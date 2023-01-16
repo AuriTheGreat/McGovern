@@ -1,0 +1,9 @@
+name=United States Presidential Election of 1912
+nation=United States
+year=1912
+fiction=False
+description=This scenario is very very scenarioy 
+startdate=1911-09-07
+enddate=1912-11-05
+electiondate=1912-11-05
+turns=25

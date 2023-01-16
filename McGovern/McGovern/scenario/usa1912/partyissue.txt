@@ -1,0 +1,13 @@
+### DO NOT WRITE ANY COMMENTS, THEY WILL BE REFRESHED.
+republican:
+	prohibition:
+		mean=-1.0
+		variance=2.0
+democratic:
+	prohibition:
+		mean=1.0
+		variance=2.0
+progressive:
+	prohibition:
+		mean=-2.0
+		variance=2.0

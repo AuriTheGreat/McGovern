@@ -1,0 +1,17 @@
+taft:
+	name=William Howard Taft
+	party=republican
+	leader=True
+	homeregion=ohio
+wilson:
+	name=Woodrow Wilson
+	party=democratic
+	leader=True
+	homeregion=newjersey
+	traits:
+		intellectual
+roosevelt:
+	name=Theodore Roosevelt
+	party=progressive
+	leader=True
+	homeregion=newyork

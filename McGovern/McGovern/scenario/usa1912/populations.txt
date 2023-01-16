@@ -1,0 +1,4 @@
+middleclass:
+	fullname=Middle Class
+	pollingbias=2
+	financialpower=1
