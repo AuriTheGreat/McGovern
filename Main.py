@@ -1,7 +1,7 @@
 from re import A
-import ScenarioHandler
-import ResultHandler
-import TriggerHandler
+import data.ScenarioHandler.Main as ScenarioHandler
+import data.ResultHandler as ResultHandler
+import data.TriggerHandler as TriggerHandler
 import os
 import sys
 import math
@@ -485,13 +485,13 @@ def parliamentarychart(x, y, width, height, gamedata, mode='westminster', ruling
 def mainmenu():
     objects.clear()
     #Rectangle(0,screen_width/(1200/250),screen_width,screen_height-(screen_height/(700/250)), '#D4FFFD')
-    Image(0,screen_width/(1200/250),screen_width,screen_height-(screen_height/(700/250)), 'gfx/menu.png')
+    Image(0,screen_width/(1200/250),screen_width,screen_height-(screen_height/(700/250)), 'resources/gfx/menu.png')
 
     button_size_x, button_size_y = screen_width/(1200/400), screen_height/(700/90)
-    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/300), button_size_x, button_size_y, 'gfx/button.png', 'Play', choosescenario)
-    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/400), button_size_x, button_size_y, 'gfx/button.png', 'Options', options)
-    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/500), button_size_x, button_size_y, 'gfx/button.png', 'Quit', quit)
-    Image(0, screen_width/(1200/10), screen_width, screen_width/4.8, 'gfx/title.png')
+    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/300), button_size_x, button_size_y, 'resources/gfx/button.png', 'Play', choosescenario)
+    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/400), button_size_x, button_size_y, 'resources/gfx/button.png', 'Options', options)
+    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/500), button_size_x, button_size_y, 'resources/gfx/button.png', 'Quit', quit)
+    Image(0, screen_width/(1200/10), screen_width, screen_width/4.8, 'resources/gfx/title.png')
 
 
 testscenarios=["nice", "indeed", "hello", "good", "fun", "destroy", "life", "great", "alright", "minecraft", "uk1970", "yes",
@@ -956,9 +956,9 @@ def nextturn(scenarioname, gamedata):
 def escape(scenarioname, gamedata):
     objects.clear()
     button_size_x, button_size_y = screen_width/(1200/400), screen_height/(700/90)
-    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/300), button_size_x, button_size_y, 'gfx/button.png', 'Return to the game', scenariomain, [scenarioname, gamedata, False])
-    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/400), button_size_x, button_size_y, 'gfx/button.png', 'Main menu', mainmenu)
-    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/500), button_size_x, button_size_y, 'gfx/button.png', 'Quit', quit)
+    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/300), button_size_x, button_size_y, 'resources/gfx/button.png', 'Return to the game', scenariomain, [scenarioname, gamedata, False])
+    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/400), button_size_x, button_size_y, 'resources/gfx/button.png', 'Main menu', mainmenu)
+    ImageButton(screen_width/2-(button_size_x/2), screen_width/(1200/500), button_size_x, button_size_y, 'resources/gfx/button.png', 'Quit', quit)
 
 def options():
     objects.clear()
@@ -983,7 +983,7 @@ if __name__ == "__main__":
 
     pygame.init()
     pygame.display.set_caption('McGovern')
-    pygame.display.set_icon(pygame.image.load('gfx/icon.png'))
+    pygame.display.set_icon(pygame.image.load('resources/gfx/icon.png'))
     fps = 30
     fpsClock = pygame.time.Clock()
     screen_width, screen_height = 1200, 700

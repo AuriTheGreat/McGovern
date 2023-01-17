@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32413.511
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "McGovern", "McGovern\McGovern.pyproj", "{46879802-CC9D-40BC-9EC3-7D6C6F734FB0}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "McGovern", "McGovern.pyproj", "{56A251C0-527F-4DE4-9AA4-7F113DDEE0E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{46879802-CC9D-40BC-9EC3-7D6C6F734FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46879802-CC9D-40BC-9EC3-7D6C6F734FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56A251C0-527F-4DE4-9AA4-7F113DDEE0E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56A251C0-527F-4DE4-9AA4-7F113DDEE0E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7D2FAD7B-120B-418D-8CC7-E7B95EB1380C}
+		SolutionGuid = {04E04E7D-EE0E-4CA6-89BC-EA05CB4A299E}
 	EndGlobalSection
 EndGlobal

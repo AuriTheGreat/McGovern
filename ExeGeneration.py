@@ -3,7 +3,7 @@ from cx_Freeze import setup, Executable
 
 # Dependencies are automatically detected, but it might need fine tuning.
 build_exe_options = {"build_exe": "build/McGovern Windows", 
-                     "include_files": ["gfx", "scenario"],
+                     "include_files": ["resources", "scenario"],
                      "packages": ["scipy"]
                      }
 
@@ -18,5 +18,5 @@ setup(
     author="AuriTheGreat",
     description="A political simulator game",
     options={"build_exe": build_exe_options},
-    executables=[Executable("Main.py", base=base, target_name='McGovern.exe', icon="gfx/icon.ico")],
+    executables=[Executable("Main.py", base=base, target_name='McGovern.exe', icon="resources/gfx/icon.ico")],
 )
