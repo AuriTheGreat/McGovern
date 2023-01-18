@@ -542,10 +542,8 @@ def scenariomain(scenarioname, gamedata=None, recalculate=True):
         gamedata.results=ResultHandler.getresults(gamedata.scenario)
         gamedata.polling=ResultHandler.getpolling(gamedata, gamedata.polling, 5)
 
-
-    #print(gamedata)
-    #print(gamedata.scenario)
-    #print(gamedata.results)
+    #gamedata.scenario.print()
+    #gamedata.results.print()
 
     objects.clear()
     Rectangle(900,0,screen_width,screen_height, '#006699')

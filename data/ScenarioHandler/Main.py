@@ -6,28 +6,47 @@ GetVariables
 import data.TriggerHandler as TriggerHandler
 
 class Scenario:
-      def __init__(self, name, main=None, base=None, issues=None, parties=None, ideologies=None, traits=None, characters=None, outcomes=None, regions=None, populations=None, partyissues=None, partypopulations=None, regionissues=None, regionpopulations=None, partyregions=None, events=None, decisions=None, triggers=None, news=None, variables=None):
+      def __init__(self, name):
         self.name = name
-        self.main = main
-        self.base = base
-        self.issues = issues
-        self.parties = parties
-        self.ideologies = ideologies
-        self.traits = traits
-        self.characters = characters
-        self.outcomes = outcomes
-        self.regions = regions
-        self.populations = populations
-        self.partyissues = partyissues
-        self.partypopulations = partypopulations
-        self.regionissues = regionissues
-        self.regionpopulations = regionpopulations
-        self.partyregions = partyregions
-        self.events = events
-        self.decisions = decisions
-        self.triggers = triggers
+        self.main = None
+        self.base = None
+        self.issues = None
+        self.parties = None
+        self.ideologies = None
+        self.traits = None
+        self.characters = None
+        self.outcomes = None
+        self.regions = None
+        self.populations = None
+        self.partyissues = None
+        self.partypopulations = None
+        self.regionissues = None
+        self.regionpopulations = None
+        self.partyregions = None
+        self.events = None
+        self.decisions = None
+        self.triggers = None
+        self.variables = None
+
         self.news = []
-        self.variables = variables
+      def print(self):
+          def printheader(string):
+              print("")
+              print("+" + "".join(["-" for c in range(95)]) + "+")
+              print("|", string.capitalize().center(93), "|")
+              print("+" + "".join(["-" for c in range(95)]) + "+")
+
+          self.base.print()
+          printheader("Parties")
+          for i in self.parties:
+              i.print()
+          printheader("Regions")
+          for i in self.regions:
+              i.print()
+          printheader("Characters")
+          for i in self.characters:
+              i.print()
+
 
 def initialisescenario(scenario): #is executed after trigger variable creation
     #Triggering leader ideological effects
@@ -72,9 +91,5 @@ def main(scenarioname):
     scenario.triggers=GetTriggers.main(scenarioname, scenario.events, scenario.decisions)
     scenario.variables=GetVariables.main(scenarioname)
 
-    #scenario.printalldata()
-
-    #print(next((x for x in scenario.partyissues if x.party.name == "labour" and x.issue.name== "tariffs"), None).variance)
-    #print(next((x for x in scenario.regionissues if x.region.name == "Wales" and x.issue.name== "immigration"), None).variance)
-
+    #scenario.print()
     return scenario

@@ -11,6 +11,18 @@ class Character:
         self.homeregion = homeregion
         self.ideologies = ideologies
         self.traits = traits
+      def print(self):
+        if self.name==None:
+            return
+        print("|", self.name.center(93), "|")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
+        print("|", "Name".rjust(20), "|", self.name[0:70].ljust(70), "|")
+        print("|", "Party".rjust(20), "|", str(self.party.fullname)[0:70].ljust(70), "|")
+        print("|", "Region".rjust(20), "|", str(self.homeregion.fullname)[0:70].ljust(70), "|")
+        print("|", "Ideologies".rjust(20), "|", ", ".join([i.fullname for i in self.ideologies])[0:70].ljust(70), "|")
+        print("|", "Traits".rjust(20), "|", ", ".join([i.fullname for i in self.traits])[0:70].ljust(70), "|")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
+
 
 def main(scenarioname, parties, mainideologies, maintraits, regions):
     characters=[]

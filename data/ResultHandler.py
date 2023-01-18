@@ -18,7 +18,7 @@ class Results:
         self.partyregionresults=partyregionresults
         self.totalpartyresults=totalpartyresults
 
-    def printresults(self):
+    def print(self):
         print("+" + "".join(["-" for c in range(95)]) + "+")
         print("|", "RESULTS".center(93), "|")
         print("+" + "".join(["-" for c in range(95)]) + "+")
@@ -240,7 +240,7 @@ def getresults(scenario):
     results.partyregionresults=getpartyregionresults(scenario)
     results.totalpartyresults=gettotalresults(scenario, results.partyregionresults)
 
-    #results.printresults()
+    #results.print()
     return results
 
 
@@ -284,7 +284,7 @@ def getnewpoll(gamedata):
 
     poll.totalpartyresults=gettotalresults(gamedata.scenario, poll.partyregionresults)
 
-    #poll.printresults()
+    #poll.print()
 
     return poll
 
@@ -316,7 +316,7 @@ def aggregatepolls(gamedata, polling):
 
     poll.totalpartyresults=gettotalresults(gamedata.scenario, poll.partyregionresults)
 
-    #poll.printresults()
+    #poll.print()
 
     return poll
 

@@ -15,6 +15,22 @@ class Base:
         self.turns=turns
         self.seats=seats
         self.population=population
+      def print(self):
+        print("+" + "".join(["-" for c in range(95)]) + "+")
+        print("|", "BASE".center(93), "|")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
+        print("|", "Name".rjust(20), "|", self.name[0:70].ljust(70), "|")
+        print("|", "Nation".rjust(20), "|", self.nation[0:70].ljust(70), "|")
+        print("|", "Year".rjust(20), "|", str(self.year)[0:70].ljust(70), "|")
+        print("|", "Fiction".rjust(20), "|", self.fiction[0:70].ljust(70), "|")
+        print("|", "Description".rjust(20), "|", self.description[0:70].ljust(70), "|")
+        print("|", "Start date".rjust(20), "|", str(self.startdate.date())[0:70].ljust(70), "|")
+        print("|", "End date".rjust(20), "|", str(self.enddate.date())[0:70].ljust(70), "|")
+        print("|", "Election date".rjust(20), "|", str(self.electiondate.date())[0:70].ljust(70), "|")
+        print("|", "Turns".rjust(20), "|", str(self.turns)[0:70].ljust(70), "|")
+        print("|", "Population".rjust(20), "|", f'{self.population:,}'[0:70].ljust(70), "|")
+        print("|", "Seats".rjust(20), "|", str(self.seats)[0:70].ljust(70), "|")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
 
 def main(scenarioname):
     f = open ( 'scenario/' + scenarioname + '/main.txt' , 'r')

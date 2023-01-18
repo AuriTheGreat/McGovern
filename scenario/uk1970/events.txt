@@ -21,14 +21,56 @@ devaluation:
 		in the world as a key player. On 12 July 1966 the Cabinet rejected the devaluation option 
 		and agreed to a tough package of deflation and austerity instead.
 	effects:
-		labour.power*0.833333
+		labour.power*0.91666 #reduces from 600 to 550
 		labour.powerofright-0.1
+		labour.middleclass.appeal-0.2
+
+degaulleveto:
+	name=Emphatic 'No' by de Gaulle
+	hidden=False
+	description:
+		President Charles de Gaulle of France has once again stated his opposition to British membership
+		within the European Economic Community, stating that membership within EEC was incompatible
+		with the economy of Britain. This is the second time in a decade when the membership was refused, 
+		as the conservative attempt to join EEC was also blocked by the president in 1963.
+
+		This is a major setback for the Labour government, and the enthusiasm for the membership has also 
+		declined throughout the country.
+
+	effects:
+		labour.power*0.9090 #reduces from 550 to 500
+		labour.powerofright-0.1
+		nationwide.europe.mean-0.5
+		nationwide.europe.variance+0.25
+
+degaulleresigns:
+	name=The General resigns
+	hidden=False
+	description:
+		President Charles de Gaulle of France has today been forced to resign after mass demonstrations and
+		strikes, as majority of the country saw him	as too old, too self-centered, too authoritarian, too 
+		conservative, and too anti-American.
+
+		Regardless, this once again open up the possibility for Britain to join the European Economic 
+		Community as the successor might be less inclined to veto the membership.
+
+	effects:
+		labour.powerofright+0.05
+		nationwide.europe.mean+0.25
+		nationwide.europe.variance-0.05
 
 democraticpartyfounded:
 	name=Founding of Democratic Party
 	hidden=False
 	description:
-		Member of Parliament for Pembrokeshire Desmond Donnely has defected from the labour party, calling for the prime minister's resignation. 
+		Member of Parliament for Pembrokeshire Desmond Donnely has defected from the labour party, calling 
+		for the prime minister's resignation. In some respects the party's policy is to the right of the
+		Conservatives, advocating the abolition of the welfare state, sweeping changes to the taxation system, 
+		and the return of national service.
+
+		The party is pretty unlikely to win any seats with the possible exception in Pembrokeshire. The 
+		constituency has traditionally been a labour seat, held by Donnely since 1950. However the struggle 
+		between labour and democratic parties' candidates may lead to conservative victory.
 	effects:
 		democratic.power=1
 		pembrokeshire=3

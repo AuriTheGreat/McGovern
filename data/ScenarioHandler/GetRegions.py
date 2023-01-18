@@ -13,6 +13,25 @@ class Region:
         self.issues = issues
         self.populations = populations
         self.resultcolor = resultcolor
+      def print(self):
+        print("|", self.name.center(93), "|")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
+        print("|", "Population".rjust(20), "|", f'{self.population:,}'[0:70].ljust(70), "|")
+        print("|", "Eligible Population".rjust(20), "|", str(self.eligiblepopulation)[0:70].ljust(70), "|")
+        print("|", "Seats".rjust(20), "|", str(self.seats)[0:70].ljust(70), "|")
+        print("+" + "".join(["-" for c in range(22)]) + "+" + "".join(["-" for c in range(72)]) + "+")
+        print("|", "".rjust(20), "|", "Issues"[0:70].center(70).ljust(70), "|")
+        print("|", "".rjust(20), "|", "Name"[0:20].center(20).ljust(20), "Mean"[0:70].center(15).ljust(15), "Variance"[0:70].center(16).ljust(16), "Importance"[0:70].center(16).ljust(16), "|")
+        print("|" + "".rjust(22) + "+" + "".join(["-" for c in range(72)]) + "+")
+        for i in self.issues:
+            print("|", "".rjust(20), "|", i.issue.fullname[0:20].center(20).ljust(20), str(round(i.mean,4)).center(15).ljust(15), str(round(i.variance,4)).center(16).ljust(16), str(round(i.importance,4)).center(16).ljust(16), "|")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
+        print("|", "".rjust(20), "|", "Populations"[0:70].center(70).ljust(70), "|")
+        print("|", "".rjust(20), "|", "Name"[0:20].center(20).ljust(20), "Influence"[0:70].center(49).ljust(49), "|")
+        print("|" + "".rjust(22) + "+" + "".join(["-" for c in range(72)]) + "+")
+        for i in self.populations:
+            print("|", "".rjust(20), "|", i.population.fullname[0:20].center(20).ljust(20), str(round(i.influence,4)).center(49).ljust(49), "|")
+        print("+" + "".join(["-" for c in range(95)]) + "+")
 
 def main(scenarioname, base):
     regions=[]

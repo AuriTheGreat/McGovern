@@ -1,6 +1,7 @@
 import numpy as np
 import re
 import datetime
+import data.TriggerHandler as TriggerHandler
 
 class Party:
       def __init__(self, name, fullname, power, playable, color, ideologies, ruling=False, issues=None, populations=None, leader=None, player=False, characters=None, nationalseats=0):
@@ -57,6 +58,29 @@ class Party:
                 object.__setattr__(self, attr, super(Party, self).__getattribute__(attr)*float(variable))
             elif operator=="=":
                 object.__setattr__(self, attr, float(variable))
+
+      def print(self):
+            print("|", self.name.center(93), "|")
+            print("+" + "".join(["-" for c in range(95)]) + "+")
+            print("|", "Full name".rjust(20), "|", self.fullname[0:70].ljust(70), "|")
+            if self.leader!=None:
+                print("|", "Leader".rjust(20), "|", str(self.leader.name)[0:70].ljust(70), "|")
+            else:
+                print("|", "Leader".rjust(20), "|", "None"[0:70].ljust(70), "|")
+            print("|", "Power".rjust(20), "|", str(round(self.power,4))[0:70].ljust(70), "|")
+            print("+" + "".join(["-" for c in range(22)]) + "+" + "".join(["-" for c in range(72)]) + "+")
+            print("|", "".rjust(20), "|", "Issues"[0:70].center(70).ljust(70), "|")
+            print("|", "".rjust(20), "|", "Name"[0:20].center(20).ljust(20), "Mean"[0:70].center(24).ljust(24), "Variance"[0:70].center(24).ljust(24), "|")
+            print("|" + "".rjust(22) + "+" + "".join(["-" for c in range(72)]) + "+")
+            for i in self.issues:
+                print("|", "".rjust(20), "|", i.issue.fullname[0:20].center(20).ljust(20), str(round(i.mean,4)).center(24).ljust(24),str(round(i.variance,4)).center(24).ljust(24), "|")
+            print("+" + "".join(["-" for c in range(95)]) + "+")
+            print("|", "".rjust(20), "|", "Populations"[0:70].center(70).ljust(70), "|")
+            print("|", "".rjust(20), "|", "Name"[0:20].center(20).ljust(20), "Appeal"[0:70].center(49).ljust(49), "|")
+            print("|" + "".rjust(22) + "+" + "".join(["-" for c in range(72)]) + "+")
+            for i in self.populations:
+                print("|", "".rjust(20), "|", i.population.fullname[0:20].center(20).ljust(20), str(round(i.appeal,4)).center(49).ljust(49), "|")
+            print("+" + "".join(["-" for c in range(95)]) + "+") 
 
 def main(scenarioname):
     parties=[]

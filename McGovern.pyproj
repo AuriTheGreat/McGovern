@@ -22,19 +22,26 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Interpreter Include="env\">
-      <Id>env</Id>
-      <Version>3.10</Version>
-      <Description>env (Python 3.10 (64-bit))</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>X64</Architecture>
-    </Interpreter>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="data\ResultHandler.py" />
-    <Compile Include="data\ScenarioHandler.py" />
+    <Compile Include="data\ScenarioHandler\GetDecisions.py" />
+    <Compile Include="data\ScenarioHandler\GetEvents.py" />
+    <Compile Include="data\ScenarioHandler\GetVariables.py" />
+    <Compile Include="data\ScenarioHandler\GetTriggers.py" />
+    <Compile Include="data\ScenarioHandler\GetPartyRegions.py" />
+    <Compile Include="data\ScenarioHandler\GetPartyPopulations.py" />
+    <Compile Include="data\ScenarioHandler\GetTraits.py" />
+    <Compile Include="data\ScenarioHandler\GetIdeologies.py" />
+    <Compile Include="data\ScenarioHandler\GetIssues.py" />
+    <Compile Include="data\ScenarioHandler\GetRegionPopulations.py" />
+    <Compile Include="data\ScenarioHandler\GetCharacters.py" />
+    <Compile Include="data\ScenarioHandler\GetPartyIssues.py" />
+    <Compile Include="data\ScenarioHandler\GetParties.py" />
+    <Compile Include="data\ScenarioHandler\GetPopulations.py" />
+    <Compile Include="data\ScenarioHandler\GetRegionIssues.py" />
+    <Compile Include="data\ScenarioHandler\GetMain.py" />
+    <Compile Include="data\ScenarioHandler\GetRegions.py" />
+    <Compile Include="data\ScenarioHandler\GetBase.py" />
+    <Compile Include="data\ScenarioHandler\Main.py" />
     <Compile Include="data\TriggerHandler.py" />
     <Compile Include="Main.py" />
     <Compile Include="ExeGeneration.py" />
@@ -46,11 +53,80 @@
     <Content Include="resources\gfx\icon.png" />
     <Content Include="resources\gfx\menu.png" />
     <Content Include="resources\gfx\title.png" />
+    <Content Include="scenario\uk1970\characters.txt" />
+    <Content Include="scenario\uk1970\decisions.txt" />
+    <Content Include="scenario\uk1970\events.txt" />
+    <Content Include="scenario\uk1970\gfx\labour.png" />
+    <Content Include="scenario\uk1970\gfx\main.png" />
+    <Content Include="scenario\uk1970\gfx\map.png" />
+    <Content Include="scenario\uk1970\gfx\nocharacter.png" />
+    <Content Include="scenario\uk1970\gfx\wilson.png" />
+    <Content Include="scenario\uk1970\historicalresults.txt" />
+    <Content Include="scenario\uk1970\ideologies.txt" />
+    <Content Include="scenario\uk1970\issues.txt" />
+    <Content Include="scenario\uk1970\main.txt" />
+    <Content Include="scenario\uk1970\outcomes.txt" />
+    <Content Include="scenario\uk1970\parties.txt" />
+    <Content Include="scenario\uk1970\partyissue.txt" />
+    <Content Include="scenario\uk1970\partypopulation.txt" />
+    <Content Include="scenario\uk1970\partyregion.txt" />
+    <Content Include="scenario\uk1970\populations.txt" />
+    <Content Include="scenario\uk1970\regionissue.txt" />
+    <Content Include="scenario\uk1970\regionpopulation.txt" />
+    <Content Include="scenario\uk1970\regions.txt" />
+    <Content Include="scenario\uk1970\traits.txt" />
+    <Content Include="scenario\uk1970\triggers.txt" />
+    <Content Include="scenario\uk1970\variables.txt" />
+    <Content Include="scenario\uk1974\main.txt" />
+    <Content Include="scenario\usa1912\characters.txt" />
+    <Content Include="scenario\usa1912\decisions.txt" />
+    <Content Include="scenario\usa1912\events.txt" />
+    <Content Include="scenario\usa1912\gfx\main.png" />
+    <Content Include="scenario\usa1912\gfx\map.png" />
+    <Content Include="scenario\usa1912\gfx\nocharacter.png" />
+    <Content Include="scenario\usa1912\historicalresults.txt" />
+    <Content Include="scenario\usa1912\ideologies.txt" />
+    <Content Include="scenario\usa1912\issues.txt" />
+    <Content Include="scenario\usa1912\main.txt" />
+    <Content Include="scenario\usa1912\outcomes.txt" />
+    <Content Include="scenario\usa1912\parties.txt" />
+    <Content Include="scenario\usa1912\partyissue.txt" />
+    <Content Include="scenario\usa1912\partypopulation.txt" />
+    <Content Include="scenario\usa1912\partyregion.txt" />
+    <Content Include="scenario\usa1912\populations.txt" />
+    <Content Include="scenario\usa1912\regionissue.txt" />
+    <Content Include="scenario\usa1912\regionpopulation.txt" />
+    <Content Include="scenario\usa1912\regions.txt" />
+    <Content Include="scenario\usa1912\traits.txt" />
+    <Content Include="scenario\usa1912\triggers.txt" />
+    <Content Include="scenario\usa1912\variables.txt" />
+    <Content Include="scenario\usa1988\main.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\" />
+    <Folder Include="data\ScenarioHandler\" />
     <Folder Include="resources\" />
     <Folder Include="resources\gfx\" />
+    <Folder Include="scenario\" />
+    <Folder Include="scenario\uk1970\" />
+    <Folder Include="scenario\uk1970\gfx\" />
+    <Folder Include="scenario\uk1974\" />
+    <Folder Include="scenario\uk1974\gfx\" />
+    <Folder Include="scenario\usa1912\" />
+    <Folder Include="scenario\usa1912\gfx\" />
+    <Folder Include="scenario\usa1988\" />
+    <Folder Include="scenario\usa1988\gfx\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.10</Version>
+      <Description>env (Python 3.10 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

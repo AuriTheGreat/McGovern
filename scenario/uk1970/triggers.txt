@@ -16,6 +16,24 @@ devaluation:
 	trigger:
 		event.devaluation
 
+degaulleveto:
+	triggerable=True
+	triggeronce=True
+	chance=100%
+	if:
+		date>"1967-11-28"
+	trigger:
+		event.degaulleveto
+
+degaulleresigns:
+	triggerable=True
+	triggeronce=True
+	chance=100%
+	if:
+		date>"1969-04-28"
+	trigger:
+		event.degaulleresigns
+
 democraticpartyfounded:
 	triggerable=True
 	triggeronce=True
