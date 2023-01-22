@@ -5,6 +5,7 @@ import data.TriggerHandler as TriggerHandler
 import os
 import sys
 import math
+import threading
 import pygame
 import pygame.freetype
 from pygame.locals import *
@@ -81,6 +82,19 @@ class Circle():
 
     def process(self):
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
+
+class LoadingScreenImage():
+    def __init__(self, x, y, radius, color):
+            self.x = x
+            self.y = y
+            self.radius = radius
+            self.color = color
+
+            objects.append(self)
+
+    def process(self):
+        pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
+        self.y+=10
 
 class Image():
     def __init__(self, x, y, width, height, img):
@@ -244,7 +258,20 @@ class Map():
             self.colormode = colormode
             self.party = party
 
+            self.colors=self.coloringmode()
             objects.append(self)
+
+    def coloringmode(self):
+        colors={}
+        if self.colormode=='main':
+            colors={i.name:i.resultcolor for i in self.gamedata.scenario.regions}
+        elif self.colormode=='party':
+            for i in [i for i in self.gamedata.polling.aggregated.partyregionresults if i.party.fullname==self.party.fullname]:
+                multiplicator=i.percentage/max([j.percentage for j in self.gamedata.polling.aggregated.partyregionresults if j.party.fullname==self.party.fullname])
+                colors[i.region.name]=tuple([max(40,j*multiplicator) for j in i.party.color])
+
+        return colors
+
 
     def process(self):
         mousePos = pygame.mouse.get_pos()
@@ -268,14 +295,7 @@ class Map():
                 else:
                     isclicked=False
         
-        if self.colormode=='main':
-            [arr.replace(i.color, i.resultcolor) for i in self.gamedata.scenario.regions]
-        elif self.colormode=='party':
-            colors={}
-            for i in [i for i in self.gamedata.polling.aggregated.partyregionresults if i.party.fullname==self.party.fullname]:
-                multiplicator=i.percentage/max([j.percentage for j in self.gamedata.polling.aggregated.partyregionresults if j.party.fullname==self.party.fullname])
-                colors[i.region.name]=tuple([max(40,j*multiplicator) for j in i.party.color])
-            [arr.replace(i.color, colors[i.name]) for i in self.gamedata.scenario.regions]
+        [arr.replace(i.color, self.colors[i.name]) for i in self.gamedata.scenario.regions]
 
         arr.close()
 
@@ -557,7 +577,10 @@ def scenariomain(scenarioname, gamedata=None, recalculate=True):
     else:
         Image(980,screen_width/(1200/110),150,150, 'scenario/' + scenarioname + '/gfx/main.png')
     Button(10, screen_width/(1200/10), button_size_x, button_size_y, 'Escape', escape, [scenarioname, gamedata])
-    Button(950, screen_width/(1200/10), button_size_x, button_size_y, 'Next Turn', nextturn, [scenarioname, gamedata])
+    if gamedata.scenario.main.currentdate<=gamedata.scenario.base.electiondate<gamedata.scenario.main.currentdate+gamedata.scenario.main.turnlength:
+        Button(950, screen_width/(1200/10), button_size_x, button_size_y, 'Head to Election', electionscreen, [scenarioname, gamedata])
+    else:
+        Button(950, screen_width/(1200/10), button_size_x, button_size_y, 'Next Turn', nextturn, [scenarioname, gamedata])
     Button(950, screen_width/(1200/280), button_size_x, button_size_y, 'Government', governmentview, [scenarioname, gamedata])
     Button(950, screen_width/(1200/380), button_size_x, button_size_y, 'Regions', regionview, [scenarioname, gamedata])
     Button(950, screen_width/(1200/480), button_size_x, button_size_y, 'Events', eventview, [scenarioname, gamedata])
@@ -938,17 +961,47 @@ def eventview(scenarioname, gamedata, currentevent=None):
         MultipleLineText(210,110, 580, 565, '#003366', currentevent.description, fontsize=30)
     #parliamentarychart(10, 100, 1180, 575, gamedata)
 
-def nextturn(scenarioname, gamedata):
+def electionscreen(scenarioname, gamedata):
     objects.clear()
+    Rectangle(0,680,screen_width,screen_height, '#003366')
+    Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366')
+    Rectangle(350,0,500,screen_height-(screen_height/(700/600)), '#003366', "Election Day")
+    Rectangle(950,0,300,screen_height-(screen_height/(700/600)), '#003366', str(gamedata.scenario.base.electiondate.date()))
+    button_size_x, button_size_y = screen_width/(1200/200), screen_height/(700/80)
+    Button(10, screen_width/(1200/10), button_size_x, button_size_y, 'Back', scenariomain, [scenarioname, gamedata, False])
+
+    ResultHandler.getelection(gamedata, 5)
+
+def nextturn(scenarioname, gamedata):
+    def calculating(scenario):
+        global isclicked
+        global calculating
+        isclicked=True
+        calculating=True
+        gamedata.results=ResultHandler.getresults(gamedata.scenario)
+        gamedata.polling=ResultHandler.getpolling(gamedata, gamedata.polling, 5)
+        calculating=False
+        isclicked=False
+        scenariomain(scenarioname, gamedata, recalculate=False)
+
     if gamedata.scenario.base.enddate>gamedata.scenario.main.currentdate:
         gamedata.scenario.main.newturn()
         TriggerHandler.main(gamedata.scenario)
-        if gamedata.scenario.main.currentdate<gamedata.scenario.base.electiondate<gamedata.scenario.main.currentdate+gamedata.scenario.main.turnlength:
+        if gamedata.scenario.main.currentdate<=gamedata.scenario.base.electiondate<gamedata.scenario.main.currentdate+gamedata.scenario.main.turnlength:
             print(gamedata.scenario.main.currentdate.date(), "ELECTION DAY")
         else:
             print(gamedata.scenario.main.currentdate.date())
 
-    scenariomain(scenarioname, gamedata)
+    """
+    gamedata.results=threading.Thread(target=ResultHandler.getresults,
+                         args=[gamedata.scenario],
+                         daemon=True).start()
+    """
+    LoadingScreenImage(200,200,5,(200,100,200))
+
+    threading.Thread(target=calculating,
+                         args=[gamedata.scenario],
+                         daemon=True).start()
 
 
 def escape(scenarioname, gamedata):
@@ -994,6 +1047,7 @@ if __name__ == "__main__":
     objects = []
     openwindows = []
     isclicked=False
+    calculating=False
 
     mainmenu()
     

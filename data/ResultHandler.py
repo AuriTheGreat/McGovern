@@ -88,8 +88,8 @@ def partyregionissuehandler(scenario):
     for i in scenario.regionissues:
         for j in scenario.partyissues:
             if i.issue==j.issue:
-                regionpopulationinfluence=[x.influence for x in scenario.regionpopulations if x.region==i.region]
-                partypopulationappeal=[x.appeal for x in scenario.partypopulations if x.party==j.party]
+                regionpopulationinfluence=[x.influence for x in i.region.populations]
+                partypopulationappeal=[x.appeal for x in j.party.populations]
                 populationinfluence=sum([a*b for a,b in zip(regionpopulationinfluence,partypopulationappeal)])/sum(regionpopulationinfluence)
                 localpower=next((x.power for x in scenario.partyregions if x.party == j.party and x.region==i.region), None)
 
@@ -340,3 +340,12 @@ def getpolling(gamedata, polling=None, count=1):
         i.totalpartyresults=sorted(i.totalpartyresults, key=lambda x: totalsort.index(str(x.party.fullname)))
 
     return polling
+
+#####################################################################################
+##################################### Election ######################################
+#####################################################################################
+
+def getelection(gamedata, turns):
+    
+
+    return None
