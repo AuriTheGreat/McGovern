@@ -25,3 +25,10 @@ silvertongued:
 	fullname=Silver-tongued
 	effects:
 		party.middleclass.appeal+0.1
+
+unionfriend:
+	fullname=Friend of the Unions
+	effects:
+		party.tradeunionists.appeal+0.1
+		party.tradeunions.mean+0.1
+		party.powerofright+0.1

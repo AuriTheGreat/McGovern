@@ -73,7 +73,8 @@ democraticpartyfounded:
 		between labour and democratic parties' candidates may lead to conservative victory.
 	effects:
 		democratic.power=1
-		pembrokeshire=3
+		democratic.wales.power=6
+		labour.wales.power-3
 		labour.wales.controlledseats-1
 		democratic.wales.controlledseats+1
 		labour.wales.guaranteedseats-1

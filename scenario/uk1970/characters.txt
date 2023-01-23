@@ -16,7 +16,8 @@ callaghan:
 	ideologies:
 		socialdemocracy
 	traits:
-		warveteran	
+		unionfriend
+		warveteran
 jenkins:
 	name=Roy Jenkins
 	party=labour
@@ -87,10 +88,17 @@ maudling:
 		conservative
 	traits:
 		unifier
+grimond:
+	name=Joseph Grimond
+	party=liberal
+	leader=True	
+	homeregion=scotland
+	ideologies:
+		liberalism
 thorpe:
 	name=Jeremy Thorpe
 	party=liberal
-	leader=True	
+	leader=False	
 	homeregion=southwest
 	ideologies:
 		liberalism
@@ -101,10 +109,17 @@ gollan:
 	homeregion=scotland
 	ideologies:
 		communism
+donaldson:
+	name=Arthur Donaldson
+	party=snp
+	leader=True
+	homeregion=scotland
+	ideologies:
+		nationalism
 wolfe:
 	name=William Wolfe
 	party=snp
-	leader=True
+	leader=False
 	homeregion=scotland
 	ideologies:
 		nationalism

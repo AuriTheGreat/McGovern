@@ -1,4 +1,5 @@
 from re import A
+from turtle import screensize
 import data.ScenarioHandler.Main as ScenarioHandler
 import data.ResultHandler as ResultHandler
 import data.TriggerHandler as TriggerHandler
@@ -7,6 +8,7 @@ import sys
 import math
 import threading
 import pygame
+import time
 import pygame.freetype
 from pygame.locals import *
 
@@ -60,16 +62,14 @@ class Rectangle():
 
             self.Surface = pygame.Surface((self.width, self.height))
             self.Surface.fill(self.color)
-            self.Rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
     def process(self):
+        self.Rect = pygame.Rect(self.x, self.y, self.width, self.height)
         screen.blit(self.Surface, self.Rect)
 
         text_rect = self.font.get_rect(self.text)
         text_rect.center = self.Surface.get_rect().center
         self.font.render_to(self.Surface, text_rect.topleft, self.text, (255,255,255))
-
-        screen.blit(self.Surface, (self.x,self.y))
 
 class Circle():
     def __init__(self, x, y, radius, color):
@@ -89,12 +89,17 @@ class LoadingScreenImage():
             self.y = y
             self.radius = radius
             self.color = color
+            self.surface = pygame.Surface((screen_width, screen_height), pygame.SRCALPHA)
+            self.transparency=60
 
             objects.append(self)
 
     def process(self):
-        pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
-        self.y+=10
+        color=tuple(list(self.color) + [self.transparency])
+        pygame.draw.circle(self.surface,color,(self.x, self.y), self.radius)
+        screen.blit(self.surface, (0,0))
+        self.x+=20
+        self.transparency=min(255,self.transparency+30)
 
 class Image():
     def __init__(self, x, y, width, height, img):
@@ -558,6 +563,8 @@ def choosescenarioplayer(scenarioname):
 
 
 def scenariomain(scenarioname, gamedata=None, recalculate=True):
+    windowhistory.clear()
+    windowhistory.append([scenariomain, [scenarioname, gamedata, False]])
     if recalculate==True:
         gamedata.results=ResultHandler.getresults(gamedata.scenario)
         gamedata.polling=ResultHandler.getpolling(gamedata, gamedata.polling, 5)
@@ -605,6 +612,8 @@ def addon(scenarioname, gamedata, affectopenwindows=True):
             Rectangle(650,120+count*60,screen_width/(1200/250), screen_height/(700/50), '#003366', str(i.name))
 
 def regionview(scenarioname, gamedata, region='National', page=0):
+    if windowhistory[-1][0]!=regionview:
+        windowhistory.append([regionview, [scenarioname, gamedata, region, page]])
     objects.clear()
     partiesperpage=5
     regions=['National'] + [i.name for i in gamedata.scenario.regions]
@@ -657,6 +666,8 @@ def regionview(scenarioname, gamedata, region='National', page=0):
         Button(520,600,screen_width/(1200/50), screen_height/(700/50), '>', regionview, [scenarioname, gamedata, region, page+1])
             
 def partyview(scenarioname, gamedata, limit=None):
+    if windowhistory[-1][0]!=partyview:
+        windowhistory.append([partyview, [scenarioname, gamedata, limit]])
     objects.clear()
     parties=[i.fullname for i in gamedata.scenario.parties if next((x.votes for x in gamedata.results.totalpartyresults if x.party == i), 0)>0]
     currentparty=next((x for x in gamedata.scenario.parties if x.fullname == limit), None)
@@ -713,6 +724,7 @@ def partyview(scenarioname, gamedata, limit=None):
         Button(1000, screen_width/(1200/430), screen_width/(1200/180), screen_height/(700/50), 'Polling', pollingview, [scenarioname, gamedata])
 
 def leaderview(scenarioname, gamedata, party):
+    windowhistory.append([leaderview, [scenarioname, gamedata, party]])
     objects.clear()
     #leader=next((x for x in gamedata.scenario.characters if x.name == leadername), None)
     Rectangle(0,680,screen_width,screen_height, '#003366')
@@ -743,6 +755,7 @@ def leaderview(scenarioname, gamedata, party):
 
 
 def governmentview(scenarioname, gamedata):
+    windowhistory.append([governmentview, [scenarioname, gamedata]])
     objects.clear()
     Rectangle(0,680,screen_width,screen_height, '#003366')
     Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366')
@@ -753,6 +766,8 @@ def governmentview(scenarioname, gamedata):
     parliamentarychart(10, 100, 1180, 575, gamedata)
 
 def issueview(scenarioname, gamedata, issue=None, region=None, page=0):
+    if windowhistory[-1][0]!=issueview:
+        windowhistory.append([issueview, [scenarioname, gamedata, issue, region, page]])
     objects.clear()
     partiesperpage=5
     Rectangle(0,680,screen_width,screen_height, '#003366')
@@ -835,6 +850,8 @@ def issueview(scenarioname, gamedata, issue=None, region=None, page=0):
         Button(520,600,screen_width/(1200/50), screen_height/(700/50), '>', issueview, [scenarioname, gamedata, issue, region, page+1])
 
 def pollingview(scenarioname, gamedata, region="National", page=0):
+    if windowhistory[-1][0]!=pollingview:
+        windowhistory.append([pollingview, [scenarioname, gamedata, region, page]])
     objects.clear()
     pollsperpage=7
     regions=['National'] + [i.name for i in gamedata.scenario.regions]
@@ -886,6 +903,8 @@ def pollingview(scenarioname, gamedata, region="National", page=0):
         Button(520,600,screen_width/(1200/50), screen_height/(700/50), '>', pollingview, [scenarioname, gamedata, region, page+1])
 
 def pollview(scenarioname, gamedata, poll, region='National', page=0):
+    if windowhistory[-1][0]!=pollview:
+        windowhistory.append([pollview, [scenarioname, gamedata, poll, region, page]])
     objects.clear()
     partiesperpage=5
     regions=['National'] + [i.name for i in gamedata.scenario.regions]
@@ -940,6 +959,7 @@ def pollview(scenarioname, gamedata, poll, region='National', page=0):
         Button(520,600,screen_width/(1200/50), screen_height/(700/50), '>', pollview, [scenarioname, gamedata, poll, region, page+1])
 
 def eventview(scenarioname, gamedata, currentevent=None):
+    windowhistory.append([eventview, [scenarioname, gamedata, currentevent]])
     objects.clear()
     Rectangle(0,680,screen_width,screen_height, '#003366')
     Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366')
@@ -962,6 +982,7 @@ def eventview(scenarioname, gamedata, currentevent=None):
     #parliamentarychart(10, 100, 1180, 575, gamedata)
 
 def electionscreen(scenarioname, gamedata):
+    windowhistory.append([electionscreen, [scenarioname, gamedata]])
     objects.clear()
     Rectangle(0,680,screen_width,screen_height, '#003366')
     Rectangle(0,0,screen_width,screen_height-(screen_height/(700/600)), '#003366')
@@ -973,35 +994,30 @@ def electionscreen(scenarioname, gamedata):
     ResultHandler.getelection(gamedata, 5)
 
 def nextturn(scenarioname, gamedata):
-    def calculating(scenario):
+    def processturn(scenarioname, gamedata):
         global isclicked
         global calculating
-        isclicked=True
         calculating=True
         gamedata.results=ResultHandler.getresults(gamedata.scenario)
         gamedata.polling=ResultHandler.getpolling(gamedata, gamedata.polling, 5)
         calculating=False
-        isclicked=False
-        scenariomain(scenarioname, gamedata, recalculate=False)
+        windowhistory[-1][0](*windowhistory[-1][1])
+        #scenariomain(scenarioname, gamedata, recalculate=False)
 
-    if gamedata.scenario.base.enddate>gamedata.scenario.main.currentdate:
-        gamedata.scenario.main.newturn()
-        TriggerHandler.main(gamedata.scenario)
-        if gamedata.scenario.main.currentdate<=gamedata.scenario.base.electiondate<gamedata.scenario.main.currentdate+gamedata.scenario.main.turnlength:
-            print(gamedata.scenario.main.currentdate.date(), "ELECTION DAY")
-        else:
-            print(gamedata.scenario.main.currentdate.date())
+    if not calculating:
+        if gamedata.scenario.base.enddate>gamedata.scenario.main.currentdate:
+            gamedata.scenario.main.newturn()
+            TriggerHandler.main(gamedata.scenario)
+            if gamedata.scenario.main.currentdate<=gamedata.scenario.base.electiondate<gamedata.scenario.main.currentdate+gamedata.scenario.main.turnlength:
+                print(gamedata.scenario.main.currentdate.date(), "ELECTION DAY")
+            else:
+                print(gamedata.scenario.main.currentdate.date())
 
-    """
-    gamedata.results=threading.Thread(target=ResultHandler.getresults,
-                         args=[gamedata.scenario],
-                         daemon=True).start()
-    """
-    LoadingScreenImage(200,200,5,(200,100,200))
+        LoadingScreenImage(225,90,5,(255,255,255))
 
-    threading.Thread(target=calculating,
-                         args=[gamedata.scenario],
-                         daemon=True).start()
+        threading.Thread(target=processturn,
+                             args=[scenarioname,gamedata],
+                             daemon=True).start()
 
 
 def escape(scenarioname, gamedata):
@@ -1045,6 +1061,7 @@ if __name__ == "__main__":
     mainfont = pygame.freetype.SysFont(mainfontstyle, mainfontsize)
 
     objects = []
+    windowhistory=[]
     openwindows = []
     isclicked=False
     calculating=False
@@ -1061,6 +1078,7 @@ if __name__ == "__main__":
     
         for object in objects:
             object.process()
-    
-        pygame.display.flip()
+
+        if objects:
+            pygame.display.flip()
         fpsClock.tick(fps)
