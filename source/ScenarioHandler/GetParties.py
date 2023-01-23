@@ -1,7 +1,7 @@
 import numpy as np
 import re
 import datetime
-import data.TriggerHandler as TriggerHandler
+import source.TriggerHandler as TriggerHandler
 
 class Party:
       def __init__(self, name, fullname, power, playable, color, ideologies, ruling=False, issues=None, populations=None, leader=None, player=False, characters=None, nationalseats=0):

@@ -1,8 +1,8 @@
 from re import A
 from turtle import screensize
-import data.ScenarioHandler.Main as ScenarioHandler
-import data.ResultHandler as ResultHandler
-import data.TriggerHandler as TriggerHandler
+import source.ScenarioHandler.Main as ScenarioHandler
+import source.ResultHandler as ResultHandler
+import source.TriggerHandler as TriggerHandler
 import os
 import sys
 import math

@@ -1,9 +1,9 @@
 import os
-from data.ScenarioHandler import GetMain, GetBase, GetIssues, GetParties, GetIdeologies, \
+from source.ScenarioHandler import GetMain, GetBase, GetIssues, GetParties, GetIdeologies, \
 GetTraits, GetCharacters, GetRegions, GetPopulations, GetPartyIssues, GetPartyPopulations, \
 GetRegionIssues, GetRegionPopulations, GetPartyRegions, GetEvents, GetDecisions, GetTriggers, \
 GetVariables
-import data.TriggerHandler as TriggerHandler
+import source.TriggerHandler as TriggerHandler
 
 class Scenario:
       def __init__(self, name):

@@ -22,27 +22,27 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="data\ResultHandler.py" />
-    <Compile Include="data\ScenarioHandler\GetDecisions.py" />
-    <Compile Include="data\ScenarioHandler\GetEvents.py" />
-    <Compile Include="data\ScenarioHandler\GetVariables.py" />
-    <Compile Include="data\ScenarioHandler\GetTriggers.py" />
-    <Compile Include="data\ScenarioHandler\GetPartyRegions.py" />
-    <Compile Include="data\ScenarioHandler\GetPartyPopulations.py" />
-    <Compile Include="data\ScenarioHandler\GetTraits.py" />
-    <Compile Include="data\ScenarioHandler\GetIdeologies.py" />
-    <Compile Include="data\ScenarioHandler\GetIssues.py" />
-    <Compile Include="data\ScenarioHandler\GetRegionPopulations.py" />
-    <Compile Include="data\ScenarioHandler\GetCharacters.py" />
-    <Compile Include="data\ScenarioHandler\GetPartyIssues.py" />
-    <Compile Include="data\ScenarioHandler\GetParties.py" />
-    <Compile Include="data\ScenarioHandler\GetPopulations.py" />
-    <Compile Include="data\ScenarioHandler\GetRegionIssues.py" />
-    <Compile Include="data\ScenarioHandler\GetMain.py" />
-    <Compile Include="data\ScenarioHandler\GetRegions.py" />
-    <Compile Include="data\ScenarioHandler\GetBase.py" />
-    <Compile Include="data\ScenarioHandler\Main.py" />
-    <Compile Include="data\TriggerHandler.py" />
+    <Compile Include="source\ResultHandler.py" />
+    <Compile Include="source\ScenarioHandler\GetDecisions.py" />
+    <Compile Include="source\ScenarioHandler\GetEvents.py" />
+    <Compile Include="source\ScenarioHandler\GetVariables.py" />
+    <Compile Include="source\ScenarioHandler\GetTriggers.py" />
+    <Compile Include="source\ScenarioHandler\GetPartyRegions.py" />
+    <Compile Include="source\ScenarioHandler\GetPartyPopulations.py" />
+    <Compile Include="source\ScenarioHandler\GetTraits.py" />
+    <Compile Include="source\ScenarioHandler\GetIdeologies.py" />
+    <Compile Include="source\ScenarioHandler\GetIssues.py" />
+    <Compile Include="source\ScenarioHandler\GetRegionPopulations.py" />
+    <Compile Include="source\ScenarioHandler\GetCharacters.py" />
+    <Compile Include="source\ScenarioHandler\GetPartyIssues.py" />
+    <Compile Include="source\ScenarioHandler\GetParties.py" />
+    <Compile Include="source\ScenarioHandler\GetPopulations.py" />
+    <Compile Include="source\ScenarioHandler\GetRegionIssues.py" />
+    <Compile Include="source\ScenarioHandler\GetMain.py" />
+    <Compile Include="source\ScenarioHandler\GetRegions.py" />
+    <Compile Include="source\ScenarioHandler\GetBase.py" />
+    <Compile Include="source\ScenarioHandler\Main.py" />
+    <Compile Include="source\TriggerHandler.py" />
     <Compile Include="Main.py" />
     <Compile Include="ExeGeneration.py" />
   </ItemGroup>
@@ -103,8 +103,8 @@
     <Content Include="scenario\usa1988\main.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="data\" />
-    <Folder Include="data\ScenarioHandler\" />
+    <Folder Include="source\" />
+    <Folder Include="source\ScenarioHandler\" />
     <Folder Include="resources\" />
     <Folder Include="resources\gfx\" />
     <Folder Include="scenario\" />
