@@ -22,6 +22,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="source\UserInterface\ComponentGroups.py" />
+    <Compile Include="source\UserInterface\Main.py" />
     <Compile Include="source\ResultHandler.py" />
     <Compile Include="source\ScenarioHandler\GetDecisions.py" />
     <Compile Include="source\ScenarioHandler\GetEvents.py" />
@@ -45,6 +47,8 @@
     <Compile Include="source\TriggerHandler.py" />
     <Compile Include="Main.py" />
     <Compile Include="ExeGeneration.py" />
+    <Compile Include="source\UserInterface\Views.py" />
+    <Compile Include="source\UserInterface\UIComponents.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
@@ -104,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="source\" />
+    <Folder Include="source\UserInterface\" />
     <Folder Include="source\ScenarioHandler\" />
     <Folder Include="resources\" />
     <Folder Include="resources\gfx\" />
