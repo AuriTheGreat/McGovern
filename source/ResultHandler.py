@@ -164,22 +164,6 @@ def partyregionresulthandler(scenario, issuepartyregionresults=None, mode='norma
             elif reachedregion:
                 break
 
-    def regionresultcolorcalculation(regions, partyregionresults):
-        for i in regions:
-            maxvalue, party=-1, None
-
-            #seatweights=[j.seats/i.seats for j in partyregionresults if i==j.region]
-
-            seatweights=[(j.seats/i.seats)**2.5 for j in partyregionresults if i==j.region]
-            seatweights=[j/sum(seatweights) for j in seatweights]
-            resultcolor=[0,0,0]
-            for count, j in enumerate([k for k in partyregionresults if i==k.region]):
-                resultcolor=[seatweights[count]*j.party.color[colorcount]+k for colorcount,k in enumerate(resultcolor)]
-
-            #print(seatweights)
-            #print(resultcolor)
-            i.resultcolor=tuple(resultcolor)
-
     if issuepartyregionresults:
         partyregionresults=convertissuepartyregionresults(scenario, issuepartyregionresults)
 
@@ -195,8 +179,6 @@ def partyregionresulthandler(scenario, issuepartyregionresults=None, mode='norma
         partypercentages[i.party]=i.percentage/100
 
     seatcalculation(partyregionresults, partypercentages, region)
-    if mode=='normal':
-        regionresultcolorcalculation(scenario.regions, partyregionresults)
 
     partyregionresults.sort(key=lambda x: (x.region.seats, x.region.population, x.region.name, x.seats, x.votes), reverse=True)
 
@@ -269,7 +251,7 @@ def getnewpoll(gamedata):
     for i in gamedata.results.partyregionresults:
         pollingbias=sum([x.influence/sum([k.influence for k in gamedata.scenario.regionpopulations if x.region==i.region])*y.appeal for x in gamedata.scenario.regionpopulations for y in gamedata.scenario.partypopulations if x.region==i.region and x.population==y.population and i.party==y.party])
         #randomvalue=random.uniform(0.85, 1+pollingbias)
-        randomvalue=random.triangular(0.7+pollingbias, 1+pollingbias, 1.3+pollingbias)
+        randomvalue=random.triangular(0.85+pollingbias, 1+pollingbias, 1.15+pollingbias)
         poll.partyregionresults.append(PartyRegionResult(i.region, i.party, i.votes*randomvalue, 0, i.percentage*randomvalue))
 
     #fixing percentages so they add to 1

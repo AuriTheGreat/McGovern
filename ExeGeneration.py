@@ -4,7 +4,8 @@ from cx_Freeze import setup, Executable
 # Dependencies are automatically detected, but it might need fine tuning.
 build_exe_options = {"build_exe": "build/McGovern Windows", 
                      "include_files": ["resources", "scenario"],
-                     "packages": ["scipy"]
+                     "packages": ["scipy"],
+                     #"excludes": ["tomli", "pluggy", "iniconfig", "exceptiongroup", "colorama", "attrs", "pytest"]
                      }
 
 # base="Win32GUI" should be used only for Windows GUI app
@@ -14,7 +15,7 @@ if sys.platform == "win32":
 
 setup(
     name="McGovern",
-    version="0.1.0",
+    version="0.1.2",
     author="AuriTheGreat",
     description="A political simulator game",
     options={"build_exe": build_exe_options},

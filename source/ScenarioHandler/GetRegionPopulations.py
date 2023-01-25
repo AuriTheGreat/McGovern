@@ -8,6 +8,11 @@ class RegionPopulation:
         self.population = population
         self.influence = influence
 
+      def __getattribute__(self, item):
+          if item=="influence":
+              return max(super(RegionPopulation, self).__getattribute__(item), 0)
+          return super(RegionPopulation, self).__getattribute__(item)
+
       def validvariables(self):
           #The key is the name of the attribute. The value describes how the variable is formatted.
           return {"influence": self.region.name+"."+self.population.name+".influence"}

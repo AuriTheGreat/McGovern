@@ -23,7 +23,11 @@ devaluation:
 	effects:
 		labour.power*0.91666 #reduces from 600 to 550
 		labour.powerofright-0.1
-		labour.middleclass.appeal-0.2
+		labour.middleclass.appeal-0.3
+		nationwide.economicphilosophy.mean-0.75
+		nationwide.economicphilosophy.importance+0.1
+		nationwide.middleclass.influence-0.05
+		nationwide.poor.influence+0.025
 
 degaulleveto:
 	name=Emphatic 'No' by de Gaulle
@@ -40,6 +44,8 @@ degaulleveto:
 	effects:
 		labour.power*0.9090 #reduces from 550 to 500
 		labour.powerofright-0.1
+		labour.europe.mean-0.75
+		labour.europe.variance+0.25
 		nationwide.europe.mean-0.5
 		nationwide.europe.variance+0.25
 

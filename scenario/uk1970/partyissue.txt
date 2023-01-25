@@ -25,8 +25,8 @@ labour:
 		mean=3.0
 		variance=2.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=4.0
+		variance=1.5
 conservative:
 	immigration:
 		mean=-1.0
@@ -53,8 +53,8 @@ conservative:
 		mean=-1.0
 		variance=2.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=2.0
+		variance=2.5
 liberal:
 	immigration:
 		mean=3.0
@@ -81,8 +81,8 @@ liberal:
 		mean=4.0
 		variance=3.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=2.0
+		variance=1.5
 communist:
 	immigration:
 		mean=4.0
@@ -109,8 +109,8 @@ communist:
 		mean=4.0
 		variance=2.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=5.0
+		variance=1.5
 snp:
 	immigration:
 		mean=1.0
@@ -137,8 +137,8 @@ snp:
 		mean=1.0
 		variance=1.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=3.0
+		variance=1.5
 plc:
 	immigration:
 		mean=2.0
@@ -165,8 +165,8 @@ plc:
 		mean=1.0
 		variance=1.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=4.0
+		variance=1.5
 unity:
 	immigration:
 		mean=2.0
@@ -193,8 +193,8 @@ unity:
 		mean=3.0
 		variance=2.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=3.0
+		variance=1.5
 prounionist:
 	immigration:
 		mean=-1.0
@@ -221,8 +221,8 @@ prounionist:
 		mean=-1.0
 		variance=2.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=1.0
+		variance=1.5
 replabour:
 	immigration:
 		mean=2.0
@@ -249,8 +249,8 @@ replabour:
 		mean=3.0
 		variance=2.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=4.0
+		variance=1.5
 inderep:
 	immigration:
 		mean=2.0
@@ -277,8 +277,8 @@ inderep:
 		mean=3.0
 		variance=2.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=2.0
+		variance=2.5
 democratic:
 	immigration:
 		mean=-2.0
@@ -305,8 +305,8 @@ democratic:
 		mean=-1.0
 		variance=2.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=-3.0
+		variance=2.5
 speaker:
 	immigration:
 		mean=-1.0
@@ -333,5 +333,5 @@ speaker:
 		mean=0.0
 		variance=2.5
 	economicphilosophy:
-		mean=0.0
-		variance=1.0
+		mean=3.0
+		variance=2.0

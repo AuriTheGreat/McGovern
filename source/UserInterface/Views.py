@@ -1,14 +1,13 @@
 import math
 import os
 import threading
+import pygame
+import sys
 import source.ScenarioHandler.Main as ScenarioHandler
 import source.ResultHandler as ResultHandler
 import source.TriggerHandler as TriggerHandler
-import source.UserInterface.UIComponents as c #component
+import source.UserInterface.UIComponents as c
 import source.UserInterface.ComponentGroups as cg
-
-import pygame
-import sys
 
 class GameData:
     def __init__(self, scenario, results=None, polling=None):
@@ -16,7 +15,7 @@ class GameData:
         self.results = results
         self.polling = polling
 
-def mainmenu(s): #UIState
+def mainmenu(s): #s is UIState
     s.objects.clear()
     #c.Rectangle(0,s.screen_width/(1200/250),s.screen_width,s.screen_height-(s.screen_height/(700/250)), '#D4FFFD')
     c.Image(s,0,s.screen_width/(1200/250),s.screen_width,s.screen_height-(s.screen_height/(700/250)), 'resources/gfx/menu.png')
@@ -406,11 +405,11 @@ def pollingview(s, scenarioname, gamedata, region="National", page=0):
     c.Button(s, 1000, s.screen_width/(1200/430), s.screen_width/(1200/180), s.screen_height/(700/50), 'Polling', pollingview, [s, scenarioname, gamedata, region, 0])
 
     if page!=0:
-        c.Button(400,600,s.screen_width/(1200/50), s.screen_height/(700/50), '<', pollingview, [s, scenarioname, gamedata, region, page-1])
+        c.Button(s,400,600,s.screen_width/(1200/50), s.screen_height/(700/50), '<', pollingview, [s, scenarioname, gamedata, region, page-1])
     if pollcount>pollsperpage:
-        c.Rectangle(460,600,s.screen_width/(1200/50), s.screen_height/(700/50), '#003366', str(page+1))
+        c.Rectangle(s,460,600,s.screen_width/(1200/50), s.screen_height/(700/50), '#003366', str(page+1))
     if pollcount>(page+1)*pollsperpage:
-        c.Button(520,600,s.screen_width/(1200/50), s.screen_height/(700/50), '>', pollingview, [s, scenarioname, gamedata, region, page+1])
+        c.Button(s,520,600,s.screen_width/(1200/50), s.screen_height/(700/50), '>', pollingview, [s, scenarioname, gamedata, region, page+1])
 
 def pollview(s, scenarioname, gamedata, poll, region='National', page=0):
     if s.windowhistory[-1][0]!=pollview:

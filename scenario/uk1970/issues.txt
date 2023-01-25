@@ -49,6 +49,6 @@ socialreforms:
 economicphilosophy:
 	fullname=Economic Philosophy
 	levels:
-		Keynesianism
-		Neutral
 		Monetarism
+		Neutral
+		Keynesianism

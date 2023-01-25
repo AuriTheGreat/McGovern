@@ -1,4 +1,6 @@
+from cmath import e
 import os
+import re
 from source.ScenarioHandler import GetMain, GetBase, GetIssues, GetParties, GetIdeologies, \
 GetTraits, GetCharacters, GetRegions, GetPopulations, GetPartyIssues, GetPartyPopulations, \
 GetRegionIssues, GetRegionPopulations, GetPartyRegions, GetEvents, GetDecisions, GetTriggers, \
@@ -46,6 +48,87 @@ class Scenario:
           printheader("Characters")
           for i in self.characters:
               i.print()
+
+      def validvariables(self):
+          variables={}
+          issuenames=[i.name for i in self.issues]
+          populationnames=[i.name for i in self.populations]
+          variables.update({i+"-"+j:"nationwide."+i+"."+j for i in issuenames for j in ["mean", "variance", "importance"]})
+          variables.update({i+"-"+j:"nationwide."+i+"."+j for i in populationnames for j in ["influence"]})
+          return variables
+         
+
+      def getvariable(self, attr):
+          issuename=re.search("(.*)-", attr)[1]
+          measurename=re.search("-(.*)", attr)[1]
+          return
+    
+      def setvariable(self, attr, variable, operator):
+          issuenames=[i.name for i in self.issues]
+          populationnames=[i.name for i in self.populations]
+
+          issuename=re.search("(.*)-", attr)[1]
+          measurename=re.search("-(.*)", attr)[1]
+
+          if issuename in issuenames:
+            if operator=="+":
+                for i in self.regionissues:
+                    if i.issue.name==issuename:
+                        if measurename=="mean":
+                            i.mean+=float(variable)
+                        elif measurename=="variance":
+                            i.variance+=float(variable)
+                        elif measurename=="importance":
+                            i.importance+=float(variable)
+            elif operator=="-":
+                for i in self.regionissues:
+                    if i.issue.name==issuename:
+                        if measurename=="mean":
+                            i.mean-=float(variable)
+                        elif measurename=="variance":
+                            i.variance-=float(variable)
+                        elif measurename=="importance":
+                            i.importance-=float(variable)
+            elif operator=="*":
+                  for i in self.regionissues:
+                    if i.issue.name==issuename:
+                        if measurename=="mean":
+                            i.mean*=float(variable)
+                        elif measurename=="variance":
+                            i.variance*=float(variable)
+                        elif measurename=="importance":
+                            i.importance*=float(variable)
+            elif operator=="=":
+                for i in self.regionissues:
+                    if i.issue.name==issuename:
+                        if measurename=="mean":
+                            i.mean=float(variable)
+                        elif measurename=="variance":
+                            i.variance=float(variable)
+                        elif measurename=="importance":
+                            i.importance=float(variable)
+          elif issuename in populationnames:
+              if operator=="+":
+                  for i in self.regionpopulations:
+                      if i.population.name==issuename:
+                          if measurename=="influence":
+                              i.influence+=float(variable)
+              elif operator=="-":
+                  for i in self.regionpopulations:
+                      if i.population.name==issuename:
+                          if measurename=="influence":
+                              i.influence-=float(variable)
+              elif operator=="*":
+                  for i in self.regionpopulations:
+                      if i.population.name==issuename:
+                          if measurename=="influence":
+                              i.influence*=float(variable)
+              elif operator=="=":
+                  for i in self.regionpopulations:
+                      if i.population.name==issuename:
+                          if measurename=="influence":
+                              i.influence=float(variable)
+            
 
 
 def initialisescenario(scenario): #is executed after trigger variable creation

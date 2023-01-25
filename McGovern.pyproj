@@ -23,7 +23,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="source\UserInterface\ComponentGroups.py" />
-    <Compile Include="source\UserInterface\Main.py" />
     <Compile Include="source\ResultHandler.py" />
     <Compile Include="source\ScenarioHandler\GetDecisions.py" />
     <Compile Include="source\ScenarioHandler\GetEvents.py" />
@@ -107,6 +106,7 @@
     <Content Include="scenario\usa1988\main.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Tests\" />
     <Folder Include="source\" />
     <Folder Include="source\UserInterface\" />
     <Folder Include="source\ScenarioHandler\" />

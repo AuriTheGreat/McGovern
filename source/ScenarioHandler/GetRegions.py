@@ -3,7 +3,7 @@ import re
 import datetime
 
 class Region:
-      def __init__(self, name, fullname, population, eligiblepopulation, seats, color, issues=None, populations=None, resultcolor=None):
+      def __init__(self, name, fullname, population, eligiblepopulation, seats, color, issues=None, populations=None):
         self.name = name
         self.fullname = fullname
         self.population = population
@@ -12,7 +12,6 @@ class Region:
         self.color = color
         self.issues = issues
         self.populations = populations
-        self.resultcolor = resultcolor
       def print(self):
         print("|", self.name.center(93), "|")
         print("+" + "".join(["-" for c in range(95)]) + "+")

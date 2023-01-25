@@ -27,7 +27,7 @@ def generatevariables(gamedata):
     iterablevariableobjects=[gamedata.scenario.parties, gamedata.scenario.regionissues, gamedata.scenario.partyissues, 
                              gamedata.scenario.partypopulations, gamedata.scenario.regionpopulations, gamedata.scenario.partyregions,
                              gamedata.scenario.variables]
-    variableobjects=[gamedata.scenario.main]
+    variableobjects=[gamedata.scenario, gamedata.scenario.main]
     #listofvariables.update({"date": currentscenario.main.currentdate})
     for i in variableobjects:
             listofvariables.update({i.validvariables()[k]:((i.getvariable, [k]), (i.setvariable, [k])) for k in i.validvariables()})

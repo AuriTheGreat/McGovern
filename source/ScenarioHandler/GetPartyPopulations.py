@@ -8,6 +8,11 @@ class PartyPopulation:
         self.population = population
         self.appeal = appeal
 
+      def __getattribute__(self, item):
+          if item=="influence":
+              return max(super(PartyPopulation, self).__getattribute__(item), 0)
+          return super(PartyPopulation, self).__getattribute__(item)
+
       def validvariables(self):
           #The key is the name of the attribute. The value describes how the variable is formatted.
           return {"appeal": self.party.name+"."+self.population.name+".appeal"}

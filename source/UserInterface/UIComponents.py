@@ -60,21 +60,31 @@ class Circle():
 class LoadingScreenImage():
     def __init__(self, UIState, x, y, radius, color):
         self.UIState = UIState
+        self.basex = x
+        self.basey = y
         self.x = x
         self.y = y
         self.radius = radius
         self.color = color
-        self.surface = pygame.Surface((self.UIState.screen_width, self.UIState.screen_height), pygame.SRCALPHA)
-        self.transparency=60
+        #self.surface = pygame.Surface((self.x+radius, self.y+radius), pygame.SRCALPHA)
+        self.basetransparency=30
+        self.transparency=self.basetransparency
 
         self.UIState.objects.append(self)
 
     def process(self):
-        color=tuple(list(self.color) + [self.transparency])
+        color=tuple(list(self.color) + [abs(self.transparency)])
+        self.surface = pygame.Surface((self.x+self.radius, self.y+self.radius), pygame.SRCALPHA)
         pygame.draw.circle(self.surface,color,(self.x, self.y), self.radius)
         self.UIState.screen.blit(self.surface, (0,0))
-        self.x+=20
+        self.x+=30
         self.transparency=min(255,self.transparency+30)
+        if self.transparency==255:
+            self.x=self.basex
+            self.y=self.basey
+            self.transparency=self.basetransparency
+
+
 
 class Image():
     def __init__(self, UIState, x, y, width, height, img):
@@ -249,7 +259,26 @@ class Map():
     def coloringmode(self):
         colors={}
         if self.colormode=='main':
-            colors={i.name:i.resultcolor for i in self.gamedata.scenario.regions}
+            #Can sort either by either seats or votes
+            partyregionresults=sorted(self.gamedata.polling.aggregated.partyregionresults, key=lambda x: (x.region.seats, x.region.population, x.region.name, x.seats, x.votes), reverse=True)
+            #partyregionresults=sorted(self.gamedata.polling.aggregated.partyregionresults, key=lambda x: (x.region.seats, x.region.population, x.region.name, x.votes, x.seats), reverse=True)
+
+            #Probably highly inefficient
+            for i in self.gamedata.scenario.regions:
+                seatweights=[(j.seats/i.seats)**2.5 for j in partyregionresults if i==j.region]
+                seatweights=[j/sum(seatweights) for j in seatweights]
+                resultcolor=[0,0,0]
+                for count, j in enumerate([k for k in partyregionresults if i==k.region]):
+                    resultcolor=[seatweights[count]*j.party.color[colorcount]+k for colorcount,k in enumerate(resultcolor)]
+                colors[i.name]=tuple(resultcolor)
+
+            """
+            #To get only the winner color, it's enough to only take the first value that is of different region
+            for i in partyregionresults:
+                if i.region.name not in colors:
+                    colors[i.region.name]=i.party.color
+            """
+            #colors={i.name:i.resultcolor for i in self.gamedata.scenario.regions}
         elif self.colormode=='party':
             for i in [i for i in self.gamedata.polling.aggregated.partyregionresults if i.party.fullname==self.party.fullname]:
                 multiplicator=i.percentage/max([j.percentage for j in self.gamedata.polling.aggregated.partyregionresults if j.party.fullname==self.party.fullname])
@@ -360,23 +389,14 @@ class MultipleLineText():
             self.Surface.fill(self.color)
             self.Rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
+            previous_height_total=0
+            heightofline=self.font.get_rect("Tg").height
+            for i in self.text:
+                text_rect = self.font.get_rect(i)
+                text_rect.y+=previous_height_total+(heightofline-text_rect.height)/2
+                previous_height_total+=heightofline
+
+                self.font.render_to(self.Surface, text_rect.topleft, i, (255,255,255))
+
     def process(self):
         self.UIState.screen.blit(self.Surface, self.Rect)
-
-        #text_rect = self.font.get_rect(self.text)
-        #print(sum([self.font.get_rect(i).height for i in self.text]))
-        previous_height_total=0
-        heightofline=self.font.get_rect("Tg").height
-        for i in self.text:
-            text_rect = self.font.get_rect(i)
-            text_rect.y+=previous_height_total+(heightofline-text_rect.height)/2
-            previous_height_total+=heightofline
-
-            self.font.render_to(self.Surface, text_rect.topleft, i, (255,255,255))
-
-        """
-        text_rect.center = self.Surface.get_rect().center
-        self.font.render_to(self.Surface, text_rect.topleft, self.text, (255,255,255))
-        """
-
-        self.UIState.screen.blit(self.Surface, (self.x,self.y))
