@@ -1,5 +1,6 @@
 import pygame
 import math
+import numpy as np
 
 class Rectangle():
     def __init__(self, UIState, x, y, width, height, color, text="", fontstyle=None, fontsize=None):
@@ -260,25 +261,38 @@ class Map():
         colors={}
         if self.colormode=='main':
             #Can sort either by either seats or votes
-            partyregionresults=sorted(self.gamedata.polling.aggregated.partyregionresults, key=lambda x: (x.region.seats, x.region.population, x.region.name, x.seats, x.votes), reverse=True)
-            #partyregionresults=sorted(self.gamedata.polling.aggregated.partyregionresults, key=lambda x: (x.region.seats, x.region.population, x.region.name, x.votes, x.seats), reverse=True)
+            #partyregionresults=sorted(self.gamedata.polling.aggregated.partyregionresults, key=lambda x: (x.region.seats, x.region.population, x.region.name, x.seats, x.votes), reverse=True)
+            partyregionresults=sorted(self.gamedata.polling.aggregated.partyregionresults, key=lambda x: (x.region.seats, x.region.population, x.region.name, x.votes, x.seats), reverse=True)
 
-            #Probably highly inefficient
-            for i in self.gamedata.scenario.regions:
-                seatweights=[(j.seats/i.seats)**2.5 for j in partyregionresults if i==j.region]
-                seatweights=[j/sum(seatweights) for j in seatweights]
-                resultcolor=[0,0,0]
-                for count, j in enumerate([k for k in partyregionresults if i==k.region]):
-                    resultcolor=[seatweights[count]*j.party.color[colorcount]+k for colorcount,k in enumerate(resultcolor)]
-                colors[i.name]=tuple(resultcolor)
+            region, firstmargin, secondmargin = partyregionresults[0].region, partyregionresults[0].percentage, 0
+            winnercolor, normalcolor=np.array(partyregionresults[0].party.color), np.array([200,200,200])
+            maxdifference=10
 
-            """
+            for i in partyregionresults[1:]:
+                if i.region!=region:
+                    region, firstmargin, secondmargin = i.region, i.percentage, 0
+                    winnercolor=np.array(i.party.color)
+                elif secondmargin!=0:
+                    continue
+                else:
+                    secondmargin=i.percentage
+                    difference=min(maxdifference, firstmargin-secondmargin)
+                    color=(normalcolor*(maxdifference-difference)+winnercolor*difference)/maxdifference
+                    colors[region.name]=tuple(color)
+
+            #Old coloring, probably highly inefficient
+            #for i in self.gamedata.scenario.regions:
+            #    seatweights=[(j.seats/i.seats)**2.5 for j in partyregionresults if i==j.region]
+            #    seatweights=[j/sum(seatweights) for j in seatweights]
+            #    resultcolor=[0,0,0]
+            #    for count, j in enumerate([k for k in partyregionresults if i==k.region]):
+            #        resultcolor=[seatweights[count]*j.party.color[colorcount]+k for colorcount,k in enumerate(resultcolor)]
+            #    colors[i.name]=tuple(resultcolor)
+
             #To get only the winner color, it's enough to only take the first value that is of different region
-            for i in partyregionresults:
-                if i.region.name not in colors:
-                    colors[i.region.name]=i.party.color
-            """
-            #colors={i.name:i.resultcolor for i in self.gamedata.scenario.regions}
+            #for i in partyregionresults:
+            #    if i.region.name not in colors:
+            #        colors[i.region.name]=i.party.color
         elif self.colormode=='party':
             for i in [i for i in self.gamedata.polling.aggregated.partyregionresults if i.party.fullname==self.party.fullname]:
                 multiplicator=i.percentage/max([j.percentage for j in self.gamedata.polling.aggregated.partyregionresults if j.party.fullname==self.party.fullname])

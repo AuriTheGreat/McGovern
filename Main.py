@@ -2,7 +2,7 @@ from re import A
 from turtle import screensize
 import source.UserInterface.Views as UI
 import source.ScenarioHandler.Main as ScenarioHandler
-import source.ResultHandler as ResultHandler
+import source.ResultHandler.Main as ResultHandler
 import source.TriggerHandler as TriggerHandler
 import os
 import sys

@@ -12,6 +12,7 @@
     <Name>McGovern</Name>
     <RootNamespace>McGovern</RootNamespace>
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <TestFramework>unittest</TestFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,8 +23,11 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="source\ResultHandler\PartyRegionResults.py" />
+    <Compile Include="source\ResultHandler\Main.py" />
+    <Compile Include="source\ResultHandler\Polling.py" />
+    <Compile Include="source\ResultHandler\TotalPartyResults.py" />
     <Compile Include="source\UserInterface\ComponentGroups.py" />
-    <Compile Include="source\ResultHandler.py" />
     <Compile Include="source\ScenarioHandler\GetDecisions.py" />
     <Compile Include="source\ScenarioHandler\GetEvents.py" />
     <Compile Include="source\ScenarioHandler\GetVariables.py" />
@@ -48,6 +52,13 @@
     <Compile Include="ExeGeneration.py" />
     <Compile Include="source\UserInterface\Views.py" />
     <Compile Include="source\UserInterface\UIComponents.py" />
+    <Compile Include="tests\test_1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\test_2.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
@@ -106,7 +117,8 @@
     <Content Include="scenario\usa1988\main.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Tests\" />
+    <Folder Include="source\ResultHandler\" />
+    <Folder Include="tests\" />
     <Folder Include="source\" />
     <Folder Include="source\UserInterface\" />
     <Folder Include="source\ScenarioHandler\" />
@@ -121,6 +133,7 @@
     <Folder Include="scenario\usa1912\gfx\" />
     <Folder Include="scenario\usa1988\" />
     <Folder Include="scenario\usa1988\gfx\" />
+    <Folder Include="tests\samples\" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">

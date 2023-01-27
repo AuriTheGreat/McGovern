@@ -4,7 +4,7 @@ import threading
 import pygame
 import sys
 import source.ScenarioHandler.Main as ScenarioHandler
-import source.ResultHandler as ResultHandler
+import source.ResultHandler.Main as ResultHandler
 import source.TriggerHandler as TriggerHandler
 import source.UserInterface.UIComponents as c
 import source.UserInterface.ComponentGroups as cg
