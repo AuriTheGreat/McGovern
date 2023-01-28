@@ -1,17 +1,56 @@
 import source.ResultHandler.PartyRegionResults as prr
 import source.ResultHandler.TotalPartyResults as tpr
 import random
+import numpy as np
 import statsmodels.api as sm
+from source.ResultHandler.Classes import Poll, PartyRegionResult
+
+currentdate=None
+regiontotalinfluencesums={}
+partypopulationappeals={}
+regionpopulationinfluences={}
+pollingbiases={}
 
 def getnewpoll(gamedata, poll):
     poll.partyregionresults=[]
 
+    #calculating pollingbias if it's a new turn
+    global currentdate
+    global regiontotalinfluencesums
+    global partypopulationappeals
+    global pollingbiases
+    if gamedata.scenario.main.currentdate!=currentdate:
+        currentdate=gamedata.scenario.main.currentdate
+        regiontotalinfluencesums.clear()
+        partypopulationappeals.clear()
+        regionpopulationinfluences.clear()
+        pollingbiases.clear()
+        #gets total influence of all populations within region combined and also region population influence multiplied by population polling bias
+        for i in gamedata.scenario.regionpopulations:
+            if i.region not in regiontotalinfluencesums:
+                regiontotalinfluencesums[i.region]=0
+                regionpopulationinfluences[i.region]=[]
+            regiontotalinfluencesums[i.region]+=i.influence
+            regionpopulationinfluences[i.region].append(i.influence)
+
+        for i in gamedata.scenario.partypopulations:
+            if i.party not in partypopulationappeals:
+                partypopulationappeals[i.party]=[]
+            partypopulationappeals[i.party].append(i.appeal*i.population.pollingbias)
+
+        for i in gamedata.results.partyregionresults:
+            #calculates pollingbias by:
+            #1) Appropriate PartyPopulation and RegionPopulation are found according to partyregionresult
+            #2) The relative (in regards to total region influence) influence of population is multiplied to the party's appeal among the population.
+            #3) All calculated sums are added up to calculate total party's appeal among populations of the region.
+            pollingbiases[i.party.name+"-"+i.region.name]=np.sum(np.array(regionpopulationinfluences[i.region])/regiontotalinfluencesums[i.region]*np.array(partypopulationappeals[i.party]))
+
     #randomizing percentages
     for i in gamedata.results.partyregionresults:
-        pollingbias=sum([x.influence/sum([k.influence for k in gamedata.scenario.regionpopulations if x.region==i.region])*y.appeal for x in gamedata.scenario.regionpopulations for y in gamedata.scenario.partypopulations if x.region==i.region and x.population==y.population and i.party==y.party])
+        pollingbias=pollingbiases[i.party.name+"-"+i.region.name]
         #randomvalue=random.uniform(0.85, 1+pollingbias)
         randomvalue=random.triangular(0.85+pollingbias, 1+pollingbias, 1.15+pollingbias)
-        poll.partyregionresults.append(prr.PartyRegionResult(i.region, i.party, i.votes*randomvalue, 0, i.percentage*randomvalue))
+        poll.partyregionresults.append(PartyRegionResult(i.region, i.party, i.votes*randomvalue, 0, i.percentage*randomvalue))
 
     #fixing percentages so they add to 1
     totalpercentage={i.region: sum([j.percentage for j in poll.partyregionresults if i.region==j.region]) for i in poll.partyregionresults}
@@ -21,7 +60,7 @@ def getnewpoll(gamedata, poll):
         i.votes=round(i.votes/totalpercentage[i.region]*100)
 
     #getting seat counts for the result
-    prr.partyregionresulthandler(gamedata.scenario, mode='polling', partyregionresults=poll.partyregionresults)
+    prr.partyregionresulthandler(gamedata.scenario, partyregionresults=poll.partyregionresults)
 
     poll.totalpartyresults=tpr.gettotalresults(gamedata.scenario, poll.partyregionresults)
 
@@ -33,12 +72,14 @@ def aggregatepolls(gamedata, polling):
     #x = np.linspace(1,len([j for i in polling.polls for j in i.partyregionresults]),len([j for i in polling.polls for j in i.partyregionresults]))
     #print([i.totalpartyresults.percentage for i in polling.polls if i.totalpartyresults.party.name=='labour'])
 
+    aggregated=Poll(gamedata.scenario, gamedata.scenario.main.currentdate, [], [])
+
     for count,k in enumerate([i for i in polling.polls[0].partyregionresults]):
         y = [j.votes for i in polling.polls for j in i.partyregionresults if j.party==k.party and j.region==k.region]
         x=range(len(y))
         lowess = sm.nonparametric.lowess(y, x, frac=0.6)
 
-        polling.aggregated.partyregionresults.append(prr.PartyRegionResult(k.region, k.party, max(0,round(lowess[len(y)-1][1])), 0, 0))
+        aggregated.partyregionresults.append(PartyRegionResult(k.region, k.party, max(0,round(lowess[len(y)-1][1])), 0, 0))
 
         """
         if count==0:
@@ -50,9 +91,8 @@ def aggregatepolls(gamedata, polling):
             plt.show()
         """
         
-    polling.aggregated.partyregionresults=prr.partyregionresulthandler(gamedata.scenario, mode='polling', partyregionresults=polling.aggregated.partyregionresults)
-    polling.aggregated.totalpartyresults=tpr.gettotalresults(gamedata.scenario, polling.aggregated.partyregionresults)
+    aggregated.partyregionresults=prr.partyregionresulthandler(gamedata.scenario, partyregionresults=aggregated.partyregionresults)
+    aggregated.totalpartyresults=tpr.gettotalresults(gamedata.scenario, aggregated.partyregionresults)
 
-    #polling.aggregated.print()
-
-    return polling.aggregated
+    #aggregated.print()
+    return aggregated

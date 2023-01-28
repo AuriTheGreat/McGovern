@@ -1,27 +1,20 @@
-
-class TotalPartyResult:
-    def __init__(self, party, votes, seats, percentage):
-        self.party = party
-        self.votes=votes
-        self.seats=seats
-        self.percentage=percentage
+from source.ResultHandler.Classes import TotalPartyResult
 
 def gettotalresults(scenario, partyregionresults):
-    totalpartyresults=[]
+    totalpartyresults={}
+    totalvotes=0
 
-    for i in scenario.parties:
-        if sum([j.votes for j in partyregionresults])*100>0:
-            totalpartyresults.append(TotalPartyResult(i, 
-            sum([j.votes for j in partyregionresults if i==j.party]),
-            sum([j.seats for j in partyregionresults if i==j.party]),
-            sum([j.votes for j in partyregionresults if i==j.party])/sum([j.votes for j in partyregionresults])*100
-            ))
-        else:
-            totalpartyresults.append(TotalPartyResult(i, 
-            sum([j.votes for j in partyregionresults if i==j.party]),
-            sum([j.seats for j in partyregionresults if i==j.party]),
-            sum([j.percentage for j in partyregionresults if i==j.party])/sum([j.percentage for j in partyregionresults])*100
-            ))
+    for i in partyregionresults:
+        if i.party not in totalpartyresults:
+            totalpartyresults[i.party]=TotalPartyResult(i.party)
+        totalpartyresults[i.party].votes+=i.votes
+        totalpartyresults[i.party].seats+=i.seats
+        totalvotes+=i.votes
 
+    totalpartyresults=list(totalpartyresults.values())
     totalpartyresults.sort(key=lambda x: (x.seats, x.votes), reverse=True)
+
+    for i in totalpartyresults:
+        i.percentage=i.votes/totalvotes*100
+
     return totalpartyresults

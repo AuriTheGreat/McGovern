@@ -23,6 +23,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="source\ResultHandler\Classes.py" />
     <Compile Include="source\ResultHandler\PartyRegionResults.py" />
     <Compile Include="source\ResultHandler\Main.py" />
     <Compile Include="source\ResultHandler\Polling.py" />

@@ -1,26 +1,9 @@
 from scipy.stats import norm
+from source.ResultHandler.Classes import IssuePartyRegionResult, PartyRegionResult
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import numpy as np
 import math
-
-
-
-class IssuePartyRegionResult:
-      def __init__(self, region, party, issue, regionaxes, partyaxes):
-        self.region = region
-        self.party = party
-        self.issue = issue
-        self.regionaxes=regionaxes
-        self.partyaxes=partyaxes
-
-class PartyRegionResult:
-      def __init__(self, region, party, votes=None, seats=None, percentage=None):
-        self.region = region
-        self.party = party
-        self.votes=votes
-        self.seats=seats
-        self.percentage=percentage
 
 def partyregionissuehandler(scenario):
     x=np.arange(-20, 20, 0.1)
@@ -59,12 +42,16 @@ def partyregionissuehandler(scenario):
 
 
 def convertissuepartyregionresults(scenario, issuepartyregionresults):
-        partyregionresults=[]
-        for i in scenario.regions:
-            for j in scenario.parties:
-                votes=round(sum([sum(x.partyaxes[1]) for x in issuepartyregionresults if x.region==i and x.party==j]))
-                partyregionresults.append(PartyRegionResult(i,j,votes))
-        return partyregionresults
+    partyregionresults={}
+
+    for i in issuepartyregionresults:
+        if i.party.name+"-"+i.region.name not in partyregionresults:
+            partyregionresults[i.party.name+"-"+i.region.name]=PartyRegionResult(i.region,i.party,0)
+        partyregionresults[i.party.name+"-"+i.region.name].votes+=i.partyaxes[1]
+
+    for i in partyregionresults.values():
+        i.votes=round(sum(i.votes))
+    return list(partyregionresults.values())
 
 def calculationbalancer(partyshares, partyseats, neededseats): #function for distributing seats if the amount of seats doesn't match amount of distributed seats
     while neededseats!=sum(partyseats.values()):
@@ -91,10 +78,20 @@ def calculationbalancer(partyshares, partyseats, neededseats): #function for dis
 def seatcalculation(partyregionresults, partypercentages, region, scenario):
     partyshares={}
     partyseats={}
-    for j in partypercentages:
-        partyshares[j]=(0.00104*(partypercentages[j]*100)**2.8+0.17)/100
-    for j in partyshares:
-        partyseats[j]=round((partyshares[j]/sum(partyshares.values()))*region.seats)
+
+    #typical distribution
+    partyshares={i:(0.00104*(partypercentages[i]*100)**2.8+0.17)/100 for i in partypercentages}
+
+    #winner takes all distribution
+    #partyshares=({i:0 for i in partypercentages})
+    #partyshares[list(partypercentages.keys())[list(partypercentages.values()).index(max(partypercentages.values()))]]=1
+
+    #proportional distribution
+    #partyshares={i:partypercentages[i]**2 for i in partypercentages}
+
+    partyseats={i:round((partyshares[i]/sum(partyshares.values()))*region.seats) for i in partypercentages}
+
+
     partyseats=calculationbalancer(partyshares, partyseats, region.seats-sum([x.guaranteedseats for x in scenario.partyregions if x.region == region]))
     for j in partyregionresults:
         reachedregion=False
@@ -106,7 +103,7 @@ def seatcalculation(partyregionresults, partypercentages, region, scenario):
     return partyseats
 
 
-def partyregionresulthandler(scenario, issuepartyregionresults=None, mode='normal', partyregionresults=None):
+def partyregionresulthandler(scenario, issuepartyregionresults=None, partyregionresults=None):
     if issuepartyregionresults:
         partyregionresults=convertissuepartyregionresults(scenario, issuepartyregionresults)
 
@@ -127,7 +124,7 @@ def partyregionresulthandler(scenario, issuepartyregionresults=None, mode='norma
 
     return partyregionresults
 
-def main(scenario, mode='normal'):
+def main(scenario):
     issuepartyregionresults=partyregionissuehandler(scenario)
-    partyregionresults=partyregionresulthandler(scenario, issuepartyregionresults, mode)
+    partyregionresults=partyregionresulthandler(scenario, issuepartyregionresults)
     return partyregionresults
