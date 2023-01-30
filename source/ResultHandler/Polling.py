@@ -74,8 +74,16 @@ def aggregatepolls(gamedata, polling):
 
     aggregated=Poll(gamedata.scenario, gamedata.scenario.main.currentdate, [], [])
 
+    #Pretty much turns partyregionresults into a dictionary
+    votes={}
+    for i in polling.polls[-20:]:
+        for j in i.partyregionresults:
+            if j.party.name+"-"+j.region.name not in votes:
+                votes[j.party.name+"-"+j.region.name]=[]
+            votes[j.party.name+"-"+j.region.name].append(j.votes)
+
     for count,k in enumerate([i for i in polling.polls[0].partyregionresults]):
-        y = [j.votes for i in polling.polls for j in i.partyregionresults if j.party==k.party and j.region==k.region]
+        y = votes[k.party.name+"-"+k.region.name]
         x=range(len(y))
         lowess = sm.nonparametric.lowess(y, x, frac=0.6)
 

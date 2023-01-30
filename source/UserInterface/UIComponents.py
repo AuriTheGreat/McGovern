@@ -252,7 +252,10 @@ class Map():
             self.regionview = regionviewfunction
             self.colormode = colormode
             self.party = party
+            
+            
             self.baseimage=pygame.image.load(self.img)
+            self.savedimages={}
 
             self.colors=self.coloringmode()
             self.UIState.objects.append(self)
@@ -280,6 +283,10 @@ class Map():
                     color=(normalcolor*(maxdifference-difference)+winnercolor*difference)/maxdifference
                     colors[region.name]=tuple(color)
 
+            for i in self.gamedata.scenario.regions:
+                if i.name not in colors:
+                    colors[i.name]=self.gamedata.scenario.base.territorycolor
+
             #Old coloring, probably highly inefficient
             #for i in self.gamedata.scenario.regions:
             #    seatweights=[(j.seats/i.seats)**2.5 for j in partyregionresults if i==j.region]
@@ -297,35 +304,61 @@ class Map():
             for i in [i for i in self.gamedata.polling.aggregated.partyregionresults if i.party.fullname==self.party.fullname]:
                 multiplicator=i.percentage/max([j.percentage for j in self.gamedata.polling.aggregated.partyregionresults if j.party.fullname==self.party.fullname])
                 colors[i.region.name]=tuple([max(40,j*multiplicator) for j in i.party.color])
+            for i in self.gamedata.scenario.regions:
+                if i.name not in colors:
+                    colors[i.name]=(0,0,0,255)
 
         return colors
 
 
+    def prepareimage(self):
+        mousePos = pygame.mouse.get_pos()
+        arr=pygame.PixelArray(self.image)
+
+        if self.buttonRect.collidepoint(mousePos):
+            color=self.image.get_at((mousePos[0]-self.newx, mousePos[1]-self.newy))
+            if color in [i.color for i in self.gamedata.scenario.regions if i.status=="state"]:
+                [arr.replace(color, (80,80,80)) for i in self.gamedata.scenario.regions]
+        
+        [arr.replace(i.color, self.colors[i.name]) for i in self.gamedata.scenario.regions]
+
+        arr.close()
+
+        return self.image
+
     def process(self):
         mousePos = pygame.mouse.get_pos()
-        global isclicked
-        
+
         self.image = self.baseimage
         reducesizeby=max(self.image.get_width()/self.width, self.image.get_height()/self.height)
         self.image = pygame.transform.scale(self.image,(round(self.image.get_width()/reducesizeby), round(self.image.get_height()/reducesizeby))).convert()
         self.newx, self.newy=round(self.x+((self.width-self.image.get_width())/2)), round(self.y+((self.height-self.image.get_height())/2))
         self.buttonRect = pygame.Rect(self.newx, self.newy, self.image.get_width(), self.image.get_height())
-        arr=pygame.PixelArray(self.image)
-
-        if self.buttonRect.collidepoint(mousePos):
-            color=self.image.get_at((mousePos[0]-self.newx, mousePos[1]-self.newy))
-            if color!=(0,0,0,255):
-                [arr.replace(color, (80,80,80)) for i in self.gamedata.scenario.regions]
-                if pygame.mouse.get_pressed(num_buttons=3)[0]:
-                    if self.UIState.isclicked==False:
-                        self.regionview(self.UIState, self.gamedata.scenario.name, self.gamedata, next((x for x in self.gamedata.scenario.regions if x.color == color), None).name)
-                        self.UIState.isclicked=True
-                else:
-                    self.UIState.isclicked=False
         
-        [arr.replace(i.color, self.colors[i.name]) for i in self.gamedata.scenario.regions]
-
-        arr.close()
+        #Checks if map, where the pixel with same color has already been saved in a dictionary.
+        #If yes, takes image from dictionary. If not, image is created in self.prepareimage().
+        if self.buttonRect.collidepoint(mousePos):
+            chosencolor=self.image.get_at((mousePos[0]-self.newx, mousePos[1]-self.newy))
+            color="-".join(str(i) for i in chosencolor)
+            if pygame.mouse.get_pressed(num_buttons=3)[0]:
+                if self.UIState.isclicked==False:
+                    region=next((x for x in self.gamedata.scenario.regions if x.color == chosencolor and x.status=="state"), None)
+                    if region:
+                        self.regionview(self.UIState, self.gamedata.scenario.name, self.gamedata, region.name)
+                        self.UIState.isclicked=True
+            else:
+                self.UIState.isclicked=False
+            if color in self.savedimages:
+                self.image=self.savedimages[color]
+            else:
+                self.image=self.prepareimage()
+                self.savedimages[color]=self.image
+        else:
+            if "base" in self.savedimages:
+                self.image=self.savedimages["base"]
+            else:
+                self.image=self.prepareimage()
+                self.savedimages["base"]=self.image
 
         #print(self.image.get_at((2, 2)))
         self.UIState.screen.blit(self.image, (self.newx, self.newy))

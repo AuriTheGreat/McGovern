@@ -48,6 +48,10 @@ labour:
 		power=-315.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 conservative:
 	london:
 		power=0.0
@@ -96,6 +100,10 @@ conservative:
 	northernireland:
 		power=0.0
 		controlledseats=11 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 liberal:
 	london:
@@ -146,6 +154,10 @@ liberal:
 		power=-65.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 communist:
 	london:
 		power=0.0
@@ -192,6 +204,10 @@ communist:
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 	northernireland:
+		power=-100000000.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
@@ -244,6 +260,10 @@ snp:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
+		power=-100000000.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 plc:
 	london:
 		power=-100000000.0
@@ -290,6 +310,10 @@ plc:
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 	northernireland:
+		power=-100000000.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
@@ -342,6 +366,10 @@ unity:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=2 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
+		power=-100000000.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 prounionist:
 	london:
 		power=-100000000.0
@@ -391,6 +419,10 @@ prounionist:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=1 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
+		power=-100000000.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 replabour:
 	london:
 		power=-100000000.0
@@ -440,6 +472,10 @@ replabour:
 		power=0.0
 		controlledseats=1 #These are seats that party currently has in parliament.
 		guaranteedseats=1 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
+		power=-100000000.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 inderep:
 	london:
 		power=-100000000.0
@@ -487,6 +523,10 @@ inderep:
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 	northernireland:
 		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
+		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 democratic:
@@ -538,6 +578,10 @@ democratic:
 		power=-100000000.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
+		power=-100000000.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 speaker:
 	london:
 		power=0.0
@@ -584,6 +628,10 @@ speaker:
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
 	northernireland:
+		power=0.0
+		controlledseats=0 #These are seats that party currently has in parliament.
+		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.
+	isleofman:
 		power=0.0
 		controlledseats=0 #These are seats that party currently has in parliament.
 		guaranteedseats=0 #This is the lowest amount of seats the party will win in next election.

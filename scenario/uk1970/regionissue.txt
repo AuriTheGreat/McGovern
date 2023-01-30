@@ -443,3 +443,40 @@ northernireland:
 		mean=2.0
 		variance=2.0
 		importance=0.1
+isleofman:
+	immigration:
+		mean=0.0
+		variance=1.0
+		importance=0.0
+	welfarestate:
+		mean=0.0
+		variance=1.0
+		importance=0.0
+	tradeunions:
+		mean=0.0
+		variance=1.0
+		importance=0.0
+	europe:
+		mean=0.0
+		variance=1.0
+		importance=0.0
+	nato:
+		mean=0.0
+		variance=1.0
+		importance=0.0
+	devolution:
+		mean=-2.0
+		variance=3.0
+		importance=1.0
+	nukes:
+		mean=0.0
+		variance=1.0
+		importance=0.0
+	socialreforms:
+		mean=0.0
+		variance=1.0
+		importance=0.0
+	economicphilosophy:
+		mean=0.0
+		variance=1.0
+		importance=0.0

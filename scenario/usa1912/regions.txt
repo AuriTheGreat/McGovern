@@ -9,6 +9,7 @@ alaska:
 	population=64509 
 	eligiblepopulation=0.3
 	seats=3
+	status=territory
 	color=123, 204, 198
 arizona:
 	fullname=Arizona
@@ -26,7 +27,7 @@ california:
 	fullname=California
 	population=2556048 
 	eligiblepopulation=0.3
-	seats=11
+	seats=13
 	color=178, 81, 152
 colorado:
 	fullname=Colorado
@@ -63,6 +64,7 @@ hawaii:
 	population=199449 
 	eligiblepopulation=0.3
 	seats=3
+	status=territory
 	color=58,181,74
 idaho:
 	fullname=Idaho

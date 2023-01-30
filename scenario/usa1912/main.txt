@@ -1,3 +1,4 @@
+#Main Options
 name=United States Presidential Election of 1912
 nation=United States
 year=1912
@@ -7,3 +8,9 @@ startdate=1911-09-07
 enddate=1912-11-05
 electiondate=1912-11-05
 turns=25
+
+#Style Options
+territorycolor=100, 100, 100
+
+#System Options
+electoralsystem=ElectoralCollege

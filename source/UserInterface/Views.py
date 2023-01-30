@@ -126,7 +126,7 @@ def regionview(s,scenarioname, gamedata, region='National', page=0):
         s.windowhistory.append([regionview, [s, scenarioname, gamedata, region, page]])
     s.objects.clear()
     partiesperpage=5
-    regions=['National'] + [i.name for i in gamedata.scenario.regions]
+    regions=['National'] + [i.name for i in gamedata.scenario.regions if i.status=="state"]
     c.Rectangle(s,0,680,s.screen_width,s.screen_height, '#003366')
     c.Rectangle(s,0,0,s.screen_width,s.screen_height-(s.screen_height/(700/600)), '#003366')
     c.Rectangle(s,350,0,500,s.screen_height-(s.screen_height/(700/600)), '#003366', "Region Information")

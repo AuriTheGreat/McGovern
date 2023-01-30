@@ -70,3 +70,10 @@ wales:
 	eligiblepopulation=0.7
 	seats=36
 	color=0, 255, 255
+isleofman:
+	fullname=Isle Of Man
+	population=44982
+	eligiblepopulation=0.7
+	seats=1
+	status=territory
+	color=211, 255, 35

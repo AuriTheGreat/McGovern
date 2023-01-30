@@ -11,6 +11,8 @@ def partyregionissuehandler(scenario):
     issuepartyregionresults=[]
 
     for i in scenario.regionissues:
+        if i.region.status!="state":
+                continue
         for j in scenario.partyissues:
             if i.issue==j.issue:
                 regionpopulationinfluence=[x.influence for x in i.region.populations]
@@ -79,15 +81,15 @@ def seatcalculation(partyregionresults, partypercentages, region, scenario):
     partyshares={}
     partyseats={}
 
-    #typical distribution
-    partyshares={i:(0.00104*(partypercentages[i]*100)**2.8+0.17)/100 for i in partypercentages}
-
-    #winner takes all distribution
-    #partyshares=({i:0 for i in partypercentages})
-    #partyshares[list(partypercentages.keys())[list(partypercentages.values()).index(max(partypercentages.values()))]]=1
-
-    #proportional distribution
-    #partyshares={i:partypercentages[i]**2 for i in partypercentages}
+    if scenario.base.electoralsystem=="FirstPastThePost":
+        partyshares={i:(0.00104*(partypercentages[i]*100)**2.8+0.17)/100 for i in partypercentages}
+    elif scenario.base.electoralsystem=="ElectoralCollege":
+        partyshares={i:partypercentages[i]**2 for i in partypercentages}
+        partyshares=({i:0 for i in partypercentages})
+        partyshares[list(partypercentages.keys())[list(partypercentages.values()).index(max(partypercentages.values()))]]=1
+    else:
+        #proportional distribution
+        partyshares={i:partypercentages[i] for i in partypercentages}
 
     partyseats={i:round((partyshares[i]/sum(partyshares.values()))*region.seats) for i in partypercentages}
 

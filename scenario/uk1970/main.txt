@@ -1,3 +1,4 @@
+#Main Options
 name=United Kingdom Election of 1970
 nation=United Kingdom
 year=1970
@@ -7,3 +8,9 @@ startdate=1967-10-07
 enddate=1971-04-08
 electiondate=1970-06-18
 turns=30
+
+#Style Options
+territorycolor=100, 100, 100
+
+#System Choices
+electoralsystem=FirstPastThePost

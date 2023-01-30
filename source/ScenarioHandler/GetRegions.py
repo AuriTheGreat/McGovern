@@ -3,12 +3,13 @@ import re
 import datetime
 
 class Region:
-      def __init__(self, name, fullname, population, eligiblepopulation, seats, color, issues=None, populations=None):
+      def __init__(self, name, fullname, population, eligiblepopulation, seats, status, color, issues=None, populations=None):
         self.name = name
         self.fullname = fullname
         self.population = population
         self.eligiblepopulation = eligiblepopulation
         self.seats = seats
+        self.status = status
         self.color = color
         self.issues = issues
         self.populations = populations
@@ -39,7 +40,7 @@ def main(scenarioname, base):
     l = np.array([ line.split() for line in f], dtype=object)
     
     currentregion=None
-    population, fullname, eligiblepopulation, seats, color=None,None,None,None,None
+    population, fullname, eligiblepopulation, seats, status, color=None,None,None,None,"state",None
     
     for i in l:
         newi=" ".join(i).split('#')[0] #Joins all the characters, and then takes all of them until the first hashtag
@@ -48,9 +49,9 @@ def main(scenarioname, base):
         string=re.search("(.*):", newi)
         if string:
             if currentregion!=None:
-                regions.append(Region(currentregion, fullname, population, eligiblepopulation, seats, color))
+                regions.append(Region(currentregion, fullname, population, eligiblepopulation, seats, status, color))
             currentregion="".join(string[1].rstrip().lstrip())
-            population, fullname, eligiblepopulation, seats, color=None,None,None,None,None
+            population, fullname, eligiblepopulation, seats, status, color=None,None,None,None,"state",None
         else:
             string=re.search(".*fullname.*=(.*)", newi)
             if string:
@@ -68,6 +69,10 @@ def main(scenarioname, base):
             if string:
                 seats=int("".join(string[1].rstrip().lstrip()))
                 continue
+            string=re.search(".*status.*=(.*)", newi)
+            if string:
+                status="".join(string[1].rstrip().lstrip())
+                continue
             string=re.search(".*color.*=(.*)", newi)
             if string:
                 tempcolor=list("".join(string[1].rstrip().lstrip()))
@@ -83,11 +88,11 @@ def main(scenarioname, base):
                 color=tuple(color)
                 continue
     
-    regions.append(Region(currentregion, fullname, population, eligiblepopulation, seats, color))
+    regions.append(Region(currentregion, fullname, population, eligiblepopulation, seats, status, color))
 
-    base.seats=sum(region.seats for region in regions)
-    base.population=sum(region.population for region in regions)
+    base.seats=sum(region.seats for region in regions if region.status!="territory")
+    base.population=sum(region.population for region in regions if region.status!="territory")
 
 
-    regions.sort(key=lambda x: x.population, reverse=True)
+    regions.sort(key=lambda x: (x.population, x.fullname), reverse=True)
     return np.array(regions)
