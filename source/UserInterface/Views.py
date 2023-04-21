@@ -21,9 +21,9 @@ def mainmenu(s): #s is UIState
     c.Image(s,0,s.screen_width/(1200/250),s.screen_width,s.screen_height-(s.screen_height/(700/250)), 'resources/gfx/menu.png')
 
     button_size_x, button_size_y = s.screen_width/(1200/400), s.screen_height/(700/90)
-    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/300), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Play', choosescenario, [s])
-    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/400), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Options', options, [s])
-    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/500), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Quit', quit)
+    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/300), button_size_x, button_size_y, 'resources/gfx/button.png', 'Play', choosescenario, [s])
+    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/400), button_size_x, button_size_y, 'resources/gfx/button.png', 'Options', options, [s])
+    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/500), button_size_x, button_size_y, 'resources/gfx/button.png', 'Quit', quit)
     c.Image(s, 0,s.screen_width/(1200/10), s.screen_width, s.screen_width/4.8, 'resources/gfx/title.png')
 
     return s
@@ -529,9 +529,9 @@ def nextturn(s, scenarioname, gamedata):
 def escape(s, scenarioname, gamedata):
     s.objects.clear()
     button_size_x, button_size_y = s.screen_width/(1200/400), s.screen_height/(700/90)
-    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/300), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Return to the game', scenariomain, [s, scenarioname, gamedata, False])
-    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/400), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Main menu', mainmenu, [s])
-    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/500), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Quit', quit)
+    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/300), button_size_x, button_size_y, 'resources/gfx/button.png', 'Return to the game', scenariomain, [s, scenarioname, gamedata, False])
+    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/400), button_size_x, button_size_y, 'resources/gfx/button.png', 'Main menu', mainmenu, [s])
+    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/500), button_size_x, button_size_y, 'resources/gfx/button.png', 'Quit', quit)
 
 def options(s):
     s.objects.clear()
