@@ -21,9 +21,9 @@ def mainmenu(s): #s is UIState
     c.Image(s,0,s.screen_width/(1200/250),s.screen_width,s.screen_height-(s.screen_height/(700/250)), 'resources/gfx/menu.png')
 
     button_size_x, button_size_y = s.screen_width/(1200/400), s.screen_height/(700/90)
-    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/300), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Play', choosescenario, [s])
-    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/400), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Options', options, [s])
-    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/500), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Quit', quit)
+    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/300), button_size_x, button_size_y, 'resources/gfx/button.png', 'Play', choosescenario, [s])
+    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/400), button_size_x, button_size_y, 'resources/gfx/button.png', 'Options', options, [s])
+    c.ImageButton(s,s.screen_width/2-(button_size_x/2), s.screen_width/(1200/500), button_size_x, button_size_y, 'resources/gfx/button.png', 'Quit', quit)
     c.Image(s, 0,s.screen_width/(1200/10), s.screen_width, s.screen_width/4.8, 'resources/gfx/title.png')
 
     return s
@@ -93,7 +93,7 @@ def scenariomain(s, scenarioname, gamedata=None, recalculate=True):
         c.Image(s, 980,s.screen_width/(1200/110),150,150, 'scenario/' + scenarioname + '/gfx/'+playedparty+'.png')
     else:
         c.Image(s, 980,s.screen_width/(1200/110),150,150, 'scenario/' + scenarioname + '/gfx/main.png')
-    c.Button(s, 10, s.screen_width/(1200/10), button_size_x, button_size_y, 'Escape', escape, [s, scenarioname, gamedata])
+    c.Button(s, 10, s.screen_width/(1200/10), button_size_x, button_size_y, 'Menu', menu, [s, scenarioname, gamedata])
     if gamedata.scenario.main.currentdate<=gamedata.scenario.base.electiondate<gamedata.scenario.main.currentdate+gamedata.scenario.main.turnlength:
         c.Button(s, 950, s.screen_width/(1200/10), button_size_x, button_size_y, 'Head to Election', electionscreen, [s, scenarioname, gamedata])
     else:
@@ -101,7 +101,7 @@ def scenariomain(s, scenarioname, gamedata=None, recalculate=True):
     c.Button(s, 950, s.screen_width/(1200/280), button_size_x, button_size_y, 'Government', governmentview, [s, scenarioname, gamedata])
     c.Button(s, 950, s.screen_width/(1200/380), button_size_x, button_size_y, 'Regions', regionview, [s, scenarioname, gamedata])
     c.Button(s, 950, s.screen_width/(1200/480), button_size_x, button_size_y, 'Events', eventview, [s, scenarioname, gamedata])
-    c.Button(s, 950, s.screen_width/(1200/580), button_size_x, button_size_y, 'Campaign', escape, [s, scenarioname, gamedata])
+    c.Button(s, 950, s.screen_width/(1200/580), button_size_x, button_size_y, 'Campaign', menu, [s, scenarioname, gamedata])
     c.Button(s, 905, s.screen_width/(1200/280), s.screen_width/(1200/20), s.screen_height/(700/380), '<', addon, [s, scenarioname, gamedata])
     c.Map(s, 0,125,900,555, 'scenario/' + scenarioname + '/gfx/map.png', gamedata, regionview)
 
@@ -162,7 +162,7 @@ def regionview(s,scenarioname, gamedata, region='National', page=0):
     c.Rectangle(s,990,240,s.screen_width/(1200/200), s.screen_height/(700/250), '#003366')
     c.Button(s, 1000, s.screen_width/(1200/250), s.screen_width/(1200/180), s.screen_height/(700/50), 'General', regionview, [s, scenarioname, gamedata, region])
     c.Button(s, 1000, s.screen_width/(1200/310), s.screen_width/(1200/180), s.screen_height/(700/50), 'Issues', issueview, [s, scenarioname, gamedata, None, region])
-    c.Button(s, 1000, s.screen_width/(1200/370), s.screen_width/(1200/180), s.screen_height/(700/50), 'Influence', escape, [s, scenarioname, gamedata])
+    c.Button(s, 1000, s.screen_width/(1200/370), s.screen_width/(1200/180), s.screen_height/(700/50), 'Influence', menu, [s, scenarioname, gamedata])
     c.Button(s, 1000, s.screen_width/(1200/430), s.screen_width/(1200/180), s.screen_height/(700/50), 'Polling', pollingview, [s, scenarioname, gamedata, region])
 
     cg.partysharechart(s, 10, 480, 960, 50, gamedata, region, 'votes')
@@ -228,9 +228,9 @@ def partyview(s, scenarioname, gamedata, limit=None):
         c.Map(s, 600,180,360,500, 'scenario/' + scenarioname + '/gfx/map.png', gamedata, regionview, 'party', currentparty)
 
         c.Rectangle(s, 990,240,s.screen_width/(1200/200), s.screen_height/(700/250), '#003366')
-        c.Button(s, 1000, s.screen_width/(1200/250), s.screen_width/(1200/180), s.screen_height/(700/50), 'General', escape, [s, scenarioname, gamedata])
-        c.Button(s, 1000, s.screen_width/(1200/310), s.screen_width/(1200/180), s.screen_height/(700/50), 'Issues', escape, [s, scenarioname, gamedata])
-        c.Button(s, 1000, s.screen_width/(1200/370), s.screen_width/(1200/180), s.screen_height/(700/50), 'Influence', escape, [s, scenarioname, gamedata])
+        c.Button(s, 1000, s.screen_width/(1200/250), s.screen_width/(1200/180), s.screen_height/(700/50), 'General', menu, [s, scenarioname, gamedata])
+        c.Button(s, 1000, s.screen_width/(1200/310), s.screen_width/(1200/180), s.screen_height/(700/50), 'Issues', menu, [s, scenarioname, gamedata])
+        c.Button(s, 1000, s.screen_width/(1200/370), s.screen_width/(1200/180), s.screen_height/(700/50), 'Influence', menu, [s, scenarioname, gamedata])
         c.Button(s, 1000, s.screen_width/(1200/430), s.screen_width/(1200/180), s.screen_height/(700/50), 'Polling', pollingview, [s, scenarioname, gamedata])
 
 def leaderview(s, scenarioname, gamedata, party):
@@ -348,7 +348,7 @@ def issueview(s, scenarioname, gamedata, issue=None, region=None, page=0):
     c.Rectangle(s, 990,240,s.screen_width/(1200/200), s.screen_height/(700/250), '#003366')
     c.Button(s, 1000, s.screen_width/(1200/250), s.screen_width/(1200/180), s.screen_height/(700/50), 'General', regionview, [s, scenarioname, gamedata, region])
     c.Button(s, 1000, s.screen_width/(1200/310), s.screen_width/(1200/180), s.screen_height/(700/50), 'Issues', issueview, [s, scenarioname, gamedata, None, region])
-    c.Button(s, 1000, s.screen_width/(1200/370), s.screen_width/(1200/180), s.screen_height/(700/50), 'Influence', escape, [s, scenarioname, gamedata])
+    c.Button(s, 1000, s.screen_width/(1200/370), s.screen_width/(1200/180), s.screen_height/(700/50), 'Influence', menu, [s, scenarioname, gamedata])
     c.Button(s, 1000, s.screen_width/(1200/430), s.screen_width/(1200/180), s.screen_height/(700/50), 'Polling', pollingview, [s, scenarioname, gamedata, region])
 
     if page!=0:
@@ -401,7 +401,7 @@ def pollingview(s, scenarioname, gamedata, region="National", page=0):
     c.Rectangle(s,990,240,s.screen_width/(1200/200), s.screen_height/(700/250), '#003366')
     c.Button(s, 1000, s.screen_width/(1200/250), s.screen_width/(1200/180), s.screen_height/(700/50), 'General', regionview, [s, scenarioname, gamedata, region])
     c.Button(s, 1000, s.screen_width/(1200/310), s.screen_width/(1200/180), s.screen_height/(700/50), 'Issues', issueview, [s, scenarioname, gamedata])
-    c.Button(s, 1000, s.screen_width/(1200/370), s.screen_width/(1200/180), s.screen_height/(700/50), 'Influence', escape, [s, scenarioname, gamedata])
+    c.Button(s, 1000, s.screen_width/(1200/370), s.screen_width/(1200/180), s.screen_height/(700/50), 'Influence', menu, [s, scenarioname, gamedata])
     c.Button(s, 1000, s.screen_width/(1200/430), s.screen_width/(1200/180), s.screen_height/(700/50), 'Polling', pollingview, [s, scenarioname, gamedata, region, 0])
 
     if page!=0:
@@ -454,7 +454,7 @@ def pollview(s, scenarioname, gamedata, poll, region='National', page=0):
     c.Rectangle(s,990,240,s.screen_width/(1200/200), s.screen_height/(700/250), '#003366')
     c.Button(s,1000, s.screen_width/(1200/250), s.screen_width/(1200/180), s.screen_height/(700/50), 'General', regionview, [s, scenarioname, gamedata, region])
     c.Button(s,1000, s.screen_width/(1200/310), s.screen_width/(1200/180), s.screen_height/(700/50), 'Issues', issueview, [s, scenarioname, gamedata, None, region])
-    c.Button(s,1000, s.screen_width/(1200/370), s.screen_width/(1200/180), s.screen_height/(700/50), 'Influence', escape, [s, scenarioname, gamedata])
+    c.Button(s,1000, s.screen_width/(1200/370), s.screen_width/(1200/180), s.screen_height/(700/50), 'Influence', menu, [s, scenarioname, gamedata])
     c.Button(s,1000, s.screen_width/(1200/430), s.screen_width/(1200/180), s.screen_height/(700/50), 'Polling', pollingview, [s, scenarioname, gamedata, region])
 
     cg.partysharechart(s, 10, 480, 960, 50, gamedata, region, 'votes')
@@ -487,7 +487,7 @@ def eventview(s, scenarioname, gamedata, currentevent=None):
     if currentevent==None:
         pass
     else:
-        c.MultipleLineText(s, 210, 110, 580, 565, '#003366', currentevent.description, fontsize=30)
+        c.MultipleLineText(s, 210, 110, 580, 565, '#003366', currentevent.description, fontsize=25)
 
 def electionscreen(s, scenarioname, gamedata):
     s.windowhistory.append([electionscreen, [s, scenarioname, gamedata]])
@@ -526,12 +526,12 @@ def nextturn(s, scenarioname, gamedata):
                              daemon=True).start()
 
 
-def escape(s, scenarioname, gamedata):
+def menu(s, scenarioname, gamedata):
     s.objects.clear()
     button_size_x, button_size_y = s.screen_width/(1200/400), s.screen_height/(700/90)
-    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/300), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Return to the game', scenariomain, [s, scenarioname, gamedata, False])
-    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/400), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Main menu', mainmenu, [s])
-    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/500), button_size_x, button_size_y, 'resources/gfx/Button.png', 'Quit', quit)
+    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/300), button_size_x, button_size_y, 'resources/gfx/button.png', 'Return to the game', scenariomain, [s, scenarioname, gamedata, False])
+    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/400), button_size_x, button_size_y, 'resources/gfx/button.png', 'Main menu', mainmenu, [s])
+    c.ImageButton(s, s.screen_width/2-(button_size_x/2), s.screen_width/(1200/500), button_size_x, button_size_y, 'resources/gfx/button.png', 'Quit', quit)
 
 def options(s):
     s.objects.clear()

@@ -25,6 +25,16 @@ degaulleveto:
 	trigger:
 		event.degaulleveto
 
+riversofblood:
+	triggerable=True
+	triggeronce=True
+	chance=100%
+	if:
+		date>"1968-04-20"
+	trigger:
+		decision.labour.riversofblood
+		decision.conservative.riversofblood
+
 degaulleresigns:
 	triggerable=True
 	triggeronce=True

@@ -3,17 +3,19 @@ import re
 import datetime
 
 class PartyRegion:
-      def __init__(self, party, region, power, controlledseats, guaranteedseats):
+      def __init__(self, party, region):
         self.party = party
         self.region = region
-        self.power = power
-        self.controlledseats = controlledseats
-        self.guaranteedseats = guaranteedseats
+        self.power = 0
+        self.enthusiasm = 0.5
+        self.controlledseats = 0
+        self.guaranteedseats = 0
 
       def validvariables(self):
           #The key is the name of the attribute. The value describes how the variable is formatted.
           return {"controlledseats": self.party.name+"."+self.region.name+".controlledseats", 
                   "guaranteedseats": self.party.name+"."+self.region.name+".guaranteedseats",
+                  "enthusiasm": self.party.name+"."+self.region.name+".enthusiasm",
                   "power": self.party.name+"."+self.region.name+".power"}
       
       def getvariable(self, attr):
@@ -57,7 +59,7 @@ def main(scenarioname, parties, regions):
 
     for i in parties:
         for j in regions:
-            partyregions[str(str(i.name)+"-"+str(j.name))]=PartyRegion(i,j,0,0,0)
+            partyregions[str(str(i.name)+"-"+str(j.name))]=PartyRegion(i,j)
 
 
     partynames=[x.name for x in parties]
@@ -83,6 +85,10 @@ def main(scenarioname, parties, regions):
                 if string:
                     partyregions[str(party.name + "-" + region.name)].power=float("".join(string[1].rstrip().lstrip()))
                     continue
+                string=re.search(".*enthusiasm.*=(.*)", newi)
+                if string:
+                    partyregions[str(party.name + "-" + region.name)].enthusiasm=float("".join(string[1].rstrip().lstrip()))
+                    continue
                 string=re.search(".*controlledseats.*=(.*)", newi)
                 if string:
                     partyregions[str(party.name + "-" + region.name)].controlledseats=max(0, int("".join(string[1].rstrip().lstrip())))
@@ -104,6 +110,7 @@ def main(scenarioname, parties, regions):
                 if i.party==j.party:
                     f.write("\t" + j.region.name + ":" + "\n")
                     f.write("\t\t" + "power=" + str(j.power) + "\n")
+                    f.write("\t\t" + "enthusiasm=" + str(j.enthusiasm) + "\n")
                     f.write("\t\t" + "controlledseats=" + str(j.controlledseats) + " #These are seats that party currently has in parliament." + "\n")
                     f.write("\t\t" + "guaranteedseats=" + str(j.guaranteedseats) + " #This is the lowest amount of seats the party will win in next election." + "\n")
 

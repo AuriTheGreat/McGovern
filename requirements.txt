@@ -14,7 +14,7 @@ patsy==0.5.3
 pefile==2022.5.30
 pygame==2.1.2
 Pillow==9.4.0
-pip==22.3.1
+pip>=22.3.1
 pyparsing==3.0.9
 pyperclip==1.8.2
 python-dateutil==2.8.2
