@@ -1,62 +1,58 @@
 riversofblood:
 	name=Rivers of Blood
 	description=Enoch Powell, one of the leading conservative members of parliament, has been accused for inciting racial tensions. How will you respond?
-	expiresafter: 3
-	ignorable: yes
+	expiresafter=1
+	ignorable=true
 	ignoreeffects:
-		party.immigration.mean: -0.1
-		party.immigration.varriance: +0.1
+		party.immigration.mean-0.1
+		party.immigration.varriance+0.1
 	options:
-		a:
+		option:
 			optionname=Denounce Powellism
-			ifparty:
-
-			ifnotparty:
-
+			privatedescription:
+				You have chosen to denounce Powellism.
+			newsdescription:
+				{party} has denounced Powellism.
 			if:
 				
 			maineffects:
-				party.immigration.mean: +0.3
-				party.immigration.variance: -0.1
-				national.immigration.importance: +0.2
-		b:
+				party.immigration.mean+0.3
+				party.immigration.variance-0.1
+				national.immigration.importance+0.2
+		option:
 			optionname=Don't mention Powell
-			ifparty:
-
-			ifnotparty:
-
 			if:
 				
 			maineffects:
 				effect:
-					ifparty:
-						labour
-					ifnotparty:
-
 					if:
-						
+						party=labour
+					privatedescription:
+						You have chosen to ignore Powell.
+					newsdescription:
+						Labour Party has ignored Powell.
 					effects:
-						national.immigration.importance: +0.1
-						party.immigration.variance: +0.2
+						national.immigration.importance+0.1
+						party.immigration.variance+0.2
 				effect:
-					ifparty:
-						
-					ifnotparty:
-						labour
 					if:
-						
+						party=conservative
+					privatedescription:
+						You have chosen to ignore Powell.
+					newsdescription:
+						Conservative Party has ignored Powell.
 					effects:
-						party.immigration.variance: +0.3
-		c:
+						party.immigration.variance+0.3
+		option:
 			optionname=Powell is right
-			ifparty:
-
-			ifnotparty:
-
+			privatedescription:
+				You have chosen to endorse Powell.
+			newsdescription:
+				{party} has endorsed Powell.
 			if:
 				
 			maineffects:
-				party.immigration.mean: -0.3
-				party.immigration.variance: -0.1
-				national.immigration.nationwide.importance: +0.3
+				party.immigration.mean-0.3
+				party.immigration.variance-0.1
+				national.immigration.nationwide.importance+0.3
 

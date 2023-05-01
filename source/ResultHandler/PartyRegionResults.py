@@ -24,7 +24,7 @@ def partyregionissuehandler(scenario):
                                                                       [x, norm.pdf(x, i.mean, i.variance)],
                                                                       [x, norm.pdf(x, j.mean, j.variance)])
                 newissuepartyregionresult.regionaxes[1]*=i.region.population*i.region.eligiblepopulation/sum(newissuepartyregionresult.regionaxes[1])
-                newissuepartyregionresult.partyaxes[1]*=max(0,j.party.power*populationinfluence+localpower)
+                newissuepartyregionresult.partyaxes[1]*=max(0,(j.party.power+localpower)*populationinfluence)
                 issuepartyregionresults.append(newissuepartyregionresult)
 
     for i in scenario.issues:
@@ -51,8 +51,10 @@ def convertissuepartyregionresults(scenario, issuepartyregionresults):
             partyregionresults[i.party.name+"-"+i.region.name]=PartyRegionResult(i.region,i.party,0)
         partyregionresults[i.party.name+"-"+i.region.name].votes+=i.partyaxes[1]
 
+    partyregionenthusiasm={i.party.name+"-"+i.region.name:i.enthusiasm for i in scenario.partyregions}
+
     for i in partyregionresults.values():
-        i.votes=round(sum(i.votes))
+        i.votes=round(sum(i.votes*partyregionenthusiasm[i.party.name+"-"+i.region.name]))
     return list(partyregionresults.values())
 
 def calculationbalancer(partyshares, partyseats, neededseats): #function for distributing seats if the amount of seats doesn't match amount of distributed seats

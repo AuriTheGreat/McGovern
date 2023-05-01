@@ -6,10 +6,7 @@ import source.ResultHandler.Main as ResultHandler
 import source.TriggerHandler as TriggerHandler
 import os
 import sys
-import math
-import threading
 import pygame
-import time
 import pygame.freetype
 from pygame.locals import *
 
@@ -17,7 +14,7 @@ def getvalidscenarios(scenarios):
     validscenarios=[]
     for i in scenarios:
         files=os.listdir('scenario/'+i)
-        if set(['gfx', 'parties.txt', 'characters.txt', 'main.txt', 'regions.txt', 'populations.txt', 'ideologies.txt', 'traits.txt', 'outcomes.txt', 'events.txt', 'issues.txt', 'partyregion.txt']).issubset(files):
+        if set(['gfx', 'parties.txt', 'characters.txt', 'main.txt', 'regions.txt', 'populations.txt', 'issues.txt']).issubset(files):
             validscenarios.append(i)
     return validscenarios
 
